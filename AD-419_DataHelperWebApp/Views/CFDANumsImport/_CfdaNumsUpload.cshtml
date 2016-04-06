@@ -1,0 +1,16 @@
+﻿<div>
+    @using (Html.BeginForm("Upload", "CFDANumsImport", FormMethod.Post, new { id = "UploadForm", enctype = "multipart/form-data" }))
+    {
+        <div>
+            <h4>Upload a CFDA Numbers Excel file:</h4>
+            <i>Please ensure your spreadsheet has the following column names as illustrated below: (Note Only the CFDANum and ProgramTitle columns are actually needed.)</i>
+            <p><i>Select <a href="~/CFDANumsImport/Download" class="btn btn-link">here</a> to download a sample form.</i></p>
+            <img src="/Content/Images/CFDANumsExample.PNG" alt="CFDA Num Excel upload file example" width="1100">
+        </div>
+        <br />
+        <b>Please select an CFDA Numbers Excel file to display:</b><input type="file" id="FileUpload1" name="FileUpload1" required="required" />
+        <br />
+        <input type="submit" value="Display CFDA Numbers" title="Upload" class="btn btn-default"/>
+    }
+</div>
+

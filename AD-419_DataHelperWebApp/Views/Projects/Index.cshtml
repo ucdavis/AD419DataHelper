@@ -1,0 +1,153 @@
+﻿@model IEnumerable<AD_419_DataHelperWebApp.Models.AllProject>
+
+@{
+    ViewBag.Title = "Index - Projects";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Accession)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Project)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isInterdepartmental)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isValid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BeginDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TermDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjTypeCd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegionalProjNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CRIS_DeptID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CoopDepts)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CSREES_ContractNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StatusCd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.inv1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.inv2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.inv3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.inv4)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.inv5)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.inv6)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsCurrentAD419Project)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Accession)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Project)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isInterdepartmental)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isValid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BeginDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TermDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjTypeCd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegionalProjNum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CRIS_DeptID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CoopDepts)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CSREES_ContractNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusCd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.inv1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.inv2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.inv3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.inv4)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.inv5)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.inv6)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsCurrentAD419Project)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idProject }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idProject }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idProject })
+        </td>
+    </tr>
+}
+
+</table>

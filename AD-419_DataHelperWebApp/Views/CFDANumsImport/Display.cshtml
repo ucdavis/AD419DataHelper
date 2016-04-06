@@ -1,0 +1,108 @@
+﻿@model System.Collections.Generic.List<AD_419_DataHelperWebApp.Models.CFDANumImport>
+
+@{
+
+    ViewBag.Title = "View CFDA Numbers Excel File";
+}
+
+
+<h2>@ViewBag.Title</h2>
+
+@Styles.Render("~/Content/DataTables-1.9.4/media/css/dataTables")
+
+@section AdditionalScripts
+{
+    @Scripts.Render("~/bundles/datatables")
+
+    <script type="text/javascript">
+        $(function () {
+            var oTable = $(".table").dataTable({
+                "oLanguage": {
+                    "sLengthMenu": 'Display <select>' +
+                        '<option value="10">10</option>' +
+                        '<option value="25">25</option>' +
+                        '<option value="50">50</option>' +
+                        '<option value="100">100</option>' +
+                        '<option value="-1">All</option>' +
+                        '</select> records'
+                },
+                "iDisplayLength": -1,
+                "aaSorting": [[0, "asc"]], //Default sort on second column
+                //"aoColumnDefs": [
+                //    //{ 'bSortable': false, 'aTargets': [0, 5] } //Disables sort on icon columns
+                //]
+            }).makeEditable();
+            var oTable2 = $('#IndexTable').dataTable({
+                "bSort": false,
+                "bPaginate": false,
+                "bInfo":false
+            });
+            var oTable3 = $('#ConstraintTable').dataTable({
+                "bSort": false,
+                "bPaginate": false,
+                "bInfo": false
+            });
+
+        });
+    </script>
+}
+
+@*<style type="text/css">
+        .table {
+            margin: 4px;
+            border-collapse: collapse;
+            width: 300px;
+        }
+
+        .header {
+            background-color: gray;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .table th, .table td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+    </style>*@
+<div>
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(m => m[0].CFDANum)</th>
+                <th>@Html.DisplayNameFor(m => m[0].ProgramTitle)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.CFDANum</td>
+                    <td>@item.ProgramTitle</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="form-horizontal">
+    @using (Html.BeginForm("Save", "CFDANumsImport", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        for (var i = 0; i < Model.Count; i++)
+        {
+            @Html.HiddenFor(m => m[i].CFDANum)
+            @Html.HiddenFor(m => m[i].ProgramTitle)
+        }
+
+        <p>
+            If all looks good, you can upload the values to the database.<br />
+            <i>Note: You can also edit the values once they have been saved.</i>
+        </p>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save CFDA Numbers to Database" class="btn btn-default" />
+            </div>
+        </div>
+    }
+</div>

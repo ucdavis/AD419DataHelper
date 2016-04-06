@@ -1,0 +1,16 @@
+﻿<div>
+    @using (Html.BeginForm("Upload", "FieldStationExpensesImport", FormMethod.Post, new { id = "UploadForm", enctype = "multipart/form-data" }))
+    {
+        <div>
+            <h4>Upload a Field Station Expenses Excel file:</h4>
+            <i>Please ensure your spreadsheet has the following column names as illustrated below: (Note that ProjectAccessionNum will automatically have leading zero(s) added.)</i>
+            <p><i>Select <a href="~/FieldStationExpensesImport/Download" class="btn btn-link">here</a> to download a sample form.</i></p>
+            <img src="/Content/Images/Field Station Expenses Example.png" alt="Field Station Expenses Excel upload file example">
+        </div>
+        <br />
+        <b>Please select an Field Station Expenses Excel file to display:</b><input type="file" id="FileUpload1" name="FileUpload1" required="required" />
+        <br />
+    <input type="submit" value="Display Field Station Expenses" title="Upload" class="btn btn-default" />
+    }
+</div>
+

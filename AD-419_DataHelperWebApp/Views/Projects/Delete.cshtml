@@ -1,0 +1,192 @@
+﻿@model AD_419_DataHelperWebApp.Models.AllProject
+
+@{
+    ViewBag.Title = "Delete Project";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>@Html.DisplayFor(model => model.Project)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Accession)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Accession)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Project)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Project)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isInterdepartmental)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isInterdepartmental)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isValid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isValid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BeginDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BeginDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TermDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TermDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjTypeCd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjTypeCd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegionalProjNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegionalProjNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CRIS_DeptID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CRIS_DeptID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoopDepts)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoopDepts)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CSREES_ContractNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CSREES_ContractNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StatusCd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StatusCd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.inv1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.inv1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.inv2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.inv2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.inv3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.inv3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.inv4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.inv4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.inv5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.inv5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.inv6)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.inv6)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsCurrentAD419Project)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsCurrentAD419Project)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
