@@ -17,7 +17,6 @@ namespace AD419.Core.IdentityStores
 
         public void Dispose()
         {
-            throw new NotImplementedException();
         }
 
         public Task CreateAsync(User user)
