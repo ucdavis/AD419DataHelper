@@ -4,7 +4,7 @@ using SerilogWeb.Classic.Enrichers;
 
 using AD_419_DataHelperWebApp.Helpers;
 
-namespace AD_419_DataHelperWebApp.App_Start
+namespace AD_419_DataHelperWebApp
 {
     public class LogConfig
     {
