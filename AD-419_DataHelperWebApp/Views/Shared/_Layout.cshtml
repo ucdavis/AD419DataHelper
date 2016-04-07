@@ -3,8 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - AD419 Data Prep</title>
     @Styles.Render("~/Content/css")
+    
+    <link href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css" rel="stylesheet" />
+
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -26,8 +29,6 @@
                     <li>@Html.ActionLink("Field Station Expenses", "Index", "FieldStationExpensesImport")</li>
                     <li>@Html.ActionLink("Projects", "Index", "Projects")</li>
                     <li>@Html.ActionLink("CFDA Numbers", "Index", "CFDANumsImport")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -68,6 +69,9 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
+
+    <script src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+
     @RenderSection("AdditionalScripts", required: false)
 </body>
 </html>
