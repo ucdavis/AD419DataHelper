@@ -204,7 +204,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AD419DataContext.cs" />
     <Compile Include="Models\AllProject.cs" />
     <Compile Include="Models\ArcCodeAccountExclusion.cs" />
@@ -214,8 +213,6 @@
     <Compile Include="Models\CesListImport.cs" />
     <Compile Include="Models\ExpiredProjectCrossReference.cs" />
     <Compile Include="Models\FISDataContext.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -297,6 +294,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AD419.Core\AD419.Core.csproj">
+      <Project>{48665c6d-c408-465f-a36d-9709c56c10c3}</Project>
+      <Name>AD419.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
