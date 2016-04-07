@@ -8,25 +8,11 @@ namespace AD_419_DataHelperWebApp.Helpers
 {
     public static class CasHelper
     {
-        private const string StrCasUrl = "https://cas.ucdavis.edu/cas/";
-        private const string StrTicket = "ticket";
-        private const string StrReturnUrl = "ReturnURL";
-
-        public static string GetReturnUrl()
-        {
-            return HttpContext.Current.Request.QueryString["ReturnURL"];
-        }
-
-        public static void LoginAndRedirect()
-        {
-            var url = Login();
-            if (url == null)
-                return;
-            HttpContext.Current.Response.Redirect(url);
-        }
+        private const string CasBaseUrl = "https://cas.ucdavis.edu/cas";
 
         public static string Login()
         {
+            // look for existing sign in data
             var current = HttpContext.Current;
             var httpCookie = current.Request.Cookies[FormsAuthentication.FormsCookieName];
             var authenticationTicket = (FormsAuthenticationTicket)null;
@@ -43,31 +29,37 @@ namespace AD_419_DataHelperWebApp.Helpers
             }
             if (authenticationTicket != null && !authenticationTicket.Expired) return null;
 
-            var str1 = "";
-            foreach (var strA in current.Request.QueryString.AllKeys)
+            // build cas request
+            var serviceParams = "";
+            foreach (var key in current.Request.QueryString.AllKeys)
             {
-                if (string.Compare(strA, "ticket", StringComparison.OrdinalIgnoreCase) != 0)
-                    str1 = str1 + "&" + strA + "=" + current.Request.QueryString[strA];
+                if (string.Compare(key, "ticket", StringComparison.OrdinalIgnoreCase) != 0)
+                    serviceParams = serviceParams + "&" + key + "=" + current.Request.QueryString[key];
             }
-            if (!string.IsNullOrEmpty(str1))
-                str1 = "?" + str1.Substring(1);
-            var str2 = current.Request.QueryString["ticket"];
-            var str3 = current.Server.UrlEncode(current.Request.Url.GetLeftPart(UriPartial.Path) + str1);
-            if (!string.IsNullOrEmpty(str2))
+            if (!string.IsNullOrEmpty(serviceParams))
+                serviceParams = "?" + serviceParams.Substring(1);
+            var serviceUrl = current.Server.UrlEncode(current.Request.Url.GetLeftPart(UriPartial.Path) + serviceParams);
+
+            // check for ticket
+            var ticket = current.Request.QueryString["ticket"];
+            if (!string.IsNullOrEmpty(ticket))
             {
-                var stream = (new WebClient()).OpenRead("https://cas.ucdavis.edu/cas/validate?ticket=" + str2 + "&service=" + str3);
-                var streamReader = new StreamReader(stream);
-                if (streamReader.ReadLine() == "yes")
+                // validate ticket
+                var client = new WebClient();
+                var stream = client.OpenRead(CasBaseUrl + "/validate?ticket=" + ticket + "&service=" + serviceUrl);
+                if (stream != null)
                 {
-                    FormsAuthentication.SetAuthCookie(streamReader.ReadLine(), false);
-                    var returnUrl = CasHelper.GetReturnUrl();
-                    if (string.IsNullOrEmpty(returnUrl))
-                        return FormsAuthentication.DefaultUrl;
-                    return returnUrl;
+                    var streamReader = new StreamReader(stream);
+                    if (streamReader.ReadLine() == "yes")
+                    {
+                        FormsAuthentication.SetAuthCookie(streamReader.ReadLine(), false);
+                        return null;
+                    }
                 }
             }
-            current.Response.Redirect("https://cas.ucdavis.edu/cas/login?service=" + str3);
-            return null;
+
+            // return login redirect url
+            return CasBaseUrl + "/login?service=" + serviceUrl;
         }
     }
 }

@@ -43,28 +43,11 @@ namespace AD_419_DataHelperWebApp.Controllers
         public ActionResult Login(string returnUrl)
         {
             var res = CasHelper.Login();
-
-            if (res == null)
+            if (res != null)
             {
-                var auth = HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName];
-                if (auth == null)
-                {
-                    return Content(string.Empty);
-                }
-
-                var cookie = FormsAuthentication.Decrypt(auth.Value);
-                if (cookie == null)
-                {
-                    return Content(string.Empty);
-                }
+                return Redirect(res);
             }
-
-            return RedirectToAction("CasRegister", new {returnUrl = res});
-        }
-
-        [AllowAnonymous]
-        public ActionResult CasRegister(string returnUrl)
-        {
+            
             // fetch cas ticket
             var auth = HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName];
             if (auth == null)
