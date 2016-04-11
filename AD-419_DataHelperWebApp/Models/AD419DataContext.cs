@@ -1,9 +1,6 @@
 namespace AD_419_DataHelperWebApp.Models
 {
-    using System;
     using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
 
     public partial class AD419DataContext : DbContext
     {
@@ -22,6 +19,10 @@ namespace AD_419_DataHelperWebApp.Models
         public virtual DbSet<FieldStationExpenseListImport> FieldStationExpenseListImports { get; set; }
 
         public virtual DbSet<CFDANumImport> CFDANumImports { get; set; }
+
+        public virtual DbSet<AllProjectsNew> AllProjectsNew { get; set; }
+
+        public virtual DbSet<AllProjectsImport> AllProjectsImmport { get; set; }
 
         //public static void Clear<T>(this DbSet<T> dbSet) where T : class
         //{
@@ -64,6 +65,10 @@ namespace AD_419_DataHelperWebApp.Models
             modelBuilder.Entity<C204Exclusions>()
                 .Property(e => e.AwardNumber)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<C204Exclusions>()
+               .Property(e => e.Comments)
+               .IsUnicode(false);
 
             modelBuilder.Entity<AllProject>()
                 .Property(e => e.Accession)
@@ -217,6 +222,14 @@ namespace AD_419_DataHelperWebApp.Models
             modelBuilder.Entity<CFDANumImport>()
                .Property(e => e.ProgramTitle)
                .IsUnicode(false);
+
+            modelBuilder.Entity<AllProjectsNew>()
+               .Property(e => e.OrgR)
+               .IsUnicode(false);
+
+            modelBuilder.Entity<AllProjectsNew>()
+                .Property(e => e.CoProjectDirectors)
+                .IsUnicode(false);
         }
     }
 }
