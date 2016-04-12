@@ -21,7 +21,7 @@
             <input type="submit" id="btnDeleteAll" value="Delete All" title="Delete All" class="btn btn-default" onclick="return confirm('Are you sure you want to delete ALL the records?')" />
         </p>
     }
-    <table id="cesUploadTable" class="table">
+    <table id="cesImportTable" class="table">
         <thead>
             <tr>
                 <th>
@@ -136,7 +136,7 @@ else
 {
     <script>
         $(function() {
-            $('#cesUploadTable').DataTable({
+            $('#cesImportTable').DataTable({
                 columnDefs: [
                     { targets: [-1], sortable: false },
                     { targets: [-2], sortable: false },
