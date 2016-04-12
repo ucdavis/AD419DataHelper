@@ -1,23 +1,27 @@
 namespace AD_419_DataHelperWebApp.Models
 {
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("ExpiredProjectCrossReference")]
     public partial class ExpiredProjectCrossReference
     {
-        [StringLength(50)]
+        [StringLength(7)]
+        [MinLength(7)]
+        [Required]
+        [Display(Name = "From Accession")]
         public string FromAccession { get; set; }
 
+        [Display(Name = "Is Active?")]
         public bool? IsActive { get; set; }
 
         [Key]
         public int RemapID { get; set; }
 
-        [StringLength(50)]
+        [StringLength(7)]
+        [MinLength(7)]
+        [Required]
+        [Display(Name = "To Accession")]
         public string ToAccession { get; set; }
     }
 }

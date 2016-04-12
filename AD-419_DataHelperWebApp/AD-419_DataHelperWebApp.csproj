@@ -175,6 +175,7 @@
     <Compile Include="Controllers\ARC_CodesController.cs" />
     <Compile Include="Controllers\CesListImportController.cs" />
     <Compile Include="Controllers\CFDANumsImportController.cs" />
+    <Compile Include="Controllers\ExpiredProjectCrossReferenceController.cs" />
     <Compile Include="Controllers\FieldStationExpensesImportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -315,6 +316,11 @@
     <Content Include="Views\C204Exclusions\Details.cshtml" />
     <Content Include="Views\C204Exclusions\Edit.cshtml" />
     <Content Include="Views\C204Exclusions\Index.cshtml" />
+    <Content Include="Views\ExpiredProjectCrossReference\Create.cshtml" />
+    <Content Include="Views\ExpiredProjectCrossReference\Delete.cshtml" />
+    <Content Include="Views\ExpiredProjectCrossReference\Details.cshtml" />
+    <Content Include="Views\ExpiredProjectCrossReference\Edit.cshtml" />
+    <Content Include="Views\ExpiredProjectCrossReference\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

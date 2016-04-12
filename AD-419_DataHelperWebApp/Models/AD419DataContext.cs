@@ -14,7 +14,7 @@ namespace AD_419_DataHelperWebApp.Models
         public virtual DbSet<AllProject> AllProjects { get; set; }
         public virtual DbSet<ArcCodeAccountExclusion> ArcCodeAccountExclusions { get; set; }
         public virtual DbSet<CesListImport> CesListImports { get; set; }
-        public virtual DbSet<ExpiredProjectCrossReference> ExpiredProjectCrossReferences { get; set; }
+        public virtual DbSet<ExpiredProjectCrossReference> ExpiredProjectCrossReference { get; set; }
 
         public virtual DbSet<FieldStationExpenseListImport> FieldStationExpenseListImports { get; set; }
 
