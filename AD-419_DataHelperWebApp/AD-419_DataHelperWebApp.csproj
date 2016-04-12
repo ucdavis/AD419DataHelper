@@ -173,6 +173,7 @@
     <Compile Include="Controllers\AllProjectsNewController.cs" />
     <Compile Include="Controllers\ArcCodeAccountExclusionsController.cs" />
     <Compile Include="Controllers\ARC_CodesController.cs" />
+    <Compile Include="Controllers\C204AcctXProjController.cs" />
     <Compile Include="Controllers\CesListImportController.cs" />
     <Compile Include="Controllers\CFDANumsImportController.cs" />
     <Compile Include="Controllers\ExpiredProjectCrossReferenceController.cs" />
@@ -321,6 +322,11 @@
     <Content Include="Views\ExpiredProjectCrossReference\Details.cshtml" />
     <Content Include="Views\ExpiredProjectCrossReference\Edit.cshtml" />
     <Content Include="Views\ExpiredProjectCrossReference\Index.cshtml" />
+    <Content Include="Views\C204AcctXProj\Create.cshtml" />
+    <Content Include="Views\C204AcctXProj\Delete.cshtml" />
+    <Content Include="Views\C204AcctXProj\Details.cshtml" />
+    <Content Include="Views\C204AcctXProj\Edit.cshtml" />
+    <Content Include="Views\C204AcctXProj\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

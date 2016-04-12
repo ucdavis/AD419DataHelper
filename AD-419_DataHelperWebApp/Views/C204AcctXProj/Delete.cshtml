@@ -1,0 +1,112 @@
+﻿@model AD_419_DataHelperWebApp.Models.C204AcctXProj
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>SFN 204 Acct to Project Mapping</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Chart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Chart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccountID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Org)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Org)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrgR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrgR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Accession)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Accession)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Expenses)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Expenses)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Is219)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Is219)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CSREES_ContractNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CSREES_ContractNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AwardNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AwardNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsCurrentProject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsCurrentProject)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.IsExcludedExpense)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsExcludedExpense)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

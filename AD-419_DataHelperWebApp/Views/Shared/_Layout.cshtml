@@ -96,9 +96,15 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
                                 <li>@Html.ActionLink("SFN 204 Award Number Exclusions", "Index", "C204Exclusions")</li>
                                 <li>@Html.ActionLink("Non-204 Expired Project Cross Reference", "Index", "ExpiredProjectCrossReference")</li>
                             </ul>
-                        </li>                   
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        </li>
+                        <li>
+                            <a href="#">Review</a>
+                            <ul>
+                                <li>@Html.ActionLink("204 Project Associations", "Index", "C204AcctXProj")</li>
+                            </ul>
+                        </li>                        
+                        @*<li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
                     </ul>
                     @Html.Partial("_LoginPartial")
                 </div>
