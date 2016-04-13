@@ -18,7 +18,6 @@ namespace AD_419_DataHelperWebApp.Models
 
         [StringLength(7)]
         [MinLength(7)]
-        [Required]
         public string Accession { get; set; }
 
         [StringLength(1)]
@@ -36,8 +35,8 @@ namespace AD_419_DataHelperWebApp.Models
         [Display(Name = "Project Contract Number")]
         public string CSREES_ContractNo { get; set; }
 
-        [StringLength(20)]
-        [Display(Name = "Account Award Number")]
+        [StringLength(50)]
+        [Display(Name = "Account Award Number(; OP Fund Award Number)")]
         public string AwardNum { get; set; }
 
         [Display(Name = "Is Current AD-419 Project?")]
@@ -49,7 +48,7 @@ namespace AD_419_DataHelperWebApp.Models
         public string Org { get; set; }
 
         [StringLength(4)]
-        [MinLength(7)]
+        [MinLength(4)]
         [Required]
         public string OrgR { get; set; }
 

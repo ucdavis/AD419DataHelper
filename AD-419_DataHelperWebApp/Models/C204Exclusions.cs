@@ -9,6 +9,7 @@ namespace AD_419_DataHelperWebApp.Models
         [Key]
         [StringLength(50)]
         [Required]
+        [Display(Name = "Award Number")]
         public string AwardNumber { get; set; }
 
         public string Comments { get; set; }
