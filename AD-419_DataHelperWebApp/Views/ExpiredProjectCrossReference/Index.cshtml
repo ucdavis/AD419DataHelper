@@ -1,0 +1,45 @@
+﻿@model IEnumerable<AD_419_DataHelperWebApp.Models.ExpiredProjectCrossReference>
+
+@{
+    ViewBag.Title = "Index - Non-204 Expired Project Cross Reference";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FromAccession)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToAccession)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromAccession)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToAccession)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RemapID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RemapID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RemapID })
+        </td>
+    </tr>
+}
+
+</table>

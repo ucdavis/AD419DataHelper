@@ -1,0 +1,66 @@
+﻿@model IEnumerable<AD_419_DataHelperWebApp.Models.ARC_Codes>
+
+@{
+    ViewBag.Title = "Index - ARC Codes";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ARC_Cd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ARC_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OP_Func_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ARC_Category_Cd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ARC_Sub_Category_Cd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isAES)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DS_Last_Update_Date)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ARC_Cd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ARC_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OP_Func_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ARC_Category_Cd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ARC_Sub_Category_Cd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isAES)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DS_Last_Update_Date)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ARC_Cd }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ARC_Cd })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,9 +1,6 @@
 namespace AD_419_DataHelperWebApp.Models
 {
-    using System;
     using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
 
     public partial class FISDataContext : DbContext
     {
@@ -28,6 +25,14 @@ namespace AD_419_DataHelperWebApp.Models
             modelBuilder.Entity<ARC_Codes>()
                 .Property(e => e.OP_Func_Name)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<ARC_Codes>()
+               .Property(e => e.ARC_Category_Cd)
+               .IsUnicode(false);
+
+            modelBuilder.Entity<ARC_Codes>()
+               .Property(e => e.ARC_Sub_Category_Cd)
+               .IsUnicode(false);
         }
     }
 }

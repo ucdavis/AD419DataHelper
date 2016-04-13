@@ -9,7 +9,63 @@
     <link href="//cdn.datatables.net/1.10.11/css/dataTables.bootstrap.min.css" rel="stylesheet" />
 
     @Scripts.Render("~/bundles/modernizr")
+    
+    <style type="text/css">
+        body {
+            font-family: arial, helvetica, serif;
+        }
 
+        #nav, #nav ul { /* all lists */
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            line-height: 1;
+        }
+
+            #nav a {
+                display: block;
+                width: 10em;
+            }
+
+            #nav li { /* all list items */
+                float: left;
+                width: 10em; /* width needed or else Opera goes nuts */
+            }
+
+                #nav li ul { /* second-level lists */
+                    position: absolute;
+                    background: white;
+                    width: 10em;
+                    left: -999em; /* using left instead of display to hide menus because display: none isn't read by screen readers */
+                }
+
+                #nav li:hover ul, #nav li.sfhover ul { /* lists nested under hovered list items */
+                    left: auto;
+                }
+
+        #content {
+            clear: left;
+            color: #ccc;
+        }
+    </style>
+    
+    <script type="text/javascript">
+<!--//--><![CDATA[//><!--
+
+sfHover = function() {
+	var sfEls = document.getElementById("nav").getElementsByTagName("LI");
+	for (var i=0; i<sfEls.length; i++) {
+		sfEls[i].onmouseover=function() {
+			this.className+=" sfhover";
+		}
+		sfEls[i].onmouseout=function() {
+			this.className=this.className.replace(new RegExp(" sfhover\\b"), "");
+		}
+	}
+}
+if (window.attachEvent) window.attachEvent("onload", sfHover);
+
+//--><!]]></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -22,13 +78,32 @@
                 </button>
                 @Html.ActionLink("AD-419 Data Helper Application", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
+            <div id="nav" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("CE Specialists", "Index", "CesListImport")</li>
-                    <li>@Html.ActionLink("Field Station Expenses", "Index", "FieldStationExpensesImport")</li>
-                    <li>@Html.ActionLink("Projects", "Index", "Projects")</li>
-                    <li>@Html.ActionLink("CFDA Numbers", "Index", "CFDANumsImport")</li>
+                    <li><a href="#">Import</a>
+                        <ul>
+                            <li>@Html.ActionLink("All ANR Projects", "Index", "AllProjectsImport")</li>
+                            <li>@Html.ActionLink("CFDA Numbers", "Index", "CFDANumsImport")</li>
+                            <li>@Html.ActionLink("CE Specialists", "Index", "CesListImport")</li>
+                            <li>@Html.ActionLink("Field Station Expenses", "Index", "FieldStationExpensesImport")</li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Maintenance</a>
+                        <ul>
+                            <li>@Html.ActionLink("Annual Report Codes", "Index", "ARC_Codes")</li>
+                            <li>@Html.ActionLink("ARC/Account Exclusions", "Index", "ArcCodeAccountExclusions")</li>
+                            <li>@Html.ActionLink("Project Maintenance", "Index", "AllProjectsNew")</li>
+                            <li>@Html.ActionLink("SFN 204 Award Number Exclusions", "Index", "C204Exclusions")</li>
+                            <li>@Html.ActionLink("Non-204 Expired Project Cross Reference", "Index", "ExpiredProjectCrossReference")</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Review</a>
+                        <ul>
+                            <li>@Html.ActionLink("204 Project Associations", "Index", "C204AcctXProj")</li>
+                        </ul>
+                    </li>                        
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -53,15 +128,13 @@
             }
         </header>
 
-        @RenderBody()
+    @RenderBody()
 
         <hr>
         <footer>
             <p>&copy; College of Agricultural and Environmental Sciences, University of California at Davis</p>
         </footer>
     </div>
-
-    @*@Html.Partial("_ServiceMessages")*@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")

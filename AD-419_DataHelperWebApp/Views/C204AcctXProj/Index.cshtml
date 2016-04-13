@@ -1,0 +1,91 @@
+﻿@model IEnumerable<AD_419_DataHelperWebApp.Models.C204AcctXProj>
+
+@{
+    ViewBag.Title = "Index -SFN 204 Acct to Project Mapping";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Chart)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.AccountID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrgR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Org)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Accession)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Expenses)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Is219)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CSREES_ContractNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AwardNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsCurrentProject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsExcludedExpense)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Chart)-@Html.DisplayFor(modelItem => item.AccountID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrgR)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Org)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Accession)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Expenses)
+        </td>
+       <td>
+            @Html.DisplayFor(modelItem => item.Is219)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CSREES_ContractNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AwardNum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsCurrentProject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsExcludedExpense)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.pk }) |
+            @Html.ActionLink("Details", "Details", new { id=item.pk }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.pk })
+        </td>
+    </tr>
+}
+
+</table>
