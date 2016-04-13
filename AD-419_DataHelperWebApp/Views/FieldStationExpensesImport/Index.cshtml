@@ -20,45 +20,69 @@
             <input type="submit" id="btnDeleteAll" value="Delete All" title="Delete All" class="btn btn-default" onclick="return confirm('Are you sure you want to delete ALL the records?')" />
         </p>
     }
-<table class="table">
-    <tr>
-        <th>@Html.DisplayNameFor(model => model.Id)</th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProjectAccessionNum)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProjectDirector)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FieldStationCharge)
-        </th>
-        <th></th>
-    </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.Id).</td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProjectAccessionNum)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProjectDirector)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FieldStationCharge)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-            </td>
-        </tr>
-    }
-    
+    <table id="fieldImportTable" class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Id)</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProjectAccessionNum)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProjectDirector)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FieldStationCharge)
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Id).</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProjectAccessionNum)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProjectDirector)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FieldStationCharge)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 }
 else
 {
     <h4>Field Station Expenses Data has yet to be created or uploaded.</h4>
     <p>Select the "Create New" (above) or browse and display an existing Field Station Expenses Excel file (above).</p>
+}
+
+@section AdditionalScripts
+{
+    <script>
+        $(function() {
+            $('#fieldImportTable').DataTable({
+                columnDefs: [
+                    { targets: [-1], sortable: false },
+                    { targets: [-2], sortable: false },
+                    { targets: [-3], sortable: false }
+                ]
+            });
+        })
+    </script>
 }

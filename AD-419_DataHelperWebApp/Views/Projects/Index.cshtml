@@ -9,7 +9,8 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table id="projectsTable" class="table">
+    <thead>
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Accession)
@@ -75,79 +76,102 @@
             @Html.DisplayNameFor(model => model.IsCurrentAD419Project)
         </th>
         <th></th>
+        <th></th>
+        <th></th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Accession)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Project)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isInterdepartmental)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isValid)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BeginDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TermDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProjTypeCd)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RegionalProjNum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CRIS_DeptID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CoopDepts)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CSREES_ContractNo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StatusCd)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdateDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.inv1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.inv2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.inv3)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.inv4)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.inv5)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.inv6)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsCurrentAD419Project)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idProject }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idProject }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idProject })
-        </td>
-    </tr>
-}
-
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Accession)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Project)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isInterdepartmental)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isValid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BeginDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TermDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjTypeCd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegionalProjNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CRIS_DeptID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CoopDepts)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CSREES_ContractNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatusCd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.inv1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.inv2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.inv3)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.inv4)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.inv5)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.inv6)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsCurrentAD419Project)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.idProject })
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.idProject })
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.idProject })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+
+@section AdditionalScripts
+{
+    <script>
+        $(function() {
+            $('#projectsTable').DataTable({
+                columnDefs: [
+                    { targets: [-1], sortable: false },
+                    { targets: [-2], sortable: false },
+                    { targets: [-3], sortable: false }
+                ]
+            });
+        })
+    </script>
+}
