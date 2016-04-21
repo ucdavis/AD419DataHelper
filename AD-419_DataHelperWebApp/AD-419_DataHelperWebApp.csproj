@@ -211,6 +211,7 @@
     <Compile Include="Controllers\C204AcctXProjController.cs" />
     <Compile Include="Controllers\CesListImportController.cs" />
     <Compile Include="Controllers\CFDANumsImportController.cs" />
+    <Compile Include="Controllers\DOS_CodesController.cs" />
     <Compile Include="Controllers\ExpiredProjectCrossReferenceController.cs" />
     <Compile Include="Controllers\FieldStationExpensesImportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -220,6 +221,7 @@
     <Compile Include="Helpers\CasHelper.cs" />
     <Compile Include="Helpers\HttpCorrelationIdEnricher.cs" />
     <Compile Include="Models\AllProjectsNew.cs" />
+    <Compile Include="Models\DOS_Code.cs" />
     <Compile Include="Models\CFDANumImport.cs" />
     <Compile Include="Models\FieldStationExpenseListImport.cs" />
     <Compile Include="Global.asax.cs">
@@ -352,6 +354,11 @@
     <Content Include="Views\C204AcctXProj\Details.cshtml" />
     <Content Include="Views\C204AcctXProj\Edit.cshtml" />
     <Content Include="Views\C204AcctXProj\Index.cshtml" />
+    <Content Include="Views\DOS_Codes\Create.cshtml" />
+    <Content Include="Views\DOS_Codes\Delete.cshtml" />
+    <Content Include="Views\DOS_Codes\Details.cshtml" />
+    <Content Include="Views\DOS_Codes\Edit.cshtml" />
+    <Content Include="Views\DOS_Codes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
