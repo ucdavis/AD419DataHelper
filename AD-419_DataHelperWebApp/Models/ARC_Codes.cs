@@ -39,7 +39,5 @@ namespace AD_419_DataHelperWebApp.Models
         [Required]
         [Display(Name = "ARC Sub-category Code")]
         public string ARC_Sub_Category_Cd { get; set; }
-
-
     }
 }
