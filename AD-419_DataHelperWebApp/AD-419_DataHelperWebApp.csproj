@@ -254,9 +254,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Sample_Forms\ModifiedCEForImport.xlsx" />
-    <Content Include="Sample_Forms\ModifiedFieldStationExpensesForImport.xlsx" />
-    <Content Include="Sample_Forms\CfdaNumbersForImport.xlsx" />
+    <Content Include="Content\Sample_Forms\ModifiedCEForImport.xlsx" />
+    <Content Include="Content\Sample_Forms\ModifiedFieldStationExpensesForImport.xlsx" />
+    <Content Include="Content\Sample_Forms\CfdaNumbersForImport.xlsx" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
