@@ -1,9 +1,9 @@
 ﻿using System;
-using AD_419_DataHelperWebApp.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using AD_419_DataHelperWebApp.Models;
 
 namespace AD_419_DataHelperWebApp.Controllers
 {
@@ -12,22 +12,20 @@ namespace AD_419_DataHelperWebApp.Controllers
         // GET: ArcCodeAccountExclusions
         public ActionResult Index()
         {
-            return View(DbContext.ArcCodeAccountExclusions.ToList());
+            var exclusions = DbContext.ArcCodeAccountExclusions.ToList();
+            return View(exclusions);
         }
 
         // GET: ArcCodeAccountExclusions/Details/5
         public ActionResult Details(int? year, string chart, string account, string annualReportCode)
         {
-            if (year == null || string.IsNullOrWhiteSpace(chart) || string.IsNullOrWhiteSpace(account) || string.IsNullOrWhiteSpace(annualReportCode))
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ArcCodeAccountExclusion arcCodeAccountExclusion = DbContext.ArcCodeAccountExclusions.Find(year, chart, account, annualReportCode);
-            if (arcCodeAccountExclusion == null)
+            var exclusion = DbContext.ArcCodeAccountExclusions.Find(year, chart, account, annualReportCode);
+            if (exclusion == null)
             {
                 return HttpNotFound();
             }
-            return View(arcCodeAccountExclusion);
+
+            return View(exclusion);
         }
 
         // GET: ArcCodeAccountExclusions/Create
@@ -42,31 +40,26 @@ namespace AD_419_DataHelperWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Year,Chart,Account,AnnualReportCode,Comments")] ArcCodeAccountExclusion arcCodeAccountExclusion)
+        public ActionResult Create([Bind(Include = "Year,Chart,Account,AnnualReportCode,Comments")] ArcCodeAccountExclusion exclusion)
         {
-            if (ModelState.IsValid)
-            {
-                DbContext.ArcCodeAccountExclusions.Add(arcCodeAccountExclusion);
-                DbContext.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            if (!ModelState.IsValid) return View(exclusion);
 
-            return View(arcCodeAccountExclusion);
+            DbContext.ArcCodeAccountExclusions.Add(exclusion);
+            DbContext.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         // GET: ArcCodeAccountExclusions/Edit/5
         public ActionResult Edit(int? year, string chart, string account, string annualReportCode)
         {
-            if (year == null || string.IsNullOrWhiteSpace(chart) || string.IsNullOrWhiteSpace(account) || string.IsNullOrWhiteSpace(annualReportCode))
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ArcCodeAccountExclusion arcCodeAccountExclusion = DbContext.ArcCodeAccountExclusions.Find(year, chart, account, annualReportCode);
-            if (arcCodeAccountExclusion == null)
+            var exclusion = DbContext.ArcCodeAccountExclusions.Find(year, chart, account, annualReportCode);
+            if (exclusion == null)
             {
                 return HttpNotFound();
             }
-            return View(arcCodeAccountExclusion);
+
+            return View(exclusion);
         }
 
         // POST: ArcCodeAccountExclusions/Edit/5
@@ -74,30 +67,26 @@ namespace AD_419_DataHelperWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Year,Chart,Account,AnnualReportCode,Comments")] ArcCodeAccountExclusion arcCodeAccountExclusion)
+        public ActionResult Edit([Bind(Include = "Year,Chart,Account,AnnualReportCode,Comments")] ArcCodeAccountExclusion exclusion)
         {
-            if (ModelState.IsValid)
-            {
-                DbContext.Entry(arcCodeAccountExclusion).State = EntityState.Modified;
-                DbContext.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(arcCodeAccountExclusion);
+            if (!ModelState.IsValid) return View(exclusion);
+
+            DbContext.Entry(exclusion).State = EntityState.Modified;
+            DbContext.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         // GET: ArcCodeAccountExclusions/Delete/5
         public ActionResult Delete(int? year, string chart, string account, string annualReportCode)
         {
-            if (year == null || string.IsNullOrWhiteSpace(chart) || string.IsNullOrWhiteSpace(account) || string.IsNullOrWhiteSpace(annualReportCode))
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ArcCodeAccountExclusion arcCodeAccountExclusion = DbContext.ArcCodeAccountExclusions.Find(year, chart, account, annualReportCode);
-            if (arcCodeAccountExclusion == null)
+            var exclusion = DbContext.ArcCodeAccountExclusions.Find(year, chart, account, annualReportCode);
+            if (exclusion == null)
             {
                 return HttpNotFound();
             }
-            return View(arcCodeAccountExclusion);
+
+            return View(exclusion);
         }
 
         // POST: ArcCodeAccountExclusions/Delete/5
@@ -105,9 +94,15 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int year, string chart, string account, string annualReportCode)
         {
-            ArcCodeAccountExclusion arcCodeAccountExclusion = DbContext.ArcCodeAccountExclusions.Find(year, chart, account, annualReportCode);
-            DbContext.ArcCodeAccountExclusions.Remove(arcCodeAccountExclusion);
+            var exclusion = DbContext.ArcCodeAccountExclusions.Find(year, chart, account, annualReportCode);
+            if (exclusion == null)
+            {
+                return HttpNotFound();
+            }
+
+            DbContext.ArcCodeAccountExclusions.Remove(exclusion);
             DbContext.SaveChanges();
+
             return RedirectToAction("Index");
         }
     }
