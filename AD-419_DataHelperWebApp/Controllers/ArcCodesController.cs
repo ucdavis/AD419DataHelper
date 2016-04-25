@@ -49,7 +49,7 @@ namespace AD_419_DataHelperWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ARC_Cd,ARC_Name,OP_Func_Name,ARC_Category_Cd, ARC_Sub_Category_Cd, DS_Last_Update_Date,isAES")] ARC_Codes code)
+        public ActionResult Edit([Bind(Include = "ARC_Cd,ARC_Name,OP_Func_Name,ARC_Category_Cd, ARC_Sub_Category_Cd, DS_Last_Update_Date,isAES")] ArcCode code)
         {
             if (!ModelState.IsValid) return View(code);
 

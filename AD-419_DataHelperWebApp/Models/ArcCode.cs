@@ -5,7 +5,7 @@ namespace AD_419_DataHelperWebApp.Models
     using System.ComponentModel.DataAnnotations.Schema;
 
     [Table("ARC_Codes")]
-    public partial class ARC_Codes
+    public partial class ArcCode
     {
         [Key]
         [StringLength(6)]
