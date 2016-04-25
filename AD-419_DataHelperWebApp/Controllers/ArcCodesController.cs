@@ -5,7 +5,7 @@ using AD_419_DataHelperWebApp.Models;
 
 namespace AD_419_DataHelperWebApp.Controllers
 {
-    public class ARC_CodesController : SuperController
+    public class ArcCodesController : SuperController
     {
         private readonly FISDataContext _fisContext = new FISDataContext();
 
