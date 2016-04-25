@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace AD_419_DataHelperWebApp.Controllers
 {
-    public class ExpiredProjectCrossReferenceController : Controller
+    public class ExpiredProjectCrossReferenceController : SuperController
     {
         private AD419DataContext db = new AD419DataContext();
 

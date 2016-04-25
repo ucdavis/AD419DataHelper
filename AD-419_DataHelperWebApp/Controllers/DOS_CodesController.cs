@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace AD_419_DataHelperWebApp.Controllers
 {
-    public class DOS_CodesController : Controller
+    public class DOS_CodesController : SuperController
     {
         private AD419DataContext db = new AD419DataContext();
 

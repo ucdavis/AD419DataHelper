@@ -11,7 +11,7 @@ using Excel;
 
 namespace AD_419_DataHelperWebApp.Controllers
 {
-    public class CFDANumsImportController : Controller
+    public class CFDANumsImportController : SuperController
     {
         private AD419DataContext db = new AD419DataContext();
 

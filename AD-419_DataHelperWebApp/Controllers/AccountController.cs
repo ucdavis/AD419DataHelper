@@ -11,8 +11,7 @@ using AD_419_DataHelperWebApp.Helpers;
 
 namespace AD_419_DataHelperWebApp.Controllers
 {
-    [Authorize]
-    public class AccountController : Controller
+    public class AccountController : SuperController
     {
         private ApplicationUserManager _userManager;
 

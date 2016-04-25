@@ -12,7 +12,7 @@ using Excel;
 
 namespace AD_419_DataHelperWebApp.Controllers
 {
-    public class CesListImportController : Controller
+    public class CesListImportController : SuperController
     {
         private AD419DataContext db = new AD419DataContext();
 

@@ -11,7 +11,7 @@ using Excel;
 
 namespace AD_419_DataHelperWebApp.Controllers
 {
-    public class FieldStationExpensesImportController : Controller
+    public class FieldStationExpensesImportController : SuperController
     {
         private AD419DataContext db = new AD419DataContext();
 

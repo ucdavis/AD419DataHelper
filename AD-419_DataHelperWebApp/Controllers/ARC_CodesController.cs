@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace AD_419_DataHelperWebApp.Controllers
 {
-    public class ARC_CodesController : Controller
+    public class ARC_CodesController : SuperController
     {
         private FISDataContext db = new FISDataContext();
 

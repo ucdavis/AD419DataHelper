@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace AD_419_DataHelperWebApp.Controllers
 {
-    public class C204AcctXProjController : Controller
+    public class C204AcctXProjController : SuperController
     {
         private AD419DataContext db = new AD419DataContext();
 

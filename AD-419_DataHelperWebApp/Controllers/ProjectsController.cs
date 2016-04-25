@@ -10,7 +10,7 @@ using AD_419_DataHelperWebApp.Models;
 
 namespace AD_419_DataHelperWebApp.Controllers
 {
-    public class ProjectsController : Controller
+    public class ProjectsController : SuperController
     {
         private AD419DataContext db = new AD419DataContext();
 
