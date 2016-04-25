@@ -17,22 +17,20 @@ namespace AD_419_DataHelperWebApp.Controllers
         // GET: CesListImport
         public ActionResult Index()
         {
-            return View(DbContext.CesListImports.ToList());
+            var imports = DbContext.CesListImports.ToList();
+            return View(imports);
         }
 
         // GET: CesListImport/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CesListImport cesListImport = DbContext.CesListImports.Find(id);
-            if (cesListImport == null)
+            var import = DbContext.CesListImports.Find(id);
+            if (import == null)
             {
                 return HttpNotFound();
             }
-            return View(cesListImport);
+
+            return View(import);
         }
 
         // GET: CesListImport/Create
@@ -48,29 +46,24 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,PI,DeptLevelOrg,EmployeeId,ProjectAccessionNum,ProjectNumber,PercentCeEffort,FullAnnualPayRate,TitleCode,FTE,Chart,Account,SubAccount,EstimatedCeExpenses")] CesListImport cesListImport)
         {
-            if (ModelState.IsValid)
-            {
-                DbContext.CesListImports.Add(cesListImport);
-                DbContext.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            if (!ModelState.IsValid) return View(cesListImport);
 
-            return View(cesListImport);
+            DbContext.CesListImports.Add(cesListImport);
+            DbContext.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         // GET: CesListImport/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CesListImport cesListImport = DbContext.CesListImports.Find(id);
-            if (cesListImport == null)
+            var import = DbContext.CesListImports.Find(id);
+            if (import == null)
             {
                 return HttpNotFound();
             }
-            return View(cesListImport);
+
+            return View(import);
         }
 
         // POST: CesListImport/Edit/5
@@ -80,28 +73,24 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,PI,DeptLevelOrg,EmployeeId,ProjectAccessionNum,ProjectNumber,PercentCeEffort,FullAnnualPayRate,TitleCode,FTE,Chart,Account,SubAccount,EstimatedCeExpenses")] CesListImport cesListImport)
         {
-            if (ModelState.IsValid)
-            {
-                DbContext.Entry(cesListImport).State = EntityState.Modified;
-                DbContext.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(cesListImport);
+            if (!ModelState.IsValid) return View(cesListImport);
+
+            DbContext.Entry(cesListImport).State = EntityState.Modified;
+            DbContext.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         // GET: CesListImport/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CesListImport cesListImport = DbContext.CesListImports.Find(id);
-            if (cesListImport == null)
+            var import = DbContext.CesListImports.Find(id);
+            if (import == null)
             {
                 return HttpNotFound();
             }
-            return View(cesListImport);
+
+            return View(import);
         }
 
         [HttpPost, ActionName("DeleteAll")]
@@ -123,54 +112,46 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CesListImport cesListImport = DbContext.CesListImports.Find(id);
-            DbContext.CesListImports.Remove(cesListImport);
+            var import = DbContext.CesListImports.Find(id);
+            if (import == null)
+            {
+                return HttpNotFound();
+            }
+
+            DbContext.CesListImports.Remove(import);
             DbContext.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                DbContext.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        [AllowAnonymous]
         [AcceptVerbs(HttpVerbs.Post)]
         [HttpPost]
         public ActionResult Upload(IEnumerable<HttpPostedFileBase> file)
         {
             var myFile = Request.Files[0];
+            if (myFile == null) return RedirectToAction("Index");
 
             var cesEntries = new List<CesListImport>();
-            if (myFile != null)
-            {
-                var fileName = myFile.FileName;
-                var excelReader = ExcelReaderFactory.CreateOpenXmlReader(myFile.InputStream);
-                excelReader.IsFirstRowAsColumnNames = true;
-                var result = excelReader.AsDataSet();
+            var fileName = myFile.FileName;
+            var excelReader = ExcelReaderFactory.CreateOpenXmlReader(myFile.InputStream);
+            excelReader.IsFirstRowAsColumnNames = true;
+            var result = excelReader.AsDataSet();
                
-                TempData.Add("Message", "Now viewing \"" + fileName + "\".");
-                excelReader.Close();
+            TempData.Add("Message", "Now viewing \"" + fileName + "\".");
+            excelReader.Close();
 
-                cesEntries.AddRange(from DataRow row in result.Tables[0].Rows select new CesListImport(row));
+            cesEntries.AddRange(from DataRow row in result.Tables[0].Rows select new CesListImport(row));
 
-                // This works.  Would now like the user to have a chance to review upload first.
-                //if (ModelState.IsValid)
-                //{
-                //    db.CesListImports.AddRange(cesEntries);
-                //    db.SaveChanges();
-                //}
+            // This works.  Would now like the user to have a chance to review upload first.
+            //if (ModelState.IsValid)
+            //{
+            //    db.CesListImports.AddRange(cesEntries);
+            //    db.SaveChanges();
+            //}
 
-                return View("Display", cesEntries);
-            }
-            return RedirectToAction("Index");
+            return View("Display", cesEntries);
         }
 
-        [AllowAnonymous]
         [HttpPost]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Save(List<AD_419_DataHelperWebApp.Models.CesListImport> cesEntries)
@@ -185,20 +166,6 @@ namespace AD_419_DataHelperWebApp.Controllers
                 }
             }
             return RedirectToAction("Index");
-        }
-
-        [AllowAnonymous]
-        [HttpGet]
-        [AcceptVerbs(HttpVerbs.Get)]
-        public FileResult Download(string id)
-        {
-            const string filePathAndFilename = @"~\Sample_Forms\ModifiedCEForImport.xlsx";
-            const string contentType = "application/text";
-            //Parameters to file are
-            //1. The File Path on the File Server
-            //2. The content type MIME type
-            //3. The parameter for the file save by the browser
-            return File(filePathAndFilename, contentType, "SampleCesList.xlsx");
         }
     }
 }
