@@ -68,49 +68,9 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 //--><!]]></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("AD-419 Data Helper Application", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div id="nav" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li><a href="#">Import</a>
-                        <ul>
-                            <li>@Html.ActionLink("All ANR Projects", "Index", "AllProjectsImport")</li>
-                            <li>@Html.ActionLink("CFDA Numbers", "Index", "CFDANumsImport")</li>
-                            <li>@Html.ActionLink("CE Specialists", "Index", "CesListImport")</li>
-                            <li>@Html.ActionLink("Field Station Expenses", "Index", "FieldStationExpensesImport")</li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Maintenance</a>
-                        <ul>
-                            <li>@Html.ActionLink("Annual Report Codes", "Index", "ARC_Codes")</li>
-                            <li>@Html.ActionLink("ARC/Account Exclusions", "Index", "ArcCodeAccountExclusions")</li>
-                            <li>@Html.ActionLink("Project Maintenance", "Index", "AllProjectsNew")</li>
-                            <li>@Html.ActionLink("SFN 204 Award Number Exclusions", "Index", "C204Exclusions")</li>
-                            <li>@Html.ActionLink("Non-204 Expired Project Cross Reference", "Index", "ExpiredProjectCrossReference")</li>
-                            <li>@Html.ActionLink("DOS Codes", "Index", "DOS_Codes")</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">Review</a>
-                        <ul>
-                            <li>@Html.ActionLink("204 Project Associations", "Index", "C204AcctXProj")</li>
-                        </ul>
-                    </li>                        
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
-    <div class="container">
+    @Html.Partial("_TopNav")
+
+    <div class="container-fluid">
         <header>
             @if (!string.IsNullOrWhiteSpace(ViewBag.ErrorMessage))
             {
@@ -129,7 +89,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
             }
         </header>
 
-    @RenderBody()
+        @RenderBody()
 
         <hr>
         <footer>
