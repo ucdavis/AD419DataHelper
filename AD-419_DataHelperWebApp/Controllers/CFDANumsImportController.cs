@@ -20,18 +20,15 @@ namespace AD_419_DataHelperWebApp.Controllers
         }
 
         // GET: CFDANumsImport/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CFDANumImport cFDANumImport = DbContext.CFDANumImports.Find(id);
-            if (cFDANumImport == null)
+            var num = DbContext.CFDANumImports.Find(id);
+            if (num == null)
             {
                 return HttpNotFound();
             }
-            return View(cFDANumImport);
+
+            return View(num);
         }
 
         // GET: CFDANumsImport/Create
@@ -47,29 +44,24 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,CFDANum")] CFDANumImport cFDANumImport)
         {
-            if (ModelState.IsValid)
-            {
-                DbContext.CFDANumImports.Add(cFDANumImport);
-                DbContext.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            if (!ModelState.IsValid) return View(cFDANumImport);
 
-            return View(cFDANumImport);
+            DbContext.CFDANumImports.Add(cFDANumImport);
+            DbContext.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         // GET: CFDANumsImport/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CFDANumImport cFDANumImport = DbContext.CFDANumImports.Find(id);
-            if (cFDANumImport == null)
+            var code = DbContext.CFDANumImports.Find(id);
+            if (code == null)
             {
                 return HttpNotFound();
             }
-            return View(cFDANumImport);
+
+            return View(code);
         }
 
         // POST: CFDANumsImport/Edit/5
@@ -79,28 +71,24 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,CFDANum, ProgramTitle")] CFDANumImport cFDANumImport)
         {
-            if (ModelState.IsValid)
-            {
-                DbContext.Entry(cFDANumImport).State = EntityState.Modified;
-                DbContext.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(cFDANumImport);
+            if (!ModelState.IsValid) return View(cFDANumImport);
+
+            DbContext.Entry(cFDANumImport).State = EntityState.Modified;
+            DbContext.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         // GET: CFDANumsImport/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CFDANumImport cFDANumImport = DbContext.CFDANumImports.Find(id);
-            if (cFDANumImport == null)
+            var num = DbContext.CFDANumImports.Find(id);
+            if (num == null)
             {
                 return HttpNotFound();
             }
-            return View(cFDANumImport);
+
+            return View(num);
         }
 
         [HttpPost, ActionName("DeleteAll")]
@@ -122,54 +110,45 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CFDANumImport cFDANumImport = DbContext.CFDANumImports.Find(id);
-            DbContext.CFDANumImports.Remove(cFDANumImport);
+            var num = DbContext.CFDANumImports.Find(id); if (num == null)
+            {
+                return HttpNotFound();
+            }
+
+            DbContext.CFDANumImports.Remove(num);
             DbContext.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                DbContext.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-                [AllowAnonymous]
         [AcceptVerbs(HttpVerbs.Post)]
         [HttpPost]
         public ActionResult Upload(IEnumerable<HttpPostedFileBase> file)
         {
             var myFile = Request.Files[0];
+            if (myFile == null) return RedirectToAction("Index");
 
             var cfdaNums = new List<CFDANumImport>();
-            if (myFile != null)
-            {
-                var fileName = myFile.FileName;
-                var excelReader = ExcelReaderFactory.CreateOpenXmlReader(myFile.InputStream);
-                excelReader.IsFirstRowAsColumnNames = true;
-                var result = excelReader.AsDataSet();
+            var fileName = myFile.FileName;
+            var excelReader = ExcelReaderFactory.CreateOpenXmlReader(myFile.InputStream);
+            excelReader.IsFirstRowAsColumnNames = true;
+            var result = excelReader.AsDataSet();
                
-                TempData.Add("Message", "Now viewing \"" + fileName + "\".");
-                excelReader.Close();
+            TempData.Add("Message", "Now viewing \"" + fileName + "\".");
+            excelReader.Close();
 
-                cfdaNums.AddRange(from DataRow row in result.Tables[0].Rows select new CFDANumImport(row));
+            cfdaNums.AddRange(from DataRow row in result.Tables[0].Rows select new CFDANumImport(row));
 
-                // This works.  Would now like the user to have a chance to review upload first.
-                //if (ModelState.IsValid)
-                //{
-                //    db.CesListImports.AddRange(cesEntries);
-                //    db.SaveChanges();
-                //}
+            // This works.  Would now like the user to have a chance to review upload first.
+            //if (ModelState.IsValid)
+            //{
+            //    db.CesListImports.AddRange(cesEntries);
+            //    db.SaveChanges();
+            //}
 
-                return View("Display", cfdaNums);
-            }
-            return RedirectToAction("Index");
+            return View("Display", cfdaNums);
         }
 
-        [AllowAnonymous]
         [HttpPost]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Save(List<AD_419_DataHelperWebApp.Models.CFDANumImport> cfdaNums)
@@ -184,20 +163,6 @@ namespace AD_419_DataHelperWebApp.Controllers
                 }
             }
             return RedirectToAction("Index");
-        }
-
-        [AllowAnonymous]
-        [HttpGet]
-        [AcceptVerbs(HttpVerbs.Get)]
-        public FileResult Download(string id)
-        {
-            const string filePathAndFilename = @"~\Sample_Forms\CfdaNumbersForImport.xlsx";
-            const string contentType = "application/text";
-            //Parameters to file are
-            //1. The File Path on the File Server
-            //2. The content type MIME type
-            //3. The parameter for the file save by the browser
-            return File(filePathAndFilename, contentType, "SampleCfdaNumbers.xlsx");
         }
     }
 }
