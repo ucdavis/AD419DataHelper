@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AD_419_DataHelperWebApp.Models;
@@ -16,22 +15,20 @@ namespace AD_419_DataHelperWebApp.Controllers
         // GET: FieldStationExpensesImport
         public ActionResult Index()
         {
-            return View(DbContext.FieldStationExpenseListImports.ToList());
+            var stations = DbContext.FieldStationExpenseListImports.ToList();
+            return View(stations);
         }
 
         // GET: FieldStationExpensesImport/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            FieldStationExpenseListImport fieldStationExpenseListImport = DbContext.FieldStationExpenseListImports.Find(id);
-            if (fieldStationExpenseListImport == null)
+            var station = DbContext.FieldStationExpenseListImports.Find(id);
+            if (station == null)
             {
                 return HttpNotFound();
             }
-            return View(fieldStationExpenseListImport);
+
+            return View(station);
         }
 
         // GET: FieldStationExpensesImport/Create
@@ -47,29 +44,22 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,ProjectAccessionNum,FieldStationCharge,ProjectDirector")] FieldStationExpenseListImport fieldStationExpenseListImport)
         {
-            if (ModelState.IsValid)
-            {
-                DbContext.FieldStationExpenseListImports.Add(fieldStationExpenseListImport);
-                DbContext.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            if (!ModelState.IsValid) return View(fieldStationExpenseListImport);
 
-            return View(fieldStationExpenseListImport);
+            DbContext.FieldStationExpenseListImports.Add(fieldStationExpenseListImport);
+            DbContext.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: FieldStationExpensesImport/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            FieldStationExpenseListImport fieldStationExpenseListImport = DbContext.FieldStationExpenseListImports.Find(id);
-            if (fieldStationExpenseListImport == null)
+            var station = DbContext.FieldStationExpenseListImports.Find(id);
+            if (station == null)
             {
                 return HttpNotFound();
             }
-            return View(fieldStationExpenseListImport);
+            return View(station);
         }
 
         // POST: FieldStationExpensesImport/Edit/5
@@ -79,28 +69,24 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,ProjectAccessionNum,FieldStationCharge,ProjectDirector")] FieldStationExpenseListImport fieldStationExpenseListImport)
         {
-            if (ModelState.IsValid)
-            {
-                DbContext.Entry(fieldStationExpenseListImport).State = EntityState.Modified;
-                DbContext.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(fieldStationExpenseListImport);
+            if (!ModelState.IsValid) return View(fieldStationExpenseListImport);
+
+            DbContext.Entry(fieldStationExpenseListImport).State = EntityState.Modified;
+            DbContext.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         // GET: FieldStationExpensesImport/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            FieldStationExpenseListImport fieldStationExpenseListImport = DbContext.FieldStationExpenseListImports.Find(id);
-            if (fieldStationExpenseListImport == null)
+            var station = DbContext.FieldStationExpenseListImports.Find(id);
+            if (station == null)
             {
                 return HttpNotFound();
             }
-            return View(fieldStationExpenseListImport);
+
+            return View(station);
         }
 
         [HttpPost, ActionName("DeleteAll")]
@@ -122,54 +108,47 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            FieldStationExpenseListImport fieldStationExpenseListImport = DbContext.FieldStationExpenseListImports.Find(id);
-            DbContext.FieldStationExpenseListImports.Remove(fieldStationExpenseListImport);
+            var station = DbContext.FieldStationExpenseListImports.Find(id);
+            if (station == null)
+            {
+                return HttpNotFound();
+            }
+
+            DbContext.FieldStationExpenseListImports.Remove(station);
             DbContext.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                DbContext.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        [AllowAnonymous]
         [AcceptVerbs(HttpVerbs.Post)]
         [HttpPost]
         public ActionResult Upload(IEnumerable<HttpPostedFileBase> file)
         {
             var myFile = Request.Files[0];
+            if (myFile == null) return RedirectToAction("Index");
 
             var fieldStationExpenseEntries = new List<FieldStationExpenseListImport>();
-            if (myFile != null)
-            {
-                var fileName = myFile.FileName;
-                var excelReader = ExcelReaderFactory.CreateOpenXmlReader(myFile.InputStream);
-                excelReader.IsFirstRowAsColumnNames = true;
-                var result = excelReader.AsDataSet();
 
-                TempData.Add("Message", "Now viewing \"" + fileName + "\".");
-                excelReader.Close();
-                var range = from DataRow row in result.Tables[0].Rows where !string.IsNullOrWhiteSpace(row["FieldStationCharge"].ToString()) select new FieldStationExpenseListImport(row);
-                fieldStationExpenseEntries.AddRange(range);
+            var fileName = myFile.FileName;
+            var excelReader = ExcelReaderFactory.CreateOpenXmlReader(myFile.InputStream);
+            excelReader.IsFirstRowAsColumnNames = true;
+            var result = excelReader.AsDataSet();
 
-                // This works.  Would now like the user to have a chance to review upload first.
-                //if (ModelState.IsValid)
-                //{
-                //    db.FieldStationExpenseListImport.AddRange(fieldStationExpenseEntries);
-                //    db.SaveChanges();
-                //}
+            TempData.Add("Message", "Now viewing \"" + fileName + "\".");
+            excelReader.Close();
+            var range = from DataRow row in result.Tables[0].Rows where !string.IsNullOrWhiteSpace(row["FieldStationCharge"].ToString()) select new FieldStationExpenseListImport(row);
+            fieldStationExpenseEntries.AddRange(range);
 
-                return View("Display", fieldStationExpenseEntries);
-            }
-            return RedirectToAction("Index");
+            // This works.  Would now like the user to have a chance to review upload first.
+            //if (ModelState.IsValid)
+            //{
+            //    db.FieldStationExpenseListImport.AddRange(fieldStationExpenseEntries);
+            //    db.SaveChanges();
+            //}
+
+            return View("Display", fieldStationExpenseEntries);
         }
 
-        [AllowAnonymous]
         [HttpPost]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Save(List<AD_419_DataHelperWebApp.Models.FieldStationExpenseListImport> fieldStationExpenseEntries)
@@ -184,20 +163,6 @@ namespace AD_419_DataHelperWebApp.Controllers
                 }
             }
             return RedirectToAction("Index");
-        }
-
-        [AllowAnonymous]
-        [HttpGet]
-        [AcceptVerbs(HttpVerbs.Get)]
-        public FileResult Download(string id)
-        {
-            const string filePathAndFilename = @"~\Sample_Forms\ModifiedFieldStationExpensesForImport.xlsx";
-            const string contentType = "application/text";
-            //Parameters to file are
-            //1. The File Path on the File Server
-            //2. The content type MIME type
-            //3. The parameter for the file save by the browser
-            return File(filePathAndFilename, contentType, "SampleFieldStationExpenses.xlsx");
         }
     }
 }
