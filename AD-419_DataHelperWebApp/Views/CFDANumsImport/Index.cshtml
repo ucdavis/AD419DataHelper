@@ -72,9 +72,7 @@ else
         $(function() {
             $('#cfdaImportTable').DataTable({
                 columnDefs: [
-                    { targets: [-1], sortable: false },
-                    { targets: [-2], sortable: false },
-                    { targets: [-3], sortable: false }
+                    { targets: [-1, -2, -3], sortable: false }
                 ]
             });
         })
