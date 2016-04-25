@@ -1,8 +1,7 @@
-﻿using AD_419_DataHelperWebApp.Models;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web.Mvc;
+using AD_419_DataHelperWebApp.Models;
 
 namespace AD_419_DataHelperWebApp.Controllers
 {
@@ -13,37 +12,36 @@ namespace AD_419_DataHelperWebApp.Controllers
         // GET: ARC_Codes
         public ActionResult Index()
         {
-            return View(_fisContext.ARC_Codes.ToList().OrderByDescending(a => a.isAES).ThenBy(a => a.ARC_Cd));
+            var codes = _fisContext.ARC_Codes
+                .OrderByDescending(a => a.isAES)
+                .ThenBy(a => a.ARC_Cd)
+                .ToList();
+
+            return View(codes);
         }
 
         // GET: ARC_Codes/Details/5
         public ActionResult Details(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ARC_Codes arcCodes = _fisContext.ARC_Codes.Find(id);
-            if (arcCodes == null)
+            var code = _fisContext.ARC_Codes.Find(id);
+            if (code == null)
             {
                 return HttpNotFound();
             }
-            return View(arcCodes);
+
+            return View(code);
         }
 
         // GET: ARC_Codes/Edit/5
         public ActionResult Edit(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ARC_Codes arcCodes = _fisContext.ARC_Codes.Find(id);
-            if (arcCodes == null)
+            var code = _fisContext.ARC_Codes.Find(id);
+            if (code == null)
             {
                 return HttpNotFound();
             }
-            return View(arcCodes);
+
+            return View(code);
         }
 
         // POST: ARC_Codes/Edit/5
@@ -51,15 +49,14 @@ namespace AD_419_DataHelperWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ARC_Cd,ARC_Name,OP_Func_Name,ARC_Category_Cd, ARC_Sub_Category_Cd, DS_Last_Update_Date,isAES")] ARC_Codes arcCodes)
+        public ActionResult Edit([Bind(Include = "ARC_Cd,ARC_Name,OP_Func_Name,ARC_Category_Cd, ARC_Sub_Category_Cd, DS_Last_Update_Date,isAES")] ARC_Codes code)
         {
-            if (ModelState.IsValid)
-            {
-                _fisContext.Entry(arcCodes).State = EntityState.Modified;
-                _fisContext.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(arcCodes);
+            if (!ModelState.IsValid) return View(code);
+
+            _fisContext.Entry(code).State = EntityState.Modified;
+            _fisContext.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
