@@ -222,7 +222,7 @@
     <Compile Include="Helpers\CasHelper.cs" />
     <Compile Include="Helpers\HttpCorrelationIdEnricher.cs" />
     <Compile Include="Models\AllProjectsNew.cs" />
-    <Compile Include="Models\DOS_Code.cs" />
+    <Compile Include="Models\DosCode.cs" />
     <Compile Include="Models\CFDANumImport.cs" />
     <Compile Include="Models\FieldStationExpenseListImport.cs" />
     <Compile Include="Global.asax.cs">
