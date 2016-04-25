@@ -6,14 +6,12 @@ using System.Web.Mvc;
 
 namespace AD_419_DataHelperWebApp.Controllers
 {
-    public class AllProjectsNewController : Controller
+    public class AllProjectsNewController : SuperController
     {
-        private AD419DataContext db = new AD419DataContext();
-
         // GET: AllProjectsNew
         public ActionResult Index()
         {
-            return View(db.AllProjectsNew.ToList());
+            return View(DbContext.AllProjectsNew.ToList());
         }
 
         // GET: AllProjectsNew/Details/5
@@ -23,7 +21,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AllProjectsNew allProjectsNew = db.AllProjectsNew.Find(id);
+            AllProjectsNew allProjectsNew = DbContext.AllProjectsNew.Find(id);
             if (allProjectsNew == null)
             {
                 return HttpNotFound();
@@ -46,8 +44,8 @@ namespace AD_419_DataHelperWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.AllProjectsNew.Add(allProjectsNew);
-                db.SaveChanges();
+                DbContext.AllProjectsNew.Add(allProjectsNew);
+                DbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -61,7 +59,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AllProjectsNew allProjectsNew = db.AllProjectsNew.Find(id);
+            AllProjectsNew allProjectsNew = DbContext.AllProjectsNew.Find(id);
             if (allProjectsNew == null)
             {
                 return HttpNotFound();
@@ -78,8 +76,8 @@ namespace AD_419_DataHelperWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(allProjectsNew).State = EntityState.Modified;
-                db.SaveChanges();
+                DbContext.Entry(allProjectsNew).State = EntityState.Modified;
+                DbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(allProjectsNew);
@@ -92,7 +90,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AllProjectsNew allProjectsNew = db.AllProjectsNew.Find(id);
+            AllProjectsNew allProjectsNew = DbContext.AllProjectsNew.Find(id);
             if (allProjectsNew == null)
             {
                 return HttpNotFound();
@@ -105,19 +103,10 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            AllProjectsNew allProjectsNew = db.AllProjectsNew.Find(id);
-            db.AllProjectsNew.Remove(allProjectsNew);
-            db.SaveChanges();
+            AllProjectsNew allProjectsNew = DbContext.AllProjectsNew.Find(id);
+            DbContext.AllProjectsNew.Remove(allProjectsNew);
+            DbContext.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

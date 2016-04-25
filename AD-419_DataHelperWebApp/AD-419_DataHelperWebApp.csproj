@@ -217,6 +217,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\C204ExclusionsController.cs" />
+    <Compile Include="Controllers\SuperController.cs" />
     <Compile Include="Models\AllProjectsImport.cs" />
     <Compile Include="Helpers\CasHelper.cs" />
     <Compile Include="Helpers\HttpCorrelationIdEnricher.cs" />
@@ -359,6 +360,7 @@
     <Content Include="Views\DOS_Codes\Details.cshtml" />
     <Content Include="Views\DOS_Codes\Edit.cshtml" />
     <Content Include="Views\DOS_Codes\Index.cshtml" />
+    <Content Include="Views\Shared\_TopNav.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

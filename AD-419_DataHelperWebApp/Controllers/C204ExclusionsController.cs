@@ -6,14 +6,12 @@ using System.Web.Mvc;
 
 namespace AD_419_DataHelperWebApp.Controllers
 {
-    public class C204ExclusionsController : Controller
+    public class C204ExclusionsController : SuperController
     {
-        private AD419DataContext db = new AD419DataContext();
-
         // GET: Sfn204Exclusions
         public ActionResult Index()
         {
-            return View(db.C204Exclusions.ToList());
+            return View(DbContext.C204Exclusions.ToList());
         }
 
         // GET: Sfn204Exclusions/Details/5
@@ -23,7 +21,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            C204Exclusions c204Exclusions = db.C204Exclusions.Find(id);
+            C204Exclusions c204Exclusions = DbContext.C204Exclusions.Find(id);
             if (c204Exclusions == null)
             {
                 return HttpNotFound();
@@ -46,8 +44,8 @@ namespace AD_419_DataHelperWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.C204Exclusions.Add(c204Exclusions);
-                db.SaveChanges();
+                DbContext.C204Exclusions.Add(c204Exclusions);
+                DbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -61,7 +59,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            C204Exclusions c204Exclusions = db.C204Exclusions.Find(id);
+            C204Exclusions c204Exclusions = DbContext.C204Exclusions.Find(id);
             if (c204Exclusions == null)
             {
                 return HttpNotFound();
@@ -78,8 +76,8 @@ namespace AD_419_DataHelperWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(c204Exclusions).State = EntityState.Modified;
-                db.SaveChanges();
+                DbContext.Entry(c204Exclusions).State = EntityState.Modified;
+                DbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(c204Exclusions);
@@ -92,7 +90,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            C204Exclusions c204Exclusions = db.C204Exclusions.Find(id);
+            C204Exclusions c204Exclusions = DbContext.C204Exclusions.Find(id);
             if (c204Exclusions == null)
             {
                 return HttpNotFound();
@@ -105,19 +103,10 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            C204Exclusions c204Exclusions = db.C204Exclusions.Find(id);
-            db.C204Exclusions.Remove(c204Exclusions);
-            db.SaveChanges();
+            C204Exclusions c204Exclusions = DbContext.C204Exclusions.Find(id);
+            DbContext.C204Exclusions.Remove(c204Exclusions);
+            DbContext.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

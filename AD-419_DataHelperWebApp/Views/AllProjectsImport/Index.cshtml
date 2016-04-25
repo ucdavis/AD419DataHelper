@@ -9,97 +9,119 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.AccessionNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProjectNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProposalNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AwardNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OrganizationName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Department)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProjectDirector)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CoProjectDirectors)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FundingSource)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProjectStartDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProjectEndDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProjectStatus)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AccessionNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProjectNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProposalNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AwardNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrganizationName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Department)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProjectDirector)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CoProjectDirectors)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FundingSource)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProjectStartDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProjectEndDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProjectStatus)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idProject }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idProject }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idProject })
-        </td>
-    </tr>
-}
-
+<table id="allProjectTable" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AccessionNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProposalNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AwardNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganizationName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectDirector)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CoProjectDirectors)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FundingSource)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectEndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectStatus)
+            </th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccessionNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProposalNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AwardNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrganizationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectDirector)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CoProjectDirectors)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FundingSource)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectStartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectEndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectStatus)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.idProject })
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.idProject })
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.idProject })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+
+@section AdditionalScripts
+{
+    <script>
+        $(function() {
+            $('#allProjectTable').DataTable({
+                columnDefs: [
+                    { targets: [-1, -2, -3], sortable: false }
+                ]
+            });
+        })
+    </script>
+}

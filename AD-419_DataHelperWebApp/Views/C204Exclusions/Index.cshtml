@@ -9,31 +9,53 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.AwardNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Comments)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AwardNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Comments)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.AwardNumber }) |
-            @Html.ActionLink("Details", "Details", new { id=item.AwardNumber }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.AwardNumber })
-        </td>
-    </tr>
-}
-
+<table id="c204Table" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AwardNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comments)
+            </th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AwardNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comments)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.AwardNumber })
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.AwardNumber })
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.AwardNumber })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+
+@section AdditionalScripts
+{
+    <script>
+        $(function() {
+            $('#c204Table').DataTable({
+                columnDefs: [
+                    { targets: [-1, -2, -3], sortable: false }
+                ]
+            });
+        })
+    </script>
+}

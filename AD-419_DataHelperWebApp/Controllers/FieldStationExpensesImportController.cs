@@ -11,14 +11,12 @@ using Excel;
 
 namespace AD_419_DataHelperWebApp.Controllers
 {
-    public class FieldStationExpensesImportController : Controller
+    public class FieldStationExpensesImportController : SuperController
     {
-        private AD419DataContext db = new AD419DataContext();
-
         // GET: FieldStationExpensesImport
         public ActionResult Index()
         {
-            return View(db.FieldStationExpenseListImports.ToList());
+            return View(DbContext.FieldStationExpenseListImports.ToList());
         }
 
         // GET: FieldStationExpensesImport/Details/5
@@ -28,7 +26,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FieldStationExpenseListImport fieldStationExpenseListImport = db.FieldStationExpenseListImports.Find(id);
+            FieldStationExpenseListImport fieldStationExpenseListImport = DbContext.FieldStationExpenseListImports.Find(id);
             if (fieldStationExpenseListImport == null)
             {
                 return HttpNotFound();
@@ -51,8 +49,8 @@ namespace AD_419_DataHelperWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.FieldStationExpenseListImports.Add(fieldStationExpenseListImport);
-                db.SaveChanges();
+                DbContext.FieldStationExpenseListImports.Add(fieldStationExpenseListImport);
+                DbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +64,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FieldStationExpenseListImport fieldStationExpenseListImport = db.FieldStationExpenseListImports.Find(id);
+            FieldStationExpenseListImport fieldStationExpenseListImport = DbContext.FieldStationExpenseListImports.Find(id);
             if (fieldStationExpenseListImport == null)
             {
                 return HttpNotFound();
@@ -83,8 +81,8 @@ namespace AD_419_DataHelperWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(fieldStationExpenseListImport).State = EntityState.Modified;
-                db.SaveChanges();
+                DbContext.Entry(fieldStationExpenseListImport).State = EntityState.Modified;
+                DbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(fieldStationExpenseListImport);
@@ -97,7 +95,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FieldStationExpenseListImport fieldStationExpenseListImport = db.FieldStationExpenseListImports.Find(id);
+            FieldStationExpenseListImport fieldStationExpenseListImport = DbContext.FieldStationExpenseListImports.Find(id);
             if (fieldStationExpenseListImport == null)
             {
                 return HttpNotFound();
@@ -114,7 +112,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             //db.FieldStationExpenseListImports.RemoveRange(all);
             //db.SaveChanges();
 
-            db.Database.ExecuteSqlCommand("TRUNCATE TABLE FieldStationExpenseListImport");
+            DbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE FieldStationExpenseListImport");
 
             return RedirectToAction("Index");
         }
@@ -124,9 +122,9 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            FieldStationExpenseListImport fieldStationExpenseListImport = db.FieldStationExpenseListImports.Find(id);
-            db.FieldStationExpenseListImports.Remove(fieldStationExpenseListImport);
-            db.SaveChanges();
+            FieldStationExpenseListImport fieldStationExpenseListImport = DbContext.FieldStationExpenseListImports.Find(id);
+            DbContext.FieldStationExpenseListImports.Remove(fieldStationExpenseListImport);
+            DbContext.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -134,7 +132,7 @@ namespace AD_419_DataHelperWebApp.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                DbContext.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -181,8 +179,8 @@ namespace AD_419_DataHelperWebApp.Controllers
                 // This works.  Would now like the user to have a chance to review upload first.
                 if (ModelState.IsValid)
                 {
-                    db.FieldStationExpenseListImports.AddRange(fieldStationExpenseEntries);
-                    db.SaveChanges();
+                    DbContext.FieldStationExpenseListImports.AddRange(fieldStationExpenseEntries);
+                    DbContext.SaveChanges();
                 }
             }
             return RedirectToAction("Index");
