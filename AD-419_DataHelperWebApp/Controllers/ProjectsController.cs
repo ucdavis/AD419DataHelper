@@ -112,14 +112,5 @@ namespace AD_419_DataHelperWebApp.Controllers
             DbContext.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                DbContext.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }
