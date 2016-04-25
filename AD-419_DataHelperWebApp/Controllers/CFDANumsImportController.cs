@@ -13,12 +13,10 @@ namespace AD_419_DataHelperWebApp.Controllers
 {
     public class CFDANumsImportController : SuperController
     {
-        private AD419DataContext db = new AD419DataContext();
-
         // GET: CFDANumsImport
         public ActionResult Index()
         {
-            return View(db.CFDANumImports.ToList());
+            return View(DbContext.CFDANumImports.ToList());
         }
 
         // GET: CFDANumsImport/Details/5
@@ -28,7 +26,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CFDANumImport cFDANumImport = db.CFDANumImports.Find(id);
+            CFDANumImport cFDANumImport = DbContext.CFDANumImports.Find(id);
             if (cFDANumImport == null)
             {
                 return HttpNotFound();
@@ -51,8 +49,8 @@ namespace AD_419_DataHelperWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.CFDANumImports.Add(cFDANumImport);
-                db.SaveChanges();
+                DbContext.CFDANumImports.Add(cFDANumImport);
+                DbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +64,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CFDANumImport cFDANumImport = db.CFDANumImports.Find(id);
+            CFDANumImport cFDANumImport = DbContext.CFDANumImports.Find(id);
             if (cFDANumImport == null)
             {
                 return HttpNotFound();
@@ -83,8 +81,8 @@ namespace AD_419_DataHelperWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cFDANumImport).State = EntityState.Modified;
-                db.SaveChanges();
+                DbContext.Entry(cFDANumImport).State = EntityState.Modified;
+                DbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(cFDANumImport);
@@ -97,7 +95,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CFDANumImport cFDANumImport = db.CFDANumImports.Find(id);
+            CFDANumImport cFDANumImport = DbContext.CFDANumImports.Find(id);
             if (cFDANumImport == null)
             {
                 return HttpNotFound();
@@ -114,7 +112,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             //db.CFDANumImport.RemoveRange(all);
             //db.SaveChanges();
 
-            db.Database.ExecuteSqlCommand("TRUNCATE TABLE CFDANumImport");
+            DbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE CFDANumImport");
 
             return RedirectToAction("Index");
         }
@@ -124,9 +122,9 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CFDANumImport cFDANumImport = db.CFDANumImports.Find(id);
-            db.CFDANumImports.Remove(cFDANumImport);
-            db.SaveChanges();
+            CFDANumImport cFDANumImport = DbContext.CFDANumImports.Find(id);
+            DbContext.CFDANumImports.Remove(cFDANumImport);
+            DbContext.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -134,7 +132,7 @@ namespace AD_419_DataHelperWebApp.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                DbContext.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -181,8 +179,8 @@ namespace AD_419_DataHelperWebApp.Controllers
                 // This works.  Would now like the user to have a chance to review upload first.
                 if (ModelState.IsValid)
                 {
-                    db.CFDANumImports.AddRange(cfdaNums);
-                    db.SaveChanges();
+                    DbContext.CFDANumImports.AddRange(cfdaNums);
+                    DbContext.SaveChanges();
                 }
             }
             return RedirectToAction("Index");

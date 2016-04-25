@@ -8,12 +8,12 @@ namespace AD_419_DataHelperWebApp.Controllers
 {
     public class ARC_CodesController : SuperController
     {
-        private FISDataContext db = new FISDataContext();
+        private readonly FISDataContext _fisContext = new FISDataContext();
 
         // GET: ARC_Codes
         public ActionResult Index()
         {
-            return View(db.ARC_Codes.ToList().OrderByDescending(a => a.isAES).ThenBy(a => a.ARC_Cd));
+            return View(_fisContext.ARC_Codes.ToList().OrderByDescending(a => a.isAES).ThenBy(a => a.ARC_Cd));
         }
 
         // GET: ARC_Codes/Details/5
@@ -23,7 +23,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ARC_Codes arcCodes = db.ARC_Codes.Find(id);
+            ARC_Codes arcCodes = _fisContext.ARC_Codes.Find(id);
             if (arcCodes == null)
             {
                 return HttpNotFound();
@@ -38,7 +38,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ARC_Codes arcCodes = db.ARC_Codes.Find(id);
+            ARC_Codes arcCodes = _fisContext.ARC_Codes.Find(id);
             if (arcCodes == null)
             {
                 return HttpNotFound();
@@ -55,8 +55,8 @@ namespace AD_419_DataHelperWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(arcCodes).State = EntityState.Modified;
-                db.SaveChanges();
+                _fisContext.Entry(arcCodes).State = EntityState.Modified;
+                _fisContext.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(arcCodes);
@@ -66,7 +66,7 @@ namespace AD_419_DataHelperWebApp.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _fisContext.Dispose();
             }
             base.Dispose(disposing);
         }

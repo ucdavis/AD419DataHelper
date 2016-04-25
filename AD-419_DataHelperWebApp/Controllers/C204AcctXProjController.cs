@@ -8,12 +8,10 @@ namespace AD_419_DataHelperWebApp.Controllers
 {
     public class C204AcctXProjController : SuperController
     {
-        private AD419DataContext db = new AD419DataContext();
-
         // GET: C204AcctXProj
         public ActionResult Index()
         {
-            return View(db.C204AcctXProj.ToList());
+            return View(DbContext.C204AcctXProj.ToList());
         }
 
         // GET: C204AcctXProj/Details/5
@@ -23,7 +21,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            C204AcctXProj c204AcctXProj = db.C204AcctXProj.Find(id);
+            C204AcctXProj c204AcctXProj = DbContext.C204AcctXProj.Find(id);
             if (c204AcctXProj == null)
             {
                 return HttpNotFound();
@@ -46,8 +44,8 @@ namespace AD_419_DataHelperWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.C204AcctXProj.Add(c204AcctXProj);
-                db.SaveChanges();
+                DbContext.C204AcctXProj.Add(c204AcctXProj);
+                DbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -61,7 +59,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            C204AcctXProj c204AcctXProj = db.C204AcctXProj.Find(id);
+            C204AcctXProj c204AcctXProj = DbContext.C204AcctXProj.Find(id);
             if (c204AcctXProj == null)
             {
                 return HttpNotFound();
@@ -78,8 +76,8 @@ namespace AD_419_DataHelperWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(c204AcctXProj).State = EntityState.Modified;
-                db.SaveChanges();
+                DbContext.Entry(c204AcctXProj).State = EntityState.Modified;
+                DbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(c204AcctXProj);
@@ -92,7 +90,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            C204AcctXProj c204AcctXProj = db.C204AcctXProj.Find(id);
+            C204AcctXProj c204AcctXProj = DbContext.C204AcctXProj.Find(id);
             if (c204AcctXProj == null)
             {
                 return HttpNotFound();
@@ -105,9 +103,9 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            C204AcctXProj c204AcctXProj = db.C204AcctXProj.Find(id);
-            db.C204AcctXProj.Remove(c204AcctXProj);
-            db.SaveChanges();
+            C204AcctXProj c204AcctXProj = DbContext.C204AcctXProj.Find(id);
+            DbContext.C204AcctXProj.Remove(c204AcctXProj);
+            DbContext.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -115,7 +113,7 @@ namespace AD_419_DataHelperWebApp.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                DbContext.Dispose();
             }
             base.Dispose(disposing);
         }

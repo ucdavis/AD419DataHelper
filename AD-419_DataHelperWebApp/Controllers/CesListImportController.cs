@@ -14,12 +14,10 @@ namespace AD_419_DataHelperWebApp.Controllers
 {
     public class CesListImportController : SuperController
     {
-        private AD419DataContext db = new AD419DataContext();
-
         // GET: CesListImport
         public ActionResult Index()
         {
-            return View(db.CesListImports.ToList());
+            return View(DbContext.CesListImports.ToList());
         }
 
         // GET: CesListImport/Details/5
@@ -29,7 +27,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CesListImport cesListImport = db.CesListImports.Find(id);
+            CesListImport cesListImport = DbContext.CesListImports.Find(id);
             if (cesListImport == null)
             {
                 return HttpNotFound();
@@ -52,8 +50,8 @@ namespace AD_419_DataHelperWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.CesListImports.Add(cesListImport);
-                db.SaveChanges();
+                DbContext.CesListImports.Add(cesListImport);
+                DbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -67,7 +65,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CesListImport cesListImport = db.CesListImports.Find(id);
+            CesListImport cesListImport = DbContext.CesListImports.Find(id);
             if (cesListImport == null)
             {
                 return HttpNotFound();
@@ -84,8 +82,8 @@ namespace AD_419_DataHelperWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cesListImport).State = EntityState.Modified;
-                db.SaveChanges();
+                DbContext.Entry(cesListImport).State = EntityState.Modified;
+                DbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(cesListImport);
@@ -98,7 +96,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CesListImport cesListImport = db.CesListImports.Find(id);
+            CesListImport cesListImport = DbContext.CesListImports.Find(id);
             if (cesListImport == null)
             {
                 return HttpNotFound();
@@ -115,7 +113,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             //db.CesListImports.RemoveRange(all);
             //db.SaveChanges();
 
-            db.Database.ExecuteSqlCommand("TRUNCATE TABLE CesListImport");
+            DbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE CesListImport");
 
             return RedirectToAction("Index");
         }
@@ -125,9 +123,9 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CesListImport cesListImport = db.CesListImports.Find(id);
-            db.CesListImports.Remove(cesListImport);
-            db.SaveChanges();
+            CesListImport cesListImport = DbContext.CesListImports.Find(id);
+            DbContext.CesListImports.Remove(cesListImport);
+            DbContext.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -135,7 +133,7 @@ namespace AD_419_DataHelperWebApp.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                DbContext.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -182,8 +180,8 @@ namespace AD_419_DataHelperWebApp.Controllers
                 // This works.  Would now like the user to have a chance to review upload first.
                 if (ModelState.IsValid)
                 {
-                    db.CesListImports.AddRange(cesEntries);
-                    db.SaveChanges();
+                    DbContext.CesListImports.AddRange(cesEntries);
+                    DbContext.SaveChanges();
                 }
             }
             return RedirectToAction("Index");

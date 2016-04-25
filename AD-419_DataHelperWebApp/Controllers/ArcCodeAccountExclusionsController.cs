@@ -9,12 +9,10 @@ namespace AD_419_DataHelperWebApp.Controllers
 {
     public class ArcCodeAccountExclusionsController : SuperController
     {
-        private AD419DataContext db = new AD419DataContext();
-
         // GET: ArcCodeAccountExclusions
         public ActionResult Index()
         {
-            return View(db.ArcCodeAccountExclusions.ToList());
+            return View(DbContext.ArcCodeAccountExclusions.ToList());
         }
 
         // GET: ArcCodeAccountExclusions/Details/5
@@ -24,7 +22,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ArcCodeAccountExclusion arcCodeAccountExclusion = db.ArcCodeAccountExclusions.Find(year, chart, account, annualReportCode);
+            ArcCodeAccountExclusion arcCodeAccountExclusion = DbContext.ArcCodeAccountExclusions.Find(year, chart, account, annualReportCode);
             if (arcCodeAccountExclusion == null)
             {
                 return HttpNotFound();
@@ -48,8 +46,8 @@ namespace AD_419_DataHelperWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.ArcCodeAccountExclusions.Add(arcCodeAccountExclusion);
-                db.SaveChanges();
+                DbContext.ArcCodeAccountExclusions.Add(arcCodeAccountExclusion);
+                DbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -63,7 +61,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ArcCodeAccountExclusion arcCodeAccountExclusion = db.ArcCodeAccountExclusions.Find(year, chart, account, annualReportCode);
+            ArcCodeAccountExclusion arcCodeAccountExclusion = DbContext.ArcCodeAccountExclusions.Find(year, chart, account, annualReportCode);
             if (arcCodeAccountExclusion == null)
             {
                 return HttpNotFound();
@@ -80,8 +78,8 @@ namespace AD_419_DataHelperWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(arcCodeAccountExclusion).State = EntityState.Modified;
-                db.SaveChanges();
+                DbContext.Entry(arcCodeAccountExclusion).State = EntityState.Modified;
+                DbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(arcCodeAccountExclusion);
@@ -94,7 +92,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ArcCodeAccountExclusion arcCodeAccountExclusion = db.ArcCodeAccountExclusions.Find(year, chart, account, annualReportCode);
+            ArcCodeAccountExclusion arcCodeAccountExclusion = DbContext.ArcCodeAccountExclusions.Find(year, chart, account, annualReportCode);
             if (arcCodeAccountExclusion == null)
             {
                 return HttpNotFound();
@@ -107,9 +105,9 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int year, string chart, string account, string annualReportCode)
         {
-            ArcCodeAccountExclusion arcCodeAccountExclusion = db.ArcCodeAccountExclusions.Find(year, chart, account, annualReportCode);
-            db.ArcCodeAccountExclusions.Remove(arcCodeAccountExclusion);
-            db.SaveChanges();
+            ArcCodeAccountExclusion arcCodeAccountExclusion = DbContext.ArcCodeAccountExclusions.Find(year, chart, account, annualReportCode);
+            DbContext.ArcCodeAccountExclusions.Remove(arcCodeAccountExclusion);
+            DbContext.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -117,7 +115,7 @@ namespace AD_419_DataHelperWebApp.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                DbContext.Dispose();
             }
             base.Dispose(disposing);
         }
