@@ -207,11 +207,11 @@
     <Compile Include="Controllers\AllProjectsImportController.cs" />
     <Compile Include="Controllers\AllProjectsNewController.cs" />
     <Compile Include="Controllers\ArcCodeAccountExclusionsController.cs" />
-    <Compile Include="Controllers\ARC_CodesController.cs" />
+    <Compile Include="Controllers\ArcCodesController.cs" />
     <Compile Include="Controllers\C204AcctXProjController.cs" />
     <Compile Include="Controllers\CesListImportController.cs" />
     <Compile Include="Controllers\CFDANumsImportController.cs" />
-    <Compile Include="Controllers\DOS_CodesController.cs" />
+    <Compile Include="Controllers\DosCodesController.cs" />
     <Compile Include="Controllers\ExpiredProjectCrossReferenceController.cs" />
     <Compile Include="Controllers\FieldStationExpensesImportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -231,7 +231,7 @@
     <Compile Include="Models\AD419DataContext.cs" />
     <Compile Include="Models\AllProject.cs" />
     <Compile Include="Models\ArcCodeAccountExclusion.cs" />
-    <Compile Include="Models\ARC_Codes.cs" />
+    <Compile Include="Models\ArcCode.cs" />
     <Compile Include="Models\C204AcctXProj.cs" />
     <Compile Include="Models\C204Exclusions.cs" />
     <Compile Include="Models\CesListImport.cs" />
@@ -332,9 +332,9 @@
     <Content Include="Views\AllProjectsImport\Edit.cshtml" />
     <Content Include="Views\AllProjectsImport\Index.cshtml" />
     <Content Include="Views\AllProjectsImport\_AllProjectsUpload.cshtml" />
-    <Content Include="Views\ARC_Codes\Details.cshtml" />
-    <Content Include="Views\ARC_Codes\Edit.cshtml" />
-    <Content Include="Views\ARC_Codes\Index.cshtml" />
+    <Content Include="Views\ArcCodes\Details.cshtml" />
+    <Content Include="Views\ArcCodes\Edit.cshtml" />
+    <Content Include="Views\ArcCodes\Index.cshtml" />
     <Content Include="Views\ArcCodeAccountExclusions\Create.cshtml" />
     <Content Include="Views\ArcCodeAccountExclusions\Delete.cshtml" />
     <Content Include="Views\ArcCodeAccountExclusions\Details.cshtml" />
@@ -355,11 +355,11 @@
     <Content Include="Views\C204AcctXProj\Details.cshtml" />
     <Content Include="Views\C204AcctXProj\Edit.cshtml" />
     <Content Include="Views\C204AcctXProj\Index.cshtml" />
-    <Content Include="Views\DOS_Codes\Create.cshtml" />
-    <Content Include="Views\DOS_Codes\Delete.cshtml" />
-    <Content Include="Views\DOS_Codes\Details.cshtml" />
-    <Content Include="Views\DOS_Codes\Edit.cshtml" />
-    <Content Include="Views\DOS_Codes\Index.cshtml" />
+    <Content Include="Views\DosCodes\Create.cshtml" />
+    <Content Include="Views\DosCodes\Delete.cshtml" />
+    <Content Include="Views\DosCodes\Details.cshtml" />
+    <Content Include="Views\DosCodes\Edit.cshtml" />
+    <Content Include="Views\DosCodes\Index.cshtml" />
     <Content Include="Views\Shared\_TopNav.cshtml" />
   </ItemGroup>
   <ItemGroup>
