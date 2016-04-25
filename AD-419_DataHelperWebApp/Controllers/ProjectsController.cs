@@ -12,22 +12,20 @@ namespace AD_419_DataHelperWebApp.Controllers
         // GET: Projects
         public ActionResult Index()
         {
-            return View(DbContext.AllProjects.ToList());
+            var projects = DbContext.AllProjects.ToList();
+            return View(projects);
         }
 
         // GET: Projects/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AllProject allProject = DbContext.AllProjects.Find(id);
-            if (allProject == null)
+            var project = DbContext.AllProjects.Find(id);
+            if (project == null)
             {
                 return HttpNotFound();
             }
-            return View(allProject);
+
+            return View(project);
         }
 
         // GET: Projects/Create
@@ -43,29 +41,23 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idProject,Accession,Project,isInterdepartmental,isValid,BeginDate,TermDate,ProjTypeCd,RegionalProjNum,CRIS_DeptID,CoopDepts,CSREES_ContractNo,StatusCd,Title,UpdateDate,inv1,inv2,inv3,inv4,inv5,inv6,IsCurrentAD419Project")] AllProject allProject)
         {
-            if (ModelState.IsValid)
-            {
-                DbContext.AllProjects.Add(allProject);
-                DbContext.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            if (!ModelState.IsValid) return View(allProject);
 
-            return View(allProject);
+            DbContext.AllProjects.Add(allProject);
+            DbContext.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Projects/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AllProject allProject = DbContext.AllProjects.Find(id);
-            if (allProject == null)
+            var project = DbContext.AllProjects.Find(id);
+            if (project == null)
             {
                 return HttpNotFound();
             }
-            return View(allProject);
+
+            return View(project);
         }
 
         // POST: Projects/Edit/5
@@ -75,28 +67,23 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idProject,Accession,Project,isInterdepartmental,isValid,BeginDate,TermDate,ProjTypeCd,RegionalProjNum,CRIS_DeptID,CoopDepts,CSREES_ContractNo,StatusCd,Title,UpdateDate,inv1,inv2,inv3,inv4,inv5,inv6,IsCurrentAD419Project")] AllProject allProject)
         {
-            if (ModelState.IsValid)
-            {
-                DbContext.Entry(allProject).State = EntityState.Modified;
-                DbContext.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(allProject);
+            if (!ModelState.IsValid) return View(allProject);
+
+            DbContext.Entry(allProject).State = EntityState.Modified;
+            DbContext.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Projects/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AllProject allProject = DbContext.AllProjects.Find(id);
-            if (allProject == null)
+            var project = DbContext.AllProjects.Find(id);
+            if (project == null)
             {
                 return HttpNotFound();
             }
-            return View(allProject);
+
+            return View(project);
         }
 
         // POST: Projects/Delete/5
@@ -104,9 +91,15 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            AllProject allProject = DbContext.AllProjects.Find(id);
-            DbContext.AllProjects.Remove(allProject);
+            var project = DbContext.AllProjects.Find(id);
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+
+            DbContext.AllProjects.Remove(project);
             DbContext.SaveChanges();
+
             return RedirectToAction("Index");
         }
     }
