@@ -1,111 +1,105 @@
-﻿using AD_419_DataHelperWebApp.Models;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web.Mvc;
+using AD_419_DataHelperWebApp.Models;
 
 namespace AD_419_DataHelperWebApp.Controllers
 {
     public class C204ExclusionsController : SuperController
     {
-        // GET: Sfn204Exclusions
+        // GET: C204Exclusions
         public ActionResult Index()
         {
-            return View(DbContext.C204Exclusions.ToList());
+            var exclusions = DbContext.C204Exclusions.ToList();
+            return View(exclusions);
         }
 
-        // GET: Sfn204Exclusions/Details/5
+        // GET: C204Exclusions/Details/5
         public ActionResult Details(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            C204Exclusions c204Exclusions = DbContext.C204Exclusions.Find(id);
-            if (c204Exclusions == null)
+            var exclusion = DbContext.C204Exclusions.Find(id);
+            if (exclusion == null)
             {
                 return HttpNotFound();
             }
-            return View(c204Exclusions);
+
+            return View(exclusion);
         }
 
-        // GET: Sfn204Exclusions/Create
+        // GET: C204Exclusions/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Sfn204Exclusions/Create
+        // POST: C204Exclusions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AwardNumber, Comments")] C204Exclusions c204Exclusions)
+        public ActionResult Create([Bind(Include = "AwardNumber, Comments")] C204Exclusions exclusion)
         {
-            if (ModelState.IsValid)
-            {
-                DbContext.C204Exclusions.Add(c204Exclusions);
-                DbContext.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            if (!ModelState.IsValid) return View(exclusion);
 
-            return View(c204Exclusions);
+            DbContext.C204Exclusions.Add(exclusion);
+            DbContext.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
-        // GET: Sfn204Exclusions/Edit/5
+        // GET: C204Exclusions/Edit/5
         public ActionResult Edit(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            C204Exclusions c204Exclusions = DbContext.C204Exclusions.Find(id);
-            if (c204Exclusions == null)
+            var exclusion = DbContext.C204Exclusions.Find(id);
+            if (exclusion == null)
             {
                 return HttpNotFound();
             }
-            return View(c204Exclusions);
+
+            return View(exclusion);
         }
 
-        // POST: Sfn204Exclusions/Edit/5
+        // POST: C204Exclusions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AwardNumber, Comments")] C204Exclusions c204Exclusions)
+        public ActionResult Edit([Bind(Include = "AwardNumber, Comments")] C204Exclusions exclusion)
         {
-            if (ModelState.IsValid)
-            {
-                DbContext.Entry(c204Exclusions).State = EntityState.Modified;
-                DbContext.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(c204Exclusions);
+            if (!ModelState.IsValid) return View(exclusion);
+
+            DbContext.Entry(exclusion).State = EntityState.Modified;
+            DbContext.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
-        // GET: Sfn204Exclusions/Delete/5
+        // GET: C204Exclusions/Delete/5
         public ActionResult Delete(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            C204Exclusions c204Exclusions = DbContext.C204Exclusions.Find(id);
-            if (c204Exclusions == null)
+            var exclusion = DbContext.C204Exclusions.Find(id);
+            if (exclusion == null)
             {
                 return HttpNotFound();
             }
-            return View(c204Exclusions);
+
+            return View(exclusion);
         }
 
-        // POST: Sfn204Exclusions/Delete/5
+        // POST: C204Exclusions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            C204Exclusions c204Exclusions = DbContext.C204Exclusions.Find(id);
-            DbContext.C204Exclusions.Remove(c204Exclusions);
+            var exclusion = DbContext.C204Exclusions.Find(id);
+            if (exclusion == null)
+            {
+                return HttpNotFound();
+            }
+
+            DbContext.C204Exclusions.Remove(exclusion);
             DbContext.SaveChanges();
+
             return RedirectToAction("Index");
         }
     }
