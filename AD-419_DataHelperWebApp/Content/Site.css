@@ -23,3 +23,7 @@ textarea {
     max-width: 280px;
 }
 
+.navbar-brand .brand-icon {
+    margin-top: -15px;
+    margin-bottom: -15px;
+}

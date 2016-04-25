@@ -1,12 +1,18 @@
 ﻿<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
+    <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            @Html.ActionLink("AD-419 Data Helper Application", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <a href="@Url.Action("Index", "Home")" class="navbar-brand">
+                <span class="fa-stack brand-icon">
+                    <i class="fa fa-square-o fa-stack-2x"></i>
+                    <i class="fa fa-magic fa-stack-1x"></i>
+                </span>
+                <span class="brand-text">AD-419 Data Helper Application</span>
+            </a>
         </div>
         <div id="nav" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
