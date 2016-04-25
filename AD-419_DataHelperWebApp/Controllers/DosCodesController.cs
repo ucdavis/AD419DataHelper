@@ -1,12 +1,11 @@
 ﻿using AD_419_DataHelperWebApp.Models;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web.Mvc;
 
 namespace AD_419_DataHelperWebApp.Controllers
 {
-    public class DOS_CodesController : SuperController
+    public class DosCodesController : SuperController
     {
         // GET: DOS_Codes
         public ActionResult Index()
