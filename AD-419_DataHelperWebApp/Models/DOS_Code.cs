@@ -4,7 +4,7 @@ namespace AD_419_DataHelperWebApp.Models
     using System.ComponentModel.DataAnnotations.Schema;
 
     [Table("DOS_Codes")]
-    public partial class DOS_Codes
+    public partial class DosCode
     {
         [Key]
         [StringLength(3)]

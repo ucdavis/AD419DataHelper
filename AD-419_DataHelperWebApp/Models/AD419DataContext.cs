@@ -24,7 +24,7 @@ namespace AD_419_DataHelperWebApp.Models
 
         public virtual DbSet<AllProjectsImport> AllProjectsImmport { get; set; }
 
-        public virtual DbSet<DOS_Codes> DOS_Codes { get; set; }
+        public virtual DbSet<DosCode> DosCodes { get; set; }
 
         //public static void Clear<T>(this DbSet<T> dbSet) where T : class
         //{

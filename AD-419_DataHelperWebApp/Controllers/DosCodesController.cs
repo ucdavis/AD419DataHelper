@@ -10,14 +10,14 @@ namespace AD_419_DataHelperWebApp.Controllers
         // GET: DOS_Codes
         public ActionResult Index()
         {
-            var codes = DbContext.DOS_Codes.ToList();
+            var codes = DbContext.DosCodes.ToList();
             return View(codes);
         }
 
         // GET: DOS_Codes/Details/5
         public ActionResult Details(string id)
         {
-            var code = DbContext.DOS_Codes.Find(id);
+            var code = DbContext.DosCodes.Find(id);
             if (code == null)
             {
                 return HttpNotFound();
@@ -37,11 +37,11 @@ namespace AD_419_DataHelperWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DOS_Code,Description,IncludeInAD419FTE")] DOS_Codes dOS_Codes)
+        public ActionResult Create([Bind(Include = "DOS_Code,Description,IncludeInAD419FTE")] DosCode code)
         {
-            if (!ModelState.IsValid) return View(dOS_Codes);
+            if (!ModelState.IsValid) return View(code);
 
-            DbContext.DOS_Codes.Add(dOS_Codes);
+            DbContext.DosCodes.Add(code);
             DbContext.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -49,7 +49,7 @@ namespace AD_419_DataHelperWebApp.Controllers
         // GET: DOS_Codes/Edit/5
         public ActionResult Edit(string id)
         {
-            var code = DbContext.DOS_Codes.Find(id);
+            var code = DbContext.DosCodes.Find(id);
             if (code == null)
             {
                 return HttpNotFound();
@@ -63,11 +63,11 @@ namespace AD_419_DataHelperWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DOS_Code,Description,IncludeInAD419FTE")] DOS_Codes dOS_Codes)
+        public ActionResult Edit([Bind(Include = "DOS_Code,Description,IncludeInAD419FTE")] DosCode code)
         {
-            if (!ModelState.IsValid) return View(dOS_Codes);
+            if (!ModelState.IsValid) return View(code);
 
-            DbContext.Entry(dOS_Codes).State = EntityState.Modified;
+            DbContext.Entry(code).State = EntityState.Modified;
             DbContext.SaveChanges();
 
             return RedirectToAction("Index");
@@ -76,7 +76,7 @@ namespace AD_419_DataHelperWebApp.Controllers
         // GET: DOS_Codes/Delete/5
         public ActionResult Delete(string id)
         {
-            var code = DbContext.DOS_Codes.Find(id);
+            var code = DbContext.DosCodes.Find(id);
             if (code == null)
             {
                 return HttpNotFound();
@@ -90,13 +90,13 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            var code = DbContext.DOS_Codes.Find(id);
+            var code = DbContext.DosCodes.Find(id);
             if (code == null)
             {
                 return HttpNotFound();
             }
 
-            DbContext.DOS_Codes.Remove(code);
+            DbContext.DosCodes.Remove(code);
             DbContext.SaveChanges();
 
             return RedirectToAction("Index");
