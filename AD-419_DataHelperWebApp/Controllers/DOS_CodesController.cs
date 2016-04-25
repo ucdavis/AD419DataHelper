@@ -11,22 +11,20 @@ namespace AD_419_DataHelperWebApp.Controllers
         // GET: DOS_Codes
         public ActionResult Index()
         {
-            return View(DbContext.DOS_Codes.ToList());
+            var codes = DbContext.DOS_Codes.ToList();
+            return View(codes);
         }
 
         // GET: DOS_Codes/Details/5
         public ActionResult Details(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            DOS_Codes dOS_Codes = DbContext.DOS_Codes.Find(id);
-            if (dOS_Codes == null)
+            var code = DbContext.DOS_Codes.Find(id);
+            if (code == null)
             {
                 return HttpNotFound();
             }
-            return View(dOS_Codes);
+
+            return View(code);
         }
 
         // GET: DOS_Codes/Create
@@ -42,29 +40,23 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "DOS_Code,Description,IncludeInAD419FTE")] DOS_Codes dOS_Codes)
         {
-            if (ModelState.IsValid)
-            {
-                DbContext.DOS_Codes.Add(dOS_Codes);
-                DbContext.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            if (!ModelState.IsValid) return View(dOS_Codes);
 
-            return View(dOS_Codes);
+            DbContext.DOS_Codes.Add(dOS_Codes);
+            DbContext.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: DOS_Codes/Edit/5
         public ActionResult Edit(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            DOS_Codes dOS_Codes = DbContext.DOS_Codes.Find(id);
-            if (dOS_Codes == null)
+            var code = DbContext.DOS_Codes.Find(id);
+            if (code == null)
             {
                 return HttpNotFound();
             }
-            return View(dOS_Codes);
+
+            return View(code);
         }
 
         // POST: DOS_Codes/Edit/5
@@ -74,28 +66,24 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "DOS_Code,Description,IncludeInAD419FTE")] DOS_Codes dOS_Codes)
         {
-            if (ModelState.IsValid)
-            {
-                DbContext.Entry(dOS_Codes).State = EntityState.Modified;
-                DbContext.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(dOS_Codes);
+            if (!ModelState.IsValid) return View(dOS_Codes);
+
+            DbContext.Entry(dOS_Codes).State = EntityState.Modified;
+            DbContext.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         // GET: DOS_Codes/Delete/5
         public ActionResult Delete(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            DOS_Codes dOS_Codes = DbContext.DOS_Codes.Find(id);
-            if (dOS_Codes == null)
+            var code = DbContext.DOS_Codes.Find(id);
+            if (code == null)
             {
                 return HttpNotFound();
             }
-            return View(dOS_Codes);
+
+            return View(code);
         }
 
         // POST: DOS_Codes/Delete/5
@@ -103,9 +91,15 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            DOS_Codes dOS_Codes = DbContext.DOS_Codes.Find(id);
-            DbContext.DOS_Codes.Remove(dOS_Codes);
+            var code = DbContext.DOS_Codes.Find(id);
+            if (code == null)
+            {
+                return HttpNotFound();
+            }
+
+            DbContext.DOS_Codes.Remove(code);
             DbContext.SaveChanges();
+
             return RedirectToAction("Index");
         }
     }
