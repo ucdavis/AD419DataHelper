@@ -11,22 +11,20 @@ namespace AD_419_DataHelperWebApp.Controllers
         // GET: ExpiredProjectCrossReference
         public ActionResult Index()
         {
-            return View(DbContext.ExpiredProjectCrossReference.ToList());
+            var projects = DbContext.ExpiredProjectCrossReference.ToList();
+            return View(projects);
         }
 
         // GET: ExpiredProjectCrossReference/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ExpiredProjectCrossReference expiredProjectCrossReference = DbContext.ExpiredProjectCrossReference.Find(id);
-            if (expiredProjectCrossReference == null)
+            var project = DbContext.ExpiredProjectCrossReference.Find(id);
+            if (project == null)
             {
                 return HttpNotFound();
             }
-            return View(expiredProjectCrossReference);
+
+            return View(project);
         }
 
         // GET: ExpiredProjectCrossReference/Create
@@ -42,29 +40,24 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "RemapID,FromAccession,IsActive,ToAccession")] ExpiredProjectCrossReference expiredProjectCrossReference)
         {
-            if (ModelState.IsValid)
-            {
-                DbContext.ExpiredProjectCrossReference.Add(expiredProjectCrossReference);
-                DbContext.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            if (!ModelState.IsValid) return View(expiredProjectCrossReference);
 
-            return View(expiredProjectCrossReference);
+            DbContext.ExpiredProjectCrossReference.Add(expiredProjectCrossReference);
+            DbContext.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         // GET: ExpiredProjectCrossReference/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ExpiredProjectCrossReference expiredProjectCrossReference = DbContext.ExpiredProjectCrossReference.Find(id);
-            if (expiredProjectCrossReference == null)
+            var project = DbContext.ExpiredProjectCrossReference.Find(id);
+            if (project == null)
             {
                 return HttpNotFound();
             }
-            return View(expiredProjectCrossReference);
+
+            return View(project);
         }
 
         // POST: ExpiredProjectCrossReference/Edit/5
@@ -74,28 +67,24 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "RemapID,FromAccession,IsActive,ToAccession")] ExpiredProjectCrossReference expiredProjectCrossReference)
         {
-            if (ModelState.IsValid)
-            {
-                DbContext.Entry(expiredProjectCrossReference).State = EntityState.Modified;
-                DbContext.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(expiredProjectCrossReference);
+            if (!ModelState.IsValid) return View(expiredProjectCrossReference);
+
+            DbContext.Entry(expiredProjectCrossReference).State = EntityState.Modified;
+            DbContext.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         // GET: ExpiredProjectCrossReference/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ExpiredProjectCrossReference expiredProjectCrossReference = DbContext.ExpiredProjectCrossReference.Find(id);
-            if (expiredProjectCrossReference == null)
+            var project = DbContext.ExpiredProjectCrossReference.Find(id);
+            if (project == null)
             {
                 return HttpNotFound();
             }
-            return View(expiredProjectCrossReference);
+
+            return View(project);
         }
 
         // POST: ExpiredProjectCrossReference/Delete/5
@@ -103,9 +92,15 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ExpiredProjectCrossReference expiredProjectCrossReference = DbContext.ExpiredProjectCrossReference.Find(id);
-            DbContext.ExpiredProjectCrossReference.Remove(expiredProjectCrossReference);
+            var project = DbContext.ExpiredProjectCrossReference.Find(id);
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+
+            DbContext.ExpiredProjectCrossReference.Remove(project);
             DbContext.SaveChanges();
+
             return RedirectToAction("Index");
         }
     }
