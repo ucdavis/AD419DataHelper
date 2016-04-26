@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AD_419_DataHelperWebApp.Models.AllProjectsImport>
+﻿@model IEnumerable<AD_419_DataHelperWebApp.Models.AllProjectImport>
 
 @{
     ViewBag.Title = "Index";
@@ -100,13 +100,13 @@
                     @Html.DisplayFor(modelItem => item.ProjectStatus)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.idProject })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
                 </td>
                 <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.idProject })
+                    @Html.ActionLink("Details", "Details", new { id = item.Id })
                 </td>
                 <td>
-                    @Html.ActionLink("Delete", "Delete", new { id = item.idProject })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                 </td>
             </tr>
         }

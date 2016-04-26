@@ -22,7 +22,7 @@ namespace AD_419_DataHelperWebApp.Models
 
         public virtual DbSet<AllProjectsNew> AllProjectsNew { get; set; }
 
-        public virtual DbSet<AllProjectsImport> AllProjectsImmport { get; set; }
+        public virtual DbSet<AllProjectImport> AllProjectsImport { get; set; }
 
         public virtual DbSet<DosCode> DosCodes { get; set; }
 
