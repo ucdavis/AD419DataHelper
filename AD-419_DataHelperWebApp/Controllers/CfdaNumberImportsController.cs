@@ -11,18 +11,18 @@ using Excel;
 
 namespace AD_419_DataHelperWebApp.Controllers
 {
-    public class CFDANumsImportController : SuperController
+    public class CfdaNumberImportsController : SuperController
     {
         // GET: CFDANumsImport
         public ActionResult Index()
         {
-            return View(DbContext.CFDANumImports.ToList());
+            return View(DbContext.CfdaNumberImports.ToList());
         }
 
         // GET: CFDANumsImport/Details/5
         public ActionResult Details(int id)
         {
-            var num = DbContext.CFDANumImports.Find(id);
+            var num = DbContext.CfdaNumberImports.Find(id);
             if (num == null)
             {
                 return HttpNotFound();
@@ -42,11 +42,11 @@ namespace AD_419_DataHelperWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CFDANum")] CFDANumImport cFDANumImport)
+        public ActionResult Create([Bind(Include = "Id,CFDANum")] CfdaNumberImport cfdaNumber)
         {
-            if (!ModelState.IsValid) return View(cFDANumImport);
+            if (!ModelState.IsValid) return View(cfdaNumber);
 
-            DbContext.CFDANumImports.Add(cFDANumImport);
+            DbContext.CfdaNumberImports.Add(cfdaNumber);
             DbContext.SaveChanges();
 
             return RedirectToAction("Index");
@@ -55,7 +55,7 @@ namespace AD_419_DataHelperWebApp.Controllers
         // GET: CFDANumsImport/Edit/5
         public ActionResult Edit(int id)
         {
-            var code = DbContext.CFDANumImports.Find(id);
+            var code = DbContext.CfdaNumberImports.Find(id);
             if (code == null)
             {
                 return HttpNotFound();
@@ -69,11 +69,11 @@ namespace AD_419_DataHelperWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CFDANum, ProgramTitle")] CFDANumImport cFDANumImport)
+        public ActionResult Edit([Bind(Include = "Id,CFDANum, ProgramTitle")] CfdaNumberImport cFdaNumberImport)
         {
-            if (!ModelState.IsValid) return View(cFDANumImport);
+            if (!ModelState.IsValid) return View(cFdaNumberImport);
 
-            DbContext.Entry(cFDANumImport).State = EntityState.Modified;
+            DbContext.Entry(cFdaNumberImport).State = EntityState.Modified;
             DbContext.SaveChanges();
 
             return RedirectToAction("Index");
@@ -82,7 +82,7 @@ namespace AD_419_DataHelperWebApp.Controllers
         // GET: CFDANumsImport/Delete/5
         public ActionResult Delete(int id)
         {
-            var num = DbContext.CFDANumImports.Find(id);
+            var num = DbContext.CfdaNumberImports.Find(id);
             if (num == null)
             {
                 return HttpNotFound();
@@ -110,12 +110,12 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var num = DbContext.CFDANumImports.Find(id); if (num == null)
+            var num = DbContext.CfdaNumberImports.Find(id); if (num == null)
             {
                 return HttpNotFound();
             }
 
-            DbContext.CFDANumImports.Remove(num);
+            DbContext.CfdaNumberImports.Remove(num);
             DbContext.SaveChanges();
 
             return RedirectToAction("Index");
@@ -128,7 +128,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             var myFile = Request.Files[0];
             if (myFile == null) return RedirectToAction("Index");
 
-            var cfdaNums = new List<CFDANumImport>();
+            var cfdaNums = new List<CfdaNumberImport>();
             var fileName = myFile.FileName;
             var excelReader = ExcelReaderFactory.CreateOpenXmlReader(myFile.InputStream);
             excelReader.IsFirstRowAsColumnNames = true;
@@ -137,7 +137,7 @@ namespace AD_419_DataHelperWebApp.Controllers
             TempData.Add("Message", "Now viewing \"" + fileName + "\".");
             excelReader.Close();
 
-            cfdaNums.AddRange(from DataRow row in result.Tables[0].Rows select new CFDANumImport(row));
+            cfdaNums.AddRange(from DataRow row in result.Tables[0].Rows select new CfdaNumberImport(row));
 
             // This works.  Would now like the user to have a chance to review upload first.
             //if (ModelState.IsValid)
@@ -151,14 +151,14 @@ namespace AD_419_DataHelperWebApp.Controllers
 
         [HttpPost]
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Save(List<AD_419_DataHelperWebApp.Models.CFDANumImport> cfdaNums)
+        public ActionResult Save(List<AD_419_DataHelperWebApp.Models.CfdaNumberImport> cfdaNums)
         {
             if (cfdaNums != null)
             {
                 // This works.  Would now like the user to have a chance to review upload first.
                 if (ModelState.IsValid)
                 {
-                    DbContext.CFDANumImports.AddRange(cfdaNums);
+                    DbContext.CfdaNumberImports.AddRange(cfdaNums);
                     DbContext.SaveChanges();
                 }
             }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AD_419_DataHelperWebApp.Models.CFDANumImport>
+﻿@model IEnumerable<AD_419_DataHelperWebApp.Models.CfdaNumberImport>
 
 @{
     ViewBag.Title = "Index - CFDA Numbers";
@@ -9,12 +9,12 @@
 <h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", "CFDANumsImport", null, new { @class="btn btn-default" })
+    @Html.ActionLink("Create New", "Create", "CfdaNumberImports", null, new { @class="btn btn-default" })
 </p>
 
 @if (Model.Count() != 0)
 {
-    using (Html.BeginForm("DeleteAll", "CFDANumsImport", FormMethod.Post, new { id = "deleteForm" }))
+    using (Html.BeginForm("DeleteAll", "CfdaNumberImports", FormMethod.Post, new { id = "deleteForm" }))
     {
         @Html.AntiForgeryToken()
         <p>
@@ -26,7 +26,7 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.CFDANum)
+                    @Html.DisplayNameFor(model => model.Number)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.ProgramTitle)
@@ -41,7 +41,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CFDANum)
+                        @Html.DisplayFor(modelItem => item.Number)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ProgramTitle)

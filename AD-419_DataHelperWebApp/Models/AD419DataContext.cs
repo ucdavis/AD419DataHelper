@@ -18,7 +18,7 @@ namespace AD_419_DataHelperWebApp.Models
 
         public virtual DbSet<FieldStationExpenseListImport> FieldStationExpenseListImports { get; set; }
 
-        public virtual DbSet<CFDANumImport> CFDANumImports { get; set; }
+        public virtual DbSet<CfdaNumberImport> CfdaNumberImports { get; set; }
 
         public virtual DbSet<AllProjectsNew> AllProjectsNew { get; set; }
 
@@ -217,11 +217,11 @@ namespace AD_419_DataHelperWebApp.Models
                 .Property(e => e.ProjectDirector)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<CFDANumImport>()
-                .Property(e => e.CFDANum)
+            modelBuilder.Entity<CfdaNumberImport>()
+                .Property(e => e.Number)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<CFDANumImport>()
+            modelBuilder.Entity<CfdaNumberImport>()
                .Property(e => e.ProgramTitle)
                .IsUnicode(false);
 

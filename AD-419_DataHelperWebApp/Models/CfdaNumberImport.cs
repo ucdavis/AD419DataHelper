@@ -9,25 +9,26 @@ namespace AD_419_DataHelperWebApp.Models
     using System.Data.Entity.Spatial;
 
     [Table("CFDANumImport")]
-    public partial class CFDANumImport
+    public partial class CfdaNumberImport
     {
-        public CFDANumImport() { }
-        public CFDANumImport(DataRow row)
+        public CfdaNumberImport() { }
+        public CfdaNumberImport(DataRow row)
         {
-            CFDANum = row["CFDANum"].ToString();
+            Number = row["CFDANum"].ToString();
             ProgramTitle = row["ProgramTitle"].ToString();
         }
+
+        public int Id { get; set; }
 
         [Required]
         [Display(Name = "CFDA Number")]
         [StringLength(10)]
-        public string CFDANum { get; set; }
+        [Column("CFDANum")]
+        public string Number { get; set; }
 
         [Required]
         [Display(Name = "Program Title")]
         [StringLength(300)]
         public string ProgramTitle { get; set; }
-
-        public int Id { get; set; }
     }
 }

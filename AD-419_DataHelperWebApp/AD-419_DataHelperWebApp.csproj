@@ -210,7 +210,7 @@
     <Compile Include="Controllers\ArcCodesController.cs" />
     <Compile Include="Controllers\C204AcctXProjController.cs" />
     <Compile Include="Controllers\CesListImportController.cs" />
-    <Compile Include="Controllers\CFDANumsImportController.cs" />
+    <Compile Include="Controllers\CfdaNumberImportsController.cs" />
     <Compile Include="Controllers\DosCodesController.cs" />
     <Compile Include="Controllers\ExpiredProjectCrossReferenceController.cs" />
     <Compile Include="Controllers\FieldStationExpensesImportController.cs" />
@@ -223,7 +223,7 @@
     <Compile Include="Helpers\HttpCorrelationIdEnricher.cs" />
     <Compile Include="Models\AllProjectsNew.cs" />
     <Compile Include="Models\DosCode.cs" />
-    <Compile Include="Models\CFDANumImport.cs" />
+    <Compile Include="Models\CfdaNumberImport.cs" />
     <Compile Include="Models\FieldStationExpenseListImport.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -313,13 +313,13 @@
     <Content Include="Views\Projects\Details.cshtml" />
     <Content Include="Views\Projects\Edit.cshtml" />
     <Content Include="Views\Projects\Index.cshtml" />
-    <Content Include="Views\CFDANumsImport\Create.cshtml" />
-    <Content Include="Views\CFDANumsImport\Delete.cshtml" />
-    <Content Include="Views\CFDANumsImport\Details.cshtml" />
-    <Content Include="Views\CFDANumsImport\Edit.cshtml" />
-    <Content Include="Views\CFDANumsImport\Index.cshtml" />
-    <Content Include="Views\CFDANumsImport\Display.cshtml" />
-    <Content Include="Views\CFDANumsImport\_CfdaNumsUpload.cshtml" />
+    <Content Include="Views\CfdaNumberImports\Create.cshtml" />
+    <Content Include="Views\CfdaNumberImports\Delete.cshtml" />
+    <Content Include="Views\CfdaNumberImports\Details.cshtml" />
+    <Content Include="Views\CfdaNumberImports\Edit.cshtml" />
+    <Content Include="Views\CfdaNumberImports\Index.cshtml" />
+    <Content Include="Views\CfdaNumberImports\Display.cshtml" />
+    <Content Include="Views\CfdaNumberImports\_CfdaNumsUpload.cshtml" />
     <Content Include="Views\AllProjectsNew\_AllProjectsUpload.cshtml" />
     <Content Include="Views\AllProjectsNew\Create.cshtml" />
     <Content Include="Views\AllProjectsNew\Delete.cshtml" />
