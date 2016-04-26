@@ -13,8 +13,8 @@ namespace AD_419_DataHelperWebApp.Controllers
         public ActionResult Index()
         {
             var codes = _fisContext.ARC_Codes
-                .OrderByDescending(a => a.isAES)
-                .ThenBy(a => a.ARC_Cd)
+                .OrderByDescending(a => a.IsAES)
+                .ThenBy(a => a.Code)
                 .ToList();
 
             return View(codes);

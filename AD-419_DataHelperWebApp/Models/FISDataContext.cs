@@ -14,24 +14,24 @@ namespace AD_419_DataHelperWebApp.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ArcCode>()
-                .Property(e => e.ARC_Cd)
+                .Property(e => e.Code)
                 .IsFixedLength()
                 .IsUnicode(false);
 
             modelBuilder.Entity<ArcCode>()
-                .Property(e => e.ARC_Name)
+                .Property(e => e.Name)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ArcCode>()
-                .Property(e => e.OP_Func_Name)
+                .Property(e => e.FunctionName)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ArcCode>()
-               .Property(e => e.ARC_Category_Cd)
+               .Property(e => e.CategoryCode)
                .IsUnicode(false);
 
             modelBuilder.Entity<ArcCode>()
-               .Property(e => e.ARC_Sub_Category_Cd)
+               .Property(e => e.SubCategoryCode)
                .IsUnicode(false);
         }
     }

@@ -10,25 +10,25 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ARC_Cd)
+                @Html.DisplayNameFor(model => model.Code)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ARC_Name)
+                @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OP_Func_Name)
+                @Html.DisplayNameFor(model => model.FunctionName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ARC_Category_Cd)
+                @Html.DisplayNameFor(model => model.CategoryCode)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ARC_Sub_Category_Cd)
+                @Html.DisplayNameFor(model => model.SubCategoryCode)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.isAES)
+                @Html.DisplayNameFor(model => model.IsAES)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DS_Last_Update_Date)
+                @Html.DisplayNameFor(model => model.UpdatedDate)
             </th>
             <th></th>
             <th></th>
@@ -39,31 +39,31 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ARC_Cd)
+                    @Html.DisplayFor(modelItem => item.Code)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ARC_Name)
+                    @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.OP_Func_Name)
+                    @Html.DisplayFor(modelItem => item.FunctionName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ARC_Category_Cd)
+                    @Html.DisplayFor(modelItem => item.CategoryCode)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ARC_Sub_Category_Cd)
+                    @Html.DisplayFor(modelItem => item.SubCategoryCode)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.isAES)
+                    @Html.DisplayFor(modelItem => item.IsAES)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DS_Last_Update_Date)
+                    @Html.DisplayFor(modelItem => item.UpdatedDate)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ARC_Cd })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Code })
                 </td>
                 <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.ARC_Cd })
+                    @Html.ActionLink("Details", "Details", new { id = item.Code })
                 </td>
             </tr>
         }
