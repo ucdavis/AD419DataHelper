@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using AD_419_DataHelperWebApp.Models;
+using AD419.DataHelper.Web.Models;
 using Excel;
 
-namespace AD_419_DataHelperWebApp.Controllers
+namespace AD419.DataHelper.Web.Controllers
 {
     public class FieldStationExpensesImportController : SuperController
     {
@@ -172,7 +171,7 @@ namespace AD_419_DataHelperWebApp.Controllers
         [AllowAnonymous]
         [HttpPost]
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Save(List<AD_419_DataHelperWebApp.Models.FieldStationExpenseListImport> fieldStationExpenseEntries)
+        public ActionResult Save(List<FieldStationExpenseListImport> fieldStationExpenseEntries)
         {
             if (fieldStationExpenseEntries != null)
             {

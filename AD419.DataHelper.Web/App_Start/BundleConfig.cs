@@ -1,7 +1,6 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
-namespace AD_419_DataHelperWebApp
+namespace AD419.DataHelper.Web
 {
     public class BundleConfig
     {

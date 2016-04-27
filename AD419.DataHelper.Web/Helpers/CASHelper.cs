@@ -4,7 +4,7 @@ using System.Net;
 using System.Web;
 using System.Web.Security;
 
-namespace AD_419_DataHelperWebApp.Helpers
+namespace AD419.DataHelper.Web.Helpers
 {
     public static class CasHelper
     {

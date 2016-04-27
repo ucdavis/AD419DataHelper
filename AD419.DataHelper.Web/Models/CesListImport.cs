@@ -1,14 +1,9 @@
-using System.Configuration;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 
-namespace AD_419_DataHelperWebApp.Models
+namespace AD419.DataHelper.Web.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-
     [Table("CesListImport")]
     public partial class CesListImport
     {

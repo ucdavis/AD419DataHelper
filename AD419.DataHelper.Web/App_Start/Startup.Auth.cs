@@ -7,7 +7,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 
-namespace AD_419_DataHelperWebApp
+namespace AD419.DataHelper.Web
 {
     public partial class Startup
     {

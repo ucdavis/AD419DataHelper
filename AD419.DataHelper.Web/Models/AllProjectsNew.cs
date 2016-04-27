@@ -1,11 +1,9 @@
-using System.ComponentModel;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AD_419_DataHelperWebApp.Models
+namespace AD419.DataHelper.Web.Models
 {
-    using System;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
     [Table("AllProjectsNew")]
     public partial class AllProjectsNew
     {

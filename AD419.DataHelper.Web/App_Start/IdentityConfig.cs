@@ -1,12 +1,11 @@
-﻿using System;
+﻿using AD419.Core;
+using AD419.Core.IdentityStores;
+using AD419.Core.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using AD419.Core;
-using AD419.Core.IdentityStores;
-using AD419.Core.Models;
 
-namespace AD_419_DataHelperWebApp
+namespace AD419.DataHelper.Web
 {
     public class ApplicationUserManager : UserManager<User, int>
     {

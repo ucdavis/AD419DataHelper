@@ -1,7 +1,6 @@
-﻿using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
-namespace AD_419_DataHelperWebApp
+namespace AD419.DataHelper.Web
 {
     public class FilterConfig
     {

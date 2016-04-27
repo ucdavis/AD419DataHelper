@@ -1,7 +1,7 @@
-namespace AD_419_DataHelperWebApp.Models
-{
-    using System.Data.Entity;
+using System.Data.Entity;
 
+namespace AD419.DataHelper.Web.Models
+{
     public partial class FISDataContext : DbContext
     {
         public FISDataContext()
