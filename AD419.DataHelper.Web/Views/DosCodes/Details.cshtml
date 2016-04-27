@@ -1,0 +1,42 @@
+﻿@model AD419.DataHelper.Web.Models.DosCode
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DOS_Codes</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DOS_Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DOS_Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncludeInAD419FTE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncludeInAD419FTE)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DOS_Code }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

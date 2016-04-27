@@ -1,0 +1,84 @@
+﻿@model IEnumerable<AD419.DataHelper.Web.Models.ArcCode>
+
+@{
+    ViewBag.Title = "Index - ARC Codes";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table id="arcCodeTable" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FunctionName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubCategoryCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsAES)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedDate)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FunctionName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubCategoryCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsAES)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Code })
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.Code })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section AdditionalScripts
+{
+    <script>
+        $(function() {
+            $('#arcCodeTable').DataTable({
+                columnDefs: [
+                    { targets: [-1, -2], sortable: false }
+                ]
+            });
+        })
+    </script>
+}
