@@ -1,0 +1,43 @@
+﻿@model AD419.DataHelper.Web.Models.FieldStationExpenseListImport
+@{
+
+    ViewBag.Title = "Field Station Expense Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ProjectAccessionNum)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ProjectAccessionNum)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ProjectDirector)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ProjectDirector)
+            </dd>
+            
+            <dt>
+                @Html.DisplayNameFor(model => model.FieldStationCharge)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FieldStationCharge)
+            </dd>
+
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
