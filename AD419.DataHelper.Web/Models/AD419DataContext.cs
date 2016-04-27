@@ -1,6 +1,6 @@
 using System.Data.Entity;
 
-namespace AD_419_DataHelperWebApp.Models
+namespace AD419.DataHelper.Web.Models
 {
     public partial class AD419DataContext : DbContext
     {

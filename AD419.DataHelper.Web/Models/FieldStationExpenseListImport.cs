@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 
-namespace AD_419_DataHelperWebApp.Models
+namespace AD419.DataHelper.Web.Models
 {
     [Table("FieldStationExpenseListImport")]
     public partial class FieldStationExpenseListImport

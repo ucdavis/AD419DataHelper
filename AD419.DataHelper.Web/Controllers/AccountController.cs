@@ -1,15 +1,13 @@
-﻿using System;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using AD419.DataHelper.Web.Helpers;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Serilog;
 
-using AD_419_DataHelperWebApp.Helpers;
-
-namespace AD_419_DataHelperWebApp.Controllers
+namespace AD419.DataHelper.Web.Controllers
 {
     public class AccountController : SuperController
     {

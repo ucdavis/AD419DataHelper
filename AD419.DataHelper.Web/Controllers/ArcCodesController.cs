@@ -1,9 +1,9 @@
 ﻿using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
-using AD_419_DataHelperWebApp.Models;
+using AD419.DataHelper.Web.Models;
 
-namespace AD_419_DataHelperWebApp.Controllers
+namespace AD419.DataHelper.Web.Controllers
 {
     public class ArcCodesController : SuperController
     {

@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using AD_419_DataHelperWebApp.Models;
+using AD419.DataHelper.Web.Models;
 using Excel;
 
-namespace AD_419_DataHelperWebApp.Controllers
+namespace AD419.DataHelper.Web.Controllers
 {
     public class CfdaNumberImportsController : SuperController
     {
@@ -151,7 +149,7 @@ namespace AD_419_DataHelperWebApp.Controllers
 
         [HttpPost]
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Save(List<AD_419_DataHelperWebApp.Models.CfdaNumberImport> cfdaNums)
+        public ActionResult Save(List<CfdaNumberImport> cfdaNums)
         {
             if (cfdaNums != null)
             {

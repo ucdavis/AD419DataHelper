@@ -3,7 +3,7 @@ using System.Web;
 using Serilog.Core;
 using Serilog.Events;
 
-namespace AD_419_DataHelperWebApp.Helpers
+namespace AD419.DataHelper.Web.Helpers
 {
     public class HttpCorrelationIdEnricher : ILogEventEnricher
     {

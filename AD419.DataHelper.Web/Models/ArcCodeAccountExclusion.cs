@@ -1,8 +1,8 @@
-namespace AD_419_DataHelperWebApp.Models
-{
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
+namespace AD419.DataHelper.Web.Models
+{
     public partial class ArcCodeAccountExclusion
     {
         [Key]

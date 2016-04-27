@@ -1,10 +1,8 @@
-﻿using System;
+﻿using AD419.DataHelper.Web.Helpers;
 using Serilog;
 using SerilogWeb.Classic.Enrichers;
 
-using AD_419_DataHelperWebApp.Helpers;
-
-namespace AD_419_DataHelperWebApp
+namespace AD419.DataHelper.Web
 {
     public class LogConfig
     {

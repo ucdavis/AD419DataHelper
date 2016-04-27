@@ -1,8 +1,9 @@
-﻿using Microsoft.Owin;
+﻿using AD419.DataHelper.Web;
+using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(AD_419_DataHelperWebApp.Startup))]
-namespace AD_419_DataHelperWebApp
+[assembly: OwinStartup(typeof(Startup))]
+namespace AD419.DataHelper.Web
 {
     public partial class Startup
     {

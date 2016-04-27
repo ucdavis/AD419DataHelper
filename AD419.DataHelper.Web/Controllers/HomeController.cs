@@ -1,7 +1,6 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
-namespace AD_419_DataHelperWebApp.Controllers
+namespace AD419.DataHelper.Web.Controllers
 {
     public class HomeController : Controller
     {
