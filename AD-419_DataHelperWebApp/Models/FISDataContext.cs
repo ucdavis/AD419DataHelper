@@ -9,29 +9,29 @@ namespace AD_419_DataHelperWebApp.Models
         {
         }
 
-        public virtual DbSet<ARC_Codes> ARC_Codes { get; set; }
+        public virtual DbSet<ArcCode> ARC_Codes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ARC_Codes>()
-                .Property(e => e.ARC_Cd)
+            modelBuilder.Entity<ArcCode>()
+                .Property(e => e.Code)
                 .IsFixedLength()
                 .IsUnicode(false);
 
-            modelBuilder.Entity<ARC_Codes>()
-                .Property(e => e.ARC_Name)
+            modelBuilder.Entity<ArcCode>()
+                .Property(e => e.Name)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<ARC_Codes>()
-                .Property(e => e.OP_Func_Name)
+            modelBuilder.Entity<ArcCode>()
+                .Property(e => e.FunctionName)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<ARC_Codes>()
-               .Property(e => e.ARC_Category_Cd)
+            modelBuilder.Entity<ArcCode>()
+               .Property(e => e.CategoryCode)
                .IsUnicode(false);
 
-            modelBuilder.Entity<ARC_Codes>()
-               .Property(e => e.ARC_Sub_Category_Cd)
+            modelBuilder.Entity<ArcCode>()
+               .Property(e => e.SubCategoryCode)
                .IsUnicode(false);
         }
     }

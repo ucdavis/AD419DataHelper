@@ -11,22 +11,20 @@ namespace AD_419_DataHelperWebApp.Controllers
         // GET: C204AcctXProj
         public ActionResult Index()
         {
-            return View(DbContext.C204AcctXProj.ToList());
+            var projects = DbContext.C204AcctXProj.ToList();
+            return View(projects);
         }
 
         // GET: C204AcctXProj/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            C204AcctXProj c204AcctXProj = DbContext.C204AcctXProj.Find(id);
-            if (c204AcctXProj == null)
+            var project = DbContext.C204AcctXProj.Find(id);
+            if (project == null)
             {
                 return HttpNotFound();
             }
-            return View(c204AcctXProj);
+
+            return View(project);
         }
 
         // GET: C204AcctXProj/Create
@@ -40,31 +38,26 @@ namespace AD_419_DataHelperWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "pk,AccountID,Expenses,Accession,Chart,Is219,CSREES_ContractNo,AwardNum,IsCurrentProject,Org,OrgR,IsExcludedExpense")] C204AcctXProj c204AcctXProj)
+        public ActionResult Create([Bind(Include = "pk,AccountID,Expenses,Accession,Chart,Is219,CSREES_ContractNo,AwardNum,IsCurrentProject,Org,OrgR,IsExcludedExpense")] C204AcctXProj project)
         {
-            if (ModelState.IsValid)
-            {
-                DbContext.C204AcctXProj.Add(c204AcctXProj);
-                DbContext.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            if (!ModelState.IsValid) return View(project);
 
-            return View(c204AcctXProj);
+            DbContext.C204AcctXProj.Add(project);
+            DbContext.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         // GET: C204AcctXProj/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            C204AcctXProj c204AcctXProj = DbContext.C204AcctXProj.Find(id);
-            if (c204AcctXProj == null)
+            var project = DbContext.C204AcctXProj.Find(id);
+            if (project == null)
             {
                 return HttpNotFound();
             }
-            return View(c204AcctXProj);
+
+            return View(project);
         }
 
         // POST: C204AcctXProj/Edit/5
@@ -72,30 +65,26 @@ namespace AD_419_DataHelperWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "pk,AccountID,Expenses,Accession,Chart,Is219,CSREES_ContractNo,AwardNum,IsCurrentProject,Org,OrgR,IsExcludedExpense")] C204AcctXProj c204AcctXProj)
+        public ActionResult Edit([Bind(Include = "pk,AccountID,Expenses,Accession,Chart,Is219,CSREES_ContractNo,AwardNum,IsCurrentProject,Org,OrgR,IsExcludedExpense")] C204AcctXProj project)
         {
-            if (ModelState.IsValid)
-            {
-                DbContext.Entry(c204AcctXProj).State = EntityState.Modified;
-                DbContext.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(c204AcctXProj);
+            if (!ModelState.IsValid) return View(project);
+
+            DbContext.Entry(project).State = EntityState.Modified;
+            DbContext.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         // GET: C204AcctXProj/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            C204AcctXProj c204AcctXProj = DbContext.C204AcctXProj.Find(id);
-            if (c204AcctXProj == null)
+            var project = DbContext.C204AcctXProj.Find(id);
+            if (project == null)
             {
                 return HttpNotFound();
             }
-            return View(c204AcctXProj);
+
+            return View(project);
         }
 
         // POST: C204AcctXProj/Delete/5
@@ -103,9 +92,15 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            C204AcctXProj c204AcctXProj = DbContext.C204AcctXProj.Find(id);
-            DbContext.C204AcctXProj.Remove(c204AcctXProj);
+            var project = DbContext.C204AcctXProj.Find(id);
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+
+            DbContext.C204AcctXProj.Remove(project);
             DbContext.SaveChanges();
+
             return RedirectToAction("Index");
         }
     }

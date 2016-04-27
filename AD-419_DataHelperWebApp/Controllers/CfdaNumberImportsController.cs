@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AD_419_DataHelperWebApp.Models;
@@ -10,111 +11,111 @@ using Excel;
 
 namespace AD_419_DataHelperWebApp.Controllers
 {
-    public class FieldStationExpensesImportController : SuperController
+    public class CfdaNumberImportsController : SuperController
     {
-        // GET: FieldStationExpensesImport
+        // GET: CFDANumsImport
         public ActionResult Index()
         {
-            var stations = DbContext.FieldStationExpenseListImports.ToList();
-            return View(stations);
+            return View(DbContext.CfdaNumberImports.ToList());
         }
 
-        // GET: FieldStationExpensesImport/Details/5
+        // GET: CFDANumsImport/Details/5
         public ActionResult Details(int id)
         {
-            var station = DbContext.FieldStationExpenseListImports.Find(id);
-            if (station == null)
+            var num = DbContext.CfdaNumberImports.Find(id);
+            if (num == null)
             {
                 return HttpNotFound();
             }
 
-            return View(station);
+            return View(num);
         }
 
-        // GET: FieldStationExpensesImport/Create
+        // GET: CFDANumsImport/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: FieldStationExpensesImport/Create
+        // POST: CFDANumsImport/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ProjectAccessionNum,FieldStationCharge,ProjectDirector")] FieldStationExpenseListImport fieldStationExpenseListImport)
+        public ActionResult Create([Bind(Include = "Id,CFDANum")] CfdaNumberImport cfdaNumber)
         {
-            if (!ModelState.IsValid) return View(fieldStationExpenseListImport);
+            if (!ModelState.IsValid) return View(cfdaNumber);
 
-            DbContext.FieldStationExpenseListImports.Add(fieldStationExpenseListImport);
+            DbContext.CfdaNumberImports.Add(cfdaNumber);
             DbContext.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
-        // GET: FieldStationExpensesImport/Edit/5
+        // GET: CFDANumsImport/Edit/5
         public ActionResult Edit(int id)
         {
-            var station = DbContext.FieldStationExpenseListImports.Find(id);
-            if (station == null)
+            var code = DbContext.CfdaNumberImports.Find(id);
+            if (code == null)
             {
                 return HttpNotFound();
             }
-            return View(station);
+
+            return View(code);
         }
 
-        // POST: FieldStationExpensesImport/Edit/5
+        // POST: CFDANumsImport/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ProjectAccessionNum,FieldStationCharge,ProjectDirector")] FieldStationExpenseListImport fieldStationExpenseListImport)
+        public ActionResult Edit([Bind(Include = "Id,CFDANum, ProgramTitle")] CfdaNumberImport cFdaNumberImport)
         {
-            if (!ModelState.IsValid) return View(fieldStationExpenseListImport);
+            if (!ModelState.IsValid) return View(cFdaNumberImport);
 
-            DbContext.Entry(fieldStationExpenseListImport).State = EntityState.Modified;
+            DbContext.Entry(cFdaNumberImport).State = EntityState.Modified;
             DbContext.SaveChanges();
 
             return RedirectToAction("Index");
         }
 
-        // GET: FieldStationExpensesImport/Delete/5
+        // GET: CFDANumsImport/Delete/5
         public ActionResult Delete(int id)
         {
-            var station = DbContext.FieldStationExpenseListImports.Find(id);
-            if (station == null)
+            var num = DbContext.CfdaNumberImports.Find(id);
+            if (num == null)
             {
                 return HttpNotFound();
             }
 
-            return View(station);
+            return View(num);
         }
 
         [HttpPost, ActionName("DeleteAll")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteAll()
         {
-            // This works, but does not reset the sequence number back to the beginning.
-            //var all = from c in db.FieldStationExpenseListImports select c;
-            //db.FieldStationExpenseListImports.RemoveRange(all);
+            //This works but doesn't reset the sequence number.
+            //var all = from c in db.CFDANumImport select c;
+            //db.CFDANumImport.RemoveRange(all);
             //db.SaveChanges();
 
-            DbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE FieldStationExpenseListImport");
+            DbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE CFDANumImport");
 
             return RedirectToAction("Index");
         }
 
-        // POST: FieldStationExpensesImport/Delete/5
+        // POST: CFDANumsImport/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var station = DbContext.FieldStationExpenseListImports.Find(id);
-            if (station == null)
+            var num = DbContext.CfdaNumberImports.Find(id); if (num == null)
             {
                 return HttpNotFound();
             }
 
-            DbContext.FieldStationExpenseListImports.Remove(station);
+            DbContext.CfdaNumberImports.Remove(num);
             DbContext.SaveChanges();
 
             return RedirectToAction("Index");
@@ -127,38 +128,37 @@ namespace AD_419_DataHelperWebApp.Controllers
             var myFile = Request.Files[0];
             if (myFile == null) return RedirectToAction("Index");
 
-            var fieldStationExpenseEntries = new List<FieldStationExpenseListImport>();
-
+            var cfdaNums = new List<CfdaNumberImport>();
             var fileName = myFile.FileName;
             var excelReader = ExcelReaderFactory.CreateOpenXmlReader(myFile.InputStream);
             excelReader.IsFirstRowAsColumnNames = true;
             var result = excelReader.AsDataSet();
-
+               
             TempData.Add("Message", "Now viewing \"" + fileName + "\".");
             excelReader.Close();
-            var range = from DataRow row in result.Tables[0].Rows where !string.IsNullOrWhiteSpace(row["FieldStationCharge"].ToString()) select new FieldStationExpenseListImport(row);
-            fieldStationExpenseEntries.AddRange(range);
+
+            cfdaNums.AddRange(from DataRow row in result.Tables[0].Rows select new CfdaNumberImport(row));
 
             // This works.  Would now like the user to have a chance to review upload first.
             //if (ModelState.IsValid)
             //{
-            //    db.FieldStationExpenseListImport.AddRange(fieldStationExpenseEntries);
+            //    db.CesListImports.AddRange(cesEntries);
             //    db.SaveChanges();
             //}
 
-            return View("Display", fieldStationExpenseEntries);
+            return View("Display", cfdaNums);
         }
 
         [HttpPost]
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Save(List<AD_419_DataHelperWebApp.Models.FieldStationExpenseListImport> fieldStationExpenseEntries)
+        public ActionResult Save(List<AD_419_DataHelperWebApp.Models.CfdaNumberImport> cfdaNums)
         {
-            if (fieldStationExpenseEntries != null)
+            if (cfdaNums != null)
             {
                 // This works.  Would now like the user to have a chance to review upload first.
                 if (ModelState.IsValid)
                 {
-                    DbContext.FieldStationExpenseListImports.AddRange(fieldStationExpenseEntries);
+                    DbContext.CfdaNumberImports.AddRange(cfdaNums);
                     DbContext.SaveChanges();
                 }
             }

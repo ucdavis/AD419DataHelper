@@ -1,103 +1,102 @@
-﻿using System.Data.Entity;
+﻿using AD_419_DataHelperWebApp.Models;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
-using AD_419_DataHelperWebApp.Models;
 
 namespace AD_419_DataHelperWebApp.Controllers
 {
-    public class C204ExclusionsController : SuperController
+    public class DosCodesController : SuperController
     {
-        // GET: C204Exclusions
+        // GET: DOS_Codes
         public ActionResult Index()
         {
-            var exclusions = DbContext.C204Exclusions.ToList();
-            return View(exclusions);
+            var codes = DbContext.DosCodes.ToList();
+            return View(codes);
         }
 
-        // GET: C204Exclusions/Details/5
+        // GET: DOS_Codes/Details/5
         public ActionResult Details(string id)
         {
-            var exclusion = DbContext.C204Exclusions.Find(id);
-            if (exclusion == null)
+            var code = DbContext.DosCodes.Find(id);
+            if (code == null)
             {
                 return HttpNotFound();
             }
 
-            return View(exclusion);
+            return View(code);
         }
 
-        // GET: C204Exclusions/Create
+        // GET: DOS_Codes/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: C204Exclusions/Create
+        // POST: DOS_Codes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AwardNumber, Comments")] C204Exclusions exclusion)
+        public ActionResult Create([Bind(Include = "DOS_Code,Description,IncludeInAD419FTE")] DosCode code)
         {
-            if (!ModelState.IsValid) return View(exclusion);
+            if (!ModelState.IsValid) return View(code);
 
-            DbContext.C204Exclusions.Add(exclusion);
+            DbContext.DosCodes.Add(code);
             DbContext.SaveChanges();
-
             return RedirectToAction("Index");
         }
 
-        // GET: C204Exclusions/Edit/5
+        // GET: DOS_Codes/Edit/5
         public ActionResult Edit(string id)
         {
-            var exclusion = DbContext.C204Exclusions.Find(id);
-            if (exclusion == null)
+            var code = DbContext.DosCodes.Find(id);
+            if (code == null)
             {
                 return HttpNotFound();
             }
 
-            return View(exclusion);
+            return View(code);
         }
 
-        // POST: C204Exclusions/Edit/5
+        // POST: DOS_Codes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AwardNumber, Comments")] C204Exclusions exclusion)
+        public ActionResult Edit([Bind(Include = "DOS_Code,Description,IncludeInAD419FTE")] DosCode code)
         {
-            if (!ModelState.IsValid) return View(exclusion);
+            if (!ModelState.IsValid) return View(code);
 
-            DbContext.Entry(exclusion).State = EntityState.Modified;
+            DbContext.Entry(code).State = EntityState.Modified;
             DbContext.SaveChanges();
 
             return RedirectToAction("Index");
         }
 
-        // GET: C204Exclusions/Delete/5
+        // GET: DOS_Codes/Delete/5
         public ActionResult Delete(string id)
         {
-            var exclusion = DbContext.C204Exclusions.Find(id);
-            if (exclusion == null)
+            var code = DbContext.DosCodes.Find(id);
+            if (code == null)
             {
                 return HttpNotFound();
             }
 
-            return View(exclusion);
+            return View(code);
         }
 
-        // POST: C204Exclusions/Delete/5
+        // POST: DOS_Codes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            var exclusion = DbContext.C204Exclusions.Find(id);
-            if (exclusion == null)
+            var code = DbContext.DosCodes.Find(id);
+            if (code == null)
             {
                 return HttpNotFound();
             }
 
-            DbContext.C204Exclusions.Remove(exclusion);
+            DbContext.DosCodes.Remove(code);
             DbContext.SaveChanges();
 
             return RedirectToAction("Index");

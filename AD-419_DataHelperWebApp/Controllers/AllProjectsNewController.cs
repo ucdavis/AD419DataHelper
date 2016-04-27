@@ -11,22 +11,20 @@ namespace AD_419_DataHelperWebApp.Controllers
         // GET: AllProjectsNew
         public ActionResult Index()
         {
-            return View(DbContext.AllProjectsNew.ToList());
+            var projects = DbContext.AllProjectsNew.ToList();
+            return View(projects);
         }
 
         // GET: AllProjectsNew/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AllProjectsNew allProjectsNew = DbContext.AllProjectsNew.Find(id);
-            if (allProjectsNew == null)
+            var project = DbContext.AllProjectsNew.Find(id);
+            if (project == null)
             {
                 return HttpNotFound();
             }
-            return View(allProjectsNew);
+
+            return View(project);
         }
 
         // GET: AllProjectsNew/Create
@@ -40,31 +38,26 @@ namespace AD_419_DataHelperWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idProject,AccessionNumber,ProjectNumber,ProposalNumber,AwardNumber,Title,OrganizationName,OrgR,Department,ProjectDirector,CoProjectDirectors,FundingSource,ProjectStartDate,ProjectEndDate,ProjectStatus,isInterdepartmental,IsActive")] AllProjectsNew allProjectsNew)
+        public ActionResult Create([Bind(Include = "idProject,AccessionNumber,ProjectNumber,ProposalNumber,AwardNumber,Title,OrganizationName,OrgR,Department,ProjectDirector,CoProjectDirectors,FundingSource,ProjectStartDate,ProjectEndDate,ProjectStatus,isInterdepartmental,IsActive")] AllProjectsNew project)
         {
-            if (ModelState.IsValid)
-            {
-                DbContext.AllProjectsNew.Add(allProjectsNew);
-                DbContext.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            if (!ModelState.IsValid) return View(project);
 
-            return View(allProjectsNew);
+            DbContext.AllProjectsNew.Add(project);
+            DbContext.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         // GET: AllProjectsNew/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AllProjectsNew allProjectsNew = DbContext.AllProjectsNew.Find(id);
-            if (allProjectsNew == null)
+            var project = DbContext.AllProjectsNew.Find(id);
+            if (project == null)
             {
                 return HttpNotFound();
             }
-            return View(allProjectsNew);
+
+            return View(project);
         }
 
         // POST: AllProjectsNew/Edit/5
@@ -72,30 +65,26 @@ namespace AD_419_DataHelperWebApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idProject,AccessionNumber,ProjectNumber,ProposalNumber,AwardNumber,Title,OrganizationName,OrgR,Department,ProjectDirector,CoProjectDirectors,FundingSource,ProjectStartDate,ProjectEndDate,ProjectStatus,IsInterdepartmental,IsActive")] AllProjectsNew allProjectsNew)
+        public ActionResult Edit([Bind(Include = "idProject,AccessionNumber,ProjectNumber,ProposalNumber,AwardNumber,Title,OrganizationName,OrgR,Department,ProjectDirector,CoProjectDirectors,FundingSource,ProjectStartDate,ProjectEndDate,ProjectStatus,IsInterdepartmental,IsActive")] AllProjectsNew project)
         {
-            if (ModelState.IsValid)
-            {
-                DbContext.Entry(allProjectsNew).State = EntityState.Modified;
-                DbContext.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(allProjectsNew);
+            if (!ModelState.IsValid) return View(project);
+
+            DbContext.Entry(project).State = EntityState.Modified;
+            DbContext.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         // GET: AllProjectsNew/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AllProjectsNew allProjectsNew = DbContext.AllProjectsNew.Find(id);
-            if (allProjectsNew == null)
+            var project = DbContext.AllProjectsNew.Find(id);
+            if (project == null)
             {
                 return HttpNotFound();
             }
-            return View(allProjectsNew);
+
+            return View(project);
         }
 
         // POST: AllProjectsNew/Delete/5
@@ -103,9 +92,15 @@ namespace AD_419_DataHelperWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            AllProjectsNew allProjectsNew = DbContext.AllProjectsNew.Find(id);
-            DbContext.AllProjectsNew.Remove(allProjectsNew);
+            var project = DbContext.AllProjectsNew.Find(id);
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+
+            DbContext.AllProjectsNew.Remove(project);
             DbContext.SaveChanges();
+
             return RedirectToAction("Index");
         }
     }

@@ -5,10 +5,11 @@ namespace AD_419_DataHelperWebApp.Models
     using System.ComponentModel.DataAnnotations.Schema;
 
     [Table("AllProjectsImport")]
-    public partial class AllProjectsImport
+    public partial class AllProjectImport
     {
         [Key]
-        public int idProject { get; set; }
+        [Column("idProject")]
+        public int Id { get; set; }
 
         [Required]
         [StringLength(20)]
