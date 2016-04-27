@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Linq;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Models;
 
@@ -9,14 +10,14 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: AllProjectsImport
         public ActionResult Index()
         {
-            var projects = DbContext.AllProjectsImmport.ToList();
+            var projects = DbContext.AllProjectsImports.ToList();
             return View(projects);
         }
 
         // GET: AllProjectsImport/Details/5
         public ActionResult Details(int id)
         {
-            var project = DbContext.AllProjectsImmport.Find(id);
+            var project = DbContext.AllProjectsImports.Find(id);
             if (project == null)
             {
                 return HttpNotFound();
@@ -40,7 +41,7 @@ namespace AD419.DataHelper.Web.Controllers
         {
             if (!ModelState.IsValid) return View(project);
 
-            DbContext.AllProjectsImmport.Add(project);
+            DbContext.AllProjectsImports.Add(project);
             DbContext.SaveChanges();
 
             return RedirectToAction("Index");
@@ -49,7 +50,7 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: AllProjectsImport/Edit/5
         public ActionResult Edit(int id)
         {
-            var project = DbContext.AllProjectsImmport.Find(id);
+            var project = DbContext.AllProjectsImports.Find(id);
             if (project == null)
             {
                 return HttpNotFound();
@@ -76,7 +77,7 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: AllProjectsImport/Delete/5
         public ActionResult Delete(int id)
         {
-            var project = DbContext.AllProjectsImmport.Find(id);
+            var project = DbContext.AllProjectsImports.Find(id);
             if (project == null)
             {
                 return HttpNotFound();
@@ -90,13 +91,13 @@ namespace AD419.DataHelper.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var project = DbContext.AllProjectsImmport.Find(id);
+            var project = DbContext.AllProjectsImports.Find(id);
             if (project == null)
             {
                 return HttpNotFound();
             }
 
-            DbContext.AllProjectsImmport.Remove(project);
+            DbContext.AllProjectsImports.Remove(project);
             DbContext.SaveChanges();
 
             return RedirectToAction("Index");

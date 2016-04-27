@@ -13,7 +13,7 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<AllProjectsNew> AllProjectsNew { get; set; }
 
-        public virtual DbSet<AllProjectImport> AllProjectsImport { get; set; }
+        public virtual DbSet<AllProjectImport> AllProjectsImports { get; set; }
 
         public virtual DbSet<ArcCodeAccountExclusion> ArcCodeAccountExclusions { get; set; }
 
