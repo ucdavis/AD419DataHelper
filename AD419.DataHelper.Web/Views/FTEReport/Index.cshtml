@@ -1,0 +1,9 @@
+﻿@using ReportViewerForMvc;
+
+@{
+    ViewBag.Title = "FTE > 1 Report";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr/>
+@Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { style = "border: none" })
