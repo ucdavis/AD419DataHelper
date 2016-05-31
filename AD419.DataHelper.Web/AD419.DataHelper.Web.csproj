@@ -107,16 +107,17 @@
       <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\MicosoftReportViewerWebForms_v11.1.0.1\lib\Microsoft.ReportViewer.WebForms.DLL</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ReportViewerForMvc">
+    <Reference Include="ReportViewerForMvc, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ReportViewerForMvc.1.0.1\lib\net45\ReportViewerForMvc.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Serilog, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.1.5.14\lib\net45\Serilog.dll</HintPath>
@@ -218,6 +219,7 @@
     <Compile Include="Controllers\C204AcctXProjController.cs" />
     <Compile Include="Controllers\CesListImportController.cs" />
     <Compile Include="Controllers\CfdaNumberImportsController.cs" />
+    <Compile Include="Controllers\ConsolidationCodesController.cs" />
     <Compile Include="Controllers\DosCodesController.cs" />
     <Compile Include="Controllers\ExpiredProjectCrossReferenceController.cs" />
     <Compile Include="Controllers\FieldStationExpensesImportController.cs" />
@@ -226,10 +228,15 @@
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\C204ExclusionsController.cs" />
     <Compile Include="Controllers\SuperController.cs" />
+    <Compile Include="Controllers\TransDocTypesController.cs" />
+    <Compile Include="DOSCode.cs" />
     <Compile Include="Models\AllProjectImport.cs" />
     <Compile Include="Helpers\CasHelper.cs" />
     <Compile Include="Helpers\HttpCorrelationIdEnricher.cs" />
     <Compile Include="Models\AllProjectsNew.cs" />
+    <Compile Include="Models\ConsolidationCodesForFTECalc.cs" />
+    <Compile Include="Models\ConsolidationCodes.cs" />
+    <Compile Include="Models\DosCodesForFTECalc.cs" />
     <Compile Include="Models\DosCode.cs" />
     <Compile Include="Models\CfdaNumberImport.cs" />
     <Compile Include="Models\FieldStationExpenseListImport.cs" />
@@ -245,6 +252,9 @@
     <Compile Include="Models\CesListImport.cs" />
     <Compile Include="Models\ExpiredProjectCrossReference.cs" />
     <Compile Include="Models\FISDataContext.cs" />
+    <Compile Include="Models\FTEGreaterThanOneReportModel.cs" />
+    <Compile Include="Models\TransDocTypesForFTECalc.cs" />
+    <Compile Include="Models\TransDocTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -371,6 +381,17 @@
     <Content Include="Views\DosCodes\Index.cshtml" />
     <Content Include="Views\Shared\_TopNav.cshtml" />
     <Content Include="Views\FTEReport\Index.cshtml" />
+    <Content Include="Views\ConsolidationCodes\Create.cshtml" />
+    <Content Include="Views\ConsolidationCodes\Delete.cshtml" />
+    <Content Include="Views\ConsolidationCodes\Details.cshtml" />
+    <Content Include="Views\ConsolidationCodes\Edit.cshtml" />
+    <Content Include="Views\ConsolidationCodes\Index.cshtml" />
+    <Content Include="Views\TransDocTypes\Create.cshtml" />
+    <Content Include="Views\TransDocTypes\Delete.cshtml" />
+    <Content Include="Views\TransDocTypes\Details.cshtml" />
+    <Content Include="Views\TransDocTypes\Edit.cshtml" />
+    <Content Include="Views\TransDocTypes\Index.cshtml" />
+    <Content Include="Views\FTEReport\Report.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -54,7 +54,10 @@
                     @Html.DisplayFor(modelItem => item.SubCategoryCode)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IsAES)
+                    @if (item.IsAES.HasValue)
+                    {
+                        <span>@item.IsAES.Value</span>
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.UpdatedDate)
@@ -77,7 +80,13 @@
             $('#arcCodeTable').DataTable({
                 columnDefs: [
                     { targets: [-1, -2], sortable: false }
-                ]
+                ],
+                order: [
+                    [5, 'desc'],
+                    [4, 'asc'],
+                    [0, 'asc']
+                ],
+                displayLength: 25
             });
         })
     </script>

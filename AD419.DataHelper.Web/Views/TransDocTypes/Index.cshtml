@@ -1,0 +1,45 @@
+﻿@model IEnumerable<AD419.DataHelper.Web.Models.TransDocTypes>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IncludeInFTECalc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IncludeInFISExpenses)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IncludeInFTECalc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IncludeInFISExpenses)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DocumentType }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DocumentType }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DocumentType })
+        </td>
+    </tr>
+}
+
+</table>

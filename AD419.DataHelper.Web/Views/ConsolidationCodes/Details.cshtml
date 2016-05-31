@@ -1,0 +1,42 @@
+﻿@model AD419.DataHelper.Web.Models.ConsolidationCodes
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ConsolidationCodes</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ObjectConsolidationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ObjectConsolidationName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncludeInFTECalc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncludeInFTECalc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncludeInLaborTransactions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncludeInLaborTransactions)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ObjectConsolidationNumber }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

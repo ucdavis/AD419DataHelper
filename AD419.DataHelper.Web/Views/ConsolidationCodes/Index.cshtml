@@ -1,0 +1,45 @@
+﻿@model IEnumerable<AD419.DataHelper.Web.Models.ConsolidationCodes>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ObjectConsolidationName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IncludeInFTECalc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IncludeInLaborTransactions)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ObjectConsolidationName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IncludeInFTECalc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IncludeInLaborTransactions)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ObjectConsolidationNumber }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ObjectConsolidationNumber }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ObjectConsolidationNumber })
+        </td>
+    </tr>
+}
+
+</table>

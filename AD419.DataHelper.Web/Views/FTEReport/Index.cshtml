@@ -1,9 +1,102 @@
-﻿@using ReportViewerForMvc;
+﻿@model AD419.DataHelper.Web.Models.FTEGreaterThanOneReportModel
 
 @{
-    ViewBag.Title = "FTE > 1 Report";
+    ViewBag.Title = "FTE Calculation Criteria";
 }
 
 <h2>@ViewBag.Title</h2>
 <hr/>
-@Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { style = "border: none" })
+<div>
+    <h4>Prior to calculating the FTE totals the following steps must have already been completed:</h4>
+    <ol>
+        <li>The @Html.ActionLink("DOS Codes", "Index", "DosCodes") to be included in the FTE calculations must have been selected.</li>
+        <li>The @Html.ActionLink("Consolidation Codes", "Index", "ConsolidationCodes") to be included in the FTE calculations must have been selected.</li>
+        <li>The @Html.ActionLink("Trans Doc Types", "Index", "TransDocTypes") to be included in the FTE calculations must have been selected.</li>
+    </ol>
+    <i>(Select any of the above links to modify the corresponding entries as desired, and then refresh the page to see the updated results.)</i>
+    <div>
+        <br/><h4>Once the criteria has been verified, the FTE > 1 Report can be viewed here: @Html.ActionLink("View FTE > 1 Report", "Report", "FteReport").</h4><br/>
+    </div>
+   
+</div>
+
+<div>
+    <h4>These are the DOS Codes, Consolidation Codes, and Trans Doc Types that are currently selected:</h4>
+    <div>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => Model.DosCodesForFTECalc[0].DOS_Code)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => Model.DosCodesForFTECalc[0].Description)
+                </th>
+            </tr>
+
+            @foreach (var item in Model.DosCodesForFTECalc)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DOS_Code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <div>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => Model.ConsolidationCodesForFTECalc[0].ObjectConsolidationNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => Model.ConsolidationCodesForFTECalc[0].ObjectConsolidationName)
+                </th>
+            </tr>
+
+            @foreach (var item in Model.ConsolidationCodesForFTECalc)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ObjectConsolidationNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ObjectConsolidationName)
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    
+    <div>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => Model.TransDocTypesForFTECalc[0].DocumentType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => Model.TransDocTypesForFTECalc[0].Description)
+                </th>
+            </tr>
+
+            @foreach (var item in Model.TransDocTypesForFTECalc)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DocumentType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+

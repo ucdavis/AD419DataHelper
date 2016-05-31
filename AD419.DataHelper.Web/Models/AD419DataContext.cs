@@ -26,10 +26,18 @@ namespace AD419.DataHelper.Web.Models
         public virtual DbSet<CfdaNumberImport> CfdaNumberImports { get; set; }
 
         public virtual DbSet<DosCode> DosCodes { get; set; }
+        public virtual DbSet<DosCodesForFTECalc> DosCodesForFTECalc { get; set; }
 
         public virtual DbSet<ExpiredProjectCrossReference> ExpiredProjectCrossReference { get; set; }
 
         public virtual DbSet<FieldStationExpenseListImport> FieldStationExpenseListImports { get; set; }
+
+        public virtual DbSet<ConsolidationCodes> ConsolidationCodes { get; set; }
+        public virtual DbSet<ConsolidationCodesForFTECalc> ConsolidationCodesForFTECalc { get; set; }
+
+        public virtual DbSet<TransDocTypes> TransDocTypes { get; set; }
+
+        public virtual DbSet<TransDocTypesForFTECalc> TransDocTypesForFTECalc { get; set; }
 
         //public static void Clear<T>(this DbSet<T> dbSet) where T : class
         //{
