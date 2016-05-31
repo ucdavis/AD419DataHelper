@@ -6,14 +6,12 @@ using System.Web.Mvc;
 
 namespace AD419.DataHelper.Web.Controllers
 {
-    public class ConsolidationCodesController : Controller
+    public class ConsolidationCodesController : SuperController
     {
-        private AD419DataContext db = new AD419DataContext();
-
         // GET: ConsolidationCodes
         public ActionResult Index()
         {
-            return View(db.ConsolidationCodes.ToList());
+            return View(DbContext.ConsolidationCodes.ToList());
         }
 
         // GET: ConsolidationCodes/Details/5
@@ -23,7 +21,7 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ConsolidationCodes consolidationCodes = db.ConsolidationCodes.Find(id);
+            ConsolidationCodes consolidationCodes = DbContext.ConsolidationCodes.Find(id);
             if (consolidationCodes == null)
             {
                 return HttpNotFound();
@@ -46,8 +44,8 @@ namespace AD419.DataHelper.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.ConsolidationCodes.Add(consolidationCodes);
-                db.SaveChanges();
+                DbContext.ConsolidationCodes.Add(consolidationCodes);
+                DbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -61,7 +59,7 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ConsolidationCodes consolidationCodes = db.ConsolidationCodes.Find(id);
+            ConsolidationCodes consolidationCodes = DbContext.ConsolidationCodes.Find(id);
             if (consolidationCodes == null)
             {
                 return HttpNotFound();
@@ -78,8 +76,8 @@ namespace AD419.DataHelper.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(consolidationCodes).State = EntityState.Modified;
-                db.SaveChanges();
+                DbContext.Entry(consolidationCodes).State = EntityState.Modified;
+                DbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(consolidationCodes);
@@ -92,7 +90,7 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ConsolidationCodes consolidationCodes = db.ConsolidationCodes.Find(id);
+            ConsolidationCodes consolidationCodes = DbContext.ConsolidationCodes.Find(id);
             if (consolidationCodes == null)
             {
                 return HttpNotFound();
@@ -105,19 +103,10 @@ namespace AD419.DataHelper.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            ConsolidationCodes consolidationCodes = db.ConsolidationCodes.Find(id);
-            db.ConsolidationCodes.Remove(consolidationCodes);
-            db.SaveChanges();
+            ConsolidationCodes consolidationCodes = DbContext.ConsolidationCodes.Find(id);
+            DbContext.ConsolidationCodes.Remove(consolidationCodes);
+            DbContext.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }
