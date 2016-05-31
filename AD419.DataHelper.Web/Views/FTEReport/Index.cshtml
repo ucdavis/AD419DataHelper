@@ -6,4 +6,15 @@
 
 <h2>@ViewBag.Title</h2>
 <hr/>
-@Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { style = "border: none" })
+<div>
+    <h4>Prior to viewing this report the following steps must have already been completed:</h4>
+    <ol>
+        <li>The @Html.ActionLink("DOS Codes", "Index", "DosCodes") to be included in the FTE calculations must have been selected.</li>
+        <li>The @Html.ActionLink("Consolidation Codes", "Index", "ConsolidationCodes") to be included in the FTE calculations must have been selected.</li>
+        <li>The @Html.ActionLink("Trans Doc Types", "Index", "TransDocTypes") to be included in the FTE calculations must have been selected.</li>
+    </ol>
+</div>
+<div>
+    @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { style = "border: none" })
+</div>
+

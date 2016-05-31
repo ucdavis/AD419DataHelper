@@ -1,0 +1,42 @@
+﻿@model AD419.DataHelper.Web.Models.TransDocTypes
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TransDocTypes</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncludeInFTECalc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncludeInFTECalc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncludeInFISExpenses)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncludeInFISExpenses)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DocumentType }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -218,6 +218,7 @@
     <Compile Include="Controllers\C204AcctXProjController.cs" />
     <Compile Include="Controllers\CesListImportController.cs" />
     <Compile Include="Controllers\CfdaNumberImportsController.cs" />
+    <Compile Include="Controllers\ConsolidationCodesController.cs" />
     <Compile Include="Controllers\DosCodesController.cs" />
     <Compile Include="Controllers\ExpiredProjectCrossReferenceController.cs" />
     <Compile Include="Controllers\FieldStationExpensesImportController.cs" />
@@ -226,10 +227,12 @@
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\C204ExclusionsController.cs" />
     <Compile Include="Controllers\SuperController.cs" />
+    <Compile Include="Controllers\TransDocTypesController.cs" />
     <Compile Include="Models\AllProjectImport.cs" />
     <Compile Include="Helpers\CasHelper.cs" />
     <Compile Include="Helpers\HttpCorrelationIdEnricher.cs" />
     <Compile Include="Models\AllProjectsNew.cs" />
+    <Compile Include="Models\ConsolidationCodes.cs" />
     <Compile Include="Models\DosCode.cs" />
     <Compile Include="Models\CfdaNumberImport.cs" />
     <Compile Include="Models\FieldStationExpenseListImport.cs" />
@@ -245,6 +248,7 @@
     <Compile Include="Models\CesListImport.cs" />
     <Compile Include="Models\ExpiredProjectCrossReference.cs" />
     <Compile Include="Models\FISDataContext.cs" />
+    <Compile Include="Models\TransDocTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -371,6 +375,16 @@
     <Content Include="Views\DosCodes\Index.cshtml" />
     <Content Include="Views\Shared\_TopNav.cshtml" />
     <Content Include="Views\FTEReport\Index.cshtml" />
+    <Content Include="Views\ConsolidationCodes\Create.cshtml" />
+    <Content Include="Views\ConsolidationCodes\Delete.cshtml" />
+    <Content Include="Views\ConsolidationCodes\Details.cshtml" />
+    <Content Include="Views\ConsolidationCodes\Edit.cshtml" />
+    <Content Include="Views\ConsolidationCodes\Index.cshtml" />
+    <Content Include="Views\TransDocTypes\Create.cshtml" />
+    <Content Include="Views\TransDocTypes\Delete.cshtml" />
+    <Content Include="Views\TransDocTypes\Details.cshtml" />
+    <Content Include="Views\TransDocTypes\Edit.cshtml" />
+    <Content Include="Views\TransDocTypes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -31,6 +31,10 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<FieldStationExpenseListImport> FieldStationExpenseListImports { get; set; }
 
+        public virtual DbSet<ConsolidationCodes> ConsolidationCodes { get; set; }
+
+        public virtual DbSet<TransDocTypes> TransDocTypes { get; set; }
+
         //public static void Clear<T>(this DbSet<T> dbSet) where T : class
         //{
         //    dbSet.RemoveRange(dbSet);
