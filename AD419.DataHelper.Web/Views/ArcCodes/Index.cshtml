@@ -54,7 +54,10 @@
                     @Html.DisplayFor(modelItem => item.SubCategoryCode)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IsAES)
+                    @if (item.IsAES.HasValue)
+                    {
+                        <span>@item.IsAES.Value</span>
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.UpdatedDate)
