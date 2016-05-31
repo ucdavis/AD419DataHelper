@@ -25,7 +25,8 @@ namespace AD419.DataHelper.Web.Controllers
             };
 
             model.ReportViewer.ServerReport.ReportPath = "/AD419Reports/FTE Greater than 1";
-            model.ReportViewer.ServerReport.ReportServerUrl = new Uri("http://testreports.caes.ucdavis.edu/ReportServer/");
+            model.ReportViewer.ServerReport.ReportServerUrl =
+                new Uri("http://testreports.caes.ucdavis.edu/ReportServer/");
 
             model.ConsolidationCodesForFTECalc = DbContext.ConsolidationCodesForFTECalc.ToList();
             model.DosCodesForFTECalc = DbContext.DosCodesForFTECalc.ToList();
@@ -33,6 +34,24 @@ namespace AD419.DataHelper.Web.Controllers
 
             //ViewBag.ReportViewer = model.ReportViewer;
             return View(model);
+        }
+
+        public ActionResult Report()
+        {
+            var reportViewer = new ReportViewer
+            {
+                SizeToReportContent = true,
+                Width = Unit.Percentage(100),
+                Height = Unit.Percentage(100),
+                ProcessingMode = ProcessingMode.Remote
+            };
+
+            reportViewer.ServerReport.ReportPath = "/AD419Reports/FTE Greater than 1";
+            reportViewer.ServerReport.ReportServerUrl =
+                new Uri("http://testreports.caes.ucdavis.edu/ReportServer/");
+
+            ViewBag.ReportViewer = reportViewer;
+            return View();
         }
     }
 }

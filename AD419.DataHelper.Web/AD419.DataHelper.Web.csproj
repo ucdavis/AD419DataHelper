@@ -391,6 +391,7 @@
     <Content Include="Views\TransDocTypes\Details.cshtml" />
     <Content Include="Views\TransDocTypes\Edit.cshtml" />
     <Content Include="Views\TransDocTypes\Index.cshtml" />
+    <Content Include="Views\FTEReport\Report.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

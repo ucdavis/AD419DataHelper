@@ -2,7 +2,7 @@
 @model AD419.DataHelper.Web.Models.FTEGreaterThanOneReportModel
 
 @{
-    ViewBag.Title = "FTE > 1 Report";
+    ViewBag.Title = "FTE > 1 Report Generation Criteria";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -15,6 +15,10 @@
         <li>The @Html.ActionLink("Trans Doc Types", "Index", "TransDocTypes") to be included in the FTE calculations must have been selected.</li>
     </ol>
     <i>(Select any of the above links to modify the corresponding entries as desired, and then refresh the page to see the updated results.)</i>
+    <div>
+        <br/><h4>Once reviewed, the FTE > 1 Report can be reviewed here: @Html.ActionLink("View FTE > 1 Report", "Report", "FteReport").</h4><br/>
+    </div>
+   
 </div>
 
 <div>
@@ -98,8 +102,4 @@
     </div>
 </div>
 
-<div>
-    <h4>The following report was generated based on the above codes and types:</h4>
-    @Html.ReportViewer(Model.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { style = "border: none" })
-</div>
 
