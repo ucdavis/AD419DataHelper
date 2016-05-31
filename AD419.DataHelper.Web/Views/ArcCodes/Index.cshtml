@@ -77,7 +77,13 @@
             $('#arcCodeTable').DataTable({
                 columnDefs: [
                     { targets: [-1, -2], sortable: false }
-                ]
+                ],
+                order: [
+                    [5, 'desc'],
+                    [4, 'asc'],
+                    [0, 'asc']
+                ],
+                displayLength: 25
             });
         })
     </script>
