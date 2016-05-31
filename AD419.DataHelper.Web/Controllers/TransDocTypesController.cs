@@ -6,14 +6,12 @@ using System.Web.Mvc;
 
 namespace AD419.DataHelper.Web.Controllers
 {
-    public class TransDocTypesController : Controller
+    public class TransDocTypesController : SuperController
     {
-        private AD419DataContext db = new AD419DataContext();
-
         // GET: TransDocTypes
         public ActionResult Index()
         {
-            return View(db.TransDocTypes.ToList());
+            return View(DbContext.TransDocTypes.ToList());
         }
 
         // GET: TransDocTypes/Details/5
@@ -23,7 +21,7 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TransDocTypes transDocTypes = db.TransDocTypes.Find(id);
+            TransDocTypes transDocTypes = DbContext.TransDocTypes.Find(id);
             if (transDocTypes == null)
             {
                 return HttpNotFound();
@@ -46,8 +44,8 @@ namespace AD419.DataHelper.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.TransDocTypes.Add(transDocTypes);
-                db.SaveChanges();
+                DbContext.TransDocTypes.Add(transDocTypes);
+                DbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -61,7 +59,7 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TransDocTypes transDocTypes = db.TransDocTypes.Find(id);
+            TransDocTypes transDocTypes = DbContext.TransDocTypes.Find(id);
             if (transDocTypes == null)
             {
                 return HttpNotFound();
@@ -78,8 +76,8 @@ namespace AD419.DataHelper.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(transDocTypes).State = EntityState.Modified;
-                db.SaveChanges();
+                DbContext.Entry(transDocTypes).State = EntityState.Modified;
+                DbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(transDocTypes);
@@ -92,7 +90,7 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TransDocTypes transDocTypes = db.TransDocTypes.Find(id);
+            TransDocTypes transDocTypes = DbContext.TransDocTypes.Find(id);
             if (transDocTypes == null)
             {
                 return HttpNotFound();
@@ -105,19 +103,10 @@ namespace AD419.DataHelper.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            TransDocTypes transDocTypes = db.TransDocTypes.Find(id);
-            db.TransDocTypes.Remove(transDocTypes);
-            db.SaveChanges();
+            TransDocTypes transDocTypes = DbContext.TransDocTypes.Find(id);
+            DbContext.TransDocTypes.Remove(transDocTypes);
+            DbContext.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }
