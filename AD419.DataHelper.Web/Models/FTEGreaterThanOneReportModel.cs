@@ -10,7 +10,5 @@ namespace AD419.DataHelper.Web.Models
         public List<DosCodesForFTECalc> DosCodesForFTECalc { get; set; }
 
         public List<TransDocTypesForFTECalc> TransDocTypesForFTECalc { get; set; }
-
-        public ReportViewer ReportViewer { get; set; }
     }
 }

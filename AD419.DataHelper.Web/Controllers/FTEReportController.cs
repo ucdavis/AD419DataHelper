@@ -15,24 +15,11 @@ namespace AD419.DataHelper.Web.Controllers
         {
             var model = new FTEGreaterThanOneReportModel
             {
-                ReportViewer = new ReportViewer
-                {
-                    SizeToReportContent = true,
-                    Width = Unit.Percentage(100),
-                    Height = Unit.Percentage(100),
-                    ProcessingMode = ProcessingMode.Remote
-                }
+                ConsolidationCodesForFTECalc = DbContext.ConsolidationCodesForFTECalc.ToList(),
+                DosCodesForFTECalc = DbContext.DosCodesForFTECalc.ToList(),
+                TransDocTypesForFTECalc = DbContext.TransDocTypesForFTECalc.ToList()
             };
 
-            model.ReportViewer.ServerReport.ReportPath = "/AD419Reports/FTE Greater than 1";
-            model.ReportViewer.ServerReport.ReportServerUrl =
-                new Uri("http://testreports.caes.ucdavis.edu/ReportServer/");
-
-            model.ConsolidationCodesForFTECalc = DbContext.ConsolidationCodesForFTECalc.ToList();
-            model.DosCodesForFTECalc = DbContext.DosCodesForFTECalc.ToList();
-            model.TransDocTypesForFTECalc = DbContext.TransDocTypesForFTECalc.ToList();
-
-            //ViewBag.ReportViewer = model.ReportViewer;
             return View(model);
         }
 

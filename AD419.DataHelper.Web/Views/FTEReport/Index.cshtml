@@ -1,14 +1,13 @@
-﻿@using ReportViewerForMvc
-@model AD419.DataHelper.Web.Models.FTEGreaterThanOneReportModel
+﻿@model AD419.DataHelper.Web.Models.FTEGreaterThanOneReportModel
 
 @{
-    ViewBag.Title = "FTE > 1 Report Generation Criteria";
+    ViewBag.Title = "FTE Calculation Criteria";
 }
 
 <h2>@ViewBag.Title</h2>
 <hr/>
 <div>
-    <h4>Prior to viewing this report the following steps must have already been completed:</h4>
+    <h4>Prior to calculating the FTE totals the following steps must have already been completed:</h4>
     <ol>
         <li>The @Html.ActionLink("DOS Codes", "Index", "DosCodes") to be included in the FTE calculations must have been selected.</li>
         <li>The @Html.ActionLink("Consolidation Codes", "Index", "ConsolidationCodes") to be included in the FTE calculations must have been selected.</li>
@@ -16,7 +15,7 @@
     </ol>
     <i>(Select any of the above links to modify the corresponding entries as desired, and then refresh the page to see the updated results.)</i>
     <div>
-        <br/><h4>Once reviewed, the FTE > 1 Report can be reviewed here: @Html.ActionLink("View FTE > 1 Report", "Report", "FteReport").</h4><br/>
+        <br/><h4>Once the criteria has been verified, the FTE > 1 Report can be viewed here: @Html.ActionLink("View FTE > 1 Report", "Report", "FteReport").</h4><br/>
     </div>
    
 </div>
@@ -96,9 +95,7 @@
                     </td>
                 </tr>
             }
-
         </table>
-
     </div>
 </div>
 
