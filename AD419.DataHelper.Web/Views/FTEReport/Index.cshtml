@@ -4,6 +4,12 @@
     ViewBag.Title = "FTE Calculation Criteria";
 }
 
+<style>
+    #dosTable, #transDocTable, #c204Table {
+        margin-bottom: 0 !important;
+    }
+</style>
+
 <h2>@ViewBag.Title</h2>
 <hr/>
 <div>
@@ -31,7 +37,7 @@
                         DOS Codes
                     </span>
                 </div>
-                <table class="table">
+                <table id="dosTable" class="table">
                     <thead>
                         <tr>
                             <th>
@@ -63,7 +69,7 @@
                 <div class="panel-heading text-center">
                     <div class="panel-title">Trans Doc Types</div>
                 </div>
-                <table class="table">
+                <table id="transDocTable" class="table">
                     <thead>
                     <tr>
                         <th>
@@ -95,7 +101,7 @@
                 <div class="panel-heading text-center">
                     <div class="panel-title">Consolidation Codes</div>
                 </div>
-                <table class="table">
+                <table id="c204Table" class="table">
                     <thead>
                     <tr>
                         <th>
@@ -127,6 +133,18 @@
 
 @section AdditionalScripts
 {
-
+<script>
+        $(function() {
+            $('#dosTable,#transDocTable,#c204Table').DataTable({
+                order: [
+                    [0, 'asc'],
+                    [1, 'asc']
+                ],
+                paging: false,
+                searching: false,
+                info: false,
+            });
+        })
+</script>
 
 }
