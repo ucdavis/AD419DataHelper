@@ -21,82 +21,112 @@
 </div>
 
 <div>
-    <h4>These are the DOS Codes, Consolidation Codes, and Trans Doc Types that are currently selected:</h4>
-    <div>
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => Model.DosCodesForFTECalc[0].DOS_Code)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => Model.DosCodesForFTECalc[0].Description)
-                </th>
-            </tr>
+    <h4>Current Selections:</h4>
 
-            @foreach (var item in Model.DosCodesForFTECalc)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DOS_Code)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                </tr>
-            }
-
-        </table>
-    </div>
-    <div>
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => Model.ConsolidationCodesForFTECalc[0].ObjectConsolidationNumber)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => Model.ConsolidationCodesForFTECalc[0].ObjectConsolidationName)
-                </th>
-            </tr>
-
-            @foreach (var item in Model.ConsolidationCodesForFTECalc)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ObjectConsolidationNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ObjectConsolidationName)
-                    </td>
-                </tr>
-            }
-
-        </table>
-    </div>
-    
-    <div>
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => Model.TransDocTypesForFTECalc[0].DocumentType)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => Model.TransDocTypesForFTECalc[0].Description)
-                </th>
-            </tr>
-
-            @foreach (var item in Model.TransDocTypesForFTECalc)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DocumentType)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                </tr>
-            }
-        </table>
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-md-offset-0 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <span class="panel-title">
+                        DOS Codes
+                    </span>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => Model.DosCodesForFTECalc[0].DOS_Code)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => Model.DosCodesForFTECalc[0].Description)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.DosCodesForFTECalc)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DOS_Code)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-4 col-lg-push-4 col-md-6 col-md-offset-0 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <div class="panel-title">Trans Doc Types</div>
+                </div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => Model.TransDocTypesForFTECalc[0].DocumentType)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => Model.TransDocTypesForFTECalc[0].Description)
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.TransDocTypesForFTECalc)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DocumentType)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-4 col-lg-pull-4 col-lg-offset-0 col-md-8 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <div class="panel-title">Consolidation Codes</div>
+                </div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => Model.ConsolidationCodesForFTECalc[0].ObjectConsolidationNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => Model.ConsolidationCodesForFTECalc[0].ObjectConsolidationName)
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ConsolidationCodesForFTECalc)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ObjectConsolidationNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ObjectConsolidationName)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 
+@section AdditionalScripts
+{
 
+
+}
