@@ -1,0 +1,85 @@
+﻿@model AD419.DataHelper.Web.Models.FFYExpensesByARCReportModel
+@{
+    ViewBag.Title = "FFY Expenses by ARC Report Generation Criteria";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<div>
+    <h4>Prior to calculating the FFY Expense totals the following steps must have already been completed:</h4>
+    <ol>
+        <li>The @Html.ActionLink("ARC Codes", "Index", "ArcCodes") to be included in the FFY Expense Totals must have been selected.</li>
+        <li>The @Html.ActionLink("ARC/Account Exclusions", "Index", "ArcCodeAccountExclusions") to be excluded from the FFY Expense Totals must have been entered.</li>
+    </ol>
+    <i>(Select any of the above links to modify the corresponding entries as desired, and then refresh the page to see the updated results.)</i>
+    <div>
+        <br /><h4>Once the criteria has been verified, the FFY Expense Totals by ARC Report can be viewed here: @Html.ActionLink("View FFY Expenses Totals by ARC Report", "Report", "FFYExpensesByARCReport").</h4><br />
+    </div>
+
+</div>
+
+<div>
+    <h4>These are the Annual Report Codes and ARC/Account Exclusions that are currently selected:</h4>
+    <div>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => Model.ArcCodeSelections[0].Code)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => Model.ArcCodeSelections[0].Name)
+                </th>
+            </tr>
+
+            @foreach (var item in Model.ArcCodeSelections)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => Model.ArcCodeAccountExclusionSelections[0].AnnualReportCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => Model.ArcCodeAccountExclusionSelections[0].Chart)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => Model.ArcCodeAccountExclusionSelections[0].Account)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => Model.ArcCodeAccountExclusionSelections[0].Comments)
+                </th>
+            </tr>
+
+            @foreach (var item in Model.ArcCodeAccountExclusionSelections)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AnnualReportCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Chart)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Account)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comments)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+

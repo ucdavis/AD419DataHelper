@@ -11,6 +11,8 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<ArcCode> ARC_Codes { get; set; }
 
+        public virtual DbSet<ArcCodeSelections> ArcCodes { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ArcCode>()
