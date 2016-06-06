@@ -10,26 +10,24 @@ namespace AD419.DataHelper.Web.Controllers
         protected AD419DataContext DbContext = new AD419DataContext();
         protected FISDataContext FisDbContext = new FISDataContext();
    
-        private int _fiscalYear;
-        protected int FiscalYear {
+        protected int FiscalYear
+        {
             get
             {
-                if (_fiscalYear == 0)
+                var session = System.Web.HttpContext.Current.Session;
+                if (session["FiscalYear"] == null)
                 {
-                    var session = System.Web.HttpContext.Current.Session;
-                    if (session["FiscalYear"] == null)
-                    {
-                        _fiscalYear = DateTime.Now.Year - 1;
-                        session["FiscalYear"] = _fiscalYear;
-                    }
-                    else
-                    {
-                        _fiscalYear = Convert.ToInt32(session["FiscalYear"]);
-                    }
+                    session["FiscalYear"] = DateTime.Now.Year - 1;
                 }
-                return _fiscalYear;
+
+                return Convert.ToInt32(session["FiscalYear"]);
             }
-         }
+            set
+            {
+                var session = System.Web.HttpContext.Current.Session;
+                session["FiscalYear"] = value;
+            }
+        }
 
         protected override void Dispose(bool disposing)
         {
