@@ -11,9 +11,10 @@ namespace AD419.DataHelper.Web.Controllers
     public class FFYExpensesByARCReportController : SuperController
     {
         // GET: FFYExpensesByARCReport
+        
         public ActionResult Index()
         {
-            var model = new FFYExpensesByARCReportModel(2015)
+            var model = new FFYExpensesByARCReportModel(FiscalYear)
             {
                 ArcCodeSelections = FisDbContext.ArcCodes.ToList()
             };
@@ -34,8 +35,9 @@ namespace AD419.DataHelper.Web.Controllers
 
         public ActionResult Report()
         {
+            var yearParameter = new ReportParameter("FiscalYear", FiscalYear.ToString());
+            var reportParameters = new ReportParameterCollection() { yearParameter };            
             var reportViewer = new ReportViewer
-
             {
                 SizeToReportContent = true,
                 Width = Unit.Percentage(100),
@@ -46,6 +48,7 @@ namespace AD419.DataHelper.Web.Controllers
             reportViewer.ServerReport.ReportPath = "/AD419Reports/Direct and Indirect FFY Expenses by ARC";
             reportViewer.ServerReport.ReportServerUrl =
                 new Uri("http://testreports.caes.ucdavis.edu/ReportServer/");
+            reportViewer.ServerReport.SetParameters(reportParameters);
 
             ViewBag.ReportViewer = reportViewer;
             return View();
