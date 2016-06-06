@@ -28,6 +28,10 @@ textarea {
     margin-bottom: -15px;
 }
 
+.navbar-right {
+    margin-right: 0;
+}
+
 .dropdown:hover .dropdown-menu {
     display: block;
 }
