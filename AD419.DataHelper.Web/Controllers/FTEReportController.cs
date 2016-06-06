@@ -1,7 +1,6 @@
 ﻿using AD419.DataHelper.Web.Models;
 using Microsoft.Reporting.WebForms;
 using System;
-using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;

@@ -238,6 +238,7 @@
     <Compile Include="Controllers\DosCodesController.cs" />
     <Compile Include="Controllers\ExpiredProjectCrossReferenceController.cs" />
     <Compile Include="Controllers\FieldStationExpensesImportController.cs" />
+    <Compile Include="Controllers\FFYExpensesByARCReportController.cs" />
     <Compile Include="Controllers\FTEReportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
@@ -249,11 +250,14 @@
     <Compile Include="Helpers\CasHelper.cs" />
     <Compile Include="Helpers\HttpCorrelationIdEnricher.cs" />
     <Compile Include="Models\AllProjectsNew.cs" />
+    <Compile Include="Models\ArcCodeSelections.cs" />
+    <Compile Include="Models\ArcCodeAccountExclusionSelections.cs" />
     <Compile Include="Models\ConsolidationCodesForFTECalc.cs" />
     <Compile Include="Models\ConsolidationCodes.cs" />
     <Compile Include="Models\DosCodesForFTECalc.cs" />
     <Compile Include="Models\DosCode.cs" />
     <Compile Include="Models\CfdaNumberImport.cs" />
+    <Compile Include="Models\FFYExpensesByARCReportModel.cs" />
     <Compile Include="Models\FieldStationExpenseListImport.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -410,9 +414,12 @@
     <Content Include="Views\TransDocTypes\Edit.cshtml" />
     <Content Include="Views\TransDocTypes\Index.cshtml" />
     <Content Include="Views\FTEReport\Report.cshtml" />
+    <Content Include="Views\FFYExpensesByARCReport\Report.cshtml" />
+    <Content Include="Views\FFYExpensesByARCReport\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

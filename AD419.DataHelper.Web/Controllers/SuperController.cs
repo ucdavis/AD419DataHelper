@@ -1,5 +1,6 @@
-﻿using System.Web.Mvc;
-using AD419.DataHelper.Web.Models;
+﻿using AD419.DataHelper.Web.Models;
+using System;
+using System.Web.Mvc;
 
 namespace AD419.DataHelper.Web.Controllers
 {
@@ -7,12 +8,33 @@ namespace AD419.DataHelper.Web.Controllers
     public class SuperController : Controller
     {
         protected AD419DataContext DbContext = new AD419DataContext();
+        protected FISDataContext FisDbContext = new FISDataContext();
+   
+        protected int FiscalYear
+        {
+            get
+            {
+                var session = System.Web.HttpContext.Current.Session;
+                if (session["FiscalYear"] == null)
+                {
+                    session["FiscalYear"] = DateTime.Now.Year - 1;
+                }
+
+                return Convert.ToInt32(session["FiscalYear"]);
+            }
+            set
+            {
+                var session = System.Web.HttpContext.Current.Session;
+                session["FiscalYear"] = value;
+            }
+        }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
                 DbContext.Dispose();
+                FisDbContext.Dispose();
             }
             base.Dispose(disposing);
         }
