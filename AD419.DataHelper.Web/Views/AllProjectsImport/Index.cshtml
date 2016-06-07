@@ -1,10 +1,13 @@
 ﻿@model IEnumerable<AD419.DataHelper.Web.Models.AllProjectImport>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Index - All Projects";
 }
 
-<h2>Index</h2>
+@Html.Partial("_AllProjectsUpload")
+<hr />
+
+<h2>@ViewBag.Title</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
