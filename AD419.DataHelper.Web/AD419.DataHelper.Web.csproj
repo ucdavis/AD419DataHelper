@@ -235,6 +235,7 @@
     <Compile Include="Controllers\CesListImportController.cs" />
     <Compile Include="Controllers\CfdaNumberImportsController.cs" />
     <Compile Include="Controllers\ConsolidationCodesController.cs" />
+    <Compile Include="Controllers\CurrentProjectsReportController.cs" />
     <Compile Include="Controllers\DosCodesController.cs" />
     <Compile Include="Controllers\ExpiredProjectCrossReferenceController.cs" />
     <Compile Include="Controllers\FieldStationExpensesImportController.cs" />
@@ -416,6 +417,7 @@
     <Content Include="Views\FTEReport\Report.cshtml" />
     <Content Include="Views\FFYExpensesByARCReport\Report.cshtml" />
     <Content Include="Views\FFYExpensesByARCReport\Index.cshtml" />
+    <Content Include="Views\CurrentProjectsReport\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
