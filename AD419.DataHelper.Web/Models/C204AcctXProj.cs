@@ -6,6 +6,10 @@ namespace AD419.DataHelper.Web.Models
     [Table("[204AcctXProj]")]
     public partial class C204AcctXProj
     {
+        [Key]
+        [Column("pk")]
+        public int Id { get; set; }
+
         [Required]
         [StringLength(7)]
         [MinLength(7)]
@@ -25,9 +29,6 @@ namespace AD419.DataHelper.Web.Models
         [Required]
         public string Chart { get; set; }
 
-        [Key]
-        public int pk { get; set; }
-
         [Display(Name = "Is 219?")]
         public bool? Is219 { get; set; }
 
@@ -36,7 +37,7 @@ namespace AD419.DataHelper.Web.Models
         public string CSREES_ContractNo { get; set; }
 
         [StringLength(50)]
-        [Display(Name = "Account Award Number(; OP Fund Award Number)")]
+        [Display(Name = "Account Award Number (OP Fund Award Number)")]
         public string AwardNum { get; set; }
 
         [Display(Name = "Is Current AD-419 Project?")]

@@ -14,7 +14,7 @@
         <h4>SFN 204 Acct to Project Mapping</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.pk)
+        @Html.HiddenFor(model => model.Id)
         
         <div class="form-group">
             @Html.LabelFor(model => model.Chart, htmlAttributes: new { @class = "control-label col-md-2" })
