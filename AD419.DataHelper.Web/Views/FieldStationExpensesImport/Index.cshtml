@@ -4,8 +4,14 @@
     ViewBag.Title = "Field Station Expenses";
 }
 
-@Html.Partial("_FieldStationExpensesUpload")
-<hr />
+<div class="pull-right">
+    <button class="btn btn-default display-inline" data-toggle="modal" data-target="#uploadModal"><i class="fa fa-upload"></i> Upload New Source File</button>
+    <form action="@Url.Action("DeleteAll")" method="POST" class="display-inline">
+        @Html.AntiForgeryToken()
+        <input type="submit" id="btnDeleteAll" value="Delete All" title="Delete All" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete ALL the records?')"/>
+    </form>
+</div>
+
 <h2>@ViewBag.Title</h2>
 <p>
     @Html.ActionLink("Create New", "Create", "FieldStationExpensesImport", null, new { @class="btn btn-default" })
@@ -13,13 +19,6 @@
 
 @if (Model.Count() != 0)
 {
-    using (Html.BeginForm("DeleteAll", "FieldStationExpensesImport", FormMethod.Post, new { id = "deleteForm" }))
-    {
-        @Html.AntiForgeryToken()
-        <p>
-            <input type="submit" id="btnDeleteAll" value="Delete All" title="Delete All" class="btn btn-default" onclick="return confirm('Are you sure you want to delete ALL the records?')" />
-        </p>
-    }
     <table id="fieldImportTable" class="table">
         <thead>
             <tr>
@@ -71,6 +70,8 @@ else
     <h4>Field Station Expenses Data has yet to be created or uploaded.</h4>
     <p>Select the "Create New" (above) or browse and display an existing Field Station Expenses Excel file (above).</p>
 }
+
+@Html.Partial("_FieldStationExpensesUpload")
 
 @section AdditionalScripts
 {
