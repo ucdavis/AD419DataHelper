@@ -5,14 +5,16 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Upload a CES List Excel file</h4>
             </div>
-            <img src="~/Content/Images/CESExample.png" alt="CFDA Num Excel upload file example">
+            <div class="modal-image">
+                <img src="~/Content/Images/CESExample.png" alt="CES Excel upload file example">
+            </div>
             @using (Html.BeginForm("Upload", "CesListImport", FormMethod.Post, new { id = "UploadForm", enctype = "multipart/form-data", @class = "" }))
             {
                 <div class="modal-body">
                     <p>
                         Please ensure your spreadsheet has the column names as illustrated above.<br />
                         Note that FTE, and Estimated Chart L Expenses will be populated automatically.<br />
-                        Download a sample form <a href="~/Content/Sample_Forms/ModifiedCEForImport.xlsx.xlsx">HERE <i class="fa fa-download"></i></a>
+                        Download a sample form <a href="~/Content/Sample_Forms/ModifiedCEForImport.xlsx">HERE <i class="fa fa-download"></i></a>
                     </p>
                     <div class="form-group">
                         <label class="control-label">Please select an CES List Excel file to display:</label>

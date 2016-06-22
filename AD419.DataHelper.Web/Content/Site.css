@@ -36,10 +36,16 @@ textarea {
     display: block;
 }
 
-.modal-content img {
+.modal-image {
     width: 100%;
     border-top: 1px solid #e5e5e5;
     border-bottom:1px solid #e5e5e5;
+}
+
+.modal-image img {
+    max-width: 100%;
+    display: block;
+    margin: auto;
 }
 
 .display-inline {

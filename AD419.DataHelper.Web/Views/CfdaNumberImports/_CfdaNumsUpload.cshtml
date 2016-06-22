@@ -5,7 +5,9 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Upload a CFDA Numbers Excel file</h4>
             </div>
-            <img src="~/Content/Images/CFDANumsExample.PNG" alt="CFDA Num Excel upload file example">
+            <div class="modal-image">
+                <img src="~/Content/Images/CFDANumsExample.PNG" alt="CFDA Num Excel upload file example">
+            </div>
             @using (Html.BeginForm("Upload", "CfdaNumberImports", FormMethod.Post, new {id = "UploadForm", enctype = "multipart/form-data", @class = ""}))
             {
                 <div class="modal-body">
