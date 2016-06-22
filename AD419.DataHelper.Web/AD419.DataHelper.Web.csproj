@@ -429,7 +429,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\Interdepartmental\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
