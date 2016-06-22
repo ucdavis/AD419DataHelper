@@ -273,6 +273,7 @@
     <Compile Include="Models\ExpiredProjectCrossReference.cs" />
     <Compile Include="Models\FISDataContext.cs" />
     <Compile Include="Models\FTEGreaterThanOneReportModel.cs" />
+    <Compile Include="Models\Interdepartmental.cs" />
     <Compile Include="Models\TransDocTypesForFTECalc.cs" />
     <Compile Include="Models\TransDocTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
