@@ -35,3 +35,13 @@ textarea {
 .dropdown:hover .dropdown-menu {
     display: block;
 }
+
+.modal-content img {
+    width: 100%;
+    border-top: 1px solid #e5e5e5;
+    border-bottom:1px solid #e5e5e5;
+}
+
+.display-inline {
+    display: inline;
+}
