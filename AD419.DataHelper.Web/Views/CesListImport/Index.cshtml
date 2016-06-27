@@ -4,8 +4,14 @@
     ViewBag.Title = "Index - CES List";
 }
 
-@Html.Partial("_CesFileUpload")
-<hr/>
+<div class="pull-right">
+    <button class="btn btn-default display-inline" data-toggle="modal" data-target="#uploadModal"><i class="fa fa-upload"></i> Upload New Source File</button>
+    <form action="@Url.Action("DeleteAll")" method="POST" class="display-inline">
+        @Html.AntiForgeryToken()
+        <input type="submit" id="btnDeleteAll" value="Delete All" title="Delete All" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete ALL the records?')"/>
+    </form>
+</div>
+
 <h2>@ViewBag.Title</h2>
 <p>
     @Html.ActionLink("Create New", "Create", "CesListImport", null, new { @class="btn btn-default" })
@@ -13,13 +19,6 @@
 
 @if (Model.Count() != 0)
 {
-    using (Html.BeginForm("DeleteAll", "CesListImport", FormMethod.Post, new { id = "deleteForm" }))
-    {
-        @Html.AntiForgeryToken()
-        <p>
-            <input type="submit" id="btnDeleteAll" value="Delete All" title="Delete All" class="btn btn-default" onclick="return confirm('Are you sure you want to delete ALL the records?')" />
-        </p>
-    }
     <table id="cesImportTable" class="table">
         <thead>
             <tr>
@@ -130,6 +129,7 @@ else
     <p>Select the "Create New" (above) or browse and display an existing CES List Excel file (above).</p>
 }
 
+@Html.Partial("_CesFileUpload")
 
 @section AdditionalScripts
 {

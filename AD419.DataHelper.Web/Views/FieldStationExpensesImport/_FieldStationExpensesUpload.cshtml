@@ -1,16 +1,30 @@
-﻿<div>
-    @using (Html.BeginForm("Upload", "FieldStationExpensesImport", FormMethod.Post, new { id = "UploadForm", enctype = "multipart/form-data" }))
-    {
-        <div>
-            <h4>Upload a Field Station Expenses Excel file:</h4>
-            <i>Please ensure your spreadsheet has the following column names as illustrated below: (Note that ProjectAccessionNum will automatically have leading zero(s) added.)</i>
-            <p><i>Select <a href="~/FieldStationExpensesImport/Download" class="btn btn-link">here</a> to download a sample form.</i></p>
-            <img src="/Content/Images/Field Station Expenses Example.png" alt="Field Station Expenses Excel upload file example">
+﻿<div class="modal fade" id="uploadModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Upload a Field Station Expenses Excel file</h4>
+            </div>
+            <div class="modal-image">
+                <img src="~/Content/Images/FieldStationExpensesExample.png" alt="Field Station Expenses Excel upload file example">
+            </div>
+            @using (Html.BeginForm("Upload", "FieldStationExpensesImport", FormMethod.Post, new { id = "UploadForm", enctype = "multipart/form-data", @class = "" }))
+            {
+                <div class="modal-body">
+                    <p>
+                        Please ensure your spreadsheet has the column names as illustrated above.<br />
+                        Note that ProjectAccessionNum will automatically have leading zero(s) added.<br />
+                        Download a sample form <a href="~/Content/Sample_Forms/ModifiedFieldStationExpensesForImport.xlsx">HERE <i class="fa fa-download"></i></a>
+                    </p>
+                    <div class="form-group">
+                        <label class="control-label">Please select an Field Station Expenses Excel file to display:</label>
+                        <input type="file" id="FileUpload1" name="FileUpload1" class="" required />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-default" value="Upload" />
+                </div>
+            }
         </div>
-        <br />
-        <b>Please select an Field Station Expenses Excel file to display:</b><input type="file" id="FileUpload1" name="FileUpload1" required="required" />
-        <br />
-    <input type="submit" value="Display Field Station Expenses" title="Upload" class="btn btn-default" />
-    }
+    </div>
 </div>
-

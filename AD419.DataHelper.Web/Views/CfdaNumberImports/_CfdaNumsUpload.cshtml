@@ -1,16 +1,30 @@
-﻿<div>
-    @using (Html.BeginForm("Upload", "CfdaNumberImports", FormMethod.Post, new { id = "UploadForm", enctype = "multipart/form-data" }))
-    {
-        <div>
-            <h4>Upload a CFDA Numbers Excel file:</h4>
-            <i>Please ensure your spreadsheet has the following column names as illustrated below: (Note Only the CFDANum and ProgramTitle columns are actually needed.)</i>
-            <p><i>Select <a href="~/CFDANumsImport/Download" class="btn btn-link">here</a> to download a sample form.</i></p>
-            <img src="/Content/Images/CFDANumsExample.PNG" alt="CFDA Num Excel upload file example" width="1100">
+﻿<div class="modal fade" id="uploadModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Upload a CFDA Numbers Excel file</h4>
+            </div>
+            <div class="modal-image">
+                <img src="~/Content/Images/CFDANumsExample.PNG" alt="CFDA Num Excel upload file example">
+            </div>
+            @using (Html.BeginForm("Upload", "CfdaNumberImports", FormMethod.Post, new {id = "UploadForm", enctype = "multipart/form-data", @class = ""}))
+            {
+                <div class="modal-body">
+                    <p>
+                        Please ensure your spreadsheet has the column names as illustrated above.<br/>
+                        Only the CFDANum and ProgramTitle columns are required.<br/>
+                        Download a sample form <a href="~/Content/Sample_Forms/CfdaNumbersForImport.xlsx">HERE <i class="fa fa-download"></i></a>
+                    </p>
+                        <div class="form-group">
+                            <label class="control-label">Please select an CFDA Numbers Excel file to display:</label>
+                            <input type="file" id="FileUpload1" name="FileUpload1" class="" required/>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-default" value="Upload" />
+                </div>
+            }
         </div>
-        <br />
-        <b>Please select an CFDA Numbers Excel file to display:</b><input type="file" id="FileUpload1" name="FileUpload1" required="required" />
-        <br />
-        <input type="submit" value="Display CFDA Numbers" title="Upload" class="btn btn-default"/>
-    }
+    </div>
 </div>
-
