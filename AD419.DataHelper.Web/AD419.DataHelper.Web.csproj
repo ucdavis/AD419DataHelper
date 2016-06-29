@@ -247,7 +247,6 @@
     <Compile Include="Controllers\C204ExclusionsController.cs" />
     <Compile Include="Controllers\SuperController.cs" />
     <Compile Include="Controllers\TransDocTypesController.cs" />
-    <Compile Include="DOSCode.cs" />
     <Compile Include="Models\AllProjectImport.cs" />
     <Compile Include="Helpers\CasHelper.cs" />
     <Compile Include="Helpers\HttpCorrelationIdEnricher.cs" />
