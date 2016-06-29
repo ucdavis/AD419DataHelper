@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AD419.DataHelper.Web.Models
 {
-    [Table("Interdepartmental")]
+    [Table("InterdepartmentalProjectsImport")]
     public partial class Interdepartmental
     {
         [Key]
