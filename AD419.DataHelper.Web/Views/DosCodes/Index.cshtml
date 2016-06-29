@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.DOS_Code)
+                @Html.DisplayNameFor(model => model.Code)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Description)
@@ -31,7 +31,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DOS_Code)
+                    @Html.DisplayFor(modelItem => item.Code)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
@@ -40,13 +40,13 @@
                     @Html.DisplayFor(modelItem => item.IncludeInAD419FTE)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.DOS_Code })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Code })
                 </td>
                 <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.DOS_Code })
+                    @Html.ActionLink("Details", "Details", new { id = item.Code })
                 </td>
                 <td>
-                    @Html.ActionLink("Delete", "Delete", new { id = item.DOS_Code })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Code })
                 </td>
             </tr>
         }
