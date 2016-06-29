@@ -12,27 +12,32 @@ namespace AD419.DataHelper.Web.Models
         public int Year { get; set; }
 
         [Key]
-        [Column(Order = 1)]
         [Required]
-        [StringLength(2)]
+        [MaxLength(2)]
         public string Chart { get; set; }
 
         [Key]
         [Column(Order = 2)]
         [Required]
-        [StringLength(7)]
-        [MinLength(7)]
+        [MaxLength(7)]
         public string Account { get; set; }
 
         [Key]
         [Column(Order = 3)]
         [Required]
-        [StringLength(6)]
-        [MinLength(6)]
+        [MaxLength(6)]
         [Display(Name = "Annual Report Code")]
         public string AnnualReportCode { get; set; }
 
-         [Required]
+        [Required]
         public string Comments { get; set; }
+
+        public bool Is204 { get; set; }
+
+        [MaxLength(20)]
+        public string AwardNumber { get; set; }
+
+        [MaxLength(24)]
+        public string ProjectNumber { get; set; }
     }
 }
