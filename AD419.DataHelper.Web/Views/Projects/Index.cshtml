@@ -166,6 +166,7 @@
     <script>
         $(function() {
             $('#projectsTable').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 columnDefs: [
                     { targets: [-1], sortable: false },
                     { targets: [-2], sortable: false },

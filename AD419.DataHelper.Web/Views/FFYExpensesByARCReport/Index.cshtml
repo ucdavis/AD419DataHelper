@@ -18,68 +18,111 @@
 
 </div>
 
-<div>
-    <h4>These are the Annual Report Codes and ARC/Account Exclusions that are currently selected:</h4>
-    <div>
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => Model.ArcCodeSelections[0].Code)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => Model.ArcCodeSelections[0].Name)
-                </th>
-            </tr>
-
-            @foreach (var item in Model.ArcCodeSelections)
-            {
+<h4>These are the Annual Report Codes and ARC/Account Exclusions that are currently selected:</h4>
+<div class="row">
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading text-center">
+                <span class="panel-title">
+                    ARC Codes
+                </span>
+            </div>
+            <table id="arcCodeTable" class="table">
+                <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Code)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.ArcCodeSelections[0].Code)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.ArcCodeSelections[0].Name)
+                    </th>
                 </tr>
-            }
-        </table>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.ArcCodeSelections)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div>
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => Model.ArcCodeAccountExclusionSelections[0].AnnualReportCode)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => Model.ArcCodeAccountExclusionSelections[0].Chart)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => Model.ArcCodeAccountExclusionSelections[0].Account)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => Model.ArcCodeAccountExclusionSelections[0].Comments)
-                </th>
-            </tr>
-
-            @foreach (var item in Model.ArcCodeAccountExclusionSelections)
-            {
+    <div class="col-lg-8">
+        <div class="panel panel-default">
+            <div class="panel-heading text-center">
+                <span class="panel-title">
+                    ARC Code Account Exclusions
+                </span>
+            </div>
+            <table id="accountExclusions" class="table">
+                <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AnnualReportCode)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Chart)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Account)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Comments)
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.ArcCodeAccountExclusionSelections[0].AnnualReportCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.ArcCodeAccountExclusionSelections[0].Chart)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.ArcCodeAccountExclusionSelections[0].Account)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.ArcCodeAccountExclusionSelections[0].Comments)
+                    </th>
                 </tr>
-            }
-        </table>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.ArcCodeAccountExclusionSelections)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AnnualReportCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Chart)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Account)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Comments)
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
+@section AdditionalScripts
+{
+    <script>
+        $(function() {
+            $('#arcCodeTable').DataTable({
+                order: [
+                    [0, 'asc']
+                ],
+                paging: false,
+                searching: false,
+                info: false
+            });
 
+            $('#accountExclusions').DataTable({
+                order: [
+                    [0, 'asc']
+                ],
+                paging: false,
+                searching: false,
+                info: false
+            });
+        })
+    </script>
+}

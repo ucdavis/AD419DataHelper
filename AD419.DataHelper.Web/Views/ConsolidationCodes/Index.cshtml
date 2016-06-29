@@ -9,37 +9,60 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ObjectConsolidationName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IncludeInFTECalc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IncludeInLaborTransactions)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ObjectConsolidationName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IncludeInFTECalc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IncludeInLaborTransactions)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ObjectConsolidationNumber }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ObjectConsolidationNumber }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ObjectConsolidationNumber })
-        </td>
-    </tr>
-}
-
+<table id="consolidationCodeTable" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ObjectConsolidationName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IncludeInFTECalc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IncludeInLaborTransactions)
+            </th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ObjectConsolidationName)
+                </td>
+                <td>
+                    @item.IncludeInFTECalc
+                </td>
+                <td>
+                    @item.IncludeInLaborTransactions
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ObjectConsolidationNumber })
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.ObjectConsolidationNumber })
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ObjectConsolidationNumber })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+
+@section AdditionalScripts
+{
+    <script>
+        $(function() {
+            $('#consolidationCodeTable').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                columnDefs: [
+                    { targets: [-1, -2, -3], sortable: false }
+                ]
+            });
+        })
+    </script>
+}
