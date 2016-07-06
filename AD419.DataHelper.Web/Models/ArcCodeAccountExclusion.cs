@@ -12,6 +12,7 @@ namespace AD419.DataHelper.Web.Models
         public int Year { get; set; }
 
         [Key]
+        [Column(Order = 1)]
         [Required]
         [MaxLength(2)]
         public string Chart { get; set; }
