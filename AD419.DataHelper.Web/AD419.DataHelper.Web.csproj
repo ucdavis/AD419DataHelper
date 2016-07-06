@@ -237,7 +237,7 @@
     <Compile Include="Controllers\ConsolidationCodesController.cs" />
     <Compile Include="Controllers\CurrentProjectsReportController.cs" />
     <Compile Include="Controllers\DosCodesController.cs" />
-    <Compile Include="Controllers\ExpiredProjectCrossReferenceController.cs" />
+    <Compile Include="Controllers\ExpiredProjectsController.cs" />
     <Compile Include="Controllers\FieldStationExpensesImportController.cs" />
     <Compile Include="Controllers\FFYExpensesByARCReportController.cs" />
     <Compile Include="Controllers\FTEReportController.cs" />
@@ -258,6 +258,7 @@
     <Compile Include="Models\DosCodesForFTECalc.cs" />
     <Compile Include="Models\DosCode.cs" />
     <Compile Include="Models\CfdaNumberImport.cs" />
+    <Compile Include="Models\ExpiringProjects.cs" />
     <Compile Include="Models\FFYExpensesByARCReportModel.cs" />
     <Compile Include="Models\FieldStationExpenseListImport.cs" />
     <Compile Include="Global.asax.cs">
@@ -400,11 +401,11 @@
     <Content Include="Views\C204Exclusions\Details.cshtml" />
     <Content Include="Views\C204Exclusions\Edit.cshtml" />
     <Content Include="Views\C204Exclusions\Index.cshtml" />
-    <Content Include="Views\ExpiredProjectCrossReference\Create.cshtml" />
-    <Content Include="Views\ExpiredProjectCrossReference\Delete.cshtml" />
-    <Content Include="Views\ExpiredProjectCrossReference\Details.cshtml" />
-    <Content Include="Views\ExpiredProjectCrossReference\Edit.cshtml" />
-    <Content Include="Views\ExpiredProjectCrossReference\Index.cshtml" />
+    <Content Include="Views\ExpiredProjects\Create.cshtml" />
+    <Content Include="Views\ExpiredProjects\Delete.cshtml" />
+    <Content Include="Views\ExpiredProjects\Details.cshtml" />
+    <Content Include="Views\ExpiredProjects\Edit.cshtml" />
+    <Content Include="Views\ExpiredProjects\Index.cshtml" />
     <Content Include="Views\C204AcctXProj\Create.cshtml" />
     <Content Include="Views\C204AcctXProj\Delete.cshtml" />
     <Content Include="Views\C204AcctXProj\Details.cshtml" />
