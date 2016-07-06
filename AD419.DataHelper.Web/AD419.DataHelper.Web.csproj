@@ -437,6 +437,7 @@
     <Content Include="Views\Interdepartmentals\Details.cshtml" />
     <Content Include="Views\Interdepartmentals\Edit.cshtml" />
     <Content Include="Views\Interdepartmentals\Index.cshtml" />
+    <Content Include="Views\ExpiredProjects\ExpiringProjects.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

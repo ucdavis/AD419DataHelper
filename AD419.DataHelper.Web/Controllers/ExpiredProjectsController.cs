@@ -15,6 +15,13 @@ namespace AD419.DataHelper.Web.Controllers
             return View(projects);
         }
 
+        public async Task<ViewResult> ExpiringProjects()
+        {
+            var year = FiscalYear;
+            var projects = await DbContext.GetExpired20XProjects(year);
+            return View(projects);
+        }
+
         // GET: ExpiredProjectCrossReference/Details/5
         public ActionResult Details(int id)
         {
