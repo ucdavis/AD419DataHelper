@@ -1,4 +1,8 @@
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
+using System.Threading.Tasks;
 
 namespace AD419.DataHelper.Web.Models
 {
@@ -42,6 +46,14 @@ namespace AD419.DataHelper.Web.Models
         public virtual DbSet<TransDocTypes> TransDocTypes { get; set; }
 
         public virtual DbSet<TransDocTypesForFTECalc> TransDocTypesForFTECalc { get; set; }
+
+        public virtual async Task<List<ExpiringProjects>> GetExpired20XProjects(int fiscalYear)
+        {
+            return await Database.SqlQuery<ExpiringProjects>(
+                "SELECT * FROM [dbo].[udf_GetExpired20xProjects] (@FiscalYear)",
+                    new SqlParameter("@FiscalYear", SqlDbType.Int) { Value = fiscalYear }
+                ).ToListAsync();
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
