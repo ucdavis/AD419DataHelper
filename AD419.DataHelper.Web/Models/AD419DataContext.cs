@@ -47,9 +47,9 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<TransDocTypesForFTECalc> TransDocTypesForFTECalc { get; set; }
 
-        public virtual async Task<List<ExpiringProjects>> GetExpired20XProjects(int fiscalYear)
+        public virtual async Task<List<ExpiringProject>> GetExpired20XProjects(int fiscalYear)
         {
-            return await Database.SqlQuery<ExpiringProjects>(
+            return await Database.SqlQuery<ExpiringProject>(
                 "SELECT * FROM [dbo].[udf_GetExpired20xProjects] (@FiscalYear)",
                     new SqlParameter("@FiscalYear", SqlDbType.Int) { Value = fiscalYear }
                 ).ToListAsync();

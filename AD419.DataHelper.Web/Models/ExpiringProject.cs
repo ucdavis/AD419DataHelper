@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AD419.DataHelper.Web.Models
 {
-    public class ExpiringProjects
+    public class ExpiringProject
     {
         public string OrgR { get; set; }
 
@@ -24,6 +24,6 @@ namespace AD419.DataHelper.Web.Models
 
         public string ProjectNumber { get; set; }
 
-        public string AccenssionNumber { get; set; }
+        public string AccessionNumber { get; set; }
     }
 }
