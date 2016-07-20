@@ -10,20 +10,31 @@
     <thead>
         <tr>
             <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th>Director</th>
+            <th>Title</th>
+            <th>End Date</th>
+            <th>Expenses</th>
+            <th>SFN</th>
+            <th>Accounts</th>
+            <th>Fund</th>
+            <th>Project Number</th>
+            <th>Accenssion Number</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>@item.OrgR</td>
+                <td>@item.ProjectDirector</td>
+                <td>@item.Title</td>
+                <td>@item.ProjectEndDate.ToShortDateString()</td>
+                <td>@item.Expenses</td>
+                <td>@item.SFN</td>
+                <td>@item.Accounts_AwardNum</td>
+                <td>@item.OPFund_AwardNum</td>
+                <td>@item.ProjectNumber</td>
+                <td>@item.AccenssionNumber</td>
             </tr>
         }
     </tbody>
