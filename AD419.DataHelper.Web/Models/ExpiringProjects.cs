@@ -12,9 +12,9 @@ namespace AD419.DataHelper.Web.Models
 
         public string Title { get; set; }
 
-        public DateTime DateTime { get; set; }
+        public DateTime ProjectEndDate { get; set; }
 
-        public string Expenses { get; set; }
+        public decimal Expenses { get; set; }
 
         public string SFN { get; set; }
 
