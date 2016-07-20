@@ -1,4 +1,4 @@
-﻿@model List<AD419.DataHelper.Web.Models.ExpiringProjects>
+﻿@model List<AD419.DataHelper.Web.ViewModels.ExpiringProjectMatch>
 
 @{
     ViewBag.Title = "Expiring Projects";
@@ -9,32 +9,42 @@
 <table id="expiredProjects" class="table">
     <thead>
         <tr>
-            <th></th>
-            <th>Director</th>
-            <th>Title</th>
-            <th>End Date</th>
-            <th>Expenses</th>
-            <th>SFN</th>
-            <th>Accounts</th>
-            <th>Fund</th>
-            <th>Project Number</th>
-            <th>Accenssion Number</th>
+            <th nowrap></th>
+            <th nowrap>Director</th>
+            <th nowrap>Title</th>
+            <th nowrap>End Date</th>
+            <th nowrap class="text-right">Expenses</th>
+            <th nowrap>SFN</th>
+            <th nowrap>Accounts</th>
+            <th nowrap>Fund</th>
+            <th nowrap>Project Number</th>
+            <th nowrap>Accenssion Number</th>
+            <th nowrap>Matched Number</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.OrgR</td>
-                <td>@item.ProjectDirector</td>
-                <td>@item.Title</td>
-                <td>@item.ProjectEndDate.ToShortDateString()</td>
-                <td>@item.Expenses</td>
-                <td>@item.SFN</td>
-                <td>@item.Accounts_AwardNum</td>
-                <td>@item.OPFund_AwardNum</td>
-                <td>@item.ProjectNumber</td>
-                <td>@item.AccenssionNumber</td>
+                <td>@item.ExpiringProject.OrgR</td>
+                <td>@item.ExpiringProject.ProjectDirector</td>
+                <td>@item.ExpiringProject.Title</td>
+                <td>@item.ExpiringProject.ProjectEndDate.ToShortDateString()</td>
+                <td class="text-right">@item.ExpiringProject.Expenses.ToString("C")</td>
+                <td>@item.ExpiringProject.SFN</td>
+                <td nowrap>@item.ExpiringProject.Accounts_AwardNum</td>
+                <td>@item.ExpiringProject.OPFund_AwardNum</td>
+                <td nowrap>@item.ExpiringProject.ProjectNumber</td>
+                <td>@item.ExpiringProject.AccessionNumber</td>
+
+                @if (item.MatchedProject != null)
+                {
+                    <td>@item.MatchedProject.ToAccession</td>
+                }
+                else
+                {
+                    <td> Needs Match </td>
+                }
             </tr>
         }
     </tbody>

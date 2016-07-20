@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Models;
+using AD419.DataHelper.Web.ViewModels;
 
 namespace AD419.DataHelper.Web.Controllers
 {
@@ -18,8 +19,16 @@ namespace AD419.DataHelper.Web.Controllers
         public async Task<ViewResult> ExpiringProjects()
         {
             var year = FiscalYear;
-            var projects = await DbContext.GetExpired20XProjects(year);
-            return View(projects);
+            var expired = await DbContext.GetExpired20XProjects(year);
+            var projects = DbContext.ExpiredProjectCrossReference.ToList();
+
+            var results = 
+                from x in expired
+                join p in projects on x.AccessionNumber equals p.FromAccession into pMatch
+                from match in pMatch.DefaultIfEmpty()
+                select new ExpiringProjectMatch { ExpiringProject = x, MatchedProject = match};
+
+            return View(results.ToList());
         }
 
         // GET: ExpiredProjectCrossReference/Details/5
