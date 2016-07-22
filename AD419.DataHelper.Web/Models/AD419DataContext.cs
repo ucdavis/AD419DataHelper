@@ -18,8 +18,6 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<AllProjectsNew> AllProjectsNew { get; set; }
 
-        public virtual DbSet<AllProjectImport> AllProjectsImports { get; set; }
-
         public virtual DbSet<ArcCodeAccountExclusion> ArcCodeAccountExclusions { get; set; }
 
         public virtual DbSet<C204AcctXProj> C204AcctXProj { get; set; }
