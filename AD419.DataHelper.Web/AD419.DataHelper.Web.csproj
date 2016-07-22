@@ -246,7 +246,6 @@
     <Compile Include="Controllers\C204ExclusionsController.cs" />
     <Compile Include="Controllers\SuperController.cs" />
     <Compile Include="Controllers\TransDocTypesController.cs" />
-    <Compile Include="Models\AllProjectImport.cs" />
     <Compile Include="Helpers\CasHelper.cs" />
     <Compile Include="Helpers\HttpCorrelationIdEnricher.cs" />
     <Compile Include="Models\AllProjectsNew.cs" />
@@ -274,6 +273,7 @@
     <Compile Include="Models\FISDataContext.cs" />
     <Compile Include="Models\FTEGreaterThanOneReportModel.cs" />
     <Compile Include="Models\Interdepartmental.cs" />
+    <Compile Include="Models\ReportingOrganization.cs" />
     <Compile Include="Models\TransDocTypesForFTECalc.cs" />
     <Compile Include="Models\TransDocTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -386,12 +386,6 @@
     <Content Include="Views\AllProjectsNew\Details.cshtml" />
     <Content Include="Views\AllProjectsNew\Edit.cshtml" />
     <Content Include="Views\AllProjectsNew\Index.cshtml" />
-    <Content Include="Views\AllProjectsImport\Create.cshtml" />
-    <Content Include="Views\AllProjectsImport\Delete.cshtml" />
-    <Content Include="Views\AllProjectsImport\Details.cshtml" />
-    <Content Include="Views\AllProjectsImport\Edit.cshtml" />
-    <Content Include="Views\AllProjectsImport\Index.cshtml" />
-    <Content Include="Views\AllProjectsImport\_AllProjectsUpload.cshtml" />
     <Content Include="Views\ArcCodes\Details.cshtml" />
     <Content Include="Views\ArcCodes\Edit.cshtml" />
     <Content Include="Views\ArcCodes\Index.cshtml" />
@@ -442,6 +436,8 @@
     <Content Include="Views\Interdepartmentals\Edit.cshtml" />
     <Content Include="Views\Interdepartmentals\Index.cshtml" />
     <Content Include="Views\ExpiredProjects\ExpiringProjects.cshtml" />
+    <Content Include="Views\AllProjectsNew\Upload.cshtml" />
+    <Content Include="Views\AllProjectsNew\_projectsTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
