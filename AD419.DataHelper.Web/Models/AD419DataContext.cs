@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
@@ -46,6 +47,16 @@ namespace AD419.DataHelper.Web.Models
         public virtual DbSet<TransDocTypes> TransDocTypes { get; set; }
 
         public virtual DbSet<TransDocTypesForFTECalc> TransDocTypesForFTECalc { get; set; }
+
+        public virtual DbSet<ReportingOrganization> ReportingOrganizations { get; set; }
+
+        public virtual DbRawSqlQuery<AllProjectsNew> GetNewProjects(int fiscalYear)
+        {
+            return Database.SqlQuery<AllProjectsNew>(
+                "SELECT * FROM [dbo].[udf_AllProjectsNewForFiscalYear] (@FiscalYear)",
+                    new SqlParameter("@FiscalYear", SqlDbType.Int) { Value = fiscalYear }
+                );
+        }
 
         public virtual async Task<List<ExpiringProject>> GetExpired20XProjects(int fiscalYear)
         {
