@@ -14,9 +14,9 @@ namespace AD419.DataHelper.Web.Controllers
     {
         private readonly ProjectImportService _projectImportService;
 
-        public AllProjectsNewController(ProjectImportService projectImportService)
+        public AllProjectsNewController()
         {
-            _projectImportService = projectImportService;
+            _projectImportService = new ProjectImportService(DbContext);
         }
 
         // GET: AllProjectsNew
@@ -161,7 +161,7 @@ namespace AD419.DataHelper.Web.Controllers
             var projects = from DataRow row in result.Tables[0].Rows
                            select _projectImportService.GetProjectFromRow(row);
 
-            return View(projects);
+            return View(projects.ToList());
         }
 
         public ActionResult Save(IEnumerable<AllProjectsNew> projects)
