@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,7 @@ namespace AD419.DataHelper.Web.Models
     [Table("ReportingOrg")]
     public class ReportingOrganization
     {
+        [Key]
         [Column("OrgR")]
         public string OrganizationCode { get; set; }
 
