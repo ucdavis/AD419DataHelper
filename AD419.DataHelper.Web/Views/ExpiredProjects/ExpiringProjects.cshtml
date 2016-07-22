@@ -128,18 +128,20 @@
                 $('#matchModal').modal('show');
             });
 
-            var directorSearchUrl = '@(Url.Action("FindByDirector", "AllProjectsImport"))';
+            var directorSearchUrl = '@(Url.Action("FindByDirector", "AllProjectsNew"))';
             $('#searchByDirector')
-                .click(function() {
+                .click(function () {
+                    console.log(director);
                     $.getJSON(directorSearchUrl + '/' + director)
                         .then(function(data) {
                             console.log(data);
                         });
                 });
 
-            var organizationSearchUrl = '@(Url.Action("FindByOrganization", "AllProjectsImport"))';
+            var organizationSearchUrl = '@(Url.Action("FindByOrganization", "AllProjectsNew"))';
             $('#searchByOrganization')
-                .click(function() {
+                .click(function () {
+                    console.log(organization);
                     $.getJSON(organizationSearchUrl + '?organization=' + organization)
                         .then(function (data) {
                             console.log(data);

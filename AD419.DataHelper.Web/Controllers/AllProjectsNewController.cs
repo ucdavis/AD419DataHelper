@@ -33,8 +33,8 @@ namespace AD419.DataHelper.Web.Controllers
         public ActionResult FindByDirector(string director)
         {
             var projects = DbContext.AllProjectsNew
-                .Where(p => p.ProjectStartDate >= FiscalStartDate)
-                .Where(p => p.ProjectEndDate >= FiscalEndDate)
+                .Where(p => p.ProjectStartDate <= FiscalEndDate) //project has actually started
+                .Where(p => p.ProjectEndDate >= FiscalStartDate) //project hasn't ended yet
                 .Where(p => p.ProjectDirector.Equals(director));
 
             return new JsonResult() { Data = projects, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -43,9 +43,9 @@ namespace AD419.DataHelper.Web.Controllers
         public ActionResult FindByOrganization(string organization)
         {
             var projects = DbContext.AllProjectsNew
-                .Where(p => p.ProjectStartDate >= FiscalStartDate)
-                .Where(p => p.ProjectEndDate >= FiscalEndDate)
-                .Where(p => p.OrganizationName.Equals(organization));
+                .Where(p => p.ProjectStartDate <= FiscalEndDate) //project has actually started
+                .Where(p => p.ProjectEndDate >= FiscalStartDate) //project hasn't ended yet
+                .Where(p => p.OrgR.Equals(organization));
 
             return new JsonResult() { Data = projects, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
