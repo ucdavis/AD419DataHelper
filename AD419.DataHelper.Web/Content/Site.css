@@ -48,6 +48,12 @@ textarea {
     margin: auto;
 }
 
+.float-center {
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .display-inline {
     display: inline;
 }
