@@ -5,12 +5,20 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Models;
+using AD419.DataHelper.Web.Services;
 using Excel;
 
 namespace AD419.DataHelper.Web.Controllers
 {
     public class AllProjectsNewController : SuperController
     {
+        private readonly ProjectImportService _projectImportService;
+
+        public AllProjectsNewController(ProjectImportService projectImportService)
+        {
+            _projectImportService = projectImportService;
+        }
+
         // GET: AllProjectsNew
         public ActionResult Index()
         {
@@ -151,9 +159,23 @@ namespace AD419.DataHelper.Web.Controllers
 
             // transform
             var projects = from DataRow row in result.Tables[0].Rows
-                           select new AllProjectImport(row);
+                           select _projectImportService.GetProjectFromRow(row);
 
             return View(projects);
+        }
+
+        public ActionResult Save(IEnumerable<AllProjectsNew> projects)
+        {
+            if (projects == null)
+                return RedirectToAction("Index");
+
+            if (!ModelState.IsValid)
+                return RedirectToAction("Index");
+
+            DbContext.AllProjectsNew.AddRange(projects);
+            DbContext.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }
