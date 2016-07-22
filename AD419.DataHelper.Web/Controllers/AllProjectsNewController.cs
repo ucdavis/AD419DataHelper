@@ -1,7 +1,11 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Models;
+using Excel;
 
 namespace AD419.DataHelper.Web.Controllers
 {
@@ -10,8 +14,32 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: AllProjectsNew
         public ActionResult Index()
         {
-            var projects = DbContext.AllProjectsNew.ToList();
+            var projects = DbContext.AllProjectsNew
+                .Where(p => p.ProjectStartDate >= FiscalStartDate)
+                .Where(p => p.ProjectEndDate >= FiscalEndDate)
+                .ToList();
+
             return View(projects);
+        }
+
+        public ActionResult FindByDirector(string director)
+        {
+            var projects = DbContext.AllProjectsNew
+                .Where(p => p.ProjectStartDate >= FiscalStartDate)
+                .Where(p => p.ProjectEndDate >= FiscalEndDate)
+                .Where(p => p.ProjectDirector.Equals(director));
+
+            return new JsonResult() { Data = projects, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        public ActionResult FindByOrganization(string organization)
+        {
+            var projects = DbContext.AllProjectsNew
+                .Where(p => p.ProjectStartDate >= FiscalStartDate)
+                .Where(p => p.ProjectEndDate >= FiscalEndDate)
+                .Where(p => p.OrganizationName.Equals(organization));
+
+            return new JsonResult() { Data = projects, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
         // GET: AllProjectsNew/Details/5
@@ -101,6 +129,31 @@ namespace AD419.DataHelper.Web.Controllers
             DbContext.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
+        public ActionResult Upload(IEnumerable<HttpPostedFileBase> file)
+        {
+            var myFile = Request.Files[0];
+            if (myFile == null) return RedirectToAction("Index");
+
+            var fileName = myFile.FileName;
+            TempData.Add("Message", "Now viewing \"" + fileName + "\".");
+
+            // setup reader
+            var excelReader = ExcelReaderFactory.CreateOpenXmlReader(myFile.InputStream);
+            excelReader.IsFirstRowAsColumnNames = true;
+
+            // read data
+            var result = excelReader.AsDataSet();
+            excelReader.Close();
+
+            // transform
+            var projects = from DataRow row in result.Tables[0].Rows
+                           select new AllProjectImport(row);
+
+            return View(projects);
         }
     }
 }
