@@ -73,14 +73,9 @@
                 <table id="foundProjects">
                     <thead>
                     <tr>
-                        <th nowrap></th>
                         <th nowrap>Director</th>
                         <th nowrap>Title</th>
                         <th nowrap>End Date</th>
-                        <th nowrap class="text-right">Expenses</th>
-                        <th nowrap>SFN</th>
-                        <th nowrap>Accounts</th>
-                        <th nowrap>Fund</th>
                         <th nowrap>Project Number</th>
                         <th nowrap>Accenssion Number</th>
                         <th nowrap></th>
@@ -107,11 +102,18 @@
                 ]
             });
 
-            $('#foundProjects').DataTable({
+            var projectTable = $('#foundProjects').DataTable({
                 columnDefs: [
                 ],
                 pagination: false,
-                searching: false
+                searching: false,
+                columns: [
+                    { "data": "ProjectDirector" },
+                    { "data": "Title" },
+                    { "data": "ProjectEndDate" },
+                    { "data": "ProjectNumber" },
+                    { "data": "AccessionNumber" },
+                ]
             });
 
             var accession;
@@ -131,23 +133,14 @@
             var directorSearchUrl = '@(Url.Action("FindByDirector", "AllProjectsNew"))';
             $('#searchByDirector')
                 .click(function () {
-                    console.log(director);
-                    $.getJSON(directorSearchUrl + '/' + director)
-                        .then(function(data) {
-                            console.log(data);
-                        });
+                    projectTable.ajax.url(directorSearchUrl + '/' + director).load();
                 });
 
             var organizationSearchUrl = '@(Url.Action("FindByOrganization", "AllProjectsNew"))';
             $('#searchByOrganization')
                 .click(function () {
-                    console.log(organization);
-                    $.getJSON(organizationSearchUrl + '?organization=' + organization)
-                        .then(function (data) {
-                            console.log(data);
-                        });
+                    projectTable.ajax.url(organizationSearchUrl + '?organization=' + organization).load();
                 });
-
         })
     </script>
 }

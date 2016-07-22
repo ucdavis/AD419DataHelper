@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Models;
@@ -37,7 +38,19 @@ namespace AD419.DataHelper.Web.Controllers
                 .Where(p => p.ProjectEndDate >= FiscalStartDate) //project hasn't ended yet
                 .Where(p => p.ProjectDirector.Equals(director));
 
-            return new JsonResult() { Data = projects, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            var results = new
+            {
+                data = projects.ToList().Select(p => new 
+                {
+                    p.ProjectDirector,
+                    p.Title,
+                    ProjectEndDate = p.ProjectEndDate.HasValue ? p.ProjectEndDate.Value.ToShortDateString() : "",
+                    p.ProjectNumber,
+                    p.AccessionNumber
+                })
+            };
+
+            return new JsonResult() { Data = results, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
         public ActionResult FindByOrganization(string organization)
@@ -47,7 +60,19 @@ namespace AD419.DataHelper.Web.Controllers
                 .Where(p => p.ProjectEndDate >= FiscalStartDate) //project hasn't ended yet
                 .Where(p => p.OrgR.Equals(organization));
 
-            return new JsonResult() { Data = projects, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            var results = new
+            {
+                data = projects.ToList().Select(p => new
+                {
+                    p.ProjectDirector,
+                    p.Title,
+                    ProjectEndDate = p.ProjectEndDate.HasValue ? p.ProjectEndDate.Value.ToShortDateString() : "",
+                    p.ProjectNumber,
+                    p.AccessionNumber
+                })
+            };
+
+            return new JsonResult() { Data = results, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
         // GET: AllProjectsNew/Details/5
