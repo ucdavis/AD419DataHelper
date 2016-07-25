@@ -1,0 +1,68 @@
+﻿@model IEnumerable<AD419.DataHelper.Web.Models.ExpiredProjectCrossReference>
+
+@{
+    ViewBag.Title = "Index - Non-204 Expired Project Cross Reference";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table id="expiredProjects" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FromAccession)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ToAccession)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FromAccession)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ToAccession)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.RemapID })
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.RemapID })
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.RemapID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section AdditionalScripts
+{
+    <script>
+        $(function() {
+            $('#expiredProjects').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                columnDefs: [
+                    { targets: [-1, -2, -3], sortable: false },
+                ]
+            });
+        })
+    </script>
+}
