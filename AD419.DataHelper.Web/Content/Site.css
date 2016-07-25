@@ -51,3 +51,75 @@ textarea {
 .display-inline {
     display: inline;
 }
+
+.jumbotron {
+    padding: 2rem;
+}
+
+.jumbotron h1 {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.step-progressbar {
+    padding-left: 0;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+	overflow: hidden;
+	/*CSS counters to number the steps*/
+	counter-reset: step;
+}
+.step-progressbar li {
+	list-style-type: none;
+	color: #101010;
+	width: 25%;
+	float: left;
+	position: relative;
+    text-align: center;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.step-progressbar li h2 {
+	text-transform: uppercase;
+	font-size: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+.step-progressbar li p {
+	font-size: 1.5rem;
+}
+
+.step-progressbar li:before {
+    position: relative;
+	content: counter(step);
+	counter-increment: step;
+	width: 20px;
+	line-height: 20px;
+	display: block;
+	font-size: 10px;
+	color: white;
+	background: #101010;
+	border-radius: 3px;
+	margin: 0 auto 5px auto;
+    z-index: 1; /* put numbers above the line */
+}
+/*progressbar connectors*/
+.step-progressbar li:after {
+	content: '';
+	width: 100%;
+	height: 2px;
+	background: #101010;
+	position: absolute;
+	left: -50%;
+	top: 9px;
+}
+/*connector not needed before the first step*/
+.step-progressbar li:first-child:after {
+	content: none; 
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+.step-progressbar li.active:before,  .step-progressbar li.active:after{
+	background: #27AE60;
+}
