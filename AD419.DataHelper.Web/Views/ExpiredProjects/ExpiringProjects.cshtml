@@ -69,22 +69,26 @@
                     <button type="button" class="btn btn-default" id="searchByOrganization">Search By Organization</button>
                 </div>
             </div>
-            <div class="modal-body" id="matchModalBody">
-                <table id="foundProjects">
-                    <thead>
-                    <tr>
-                        <th nowrap>Director</th>
-                        <th nowrap>Title</th>
-                        <th nowrap>End Date</th>
-                        <th nowrap>Project Number</th>
-                        <th nowrap>Accenssion Number</th>
-                        <th nowrap></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
+            <form method="POST" action="@Url.Action("MapProject")">
+                @Html.AntiForgeryToken()
+                <input type="hidden" id="accessionFromInput" name="from"/>
+                <div class="modal-body" id="matchModalBody">
+                    <table id="foundProjects">
+                        <thead>
+                        <tr>
+                            <th nowrap>Director</th>
+                            <th nowrap>Title</th>
+                            <th nowrap>End Date</th>
+                            <th nowrap>Project Number</th>
+                            <th nowrap>Accenssion Number</th>
+                            <th nowrap></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
@@ -98,21 +102,31 @@
         $(function() {
             $('#expiredProjects').DataTable({
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                columnDefs: [
-                ]
+                columnDefs: [{
+                    targets: [-1],
+                    orderable: false,
+                    searchable: false
+                }]
             });
 
             var projectTable = $('#foundProjects').DataTable({
                 columnDefs: [
+
                 ],
-                pagination: false,
-                searching: false,
+                paging: false,
                 columns: [
                     { "data": "ProjectDirector" },
                     { "data": "Title" },
                     { "data": "ProjectEndDate" },
                     { "data": "ProjectNumber" },
                     { "data": "AccessionNumber" },
+                    {
+                        "data": "AccessionNumber",
+                        "render": function (d) {
+                            // value passed in the 'to' field on the form
+                            return '<button class="btn btn-default" type="submit" name="to" value="' + d + '">Select</a>';
+                        }
+                    }
                 ]
             });
 
@@ -126,10 +140,15 @@
                 accession = $(this).data('accession');
                 organization = $(this).data('organization');
 
+                // set form from value
+                $('#accessionFromInput').val(accession);
 
+                // clear the table and open the modal
+                projectTable.clear().draw();
                 $('#matchModal').modal('show');
             });
 
+            // actions to fetch data
             var directorSearchUrl = '@(Url.Action("FindByDirector", "AllProjectsNew"))';
             $('#searchByDirector')
                 .click(function () {

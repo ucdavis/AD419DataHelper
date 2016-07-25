@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Models;
@@ -115,6 +116,29 @@ namespace AD419.DataHelper.Web.Controllers
             }
 
             DbContext.ExpiredProjectCrossReference.Remove(project);
+            DbContext.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult MapProject(string from, string to)
+        {
+            if (string.IsNullOrWhiteSpace(from))
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            if (string.IsNullOrWhiteSpace(to))
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            var match = new ExpiredProjectCrossReference()
+            {
+                FromAccession = from,
+                ToAccession = to,
+                IsActive = true
+            };
+
+            DbContext.ExpiredProjectCrossReference.Add(match);
             DbContext.SaveChanges();
 
             return RedirectToAction("Index");
