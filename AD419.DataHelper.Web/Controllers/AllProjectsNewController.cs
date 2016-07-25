@@ -2,7 +2,6 @@
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Models;
@@ -98,7 +97,7 @@ namespace AD419.DataHelper.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idProject,AccessionNumber,ProjectNumber,ProposalNumber,AwardNumber,Title,OrganizationName,OrgR,Department,ProjectDirector,CoProjectDirectors,FundingSource,ProjectStartDate,ProjectEndDate,ProjectStatus,isInterdepartmental,IsActive")] AllProjectsNew project)
+        public ActionResult Create(AllProjectsNew project)
         {
             if (!ModelState.IsValid) return View(project);
 
@@ -125,7 +124,7 @@ namespace AD419.DataHelper.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idProject,AccessionNumber,ProjectNumber,ProposalNumber,AwardNumber,Title,OrganizationName,OrgR,Department,ProjectDirector,CoProjectDirectors,FundingSource,ProjectStartDate,ProjectEndDate,ProjectStatus,IsInterdepartmental,IsActive")] AllProjectsNew project)
+        public ActionResult Edit(AllProjectsNew project)
         {
             if (!ModelState.IsValid) return View(project);
 

@@ -399,11 +399,8 @@
     <Content Include="Views\C204Exclusions\Details.cshtml" />
     <Content Include="Views\C204Exclusions\Edit.cshtml" />
     <Content Include="Views\C204Exclusions\Index.cshtml" />
-    <Content Include="Views\ExpiredProjects\Create.cshtml" />
     <Content Include="Views\ExpiredProjects\Delete.cshtml" />
-    <Content Include="Views\ExpiredProjects\Details.cshtml" />
-    <Content Include="Views\ExpiredProjects\Edit.cshtml" />
-    <Content Include="Views\ExpiredProjects\Index.cshtml" />
+    <Content Include="Views\ExpiredProjects\Mappings.cshtml" />
     <Content Include="Views\C204AcctXProj\Create.cshtml" />
     <Content Include="Views\C204AcctXProj\Delete.cshtml" />
     <Content Include="Views\C204AcctXProj\Details.cshtml" />
@@ -435,9 +432,10 @@
     <Content Include="Views\Interdepartmentals\Details.cshtml" />
     <Content Include="Views\Interdepartmentals\Edit.cshtml" />
     <Content Include="Views\Interdepartmentals\Index.cshtml" />
-    <Content Include="Views\ExpiredProjects\ExpiringProjects.cshtml" />
+    <Content Include="Views\ExpiredProjects\Index.cshtml" />
     <Content Include="Views\AllProjectsNew\Upload.cshtml" />
     <Content Include="Views\AllProjectsNew\_projectsTable.cshtml" />
+    <Content Include="Views\ExpiredProjects\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
