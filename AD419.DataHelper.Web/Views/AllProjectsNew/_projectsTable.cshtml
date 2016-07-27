@@ -18,9 +18,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Title)
             </th>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.OrganizationName)
-                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.OrgR)
             </th>
@@ -72,9 +69,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.OrganizationName)
-                    </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.OrgR)
                 </td>
@@ -100,7 +94,7 @@
                     @Html.DisplayFor(modelItem => item.ProjectStatus)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IsInterdepartmental)
+                    @item.IsInterdepartmental
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id })

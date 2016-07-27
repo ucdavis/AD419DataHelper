@@ -69,6 +69,7 @@ namespace AD419.DataHelper.Web.Services
             else if (shortCode.Equals("XXX", StringComparison.OrdinalIgnoreCase))
             {
                 project.OrgR = "XXXX";
+                project.IsInterdepartmental = true;
             }
             else if (shortCode.Equals("IPO", StringComparison.OrdinalIgnoreCase))
             {

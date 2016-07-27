@@ -50,13 +50,13 @@
             @Html.DisplayFor(model => model.Title)
         </dd>
 
-        @*<dt>
+        <dt>
             @Html.DisplayNameFor(model => model.OrganizationName)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.OrganizationName)
-        </dd>*@
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.OrgR)
@@ -127,20 +127,11 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.IsInterdepartmental)
+            @Model.IsInterdepartmental
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsActive)
-        </dd>
-
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.idProject }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
