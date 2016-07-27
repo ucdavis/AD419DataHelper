@@ -170,9 +170,6 @@ namespace AD419.DataHelper.Web.Controllers
             var myFile = Request.Files[0];
             if (myFile == null) return RedirectToAction("Index");
 
-            var fileName = myFile.FileName;
-            TempData.Add("Message", "Now viewing \"" + fileName + "\".");
-
             // setup reader
             var excelReader = ExcelReaderFactory.CreateOpenXmlReader(myFile.InputStream);
             excelReader.IsFirstRowAsColumnNames = true;
@@ -182,8 +179,7 @@ namespace AD419.DataHelper.Web.Controllers
             excelReader.Close();
 
             // transform
-            var projects = from DataRow row in result.Tables[0].Rows
-                           select _projectImportService.GetProjectFromRow(row);
+            var projects = _projectImportService.GetProjectsFromRows(result.Tables[0].Rows);
 
             return View(projects.ToList());
         }
