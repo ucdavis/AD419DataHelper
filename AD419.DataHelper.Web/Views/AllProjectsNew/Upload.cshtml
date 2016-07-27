@@ -1,0 +1,60 @@
+﻿@model List<AD419.DataHelper.Web.Models.AllProjectsNew>
+
+@{
+    ViewBag.Title = "New Projects Upload";
+}
+
+<h2>New Projects Upload</h2>
+
+@Html.Partial("_projectsTable", Model)
+
+@using (Html.BeginForm("Save", "AllProjectsNew", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    for (var i = 0; i < Model.Count; i++)
+    {
+        @Html.HiddenFor(m => m[i].AccessionNumber)
+        @Html.HiddenFor(m => m[i].ProjectNumber)
+        @Html.HiddenFor(m => m[i].ProposalNumber)
+        @Html.HiddenFor(m => m[i].AwardNumber)
+        @Html.HiddenFor(m => m[i].Title)
+        @Html.HiddenFor(m => m[i].OrganizationName)
+        @Html.HiddenFor(m => m[i].OrgR)
+        @Html.HiddenFor(m => m[i].Department)
+        @Html.HiddenFor(m => m[i].ProjectDirector)
+        @Html.HiddenFor(m => m[i].CoProjectDirectors)
+        @Html.HiddenFor(m => m[i].FundingSource)
+        @Html.HiddenFor(m => m[i].ProjectStartDate)
+        @Html.HiddenFor(m => m[i].ProjectEndDate)
+        @Html.HiddenFor(m => m[i].ProjectStatus)
+        @Html.HiddenFor(m => m[i].IsInterdepartmental)
+        @Html.HiddenFor(m => m[i].IsUcDavis)
+        @Html.HiddenFor(m => m[i].Is204)
+        @Html.HiddenFor(m => m[i].IsExpired)
+    }
+
+    <p>
+        If all looks good, you can upload the values to the database.<br />
+        <i>Note: You can also edit the values once they have been saved.</i>
+    </p>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save CFDA Numbers to Database" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+@section AdditionalScripts
+{
+    <script>
+        $(function() {
+            $('#newProjectTable').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                columnDefs: [
+                    { targets: [-1, -2, -3], sortable: false }
+                ]
+            });
+        })
+    </script>
+}

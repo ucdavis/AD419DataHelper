@@ -29,6 +29,23 @@ namespace AD419.DataHelper.Web.Controllers
             }
         }
 
+        public DateTime FiscalStartDate
+        {
+            get
+            {
+                return new DateTime(FiscalYear - 1, 10, 1, 0, 0, 0, DateTimeKind.Utc);
+                
+            }
+        }
+
+        public DateTime FiscalEndDate
+        {
+            get
+            {
+                return new DateTime(FiscalYear, 10, 1, 0, 0, 0, DateTimeKind.Utc);
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

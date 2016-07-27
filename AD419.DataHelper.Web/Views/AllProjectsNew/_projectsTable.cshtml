@@ -1,15 +1,6 @@
-﻿@model IEnumerable<AD419.DataHelper.Web.Models.AllProjectImport>
+﻿@model IEnumerable<AD419.DataHelper.Web.Models.AllProjectsNew>
 
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table id="allProjectTable" class="table">
+<table id="newProjectTable" class="table">
     <thead>
         <tr>
             <th>
@@ -27,8 +18,11 @@
             <th>
                 @Html.DisplayNameFor(model => model.Title)
             </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.OrganizationName)
+                </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.OrganizationName)
+                @Html.DisplayNameFor(model => model.OrgR)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Department)
@@ -50,6 +44,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ProjectStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsInterdepartmental)
             </th>
             <th></th>
             <th></th>
@@ -75,8 +72,11 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.OrganizationName)
+                    </td>*@
                 <td>
-                    @Html.DisplayFor(modelItem => item.OrganizationName)
+                    @Html.DisplayFor(modelItem => item.OrgR)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Department)
@@ -100,6 +100,9 @@
                     @Html.DisplayFor(modelItem => item.ProjectStatus)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.IsInterdepartmental)
+                </td>
+                <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id })
                 </td>
                 <td>
@@ -112,16 +115,3 @@
         }
     </tbody>
 </table>
-
-@section AdditionalScripts
-{
-    <script>
-        $(function() {
-            $('#allProjectTable').DataTable({
-                columnDefs: [
-                    { targets: [-1, -2, -3], sortable: false }
-                ]
-            });
-        })
-    </script>
-}

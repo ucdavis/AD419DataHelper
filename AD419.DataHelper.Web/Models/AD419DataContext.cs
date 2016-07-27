@@ -1,4 +1,9 @@
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
+using System.Threading.Tasks;
 
 namespace AD419.DataHelper.Web.Models
 {
@@ -12,8 +17,6 @@ namespace AD419.DataHelper.Web.Models
         public virtual DbSet<AllProject> AllProjects { get; set; }
 
         public virtual DbSet<AllProjectsNew> AllProjectsNew { get; set; }
-
-        public virtual DbSet<AllProjectImport> AllProjectsImports { get; set; }
 
         public virtual DbSet<ArcCodeAccountExclusion> ArcCodeAccountExclusions { get; set; }
 
@@ -42,6 +45,24 @@ namespace AD419.DataHelper.Web.Models
         public virtual DbSet<TransDocTypes> TransDocTypes { get; set; }
 
         public virtual DbSet<TransDocTypesForFTECalc> TransDocTypesForFTECalc { get; set; }
+
+        public virtual DbSet<ReportingOrganization> ReportingOrganizations { get; set; }
+
+        public virtual DbRawSqlQuery<AllProjectsNew> GetNewProjects(int fiscalYear)
+        {
+            return Database.SqlQuery<AllProjectsNew>(
+                "SELECT * FROM [dbo].[udf_AllProjectsNewForFiscalYear] (@FiscalYear)",
+                    new SqlParameter("@FiscalYear", SqlDbType.Int) { Value = fiscalYear }
+                );
+        }
+
+        public virtual async Task<List<ExpiringProject>> GetExpired20XProjects(int fiscalYear)
+        {
+            return await Database.SqlQuery<ExpiringProject>(
+                "SELECT * FROM [dbo].[udf_GetExpired20xProjects] (@FiscalYear)",
+                    new SqlParameter("@FiscalYear", SqlDbType.Int) { Value = fiscalYear }
+                ).ToListAsync();
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

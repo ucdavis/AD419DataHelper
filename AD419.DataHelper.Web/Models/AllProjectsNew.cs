@@ -8,7 +8,7 @@ namespace AD419.DataHelper.Web.Models
     public partial class AllProjectsNew
     {
         [Key]
-        public int idProject { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(20)]
@@ -74,7 +74,11 @@ namespace AD419.DataHelper.Web.Models
         [Display(Name = "Is Interdepartmental?")]
         public bool? IsInterdepartmental { get; set; }
 
-        [Display(Name = "Is Active?")]
-        public bool? IsActive { get; set; }
+        [Column("IsUCD")]
+        public bool IsUcDavis { get; set; }
+
+        public bool Is204 { get; set; }
+
+        public bool IsExpired { get; set; }
     }
 }
