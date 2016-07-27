@@ -71,10 +71,11 @@ namespace AD419.DataHelper.Web.Models
         [Display(Name = "Project Status")]
         public string ProjectStatus { get; set; }
 
-        [Display(Name = "Is Interdepartmental?")]
+        [Display(Name = "Interdepartmental?")]
         public bool? IsInterdepartmental { get; set; }
 
         [Column("IsUCD")]
+        [Display(Name = "Is UC Davis?")]
         public bool IsUcDavis { get; set; }
 
         public bool Is204 { get; set; }
