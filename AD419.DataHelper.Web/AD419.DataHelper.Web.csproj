@@ -437,6 +437,7 @@
     <Content Include="Views\AllProjectsNew\Upload.cshtml" />
     <Content Include="Views\AllProjectsNew\_projectsTable.cshtml" />
     <Content Include="Views\ExpiredProjects\Details.cshtml" />
+    <Content Include="Views\AllProjectsNew\_uploadData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
