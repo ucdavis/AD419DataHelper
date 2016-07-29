@@ -3,45 +3,67 @@
     ViewBag.Title = "New Projects Upload";
 }
 
-<h2>New Projects Upload</h2>
+<h1>Upload New Projects</h1>
 
-<ul id="uploadTabs" class="step-progressbar" role="tablist">
-    <li role="presentation" class="active"><a href="#upload" aria-controls="home" role="tab" data-toggle="tab">Upload</a></li>
-    <li role="presentation"><a href="#review" aria-controls="settings" role="tab" data-toggle="tab">Review</a></li>
-    <li role="presentation"><a href="#confirm" aria-controls="settings" role="tab" data-toggle="tab">Confirm</a></li>
+<ul id="uploadTabs" class="step-progressbar">
+    <li id="uploadStepper" class="active">
+        <h2>Upload</h2>
+    </li>
+    <li id="reviewStepper">
+        <h2>Review</h2>
+    </li>
+    <li id="confirmStepper">
+        <h2>Confirm</h2>
+    </li>
 </ul>
 
 <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="upload">
-        <div>
-            <h4>Upload an All AES Projects List Excel file:</h4>
-            <i>Please ensure your spreadsheet has the following column names as illustrated below: (Note that IsDepartmental, and OrgR will be populated automatically.)</i>
-            <p>
-                <i>Select <a href="~/Content/Sample_Forms/ProjectsForImport.xlsx" class="btn btn-link">here</a> to download a sample form.</i>
-            </p>
-            <img src="/Content/Images/?" alt="All AES Projects Excel upload file example" width="1100">
-        </div>
-
-        <form id="UploadForm" method="post" enctype="multipart/form-data">
-            <b>Please select an All AES Projects List Excel file to display:</b>
-            <input type="file" id="FileUpload1" name="file" required="required"/>
-            <br/>
-            <input type="submit" value="Display All AES Projects List" title="Upload" class="btn btn-default"/>
-        </form>
-    </div>
-    <div role="tabpanel" class="tab-pane" id="review">
-        
-    </div>
-    <div role="tabpanel" class="tab-pane" id="confirm">
-        <p>
-            If all looks good, you can upload the values to the database.<br/>
-            <i>Note: You can also edit the values once they have been saved.</i>
-        </p>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save CFDA Numbers to Database" class="btn btn-default" />
+    <div role="tabpanel" class="tab-pane active" id="uploadTab">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Upload an All AES Projects List Excel file:</h4>
+                    <i>Please ensure your spreadsheet has the following column names as illustrated below: (Note that IsDepartmental, and OrgR will be populated automatically.)</i>
+                    <p>
+                        <i>Select <a href="~/Content/Sample_Forms/ProjectsForImport.xlsx" class="btn btn-link">here</a> to download a sample form.</i>
+                    </p>
+                    <img src="/Content/Images/?" alt="All AES Projects Excel upload file example" width="1100">
+                </div>
+                <div class="col-md-6">
+                    <form id="UploadForm" method="post" enctype="multipart/form-data">
+                        <b>Please select an All AES Projects List Excel file to display:</b>
+                        <input type="file" name="file" required="required"/>
+                        <br/>
+                        <button id="uploadButton" type="submit" title="Upload" class="btn btn-default">Process Upload <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                    </form>
+                </div>
             </div>
+        </div>
+    </div>
+    <div class="tab-pane" id="loadingTab">
+        <div class="loader text-center">
+            <i class="fa fa-spinner fa-spin fa-fw"></i>
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="reviewTab">
+        <div class="wizard-buttons text-center">
+            <button id="returnUploadButton" class="btn btn-danger"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</button>
+            <button id="continueConfirmButton" class="btn btn-default">Confirm and Upload <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+        </div>
+        <div class="container-fluid" id="review"></div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="confirmTab">
+        <div class="container text-center">
+            <p>
+                If all looks good, you can upload the values to the database.<br />
+                <i>Note: You can also edit the values once they have been saved.</i>
+            </p>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button id="confirmButton" class="btn btn-default">Save to Database</button>
+                </div>
+            </div>    
         </div>
     </div>
 </div>
@@ -51,7 +73,11 @@
     <script>
         $(function() {
             $('#UploadForm')
-                .submit(function(event) {
+                .submit(function (event) {
+                    $('#uploadButton').prop('disabled', true);
+                    $('#uploadTab').removeClass('active');
+                    $('#loadingTab').addClass('active');
+
                     event.preventDefault();
 
                     var formData = new FormData($(this)[0]);
@@ -69,13 +95,35 @@
                         drawTable();
                     });
                 });
+
+            $('#returnUploadButton')
+                .click(function() {
+                    $('#uploadButton').prop('disabled', false);
+                    $('#uploadTab').addClass('active');
+                    $('#reviewTab').removeClass('active');
+                    $('#reviewStepper').removeClass('active');
+                });
+
+            $('#continueConfirmButton')
+                .click(function() {
+                    $('#reviewTab').removeClass('active');
+                    $('#confirmTab').addClass('active');
+                    $('#confirmStepper').addClass('active');
+                });
+
+            $('#confirmButton')
+                .click(function() {
+                    $('#confirmForm').submit();
+                });
         });
 
         function drawTable() {
             return $('#newProjectTable').DataTable({
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 initComplete: function () {
-                    $('#uploadTabs a[href="#review"]').tab('show');
+                    $('#loadingTab').removeClass('active');
+                    $('#reviewTab').addClass('active');
+                    $('#reviewStepper').addClass('active');
                 }
             });
         }
