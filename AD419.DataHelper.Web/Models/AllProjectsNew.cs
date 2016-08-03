@@ -72,7 +72,7 @@ namespace AD419.DataHelper.Web.Models
         public string ProjectStatus { get; set; }
 
         [Display(Name = "Interdepartmental?")]
-        public bool? IsInterdepartmental { get; set; }
+        public bool IsInterdepartmental { get; set; }
 
         [Column("IsUCD")]
         [Display(Name = "Is UC Davis?")]
@@ -81,5 +81,17 @@ namespace AD419.DataHelper.Web.Models
         public bool Is204 { get; set; }
 
         public bool IsExpired { get; set; }
+
+        [NotMapped]
+        public string ShortCode
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(ProjectNumber) || ProjectNumber.Length < 9)
+                    return null;
+
+                return ProjectNumber.Substring(6, 3);
+            }
+        }
     }
 }

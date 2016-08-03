@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Models;
@@ -163,18 +165,21 @@ namespace AD419.DataHelper.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public ActionResult Upload()
+        {
+            return View(new List<AllProjectsNew>());
+        }
+
         [AcceptVerbs(HttpVerbs.Post)]
         [HttpPost]
-        public ActionResult Upload(IEnumerable<HttpPostedFileBase> file)
+        public ActionResult Upload(HttpPostedFileBase file)
         {
-            var myFile = Request.Files[0];
-            if (myFile == null) return RedirectToAction("Index");
-
-            var fileName = myFile.FileName;
-            TempData.Add("Message", "Now viewing \"" + fileName + "\".");
+            if (file == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             // setup reader
-            var excelReader = ExcelReaderFactory.CreateOpenXmlReader(myFile.InputStream);
+            var excelReader = ExcelReaderFactory.CreateOpenXmlReader(file.InputStream);
             excelReader.IsFirstRowAsColumnNames = true;
 
             // read data
@@ -182,10 +187,16 @@ namespace AD419.DataHelper.Web.Controllers
             excelReader.Close();
 
             // transform
-            var projects = from DataRow row in result.Tables[0].Rows
-                           select _projectImportService.GetProjectFromRow(row);
+            var projects = _projectImportService.GetProjectsFromRows(result.Tables[0].Rows);
 
-            return View(projects.ToList());
+            return PartialView("_uploadData", projects.ToList());
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
+        public ActionResult UploadConfirm()
+        {
+            throw new NotImplementedException();
         }
 
         public ActionResult Save(IEnumerable<AllProjectsNew> projects)

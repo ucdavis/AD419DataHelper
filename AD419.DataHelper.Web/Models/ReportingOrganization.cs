@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace AD419.DataHelper.Web.Models
 {
@@ -25,9 +22,6 @@ namespace AD419.DataHelper.Web.Models
 
         [Column("OrgCd3Char")]
         public string OrganizationShortCode { get; set; }
-
-        [Column("IsLocked")]
-        public bool IsLocked { get; set; }
 
         [Column("IsActive")]
         public bool IsActive { get; set; }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text.RegularExpressions;
+using AD419.DataHelper.Web.Helpers;
 using AD419.DataHelper.Web.Models;
 
 namespace AD419.DataHelper.Web.Services
@@ -11,12 +12,35 @@ namespace AD419.DataHelper.Web.Services
     {
         private readonly AD419DataContext _dataContext;
 
+
         public ProjectImportService(AD419DataContext dataContext)
         {
             _dataContext = dataContext;
         }
 
-        public AllProjectsNew GetProjectFromRow(DataRow row)
+        public IEnumerable<AllProjectsNew> GetProjectsFromRows(DataRowCollection rows)
+        {
+            var projects = rows.ToEnumerable().Select(GetProjectFromRow).ToList();
+            
+            // setup organiztion references
+            var reportingOrganizations = _dataContext.ReportingOrganizations
+                .Where(r => r.IsActive).ToList();
+
+            var matches = 
+                from project in projects
+                join organization in reportingOrganizations on project.ShortCode equals organization.OrganizationShortCode into j
+                from match in j.DefaultIfEmpty()
+                select new { Project = project, Organization = match };
+
+            foreach (var match in matches)
+            {
+                ConfigureReportingOrg(match.Project, match.Organization);
+            }
+
+            return projects;
+        }
+
+        private AllProjectsNew GetProjectFromRow(DataRow row)
         {
             var project = new AllProjectsNew()
             {
@@ -47,40 +71,33 @@ namespace AD419.DataHelper.Web.Services
             }
 
             // parse other values!
-            project.Is204 = Is204Project(project.ProjectNumber);
-            project.IsUcDavis = IsUCDavisProject(project.OrganizationName);
+            project.Is204               = Is204Project(project.ProjectNumber);
+            project.IsUcDavis           = IsUCDavisProject(project.OrganizationName);
+            project.IsInterdepartmental = IsInterdepartmentalProject(project.ProjectNumber);
 
-            // match reporting organization
-            var shortCode = "";
-            ReportingOrganization reportingOrg = null;
-            if (!string.IsNullOrEmpty(project.ProjectNumber) && project.ProjectNumber.Length <= 9)
-            {
-                shortCode = project.ProjectNumber.Substring(6, 3);
-                reportingOrg = _dataContext.ReportingOrganizations.FirstOrDefault(r =>
-                         r.IsActive &&
-                         r.OrganizationShortCode.Equals(shortCode));
-            }
+            return project;
+        }
 
-            // setup value based on possible match
-            if (reportingOrg != null)
+        private void ConfigureReportingOrg(AllProjectsNew project, ReportingOrganization organization)
+        {
+            if (organization != null)
             {
-                project.OrgR = reportingOrg.OrganizationCode;
+                project.OrgR = organization.OrganizationCode;
             }
-            else if (shortCode.Equals("XXX", StringComparison.OrdinalIgnoreCase))
+            else if (!string.IsNullOrEmpty(project.ShortCode) && project.ShortCode.Equals("XXX", StringComparison.OrdinalIgnoreCase))
             {
                 project.OrgR = "XXXX";
                 project.IsInterdepartmental = true;
             }
-            else if (shortCode.Equals("IPO", StringComparison.OrdinalIgnoreCase))
+            else if (!string.IsNullOrEmpty(project.ShortCode) && project.ShortCode.Equals("IPO", StringComparison.OrdinalIgnoreCase))
             {
                 project.OrgR = "AIND";
+                project.IsInterdepartmental = true;
             }
             else if (project.IsUcDavis)
             {
                 project.OrgR = GetDepartmentCode(project.Department);
             }
-
-            return project;
         }
 
         private static readonly List<Tuple<Regex, string>> Searches = new List<Tuple<Regex, string>>
@@ -140,6 +157,11 @@ namespace AD419.DataHelper.Web.Services
                 return true;
 
             return false;
+        }
+
+        public static bool IsInterdepartmentalProject(string projectNumber)
+        {
+            return !string.IsNullOrWhiteSpace(projectNumber) && projectNumber.Contains("XXX");
         }
     }
 }
