@@ -1,0 +1,30 @@
+﻿<div class="modal fade" id="uploadModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Upload an Interdepartmental Source File</h4>
+            </div>
+            <div class="modal-image">
+                <img src="~/Content/Images/interdepartmental.png" alt="Interdepartmental Source Upload File Example">
+            </div>
+            @using (Html.BeginForm("Upload", "Interdepartmentals", FormMethod.Post, new { id = "UploadForm", enctype = "multipart/form-data", @class = "" }))
+            {
+                <div class="modal-body">
+                    <p>
+                        Please ensure your spreadsheet has the column names as illustrated above.<br />
+                        Only the Accession Number and OrgR columns are required.<br />
+                        Download a sample form <a href="~/Content/Sample_Forms/Interdepartmental.xlsx">HERE <i class="fa fa-download"></i></a>
+                    </p>
+                    <div class="form-group">
+                        <label class="control-label">Please select an file to display:</label>
+                        <input type="file" id="FileUpload1" name="FileUpload1" class="" required />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-default" value="Upload" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
