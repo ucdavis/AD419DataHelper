@@ -45,7 +45,7 @@
 
         $('#resetErrorButton')
             .click(function() {
-                this.reset();
+                reset();
             });
 
         $('#returnUploadButton')
