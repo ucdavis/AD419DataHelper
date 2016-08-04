@@ -116,10 +116,6 @@ namespace AD419.DataHelper.Web.Models
             modelBuilder.Entity<FieldStationExpenseListImport>()
                 .Property(e => e.FieldStationCharge)
                 .HasPrecision(19, 4);
-
-            modelBuilder.Entity<FieldStationExpenseListImport>()
-                .Property(e => e.ProjectDirector)
-                .IsUnicode(false);
         }
 
         private static void CreateExpiredProjectCrossReference(DbModelBuilder modelBuilder)
