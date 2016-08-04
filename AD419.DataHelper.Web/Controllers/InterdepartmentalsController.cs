@@ -109,5 +109,20 @@ namespace AD419.DataHelper.Web.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpPost, ActionName("DeleteAll")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteAll()
+        {
+            var year = FiscalYear;
+
+            var target = DbContext.Interdepartmentals
+                .Where(i => i.Year == year);
+
+            DbContext.Interdepartmentals.RemoveRange(target);
+            DbContext.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
     }
 }
