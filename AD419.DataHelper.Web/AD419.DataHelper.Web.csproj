@@ -344,6 +344,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\upload-wizard.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -445,6 +446,7 @@
     <Content Include="Views\ExpiredProjects\Details.cshtml" />
     <Content Include="Views\AllProjectsNew\_uploadData.cshtml" />
     <Content Include="Views\Interdepartmentals\_Upload.cshtml" />
+    <Content Include="Views\Interdepartmentals\_UploadData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

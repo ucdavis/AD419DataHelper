@@ -156,7 +156,7 @@ namespace AD419.DataHelper.Web.Controllers
                     AccessionNumber = r["AccessionNumber"].ToString()
                 });
 
-            return View("Display", data);
+            return PartialView("_uploadData", data.ToList());
         }
 
         [HttpPost]

@@ -65,7 +65,16 @@
 
 @section AdditionalScripts
 {
-    <script>
+    <script type="text/javascript" src="~/Scripts/upload-wizard.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            UploadWizard.setup({
+                uploadUrl: '@Url.Action("Upload")'
+            });
+
+            $('#uploadModal').on('hidden.bs.modal', UploadWizard.reset);
+        });
+
         $(function() {
             $('#interdepartmentalTable').DataTable({
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
