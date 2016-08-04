@@ -12,7 +12,12 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: Interdepartmentals
         public ActionResult Index()
         {
-            var model = DbContext.Interdepartmentals.ToList();
+            var year = FiscalYear;
+
+            var model = DbContext.Interdepartmentals
+                .Where(i => i.Year == year)
+                .ToList();
+
             return View(model);
         }
 
