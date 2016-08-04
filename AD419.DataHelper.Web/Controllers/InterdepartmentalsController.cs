@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -163,15 +164,26 @@ namespace AD419.DataHelper.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Save(List<Interdepartmental> list)
         {
-            if (list != null)
+            if (list == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            try
             {
-                // This works.  Would now like the user to have a chance to review upload first.
-                if (ModelState.IsValid)
-                {
-                    DbContext.Interdepartmentals.AddRange(list);
-                    DbContext.SaveChanges();
-                }
+                DbContext.Interdepartmentals.AddRange(list);
+                DbContext.SaveChanges();
             }
+            catch (DbUpdateException dbEx)
+            {
+                // dig into the exception
+                if (dbEx.InnerException == null || dbEx.InnerException.InnerException == null) throw;
+
+                // look for the unique constraint error code
+                var sqlEx = dbEx.InnerException.InnerException as SqlException;
+                if (sqlEx == null || sqlEx.Number != 2627) throw;
+
+                ErrorMessage = "You data contains duplicates with the database. Please delete all records and re-check your document for duplicates.";
+            }
+
             return RedirectToAction("Index");
         }
     }
