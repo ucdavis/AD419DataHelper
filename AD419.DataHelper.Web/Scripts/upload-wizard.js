@@ -1,6 +1,6 @@
-﻿var UploadWizard = {
+﻿function UploadWizardFactory() {
 
-    reset: function () {
+    function reset() {
         $('#uploadButton').prop('disabled', false);
         $('#uploadForm')[0].reset();
 
@@ -10,9 +10,9 @@
         $('#uploadTab').addClass('active');
         $('#reviewTab').removeClass('active');
         $('#confirmTab').removeClass('active');
-    },
-
-    setup: function(options) {
+    }
+        
+    function setup(options) {
 
         $('#uploadForm')
             .submit(function (event) {
@@ -35,7 +35,17 @@
                 .success(function (view) {
                     $('#review').html(view);
                     drawTable();
+                })
+                .error(function(err) {
+                    console.log(err);
+                    $('#loadingTab').removeClass('active');
+                    $('#errorTab').addClass('active');
                 });
+            });
+
+        $('#resetErrorButton')
+            .click(function() {
+                this.reset();
             });
 
         $('#returnUploadButton')
@@ -64,16 +74,23 @@
             .click(function () {
                 $('#confirmForm').submit();
             });
+    }
 
-        function drawTable() {
-            return $('#uploadTable').DataTable({
-                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                initComplete: function () {
-                    $('#loadingTab').removeClass('active');
-                    $('#reviewTab').addClass('active');
-                    $('#reviewStepper').addClass('active');
-                }
-            });
-        }
+    function drawTable() {
+        return $('#uploadTable').DataTable({
+            lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+            initComplete: function () {
+                $('#loadingTab').removeClass('active');
+                $('#reviewTab').addClass('active');
+                $('#reviewStepper').addClass('active');
+            }
+        });
+    }
+
+    return {
+        reset: reset,
+        setup: setup
     }
 }
+
+var UploadWizard = UploadWizardFactory();
