@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using AD419.DataHelper.Web.Helpers;
 using AD419.DataHelper.Web.Models;
+using Excel;
 
 namespace AD419.DataHelper.Web.Controllers
 {
@@ -122,6 +127,51 @@ namespace AD419.DataHelper.Web.Controllers
             DbContext.Interdepartmentals.RemoveRange(target);
             DbContext.SaveChanges();
 
+            return RedirectToAction("Index");
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
+        public ActionResult Upload(HttpPostedFileBase file)
+        {
+            if (file == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            // setup reader
+            var excelReader = ExcelReaderFactory.CreateOpenXmlReader(file.InputStream);
+            excelReader.IsFirstRowAsColumnNames = true;
+
+            // read data
+            var result = excelReader.AsDataSet();
+            excelReader.Close();
+
+            // transform
+            var year = FiscalYear;
+            var data = result.Tables[0].Rows
+                .ToEnumerable()
+                .Select(r => new Interdepartmental()
+                {
+                    Year            = year,
+                    OrgR            = r["OrgR"].ToString(),
+                    AccessionNumber = r["AccessionNumber"].ToString()
+                });
+
+            return View("Display", data);
+        }
+
+        [HttpPost]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Save(List<Interdepartmental> list)
+        {
+            if (list != null)
+            {
+                // This works.  Would now like the user to have a chance to review upload first.
+                if (ModelState.IsValid)
+                {
+                    DbContext.Interdepartmentals.AddRange(list);
+                    DbContext.SaveChanges();
+                }
+            }
             return RedirectToAction("Index");
         }
     }
