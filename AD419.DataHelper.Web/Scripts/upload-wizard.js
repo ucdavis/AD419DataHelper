@@ -8,6 +8,8 @@
         $('#confirmStepper').removeClass('active');
 
         $('#uploadTab').addClass('active');
+        $('#progressTab').removeClass('active');
+        $('#errorTab').removeClass('active');
         $('#reviewTab').removeClass('active');
         $('#confirmTab').removeClass('active');
     }
