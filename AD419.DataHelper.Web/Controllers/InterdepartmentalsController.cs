@@ -40,7 +40,7 @@ namespace AD419.DataHelper.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AccessionNumber,OrgR,Year,ProjectNumber")] Interdepartmental interdepartmental)
+        public ActionResult Create([Bind(Include = "AccessionNumber,OrgR,Year")] Interdepartmental interdepartmental)
         {
             if (!ModelState.IsValid)
                 return View(interdepartmental);
@@ -68,7 +68,7 @@ namespace AD419.DataHelper.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, [Bind(Include = "AccessionNumber,OrgR,Year,ProjectNumber")] Interdepartmental interdepartmental)
+        public ActionResult Edit(int id, [Bind(Include = "AccessionNumber,OrgR,Year")] Interdepartmental interdepartmental)
         {
             if (!ModelState.IsValid)
                 return View(interdepartmental);
