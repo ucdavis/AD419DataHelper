@@ -9,6 +9,10 @@
     padding-right: 15px;
 }
 
+.body-content header {
+    margin-top: 15px;
+}
+
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
@@ -46,6 +50,12 @@ textarea {
     max-width: 100%;
     display: block;
     margin: auto;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .float-center {
@@ -88,6 +98,12 @@ textarea {
 
 #uploadTabs.step-progressbar li {
 	width: 33%;
+}
+
+.modal-content .step-progressbar {
+    padding-top: 2rem;
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
 
 .step-progressbar li h2 {
