@@ -17,7 +17,5 @@ namespace AD419.DataHelper.Web.Models
         public string OrgR { get; set; }
 
         public int Year { get; set; }
-
-        public string ProjectNumber { get; set; }
     }
 }

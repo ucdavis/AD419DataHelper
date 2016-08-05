@@ -34,7 +34,6 @@ namespace AD419.DataHelper.Web.Controllers
             get
             {
                 return new DateTime(FiscalYear - 1, 10, 1, 0, 0, 0, DateTimeKind.Utc);
-                
             }
         }
 
@@ -43,6 +42,30 @@ namespace AD419.DataHelper.Web.Controllers
             get
             {
                 return new DateTime(FiscalYear, 10, 1, 0, 0, 0, DateTimeKind.Utc);
+            }
+        }
+
+        public string Message
+        {
+            get
+            {
+                return TempData["Message"] as string;
+            }
+            set
+            {
+                TempData["Message"] = value;
+            }
+        }
+
+        public string ErrorMessage
+        {
+            get
+            {
+                return TempData["ErrorMessage"] as string;
+            }
+            set
+            {
+                TempData["ErrorMessage"] = value;
             }
         }
 

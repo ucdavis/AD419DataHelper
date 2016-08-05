@@ -296,6 +296,9 @@
     <Content Include="Content\Images\FieldStationExpensesExample.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Images\Interdepartmental.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -323,6 +326,9 @@
     <Content Include="Content\Sample_Forms\ProjectsForImport.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Sample_Forms\Interdepartmental.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Scripts\jquery-1.12.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.2.js" />
@@ -338,6 +344,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\upload-wizard.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -438,6 +445,8 @@
     <Content Include="Views\AllProjectsNew\_projectsTable.cshtml" />
     <Content Include="Views\ExpiredProjects\Details.cshtml" />
     <Content Include="Views\AllProjectsNew\_uploadData.cshtml" />
+    <Content Include="Views\Interdepartmentals\_Upload.cshtml" />
+    <Content Include="Views\Interdepartmentals\_UploadData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

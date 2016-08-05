@@ -37,11 +37,11 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
 
     <div class="body-content">
         <header>
-            @if (!string.IsNullOrWhiteSpace(ViewBag.ErrorMessage))
+            @if (!string.IsNullOrWhiteSpace(TempData["ErrorMessage"] as string))
             {
-                <div class="alert alert-error">
+                <div class="alert alert-danger">
                     <button type="button" class="close" data-dismiss="alert">×</button>
-                    @ViewBag.ErrorMessage
+                    @TempData["ErrorMessage"]
                 </div>
             }
 
@@ -49,7 +49,7 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
             {
                 <div class="alert alert-info">
                     <button type="button" class="close" data-dismiss="alert">×</button>
-                    @Html.Raw(@TempData["Message"])
+                    @TempData["Message"]
                 </div>
             }
         </header>
