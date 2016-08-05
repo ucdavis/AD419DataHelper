@@ -257,6 +257,7 @@
     <Compile Include="Models\DosCodesForFTECalc.cs" />
     <Compile Include="Models\DosCode.cs" />
     <Compile Include="Models\CfdaNumberImport.cs" />
+    <Compile Include="Models\ExpenseOrgMapping.cs" />
     <Compile Include="Models\ExpiringProject.cs" />
     <Compile Include="Models\FFYExpensesByARCReportModel.cs" />
     <Compile Include="Models\FieldStationExpenseListImport.cs" />
