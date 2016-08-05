@@ -71,7 +71,6 @@
         <thead>
             <tr>
                 <th>@Html.DisplayNameFor(m => m[0].ProjectAccessionNum)</th> 
-                <th>@Html.DisplayNameFor(m => m[0].ProjectDirector)</th>
                 <th>@Html.DisplayNameFor(m => m[0].FieldStationCharge)</th>
             </tr>
         </thead>
@@ -80,7 +79,6 @@
             {
                 <tr>
                     <td>@item.ProjectAccessionNum</td>
-                    <td>@item.ProjectDirector</td>
                     <td>@item.FieldStationCharge</td>
                 </tr>
             }
@@ -94,7 +92,6 @@
         for (var i = 0; i < Model.Count; i++)
         {
             @Html.HiddenFor(m => m[i].ProjectAccessionNum)
-            @Html.HiddenFor(m => m[i].ProjectDirector)
             @Html.HiddenFor(m => m[i].FieldStationCharge)
         }
         
