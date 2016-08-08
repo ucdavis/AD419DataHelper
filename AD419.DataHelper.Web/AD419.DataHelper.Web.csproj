@@ -236,6 +236,7 @@
     <Compile Include="Controllers\ConsolidationCodesController.cs" />
     <Compile Include="Controllers\CurrentProjectsReportController.cs" />
     <Compile Include="Controllers\DosCodesController.cs" />
+    <Compile Include="Controllers\ExpenseOrgMappingsController.cs" />
     <Compile Include="Controllers\ExpiredProjectsController.cs" />
     <Compile Include="Controllers\FieldStationExpensesImportController.cs" />
     <Compile Include="Controllers\FFYExpensesByARCReportController.cs" />
@@ -257,6 +258,7 @@
     <Compile Include="Models\DosCodesForFTECalc.cs" />
     <Compile Include="Models\DosCode.cs" />
     <Compile Include="Models\CfdaNumberImport.cs" />
+    <Compile Include="Models\ExpenseOrgMapping.cs" />
     <Compile Include="Models\ExpiringProject.cs" />
     <Compile Include="Models\FFYExpensesByARCReportModel.cs" />
     <Compile Include="Models\FieldStationExpenseListImport.cs" />
@@ -447,6 +449,11 @@
     <Content Include="Views\AllProjectsNew\_uploadData.cshtml" />
     <Content Include="Views\Interdepartmentals\_Upload.cshtml" />
     <Content Include="Views\Interdepartmentals\_UploadData.cshtml" />
+    <Content Include="Views\ExpenseOrgMappings\Create.cshtml" />
+    <Content Include="Views\ExpenseOrgMappings\Delete.cshtml" />
+    <Content Include="Views\ExpenseOrgMappings\Details.cshtml" />
+    <Content Include="Views\ExpenseOrgMappings\Edit.cshtml" />
+    <Content Include="Views\ExpenseOrgMappings\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
