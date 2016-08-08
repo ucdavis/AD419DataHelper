@@ -1,0 +1,75 @@
+﻿@model IEnumerable<AD419.DataHelper.Web.Models.ReportingOrganization>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrganizationName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrganizationShortName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CrisDepartmentCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrganizationShortCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountEndCharacters)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsAdminCluster)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AdminClusterOrganizationCode)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrganizationName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrganizationShortName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CrisDepartmentCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrganizationShortCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccountEndCharacters)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsAdminCluster)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdminClusterOrganizationCode)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.OrganizationCode }) |
+            @Html.ActionLink("Details", "Details", new { id=item.OrganizationCode }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.OrganizationCode })
+        </td>
+    </tr>
+}
+
+</table>
