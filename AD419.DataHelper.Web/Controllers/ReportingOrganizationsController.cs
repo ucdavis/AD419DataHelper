@@ -12,7 +12,11 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: ReportingOrganizations
         public ActionResult Index()
         {
-            return View(DbContext.ReportingOrganizations.ToList());
+            var orgs = DbContext.ReportingOrganizations
+                .Where(r => r.IsActive)
+                .ToList();
+
+            return View(orgs);
         }
 
         // GET: ReportingOrganizations/Details/5
