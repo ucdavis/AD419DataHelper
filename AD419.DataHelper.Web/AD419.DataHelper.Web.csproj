@@ -245,6 +245,7 @@
     <Compile Include="Controllers\InterdepartmentalsController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\C204ExclusionsController.cs" />
+    <Compile Include="Controllers\ReportingOrganizationsController.cs" />
     <Compile Include="Controllers\SuperController.cs" />
     <Compile Include="Controllers\TransDocTypesController.cs" />
     <Compile Include="Helpers\CasHelper.cs" />
@@ -454,6 +455,11 @@
     <Content Include="Views\ExpenseOrgMappings\Details.cshtml" />
     <Content Include="Views\ExpenseOrgMappings\Edit.cshtml" />
     <Content Include="Views\ExpenseOrgMappings\Index.cshtml" />
+    <Content Include="Views\ReportingOrganizations\Create.cshtml" />
+    <Content Include="Views\ReportingOrganizations\Delete.cshtml" />
+    <Content Include="Views\ReportingOrganizations\Details.cshtml" />
+    <Content Include="Views\ReportingOrganizations\Edit.cshtml" />
+    <Content Include="Views\ReportingOrganizations\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

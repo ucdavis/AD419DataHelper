@@ -82,7 +82,7 @@ namespace AD419.DataHelper.Web.Services
         {
             if (organization != null)
             {
-                project.OrgR = organization.OrganizationCode;
+                project.OrgR = organization.Code;
             }
             else if (!string.IsNullOrEmpty(project.ShortCode) && project.ShortCode.Equals("XXX", StringComparison.OrdinalIgnoreCase))
             {

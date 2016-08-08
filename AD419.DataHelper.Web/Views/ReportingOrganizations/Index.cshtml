@@ -1,0 +1,98 @@
+﻿@model IEnumerable<AD419.DataHelper.Web.Models.ReportingOrganization>
+
+@{
+    ViewBag.Title = "Reporting Organizations";
+}
+
+<div class="pull-right">
+    <a href="@Url.Action("Create")" class="btn btn-default display-inline"><i class="fa fa-plus"></i> Create New</a>
+</div>
+
+<h2>Reporting Organizations</h2>
+
+
+<table id="orgsTable" class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShortName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrganizationShortCode)
+        </th>
+        <th>
+            Account# Ending <i class="fa fa-help" title="@Html.DisplayNameFor(model => model.AccountEndCharacters)"></i>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsAdminCluster)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AdminClusterOrganizationCode)
+        </th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShortName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrganizationShortCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountEndCharacters)
+                </td>
+                <td>
+                    @item.IsAdminCluster
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdminClusterOrganizationCode)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Code })
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.Code })
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Code })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section AdditionalScripts
+{
+    <script>
+        $(function() {
+            $('#orgsTable').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                columnDefs: [
+                    { targets: [-1, -2, -3], sortable: false }
+                ],
+                order: [
+                    [0, 'asc']
+                ],
+                displayLength: 25
+            });
+        })
+    </script>
+}

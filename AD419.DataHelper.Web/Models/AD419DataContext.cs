@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AD419.DataHelper.Web.Models
 {
-    public partial class AD419DataContext : DbContext
+    public class AD419DataContext : DbContext
     {
         public AD419DataContext()
             : base("name=AD419DataContext")
