@@ -30,15 +30,16 @@ namespace AD419.DataHelper.Web.Models
         [DisplayName("2nd & 3rd Account # Characters")]
         [Column("SecondAndThirdAcctNumCharacters")]
         [MaxLength(2)]
-        public string SecondAndThirdAccountNumberCharacters { get; set; }
+        public string AccountEndCharacters { get; set; }
 
         [DisplayName("Is Admin Cluster?")]
         [DefaultValue(false)]
-        public bool IsAdminCluster { get; set; }
+        public bool? IsAdminCluster { get; set; }
 
         [DisplayName("Admin Cluster Organization")]
+        [Column("AdminClusterOrgR")]
         [MaxLength(4)]
-        public string AdminClusterOrgR { get; set; }
+        public string AdminClusterOrganizationCode { get; set; }
 
         [DisplayName("Is Active?")]
         [DefaultValue(true)]
