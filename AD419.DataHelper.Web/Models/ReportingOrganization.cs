@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,30 +10,38 @@ namespace AD419.DataHelper.Web.Models
     {
         [Key]
         [Column("OrgR")]
-        public string OrganizationCode { get; set; }
+        [MaxLength(4)]
+        public string Code { get; set; }
 
         [Column("OrgName")]
-        public string OrganizationName { get; set; }
+        [MaxLength(40)]
+        public string Name { get; set; }
 
+        [DisplayName("Short Name")]
         [Column("OrgShortName")]
-        public string OrganizationShortName { get; set; }
+        [MaxLength(20)]
+        public string ShortName { get; set; }
 
-        [Column("CRISDeptCd")]
-        public string CrisDepartmentCode { get; set; }
-
+        [DisplayName("Short Code")]
         [Column("OrgCd3Char")]
+        [MaxLength(3)]
         public string OrganizationShortCode { get; set; }
 
-        [Column("IsActive")]
-        public bool IsActive { get; set; }
-
+        [DisplayName("2nd & 3rd Account # Characters")]
         [Column("SecondAndThirdAcctNumCharacters")]
-        public string AccountEndCharacters { get; set; }
+        [MaxLength(2)]
+        public string SecondAndThirdAccountNumberCharacters { get; set; }
 
-        [Column("IsAdminCluster")]
-        public bool? IsAdminCluster { get; set; }
+        [DisplayName("Is Admin Cluster?")]
+        [DefaultValue(false)]
+        public bool IsAdminCluster { get; set; }
 
-        [Column("AdminClusterOrgR")]
-        public string AdminClusterOrganizationCode { get; set; }
+        [DisplayName("Admin Cluster Organization")]
+        [MaxLength(4)]
+        public string AdminClusterOrgR { get; set; }
+
+        [DisplayName("Is Active?")]
+        [DefaultValue(true)]
+        public bool IsActive { get; set; }
     }
 }
