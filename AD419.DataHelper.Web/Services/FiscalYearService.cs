@@ -30,14 +30,13 @@ namespace AD419.DataHelper.Web.Services
                 }
 
                 // check database
-                var query = _dbContext.Database.SqlQuery<object>("SELECT TOP 1 FiscalYear FROM CurrentFiscalYear");
+                var query = _dbContext.Database.SqlQuery<int>("SELECT TOP 1 FiscalYear FROM CurrentFiscalYear");
                 var result = query.FirstOrDefault();
-                if (result != null)
+                if (result > 0)
                 {
                     // save to cache
-                    var year = (int) result;
-                    CacheFiscalYear(year);
-                    return year;
+                    CacheFiscalYear(result);
+                    return result;
                 }
 
                 // check current year
