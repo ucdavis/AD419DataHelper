@@ -89,7 +89,7 @@ namespace AD419.DataHelper.Web.Services
 
         private void PersistFiscalYear(int year)
         {
-            _dbContext.Database.ExecuteSqlCommand("INSERT INTO CurrentFiscalYear (FiscalYear) VALUES (@p0)", year);
+            _dbContext.Database.ExecuteSqlCommand("UPDATE CurrentFiscalYear SET FiscalYear = @p0", year);
         }
     }
 }
