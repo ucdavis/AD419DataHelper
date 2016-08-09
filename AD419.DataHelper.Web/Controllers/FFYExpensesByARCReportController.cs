@@ -14,7 +14,8 @@ namespace AD419.DataHelper.Web.Controllers
         
         public ActionResult Index()
         {
-            var model = new FFYExpensesByARCReportModel(FiscalYear)
+            var year = FiscalYearService.FiscalYear;
+            var model = new FFYExpensesByARCReportModel(year)
             {
                 ArcCodeSelections = FisDbContext.ArcCodes.ToList()
             };
@@ -35,7 +36,8 @@ namespace AD419.DataHelper.Web.Controllers
 
         public ActionResult Report()
         {
-            var yearParameter = new ReportParameter("FiscalYear", FiscalYear.ToString());
+            var year = FiscalYearService.FiscalYear;
+            var yearParameter = new ReportParameter("FiscalYear", year.ToString());
             var reportParameters = new ReportParameterCollection() { yearParameter };            
             var reportViewer = new ReportViewer
             {

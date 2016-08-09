@@ -7,7 +7,7 @@ namespace AD419.DataHelper.Web.Controllers
     {
         public HomeController()
         {
-            ViewBag.FiscalYear = FiscalYear;
+            ViewBag.FiscalYear = FiscalYearService.FiscalYear;
         }
         public ActionResult Index()
         {
@@ -17,7 +17,7 @@ namespace AD419.DataHelper.Web.Controllers
         [HttpPost]
         public ActionResult SetFiscalYear(int fiscalYear)
         {
-            FiscalYear = fiscalYear;
+            FiscalYearService.FiscalYear = fiscalYear;
             return RedirectToAction("Index");
         }
     }

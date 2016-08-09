@@ -12,7 +12,7 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: ExpiredProjectCrossReference
         public async Task<ViewResult> Index()
         {
-            var year = FiscalYear;
+            var year = FiscalYearService.FiscalYear;
             var expired = await DbContext.GetExpired20XProjects(year);
             var projects = DbContext.ExpiredProjectCrossReference.ToList();
 

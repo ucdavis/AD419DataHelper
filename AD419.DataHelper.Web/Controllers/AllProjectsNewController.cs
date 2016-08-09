@@ -24,9 +24,12 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: AllProjectsNew
         public ActionResult Index()
         {
+            var start = FiscalYearService.FiscalStartDate;
+            var end = FiscalYearService.FiscalEndDate;
+
             var projects = DbContext.AllProjectsNew
-                .Where(p => p.ProjectStartDate >= FiscalStartDate)
-                .Where(p => p.ProjectEndDate >= FiscalEndDate)
+                .Where(p => p.ProjectStartDate >= start)
+                .Where(p => p.ProjectEndDate >= end)
                 .ToList();
 
             return View(projects);
@@ -34,9 +37,12 @@ namespace AD419.DataHelper.Web.Controllers
 
         public ActionResult FindByDirector(string director)
         {
+            var start = FiscalYearService.FiscalStartDate;
+            var end = FiscalYearService.FiscalEndDate;
+
             var projects = DbContext.AllProjectsNew
-                .Where(p => p.ProjectStartDate <= FiscalEndDate) //project has actually started
-                .Where(p => p.ProjectEndDate >= FiscalStartDate) //project hasn't ended yet
+                .Where(p => p.ProjectStartDate <= end) //project has actually started
+                .Where(p => p.ProjectEndDate >= start) //project hasn't ended yet
                 .Where(p => p.ProjectDirector.Equals(director));
 
             var results = new
@@ -56,9 +62,12 @@ namespace AD419.DataHelper.Web.Controllers
 
         public ActionResult FindByOrganization(string organization)
         {
+            var start = FiscalYearService.FiscalStartDate;
+            var end = FiscalYearService.FiscalEndDate;
+
             var projects = DbContext.AllProjectsNew
-                .Where(p => p.ProjectStartDate <= FiscalEndDate) //project has actually started
-                .Where(p => p.ProjectEndDate >= FiscalStartDate) //project hasn't ended yet
+                .Where(p => p.ProjectStartDate <= end) //project has actually started
+                .Where(p => p.ProjectEndDate >= start) //project hasn't ended yet
                 .Where(p => p.OrgR.Equals(organization));
 
             var results = new
