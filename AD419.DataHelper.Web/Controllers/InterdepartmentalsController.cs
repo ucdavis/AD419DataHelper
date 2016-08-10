@@ -18,7 +18,7 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: Interdepartmentals
         public ActionResult Index()
         {
-            var year = FiscalYear;
+            var year = FiscalYearService.FiscalYear;
 
             var model = DbContext.Interdepartmentals
                 .Where(i => i.Year == year)
@@ -120,7 +120,7 @@ namespace AD419.DataHelper.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteAll()
         {
-            var year = FiscalYear;
+            var year = FiscalYearService.FiscalYear;
 
             var target = DbContext.Interdepartmentals
                 .Where(i => i.Year == year);
@@ -147,7 +147,7 @@ namespace AD419.DataHelper.Web.Controllers
             excelReader.Close();
 
             // transform
-            var year = FiscalYear;
+            var year = FiscalYearService.FiscalYear;
             var data = result.Tables[0].Rows
                 .ToEnumerable()
                 .Select(r => new Interdepartmental()

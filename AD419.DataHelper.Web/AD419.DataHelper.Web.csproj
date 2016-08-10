@@ -281,6 +281,7 @@
     <Compile Include="Models\TransDocTypesForFTECalc.cs" />
     <Compile Include="Models\TransDocTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\FiscalYearService.cs" />
     <Compile Include="Services\ProjectImportService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ExpiringProjectMatch.cs" />
