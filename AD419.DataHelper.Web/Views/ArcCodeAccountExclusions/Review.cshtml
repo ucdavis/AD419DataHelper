@@ -1,21 +1,14 @@
 ﻿@model IEnumerable<AD419.DataHelper.Web.Models.ArcCodeAccountExclusion>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Review";
 }
 
 <div class="pull-right">
-    <a class="btn btn-default" href="@Url.Action("Create")">Create New</a>
-    <form action="@Url.Action("ImportOld")" method="POST" class="display-inline">
-        @Html.AntiForgeryToken()
-        <input type="submit" id="btnImportOld" value="Import From Last Year" title="Import From Last Year" class="btn btn-danger" 
-               onclick="return confirm('Are you sure you want to import records into the currently selected year?')" />
-    </form>
+    <a class="btn btn-default" href="@Url.Action("Index")">Maintenance</a>
 </div>
 
-<h2>ARC Code Account Exclusions</h2>
-
-<br/>
+<h2>Index</h2>
 
 <table id="arcCodeTable" class="table">
     <thead>
@@ -44,9 +37,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.AwardNumber)
             </th>
-            <th></th>
-            <th></th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -77,15 +67,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.AwardNumber)
                 </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { year = item.Year, chart = item.Chart, account = item.Account, annualReportCode = item.AnnualReportCode })
-                </td>
-                <td>
-                    @Html.ActionLink("Details", "Details", new { year = item.Year, chart = item.Chart, account = item.Account, annualReportCode = item.AnnualReportCode })
-                </td>
-                <td>
-                    @Html.ActionLink("Delete", "Delete", new { year = item.Year, chart = item.Chart, account = item.Account, annualReportCode = item.AnnualReportCode })
-                </td>
             </tr>
         }
     </tbody>
@@ -98,7 +79,6 @@
             $('#arcCodeTable').DataTable({
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 columnDefs: [
-                    { targets: [-1, -2, -3], sortable: false }
                 ]
             });
         })

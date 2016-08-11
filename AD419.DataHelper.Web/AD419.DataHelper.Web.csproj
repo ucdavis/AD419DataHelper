@@ -461,6 +461,7 @@
     <Content Include="Views\ReportingOrganizations\Details.cshtml" />
     <Content Include="Views\ReportingOrganizations\Edit.cshtml" />
     <Content Include="Views\ReportingOrganizations\Index.cshtml" />
+    <Content Include="Views\ArcCodeAccountExclusions\Review.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
