@@ -27,6 +27,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.Comments)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Is204)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AwardNumber)
+            </th>
             <th></th>
             <th></th>
             <th></th>
@@ -50,6 +59,15 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Comments)
+                </td>
+                <td>
+                    @item.Is204
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AwardNumber)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { year = item.Year, chart = item.Chart, account = item.Account, annualReportCode = item.AnnualReportCode })
