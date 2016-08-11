@@ -39,7 +39,7 @@ namespace AD419.DataHelper.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Year,Chart,Account,AnnualReportCode,Comments")] ArcCodeAccountExclusion exclusion)
+        public ActionResult Create(ArcCodeAccountExclusion exclusion)
         {
             if (!ModelState.IsValid) return View(exclusion);
 
@@ -66,7 +66,7 @@ namespace AD419.DataHelper.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Year,Chart,Account,AnnualReportCode,Comments")] ArcCodeAccountExclusion exclusion)
+        public ActionResult Edit(ArcCodeAccountExclusion exclusion)
         {
             if (!ModelState.IsValid) return View(exclusion);
 
