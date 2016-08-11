@@ -15,6 +15,16 @@ namespace AD419.DataHelper.Web.Controllers
             return View(exclusions);
         }
 
+        public ActionResult Review()
+        {
+            var year = FiscalYearService.FiscalYear;
+            var exclusions = DbContext.ArcCodeAccountExclusions
+                .Where(x => x.Year == year)
+                .ToList();
+
+            return View(exclusions);
+        }
+
         // GET: ArcCodeAccountExclusions/Details/5
         public ActionResult Details(int? year, string chart, string account, string annualReportCode)
         {
