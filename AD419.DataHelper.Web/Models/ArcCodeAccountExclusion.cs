@@ -33,12 +33,15 @@ namespace AD419.DataHelper.Web.Models
         [Required]
         public string Comments { get; set; }
 
+        [Display(Name = "Is 204?")]
         public bool Is204 { get; set; }
 
         [MaxLength(20)]
+        [Display(Name = "Award Number")]
         public string AwardNumber { get; set; }
 
         [MaxLength(24)]
+        [Display(Name = "Project Number")]
         public string ProjectNumber { get; set; }
     }
 }
