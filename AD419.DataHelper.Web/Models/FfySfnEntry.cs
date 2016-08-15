@@ -5,8 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AD419.DataHelper.Web.Models
 {
-    [Table("FFY_SFN_Entities")]
-    public class FfySfnEntities
+    [Table("FFY_SFN_Entries")]
+    public class FfySfnEntry
     {
         [Key]
         public int Id { get; set; }
@@ -33,15 +33,15 @@ namespace AD419.DataHelper.Web.Models
         public string ProjectNumber { get; set; }
 
         [DisplayName("Is Expired?")]
-        public bool IsExpired { get; set; }
+        public bool? IsExpired { get; set; }
 
         [DisplayName("Project End Date")]
-        public DateTime ProjectEndDate { get; set; }
+        public DateTime? ProjectEndDate { get; set; }
 
-        public decimal Expenses { get; set; }
+        public decimal? Expenses { get; set; }
 
         [Column("FTE")]
         [DisplayName("Full Time Employees")]
-        public decimal FullTimeEmployees { get; set; }
+        public decimal? FullTimeEmployees { get; set; }
     }
 }
