@@ -44,6 +44,8 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<FfySfnEntry> FfySfnEntries { get; set; }
 
+        public virtual DbSet<FfySfnEntryWithAccount> FfySfnEntriesWithAccounts { get; set; }
+
         public virtual DbSet<Interdepartmental> Interdepartmentals { get; set; }
 
         public virtual DbSet<TransDocTypes> TransDocTypes { get; set; }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AD419.DataHelper.Web.Models.FfySfnEntry>
+﻿@model IEnumerable<AD419.DataHelper.Web.Models.FfySfnEntryWithAccount>
 
 @{
     ViewBag.Title = "Index";
@@ -45,6 +45,15 @@
         <th>
             @Html.DisplayNameFor(model => model.FullTimeEmployees)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrincipalInvestigator)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Purpose)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountName)
+        </th>
         <th></th>
         <th></th>
         <th></th>
@@ -86,6 +95,15 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.FullTimeEmployees)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrincipalInvestigator)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Purpose)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountName)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id })

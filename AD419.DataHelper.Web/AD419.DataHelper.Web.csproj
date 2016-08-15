@@ -264,6 +264,7 @@
     <Compile Include="Models\ExpiringProject.cs" />
     <Compile Include="Models\FFYExpensesByARCReportModel.cs" />
     <Compile Include="Models\FfySfnEntry.cs" />
+    <Compile Include="Models\FfySfnEntryWithAccount.cs" />
     <Compile Include="Models\FieldStationExpenseListImport.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

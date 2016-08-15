@@ -12,7 +12,8 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: FfySfnEntities
         public ActionResult Index()
         {
-            return View(DbContext.FfySfnEntries.ToList());
+            var entries = DbContext.FfySfnEntriesWithAccounts.ToList();
+            return View(entries);
         }
 
         // GET: FfySfnEntities/Details/5

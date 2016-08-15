@@ -1,42 +1,38 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Web;
 
 namespace AD419.DataHelper.Web.Models
 {
-    [Table("FFY_SFN_Entries")]
-    public class FfySfnEntry
+    [Table("FFY_SFN_EntriesV")]
+    public class FfySfnEntryWithAccount
     {
         [Key]
         public int Id { get; set; }
 
-        [MaxLength(2)]
         public string Chart { get; set; }
 
-        [MaxLength(7)]
         public string Account { get; set; }
 
         [DisplayName("SFN")]
-        [MaxLength(5)]
         public string Sfn { get; set; }
 
         [Column("Accounts_AwardNum")]
         [DisplayName("Account Award Number")]
-        [MaxLength(50)]
         public string AccountsAwardNumber { get; set; }
 
         [Column("OpFund_AwardNum")]
         [DisplayName("OP Fund Award Number")]
-        [MaxLength(50)]
         public string OpFundAwardNumber { get; set; }
 
         [DisplayName("Accession Number")]
-        [MaxLength(10)]
         public string AccessionNumber { get; set; }
 
         [DisplayName("Project Number")]
-        [MaxLength(24)]
         public string ProjectNumber { get; set; }
 
         [DisplayName("Is Expired?")]
@@ -50,5 +46,14 @@ namespace AD419.DataHelper.Web.Models
         [Column("FTE")]
         [DisplayName("Full Time Employees")]
         public decimal? FullTimeEmployees { get; set; }
+
+        [Column("PrincipalInvestigatorName")]
+        [DisplayName("Principal Investigator Name")]
+        public string PrincipalInvestigator { get; set; }
+
+        public string Purpose { get; set; }
+
+        [DisplayName("Account Name")]
+        public string AccountName { get; set; }
     }
 }
