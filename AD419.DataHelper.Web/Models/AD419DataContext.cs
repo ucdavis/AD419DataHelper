@@ -42,6 +42,10 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<FieldStationExpenseListImport> FieldStationExpenseListImports { get; set; }
 
+        public virtual DbSet<FfySfnEntry> FfySfnEntries { get; set; }
+
+        public virtual DbSet<FfySfnEntryWithAccount> FfySfnEntriesWithAccounts { get; set; }
+
         public virtual DbSet<Interdepartmental> Interdepartmentals { get; set; }
 
         public virtual DbSet<TransDocTypes> TransDocTypes { get; set; }
@@ -309,5 +313,6 @@ namespace AD419.DataHelper.Web.Models
                 .Property(e => e.OrgR)
                 .IsUnicode(false);
         }
+
     }
 }
