@@ -238,6 +238,7 @@
     <Compile Include="Controllers\DosCodesController.cs" />
     <Compile Include="Controllers\ExpenseOrgMappingsController.cs" />
     <Compile Include="Controllers\ExpiredProjectsController.cs" />
+    <Compile Include="Controllers\PrincipalsController.cs" />
     <Compile Include="Controllers\ProjectMappingController.cs" />
     <Compile Include="Controllers\FieldStationExpensesImportController.cs" />
     <Compile Include="Controllers\FFYExpensesByARCReportController.cs" />
