@@ -238,6 +238,7 @@
     <Compile Include="Controllers\DosCodesController.cs" />
     <Compile Include="Controllers\ExpenseOrgMappingsController.cs" />
     <Compile Include="Controllers\ExpiredProjectsController.cs" />
+    <Compile Include="Controllers\ProjectMappingController.cs" />
     <Compile Include="Controllers\FieldStationExpensesImportController.cs" />
     <Compile Include="Controllers\FFYExpensesByARCReportController.cs" />
     <Compile Include="Controllers\FTEReportController.cs" />
@@ -463,6 +464,11 @@
     <Content Include="Views\ReportingOrganizations\Edit.cshtml" />
     <Content Include="Views\ReportingOrganizations\Index.cshtml" />
     <Content Include="Views\ArcCodeAccountExclusions\Review.cshtml" />
+    <Content Include="Views\ProjectMapping\Create.cshtml" />
+    <Content Include="Views\ProjectMapping\Delete.cshtml" />
+    <Content Include="Views\ProjectMapping\Details.cshtml" />
+    <Content Include="Views\ProjectMapping\Edit.cshtml" />
+    <Content Include="Views\ProjectMapping\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

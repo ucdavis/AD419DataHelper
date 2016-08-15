@@ -1,0 +1,116 @@
+﻿@model IEnumerable<AD419.DataHelper.Web.Models.FfySfnEntry>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table id="ffyTable" class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Chart)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Account)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sfn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountsAwardNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OpFundAwardNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccessionNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsExpired)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectEndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Expenses)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FullTimeEmployees)
+        </th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Chart)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Account)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sfn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountsAwardNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpFundAwardNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccessionNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectNumber)
+                </td>
+                <td>
+                    @item.IsExpired
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectEndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Expenses)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullTimeEmployees)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section AdditionalScripts
+{
+    <script>
+        $(function() {
+            $('#ffyTable').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                columnDefs: [
+                    { targets: [-1, -2, -3], sortable: false }
+                ]
+            });
+        })
+    </script>
+}

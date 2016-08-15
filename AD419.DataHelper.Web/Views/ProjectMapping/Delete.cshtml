@@ -1,0 +1,112 @@
+﻿@model AD419.DataHelper.Web.Models.FfySfnEntry
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>FfySfnEntities</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Chart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Chart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Account)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Account)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sfn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sfn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountsAwardNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccountsAwardNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OpFundAwardNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OpFundAwardNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccessionNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccessionNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsExpired)
+        </dt>
+
+        <dd>
+            @Model.IsExpired
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectEndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectEndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Expenses)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Expenses)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullTimeEmployees)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullTimeEmployees)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
