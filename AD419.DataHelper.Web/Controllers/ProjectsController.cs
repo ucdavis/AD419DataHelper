@@ -100,5 +100,63 @@ namespace AD419.DataHelper.Web.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public ActionResult AccessionNumbers()
+        {
+            var accessions = DbContext.AllProjects
+                .Select(p => p.Accession)
+                .Distinct()
+                .ToList();
+
+            return new JsonResult()
+            {
+                Data = accessions,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        public ActionResult FindAccessionNumbers(string query)
+        {
+            var accessions = DbContext.AllProjects
+                .Select(p => p.Accession)
+                .Where(a => a.Contains(query))
+                .Distinct()
+                .ToList();
+
+            return new JsonResult()
+            {
+                Data = accessions,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        public ActionResult ProjectNumbers()
+        {
+            var projects = DbContext.AllProjects
+                .Select(p => p.Project)
+                .Distinct()
+                .ToList();
+
+            return new JsonResult()
+            {
+                Data =  projects,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        public ActionResult FindProjectNumbers(string query)
+        {
+            var projects = DbContext.AllProjects
+                .Select(p => p.Project)
+                .Where(p => p.Contains(query))
+                .Distinct()
+                .ToList();
+
+            return new JsonResult()
+            {
+                Data = projects,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
     }
 }

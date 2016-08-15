@@ -59,7 +59,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.AccessionNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.AccessionNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.AccessionNumber, new { htmlAttributes = new { @class = "form-control typeahead" } })
                 @Html.ValidationMessageFor(model => model.AccessionNumber, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -67,7 +67,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ProjectNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ProjectNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.ProjectNumber, new { htmlAttributes = new { @class = "form-control typeahead" } })
                 @Html.ValidationMessageFor(model => model.ProjectNumber, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -115,3 +115,46 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section AdditionalStyles
+{
+    <link rel="stylesheet" href="~/Content/typeahead.css"/>
+}
+
+@section AdditionalScripts
+{
+    <script type="text/javascript" src="~/Scripts/typeahead.bundle.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var accessions = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.whitespace,
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '@Url.Action("FindAccessionNumbers", "Projects", new { query = "value"})',
+                    wildcard: 'value'
+                }
+            });
+
+            $('#AccessionNumber').typeahead(null,
+            {
+                name: 'accessions',
+                source: accessions
+            });
+
+            var projects = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.whitespace,
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '@Url.Action("FindProjectNumbers", "Projects", new { query = "value" })',
+                    wildcard: 'value'
+                }
+            });
+
+            $('#ProjectNumber').typeahead(null,
+            {
+                name: 'projects',
+                source: projects
+            });
+        });
+    </script>
+}

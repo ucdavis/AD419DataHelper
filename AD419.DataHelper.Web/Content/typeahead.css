@@ -1,0 +1,95 @@
+﻿.twitter-typeahead .tt-hint {
+    display: block;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    border: 1px solid transparent;
+    border-radius:4px;
+}
+
+.twitter-typeahead .hint-small {
+    height: 30px;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 3px;
+    line-height: 1.5;
+}
+
+.twitter-typeahead .hint-large {
+    height: 45px;
+    padding: 10px 16px;
+    font-size: 18px;
+    border-radius: 6px;
+    line-height: 1.33;
+}
+
+.tt-menu {
+    width: 422px;
+    margin-top: 12px;
+    padding: 8px 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.tt-suggestion {
+    padding: 3px 20px;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.tt-suggestion.tt-cursor {
+    color: #fff;
+    background-color: #0097cf;
+
+}
+
+.tt-suggestion p {
+    margin: 0;
+}
+
+/* WIDTH = 100% */
+
+.twitter-typeahead {
+	width: 100%;
+}
+
+.tt-menu {
+	width: 100%;
+}
+
+.tt-hint {
+    width: 100%;
+}
+
+.bootstrap-tagsinput {
+    padding: 0 12px;
+}
+
+.bootstrap-tagsinput .twitter-typeahead,
+.bootstrap-tagsinput .tt-query,
+.bootstrap-tagsinput .tt-hint,
+.bootstrap-tagsinput .tt-input {
+    width: 396px;
+    height: 30px;
+    margin: 0;
+    line-height: 30px;
+    outline: none;
+}
+
+.bootstrap-tagsinput .tt-input {
+    border: 1px solid transparent;
+    padding: 6px 12px;
+}
+
+.bootstrap-tagsinput .tt-query {
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.bootstrap-tagsinput .tt-hint {
+    display: block;
+    color: #999;
+}
