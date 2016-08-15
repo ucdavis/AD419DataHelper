@@ -23,22 +23,45 @@ namespace AD419.DataHelper.Web.Controllers
             var match = DbContext.PrincipalInvestigatorMatches.Find(id);
             if (match == null) return HttpNotFound();
 
+            var names = DbContext.PrincipalInvestigators
+                .Where(p => p.Organization == match.Organization)
+                .OrderBy(p => p.EmployeeId)
+                .ToList() // pull from db
+                .Select(p => new SelectListItem()
+                {
+                    Text = string.Format("({0}) - {1}", p.EmployeeId,  p.EmployeeName.Replace("(CE PI)", "")),
+                    Value = p.EmployeeId
+                })
+                .ToList();
+
+
+            // add empty
+            names.Insert(0, new SelectListItem());
+
+            ViewBag.NamesInOrg = names;
+
             return View(match);
         }
 
         [HttpPost]
-        public ActionResult Match(PrincipalInvestigatorMatch match)
+        public ActionResult FindMatch(PrincipalInvestigatorMatch match)
         {
+            // check matched employee id, fetch and insert name
+            var name = DbContext.PrincipalInvestigators
+                .FirstOrDefault(p => p.EmployeeId == match.EmployeeId);
+            if (name == null)
+            {
+                ErrorMessage = "Could not match";
+                return View(match);
+            }
+
+
+            match.MatchName = name.Name;
+
             DbContext.Entry(match).State = EntityState.Modified;
             DbContext.SaveChanges();
 
             return RedirectToAction("UnproratedMatches");
-        }
-
-        public ActionResult Find(string query)
-        {
-            var matches = DbContext.PrincipalInvestigatorMatches
-                .Where(p => p.Name);
         }
     }
 }
