@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Models;
 
@@ -58,6 +59,30 @@ namespace AD419.DataHelper.Web.Controllers
 
             match.MatchName = name.Name;
 
+            DbContext.Entry(match).State = EntityState.Modified;
+            DbContext.SaveChanges();
+
+            return RedirectToAction("UnproratedMatches");
+        }
+
+        public ActionResult ProrateMatch(int id)
+        {
+            var match = DbContext.PrincipalInvestigatorMatches.Find(id);
+            if (match == null)
+                return HttpNotFound();
+
+            if (!string.IsNullOrEmpty(match.MatchName))
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            if (match.IsProrated.HasValue && match.IsProrated.Value)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            return View(match);
+        }
+
+        [HttpPost]
+        public ActionResult ProrateMatch(PrincipalInvestigatorMatch match)
+        {
             DbContext.Entry(match).State = EntityState.Modified;
             DbContext.SaveChanges();
 

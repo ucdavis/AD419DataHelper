@@ -25,6 +25,7 @@
                 @Html.DisplayNameFor(model => model.IsProrated)
             </th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -49,6 +50,9 @@
                 <td>
                     @Html.ActionLink("Match", "FindMatch", new { id = item.Id })
                 </td>
+                <td>
+                    @Html.ActionLink("Prorate", "ProrateMatch", new { id = item.Id })
+                </td>
             </tr>
         }
     </tbody>
@@ -62,7 +66,7 @@
             $('#matchesTable').DataTable({
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 columnDefs: [
-                    { targets: [-1], sortable: false }
+                    { targets: [-1, -2], sortable: false }
                 ]
             });
         })
