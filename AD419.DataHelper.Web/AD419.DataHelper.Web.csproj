@@ -480,11 +480,7 @@
     <Content Include="Views\ProjectMapping\Details.cshtml" />
     <Content Include="Views\ProjectMapping\Edit.cshtml" />
     <Content Include="Views\ProjectMapping\Index.cshtml" />
-    <Content Include="Views\Principals\Create.cshtml" />
-    <Content Include="Views\Principals\Delete.cshtml" />
-    <Content Include="Views\Principals\Details.cshtml" />
-    <Content Include="Views\Principals\Edit.cshtml" />
-    <Content Include="Views\Principals\Index.cshtml" />
+    <Content Include="Views\Principals\ProrateMatch.cshtml" />
     <Content Include="Views\Principals\UnproratedMatches.cshtml" />
     <Content Include="Views\Principals\FindMatch.cshtml" />
   </ItemGroup>
