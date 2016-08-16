@@ -1,0 +1,74 @@
+﻿@model IEnumerable<AD419.DataHelper.Web.Models.PrincipalInvestigatorMatch>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table id="matchesTable" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Organization)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatchName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsProrated)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Organization)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MatchName)
+                </td>
+                <td>
+                    @item.IsProrated
+                </td>
+                <td>
+                    @Html.ActionLink("Match", "FindMatch", new { id = item.Id })
+                </td>
+                <td>
+                    @Html.ActionLink("Prorate", "ProrateMatch", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@section AdditionalScripts
+{
+    <script>
+        $(function() {
+            $('#matchesTable').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                columnDefs: [
+                    { targets: [-1, -2], sortable: false }
+                ]
+            });
+        })
+    </script>
+}

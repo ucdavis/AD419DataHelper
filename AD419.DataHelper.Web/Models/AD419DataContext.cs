@@ -54,6 +54,10 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<ReportingOrganization> ReportingOrganizations { get; set; }
 
+        public virtual DbSet<PrincipalInvestigator> PrincipalInvestigators { get; set; }
+
+        public virtual DbSet<PrincipalInvestigatorMatch> PrincipalInvestigatorMatches { get; set; }
+
         public virtual DbRawSqlQuery<AllProjectsNew> GetNewProjects(int fiscalYear)
         {
             return Database.SqlQuery<AllProjectsNew>(
@@ -313,6 +317,5 @@ namespace AD419.DataHelper.Web.Models
                 .Property(e => e.OrgR)
                 .IsUnicode(false);
         }
-
     }
 }
