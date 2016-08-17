@@ -77,6 +77,8 @@ namespace AD419.DataHelper.Web.Controllers
             if (match.IsProrated.HasValue && match.IsProrated.Value)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
+            match.IsProrated = true;
+
             return View(match);
         }
 
