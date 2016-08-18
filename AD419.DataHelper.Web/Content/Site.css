@@ -182,6 +182,10 @@ textarea {
     font-size: 2rem;
 }
 
+.checklist li.complete h2 {
+    text-decoration: line-through
+}
+
 .checklist li > i.bullet, h2 {
     display: inline-block;
 }
