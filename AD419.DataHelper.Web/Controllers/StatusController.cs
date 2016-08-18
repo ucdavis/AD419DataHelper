@@ -10,8 +10,6 @@ namespace AD419.DataHelper.Web.Controllers
         public ActionResult Index()
         {
             var status = DbContext.ProcessStatuses.ToList();
-            status[0].IsCompleted = true;
-
             return View(status);
         }
     }
