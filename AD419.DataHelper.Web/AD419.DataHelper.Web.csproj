@@ -485,6 +485,7 @@
     <Content Include="Views\Principals\ProrateMatch.cshtml" />
     <Content Include="Views\Principals\UnproratedMatches.cshtml" />
     <Content Include="Views\Principals\FindMatch.cshtml" />
+    <Content Include="Views\Status\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
