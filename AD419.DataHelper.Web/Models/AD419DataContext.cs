@@ -58,6 +58,8 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<PrincipalInvestigatorMatch> PrincipalInvestigatorMatches { get; set; }
 
+        public virtual DbSet<ProcessStatus> ProcessStatuses { get; set; }
+
         public virtual DbRawSqlQuery<AllProjectsNew> GetNewProjects(int fiscalYear)
         {
             return Database.SqlQuery<AllProjectsNew>(

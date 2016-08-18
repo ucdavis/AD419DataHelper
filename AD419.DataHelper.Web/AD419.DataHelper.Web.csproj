@@ -248,6 +248,7 @@
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\C204ExclusionsController.cs" />
     <Compile Include="Controllers\ReportingOrganizationsController.cs" />
+    <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\SuperController.cs" />
     <Compile Include="Controllers\TransDocTypesController.cs" />
     <Compile Include="Helpers\CasHelper.cs" />
@@ -283,6 +284,7 @@
     <Compile Include="Models\Interdepartmental.cs" />
     <Compile Include="Models\PrincipalInvestigator.cs" />
     <Compile Include="Models\PrincipalInvestigatorMatch.cs" />
+    <Compile Include="Models\ProcessStatus.cs" />
     <Compile Include="Models\ReportingOrganization.cs" />
     <Compile Include="Models\TransDocTypesForFTECalc.cs" />
     <Compile Include="Models\TransDocTypes.cs" />
@@ -483,6 +485,7 @@
     <Content Include="Views\Principals\ProrateMatch.cshtml" />
     <Content Include="Views\Principals\UnproratedMatches.cshtml" />
     <Content Include="Views\Principals\FindMatch.cshtml" />
+    <Content Include="Views\Status\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
