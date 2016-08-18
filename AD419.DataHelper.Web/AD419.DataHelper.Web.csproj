@@ -248,6 +248,7 @@
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\C204ExclusionsController.cs" />
     <Compile Include="Controllers\ReportingOrganizationsController.cs" />
+    <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\SuperController.cs" />
     <Compile Include="Controllers\TransDocTypesController.cs" />
     <Compile Include="Helpers\CasHelper.cs" />

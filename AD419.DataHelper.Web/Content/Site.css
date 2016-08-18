@@ -149,3 +149,43 @@ textarea {
 .step-progressbar li.active:before,  .step-progressbar li.active:after{
 	background: #27AE60;
 }
+
+
+.checklist {
+    list-style: none;
+}
+
+.checklist li {
+    color: #9E9E9E;
+}
+
+.checklist li.complete {
+    color: #9E9E9E;
+}
+
+.checklist li.complete+li.incomplete {
+    color: black;
+}
+
+.checklist li i.bullet {
+    color: grey;
+    font-size: 2rem;
+    padding-right: 1rem;
+    vertical-align: central;
+}
+
+.checklist li.complete .bullet {
+    color: #27AE60;
+}
+
+.checklist h2 {
+    font-size: 2rem;
+}
+
+.checklist li > i.bullet, h2 {
+    display: inline-block;
+}
+
+.checklist li p {
+    padding-left: 3.5rem;
+}
