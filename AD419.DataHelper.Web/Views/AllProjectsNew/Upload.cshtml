@@ -31,6 +31,7 @@
                 </div>
                 <div class="col-md-6">
                     <form id="UploadForm" method="post" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
                         <b>Please select an All AES Projects List Excel file to display:</b>
                         <input type="file" name="file" required="required"/>
                         <br/>

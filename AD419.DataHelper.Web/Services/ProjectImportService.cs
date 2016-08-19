@@ -57,6 +57,12 @@ namespace AD419.DataHelper.Web.Services
                 ProjectStatus      = row["Project Status"].ToString(),
             };
 
+            // fix accession number
+            if (string.IsNullOrWhiteSpace(project.AccessionNumber))
+            {
+                project.AccessionNumber = "0000000";
+            }
+
             // parse dates
             DateTime startDate;
             if (DateTime.TryParse(row["Project Start Date"].ToString(), out startDate))
@@ -80,24 +86,35 @@ namespace AD419.DataHelper.Web.Services
 
         private void ConfigureReportingOrg(AllProjectsNew project, ReportingOrganization organization)
         {
+            // don't set orgR on non ucdavis projects
+            if (!project.IsUcDavis)
+                return;
+
+            // if we have an org, use that
             if (organization != null)
             {
                 project.OrgR = organization.Code;
+                return;
             }
-            else if (!string.IsNullOrEmpty(project.ShortCode) && project.ShortCode.Equals("XXX", StringComparison.OrdinalIgnoreCase))
-            {
-                project.OrgR = "XXXX";
-                project.IsInterdepartmental = true;
-            }
-            else if (!string.IsNullOrEmpty(project.ShortCode) && project.ShortCode.Equals("IPO", StringComparison.OrdinalIgnoreCase))
+
+            // check for IPO
+            if (!string.IsNullOrEmpty(project.ShortCode) && project.ShortCode.Equals("IPO", StringComparison.OrdinalIgnoreCase))
             {
                 project.OrgR = "AIND";
                 project.IsInterdepartmental = true;
+                return;
             }
-            else if (project.IsUcDavis)
+
+            // check for XXX
+            if (!string.IsNullOrEmpty(project.ShortCode) && project.ShortCode.Equals("XXX", StringComparison.OrdinalIgnoreCase))
             {
-                project.OrgR = GetDepartmentCode(project.Department);
+                project.OrgR = "XXXX";
+                project.IsInterdepartmental = true;
+                return;
             }
+            
+            // try to parse from department code
+            project.OrgR = GetDepartmentCode(project.Department);
         }
 
         private static readonly List<Tuple<Regex, string>> Searches = new List<Tuple<Regex, string>>

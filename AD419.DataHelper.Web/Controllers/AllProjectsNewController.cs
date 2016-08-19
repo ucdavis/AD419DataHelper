@@ -177,11 +177,18 @@ namespace AD419.DataHelper.Web.Controllers
         [HttpGet]
         public ActionResult Upload()
         {
-            return View(new List<AllProjectsNew>());
+            var errors = ImportErrors;
+            if (errors != null)
+            {
+                ErrorMessage = "Your upload file has errors.";
+                ModelState.Merge(ImportErrors);
+            }
+
+            return View();
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Upload(HttpPostedFileBase file)
         {
             if (file == null)
@@ -196,30 +203,55 @@ namespace AD419.DataHelper.Web.Controllers
             excelReader.Close();
 
             // transform
-            var projects = _projectImportService.GetProjectsFromRows(result.Tables[0].Rows);
+            var projects = _projectImportService.GetProjectsFromRows(result.Tables[0].Rows).ToList();
 
-            return PartialView("_uploadData", projects.ToList());
+            // validate
+            var errors = new List<ModelStateDictionary>();
+            foreach (var project in projects)
+            {
+                // clear and check
+                ModelState.Clear();
+                TryValidateModel(project);
+
+                // copy out errors
+                var state = new ModelStateDictionary();
+                state.Merge(ModelState);
+                errors.Add(state);
+            }
+            ViewBag.Errors = errors;
+            
+            return PartialView("_uploadData", projects);
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
         [HttpPost]
-        public ActionResult UploadConfirm()
-        {
-            throw new NotImplementedException();
-        }
-
+        [ValidateAntiForgeryToken]
         public ActionResult Save(IEnumerable<AllProjectsNew> projects)
         {
             if (projects == null)
-                return RedirectToAction("Index");
+                return RedirectToAction("Upload");
 
             if (!ModelState.IsValid)
-                return RedirectToAction("Index");
+            {
+                ImportErrors = ModelState;
+                return RedirectToAction("Upload");
+            }
 
             DbContext.AllProjectsNew.AddRange(projects);
             DbContext.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        private ModelStateDictionary ImportErrors
+        {
+            get
+            {
+                return TempData["ImportErrors"] as ModelStateDictionary;
+            }
+            set
+            {
+                TempData["ImportErrors"] = value;
+            }
         }
     }
 }
