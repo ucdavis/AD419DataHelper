@@ -4,17 +4,17 @@
     ViewBag.Title = "Index - All Projects";
 }
 
-<h2>@ViewBag.Title</h2>
+<div class="pull-right">
+    <button class="btn btn-default display-inline" data-toggle="modal" data-target="#uploadModal"><i class="fa fa-upload"></i> Upload New Source File</button>
+</div>
 
-<p>
-    @Html.ActionLink("Upload", "Upload")
-</p>
+<h2>All New Projects</h2>
 
 <hr />
 
 @Html.Partial("_projectsTable", Model)
 
-@Html.Partial("Upload")
+@Html.Partial("_Upload")
 
 @section AdditionalScripts
 {
