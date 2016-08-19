@@ -66,6 +66,7 @@ namespace AD419.DataHelper.Web.Services
             {
                 project.AccessionNumber = "0000000";
             }
+            project.AccessionNumber = project.AccessionNumber.PadLeft(7, '0');
 
             // parse dates
             DateTime startDate;
