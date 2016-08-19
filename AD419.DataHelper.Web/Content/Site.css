@@ -40,6 +40,14 @@ textarea {
     display: block;
 }
 
+.modal-dialog {
+    transition: width 2s ease-in-out;
+}
+
+.modal-xl {
+    width: 90%;
+}
+
 .modal-image {
     width: 100%;
     border-top: 1px solid #e5e5e5;
