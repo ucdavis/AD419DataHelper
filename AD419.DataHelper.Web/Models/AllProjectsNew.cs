@@ -35,7 +35,6 @@ namespace AD419.DataHelper.Web.Models
         [Display(Name = "Organization Name")]
         public string OrganizationName { get; set; }
 
-        [Required]
         [StringLength(4)]
         [Display(Name = "OrgR")]
         public string OrgR { get; set; }
