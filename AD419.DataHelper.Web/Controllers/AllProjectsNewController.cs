@@ -181,6 +181,7 @@ namespace AD419.DataHelper.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Upload(HttpPostedFileBase file)
         {
             if (file == null)
@@ -201,6 +202,7 @@ namespace AD419.DataHelper.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(IEnumerable<AllProjectsNew> projects)
         {
             if (projects == null)
