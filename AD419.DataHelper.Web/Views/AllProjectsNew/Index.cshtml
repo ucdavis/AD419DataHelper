@@ -4,26 +4,41 @@
     ViewBag.Title = "Index - All Projects";
 }
 
-<h2>@ViewBag.Title</h2>
+<div class="pull-right">
+    <button class="btn btn-default display-inline" data-toggle="modal" data-target="#uploadModal"><i class="fa fa-upload"></i> Upload New Source File</button>
+</div>
 
-<p>
-    @Html.ActionLink("Upload", "Upload")
-</p>
+<h2>All New Projects</h2>
 
 <hr />
 
 @Html.Partial("_projectsTable", Model)
 
+@Html.Partial("_Upload")
+
 @section AdditionalScripts
 {
-    <script>
+    <script type="text/javascript" src="~/Scripts/upload-wizard.js"></script>
+    <script type="text/javascript">
         $(function() {
-            $('#newProjectTable').DataTable({
-                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                columnDefs: [
-                    { targets: [-1, -2, -3], sortable: false }
-                ]
+            UploadWizard.setup({
+                uploadUrl: '@Url.Action("Upload")',
+                tableOptions: {
+                    order: [[0, "desc"]]
+                }
             });
+
+            $('#uploadModal').on('hidden.bs.modal', UploadWizard.reset);
+        });
+
+        $(function() {
+            $('#newProjectTable')
+                .DataTable({
+                    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                    columnDefs: [
+                        { targets: [-1, -2, -3], sortable: false }
+                    ]
+                });
         })
     </script>
 }

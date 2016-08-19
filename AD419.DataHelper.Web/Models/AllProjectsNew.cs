@@ -27,7 +27,6 @@ namespace AD419.DataHelper.Web.Models
         [Display(Name = "Award Number")]
         public string AwardNumber { get; set; }
 
-        [Required]
         public string Title { get; set; }
 
         [Required]
@@ -39,7 +38,6 @@ namespace AD419.DataHelper.Web.Models
         [Display(Name = "OrgR")]
         public string OrgR { get; set; }
 
-        [Required]
         [StringLength(255)]
         public string Department { get; set; }
 
@@ -48,7 +46,7 @@ namespace AD419.DataHelper.Web.Models
         [Display(Name = "Project Director")]
         public string ProjectDirector { get; set; }
 
-        [StringLength(255)]
+        [StringLength(1024)]
         [Display(Name = "Co-Project Directors")]
         public string CoProjectDirectors { get; set; }
 

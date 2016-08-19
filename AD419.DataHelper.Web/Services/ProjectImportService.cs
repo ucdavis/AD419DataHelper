@@ -37,6 +37,10 @@ namespace AD419.DataHelper.Web.Services
                 ConfigureReportingOrg(match.Project, match.Organization);
             }
 
+            // eliminate projects with bad accession numbers
+            // per KT 8/19/2016
+            projects = projects.Where(p => !string.IsNullOrWhiteSpace(p.AccessionNumber) && p.AccessionNumber != "0000000").ToList();
+
             return projects;
         }
 
@@ -62,6 +66,7 @@ namespace AD419.DataHelper.Web.Services
             {
                 project.AccessionNumber = "0000000";
             }
+            project.AccessionNumber = project.AccessionNumber.PadLeft(7, '0');
 
             // parse dates
             DateTime startDate;
