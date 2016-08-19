@@ -203,9 +203,24 @@ namespace AD419.DataHelper.Web.Controllers
             excelReader.Close();
 
             // transform
-            var projects = _projectImportService.GetProjectsFromRows(result.Tables[0].Rows);
+            var projects = _projectImportService.GetProjectsFromRows(result.Tables[0].Rows).ToList();
 
-            return PartialView("_uploadData", projects.ToList());
+            // validate
+            var errors = new List<ModelStateDictionary>();
+            foreach (var project in projects)
+            {
+                // clear and check
+                ModelState.Clear();
+                TryValidateModel(project);
+
+                // copy out errors
+                var state = new ModelStateDictionary();
+                state.Merge(ModelState);
+                errors.Add(state);
+            }
+            ViewBag.Errors = errors;
+            
+            return PartialView("_uploadData", projects);
         }
 
         [HttpPost]
