@@ -1,5 +1,5 @@
 ﻿<div class="modal fade" id="uploadModal">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             
             <div class="modal-header">
@@ -24,7 +24,7 @@
                     <div class="modal-image">
                         <img src="~/Content/Images/?.png" alt="All AES Projects Example">
                     </div>
-                    <form id="uploadForm" enctype="multipart/form-data">
+                    <form id="uploadForm" enctype="multipart/form-data" class="">
                         @Html.AntiForgeryToken()
                         <div class="modal-body">
                             <p>
@@ -48,23 +48,39 @@
                         <span class="sr-only">Loading...</span>
                     </div>
                 </div>
-                <div role="tabpanel" class="tab-pane" id="reviewTab">
-                    <div class="wizard-buttons text-center">
-                        <button id="returnUploadButton" class="btn btn-danger"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</button>
-                        <button id="continueConfirmButton" class="btn btn-default">Confirm and Upload <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                <div class="tab-pane" id="errorTab">
+                    <div class="modal-body">
+                        <div class="alert alert-danger" role="alert">
+                            Something has gone terribly wrong. Are you sure you uploaded a proper file?
+                        </div>
                     </div>
-                    <div class="container-fluid" id="review"></div>
+                    <div class="modal-footer text-left">
+                        <div class="flex-between">
+                            <button id="resetErrorButton" class="btn btn-danger"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</button>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="reviewTab">
+                    <div class="modal-body" id="review"></div>
+                    <div class="modal-footer">
+                        <div class="flex-between">
+                            <button id="returnUploadButton" class="btn btn-danger"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</button>
+                            <button id="continueConfirmButton" class="btn btn-default">Confirm and Upload <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="confirmTab">
-                    <div class="container text-center">
+                    <div class="modal-body text-center">
                         <p>
-                            If all looks good, you can upload the values to the database.<br/>
+                            If all looks good, you can upload the values to the database.<br />
+                            <br />
                             <i>Note: You can also edit the values once they have been saved.</i>
                         </p>
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <button id="confirmButton" class="btn btn-default">Save to Database</button>
-                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="flex-between">
+                            <button id="returnReviewButton" class="btn btn-danger"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</button>
+                            <button id="confirmButton" class="btn btn-default">Save to Database</button>
                         </div>
                     </div>
                 </div>
