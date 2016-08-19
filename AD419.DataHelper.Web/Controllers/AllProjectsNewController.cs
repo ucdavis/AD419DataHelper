@@ -177,7 +177,14 @@ namespace AD419.DataHelper.Web.Controllers
         [HttpGet]
         public ActionResult Upload()
         {
-            return View(new List<AllProjectsNew>());
+            var errors = ImportErrors;
+            if (errors != null)
+            {
+                ErrorMessage = "Your upload file has errors.";
+                ModelState.Merge(ImportErrors);
+            }
+
+            return View();
         }
 
         [HttpPost]
@@ -209,12 +216,27 @@ namespace AD419.DataHelper.Web.Controllers
                 return RedirectToAction("Upload");
 
             if (!ModelState.IsValid)
+            {
+                ImportErrors = ModelState;
                 return RedirectToAction("Upload");
+            }
 
             DbContext.AllProjectsNew.AddRange(projects);
             DbContext.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        private ModelStateDictionary ImportErrors
+        {
+            get
+            {
+                return TempData["ImportErrors"] as ModelStateDictionary;
+            }
+            set
+            {
+                TempData["ImportErrors"] = value;
+            }
         }
     }
 }
