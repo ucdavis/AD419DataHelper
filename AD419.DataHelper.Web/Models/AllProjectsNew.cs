@@ -47,7 +47,7 @@ namespace AD419.DataHelper.Web.Models
         [Display(Name = "Project Director")]
         public string ProjectDirector { get; set; }
 
-        [StringLength(255)]
+        [StringLength(1024)]
         [Display(Name = "Co-Project Directors")]
         public string CoProjectDirectors { get; set; }
 
