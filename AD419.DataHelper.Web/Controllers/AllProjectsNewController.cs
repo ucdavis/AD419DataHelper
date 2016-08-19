@@ -206,10 +206,10 @@ namespace AD419.DataHelper.Web.Controllers
         public ActionResult Save(IEnumerable<AllProjectsNew> projects)
         {
             if (projects == null)
-                return RedirectToAction("Index");
+                return RedirectToAction("Upload");
 
             if (!ModelState.IsValid)
-                return RedirectToAction("Index");
+                return RedirectToAction("Upload");
 
             DbContext.AllProjectsNew.AddRange(projects);
             DbContext.SaveChanges();
