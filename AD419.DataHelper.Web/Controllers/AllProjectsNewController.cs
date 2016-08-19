@@ -180,7 +180,6 @@ namespace AD419.DataHelper.Web.Controllers
             return View(new List<AllProjectsNew>());
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase file)
         {
