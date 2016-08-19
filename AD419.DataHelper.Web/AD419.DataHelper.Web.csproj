@@ -239,6 +239,7 @@
     <Compile Include="Controllers\ExpenseOrgMappingsController.cs" />
     <Compile Include="Controllers\ExpiredProjectsController.cs" />
     <Compile Include="Controllers\PrincipalsController.cs" />
+    <Compile Include="Controllers\ProcessController.cs" />
     <Compile Include="Controllers\ProjectMappingController.cs" />
     <Compile Include="Controllers\FieldStationExpensesImportController.cs" />
     <Compile Include="Controllers\FFYExpensesByARCReportController.cs" />
@@ -284,6 +285,7 @@
     <Compile Include="Models\Interdepartmental.cs" />
     <Compile Include="Models\PrincipalInvestigator.cs" />
     <Compile Include="Models\PrincipalInvestigatorMatch.cs" />
+    <Compile Include="Models\ProcessCategory.cs" />
     <Compile Include="Models\ProcessStatus.cs" />
     <Compile Include="Models\ReportingOrganization.cs" />
     <Compile Include="Models\TransDocTypesForFTECalc.cs" />
@@ -486,6 +488,7 @@
     <Content Include="Views\Principals\UnproratedMatches.cshtml" />
     <Content Include="Views\Principals\FindMatch.cshtml" />
     <Content Include="Views\Status\Index.cshtml" />
+    <Content Include="Views\Process\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
