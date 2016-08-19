@@ -57,6 +57,12 @@ namespace AD419.DataHelper.Web.Services
                 ProjectStatus      = row["Project Status"].ToString(),
             };
 
+            // fix accession number
+            if (string.IsNullOrWhiteSpace(project.AccessionNumber))
+            {
+                project.AccessionNumber = "0000000";
+            }
+
             // parse dates
             DateTime startDate;
             if (DateTime.TryParse(row["Project Start Date"].ToString(), out startDate))
