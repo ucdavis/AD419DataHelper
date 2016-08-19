@@ -201,13 +201,7 @@ namespace AD419.DataHelper.Web.Controllers
             return PartialView("_uploadData", projects.ToList());
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
         [HttpPost]
-        public ActionResult UploadConfirm()
-        {
-            throw new NotImplementedException();
-        }
-
         public ActionResult Save(IEnumerable<AllProjectsNew> projects)
         {
             if (projects == null)
