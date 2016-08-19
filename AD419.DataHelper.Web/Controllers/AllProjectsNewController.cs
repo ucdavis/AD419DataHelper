@@ -174,19 +174,6 @@ namespace AD419.DataHelper.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet]
-        public ActionResult Upload()
-        {
-            var errors = ImportErrors;
-            if (errors != null)
-            {
-                ErrorMessage = "Your upload file has errors.";
-                ModelState.Merge(ImportErrors);
-            }
-
-            return View();
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Upload(HttpPostedFileBase file)
@@ -228,30 +215,18 @@ namespace AD419.DataHelper.Web.Controllers
         public ActionResult Save(IEnumerable<AllProjectsNew> projects)
         {
             if (projects == null)
-                return RedirectToAction("Upload");
+                return RedirectToAction("Index");
 
             if (!ModelState.IsValid)
             {
-                ImportErrors = ModelState;
-                return RedirectToAction("Upload");
+                ErrorMessage = "Data upload had errors";
+                return RedirectToAction("Index");
             }
 
             DbContext.AllProjectsNew.AddRange(projects);
             DbContext.SaveChanges();
 
             return RedirectToAction("Index");
-        }
-
-        private ModelStateDictionary ImportErrors
-        {
-            get
-            {
-                return TempData["ImportErrors"] as ModelStateDictionary;
-            }
-            set
-            {
-                TempData["ImportErrors"] = value;
-            }
         }
     }
 }
