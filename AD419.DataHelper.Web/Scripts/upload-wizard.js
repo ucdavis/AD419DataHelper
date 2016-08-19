@@ -36,7 +36,7 @@
                 })
                 .success(function (view) {
                     $('#review').html(view);
-                    drawTable();
+                    drawTable(options.tableOptions);
                 })
                 .error(function(err) {
                     console.log(err);
@@ -78,15 +78,21 @@
             });
     }
 
-    function drawTable() {
-        return $('#uploadTable').DataTable({
+    function drawTable(options) {
+        var config = {
             lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-            initComplete: function () {
+            initComplete: function() {
                 $('#loadingTab').removeClass('active');
                 $('#reviewTab').addClass('active');
                 $('#reviewStepper').addClass('active');
             }
-        });
+        };
+
+        if (options) {
+            $.extend(config, options);
+        }
+
+        return $('#uploadTable').DataTable(config);
     }
 
     return {
