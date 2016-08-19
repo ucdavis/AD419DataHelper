@@ -27,7 +27,6 @@ namespace AD419.DataHelper.Web.Models
         [Display(Name = "Award Number")]
         public string AwardNumber { get; set; }
 
-        [Required]
         public string Title { get; set; }
 
         [Required]
