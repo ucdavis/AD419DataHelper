@@ -5,13 +5,23 @@
 
 <h2>Project Status</h2>
 
+@{
+    // First let's find the lowest non-completed category, aka the current category
+    var nonCompleted = Model.Where(c => !c.IsCompleted).ToArray();
+    
+    var currentCategoryId = nonCompleted.Any() ? nonCompleted.Min(c => c.Id) : 0;
+}
+
 @foreach (var category in Model)
 {
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title @(category.IsCompleted ? "complete" : "incomplete")" title="@category.Notes">@category.Id. @category.Name</h3>
+            <a role="button" data-toggle="collapse" href="#collapse-@category.Id">
+
+                <h3 class="panel-title category @(category.IsCompleted ? "complete" : "incomplete")" title="@category.Notes">@category.Id. @category.Name</h3>
+            </a>
         </div>
-        <div class="panel-body">
+        <div id="collapse-@category.Id" class="panel-body collapse @(category.Id == currentCategoryId ? "in active-category" : "out inactive-category")">
             <ul class="checklist">
                 @foreach (var status in category.Statuses)
                 {

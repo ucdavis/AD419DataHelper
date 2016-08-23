@@ -171,7 +171,7 @@ textarea {
     color: #9E9E9E;
 }
 
-.checklist li.complete+li.incomplete {
+.checklist li.incomplete {
     color: black;
 }
 
@@ -200,4 +200,12 @@ textarea {
 
 .checklist li p {
     padding-left: 3.5rem;
+}
+
+.category.complete {
+    text-decoration: line-through;
+}
+
+.inactive-category {
+    color: #9E9E9E;
 }
