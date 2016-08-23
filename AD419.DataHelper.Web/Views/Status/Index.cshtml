@@ -22,12 +22,22 @@
             </a>
         </div>
         <div id="collapse-@category.Id" class="panel-body collapse @(category.Id == currentCategoryId ? "in active-category" : "out inactive-category")">
+            @if (!string.IsNullOrWhiteSpace(category.Notes))
+            {
+                <div class="well well-sm">
+                    @category.Notes
+                </div>
+            }
+            @if (!string.IsNullOrWhiteSpace(category.StoredProcedureName))
+            {
+                <a class="btn btn-primary @(category.Id != currentCategoryId ? "disabled" : "")">Click here to @category.Name</a>
+            }
             <ul class="checklist">
                 @foreach (var status in category.Statuses)
                 {
                     <li class="@(status.IsCompleted ? "complete" : "incomplete")">
                         @if (status.IsCompleted)
-                    {
+                        {
                             <i class="fa fa-check-circle bullet"></i>
                         }
                         else
