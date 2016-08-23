@@ -9,8 +9,9 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: Status
         public ActionResult Index()
         {
-            var status = DbContext.ProcessStatuses.ToList();
-            return View(status);
+            var categories = DbContext.ProcessCategories.Include("Statuses").ToList();
+
+            return View(categories);
         }
     }
 }

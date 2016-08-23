@@ -284,6 +284,7 @@
     <Compile Include="Models\Interdepartmental.cs" />
     <Compile Include="Models\PrincipalInvestigator.cs" />
     <Compile Include="Models\PrincipalInvestigatorMatch.cs" />
+    <Compile Include="Models\ProcessCategory.cs" />
     <Compile Include="Models\ProcessStatus.cs" />
     <Compile Include="Models\ReportingOrganization.cs" />
     <Compile Include="Models\TransDocTypesForFTECalc.cs" />
