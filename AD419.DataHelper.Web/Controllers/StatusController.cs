@@ -27,5 +27,17 @@ namespace AD419.DataHelper.Web.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public ActionResult RunSproc(int id)
+        {
+            var category = DbContext.ProcessCategories.Find(id);
+            if (category == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(category);
+        }
     }
 }

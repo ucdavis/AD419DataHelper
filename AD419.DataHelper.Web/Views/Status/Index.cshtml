@@ -30,7 +30,13 @@
             }
             @if (!string.IsNullOrWhiteSpace(category.StoredProcedureName))
             {
-                <a class="btn btn-primary @(category.Id != currentCategoryId ? "disabled" : "")">Click here to @category.Name</a>
+                var disabled = category.Id != currentCategoryId ? "disabled='disabled" : string.Empty;
+                using (Html.BeginForm("RunSproc", "Status", new {id = category.Id}, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-primary" @disabled>Click here to @category.Name</button>
+                }
+
             }
             <ul class="checklist">
                 @foreach (var status in category.Statuses)
@@ -52,10 +58,10 @@
             @if (string.IsNullOrWhiteSpace(category.StoredProcedureName) && category.Statuses.All(a => !a.IsCompleted))
             {
                 var disabled = category.Id != currentCategoryId ? "disabled='disabled" : string.Empty;
-                using (Html.BeginForm("Completed", "Status", new {id=category.Id}, FormMethod.Post))
-                {                    
+                using (Html.BeginForm("Completed", "Status", new {id = category.Id}, FormMethod.Post))
+                {
                     @Html.AntiForgeryToken()
-                    <input type="submit" class="btn btn-primary" @disabled value="I've done these processes"/>
+                    <input type="submit" class="btn btn-primary" @disabled value="I've done these steps"/>
 
                 }
             }
