@@ -49,6 +49,10 @@
                     </li>
                 }
             </ul>
+            @if (string.IsNullOrWhiteSpace(category.StoredProcedureName) && category.Statuses.All(a => !a.IsCompleted))
+            {
+                <a class="btn btn-primary @(category.Id != currentCategoryId ? "disabled" : "")">I've done these processes</a>
+            }
         </div>
     </div>
 }
