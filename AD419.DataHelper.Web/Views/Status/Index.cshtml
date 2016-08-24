@@ -52,8 +52,8 @@
             @if (string.IsNullOrWhiteSpace(category.StoredProcedureName) && category.Statuses.All(a => !a.IsCompleted))
             {
                 var disabled = category.Id != currentCategoryId ? "disabled='disabled" : string.Empty;
-                using (Html.BeginForm())
-                {
+                using (Html.BeginForm("Completed", "Status", new {id=category.Id}, FormMethod.Post))
+                {                    
                     @Html.AntiForgeryToken()
                     <input type="submit" class="btn btn-primary" @disabled value="I've done these processes"/>
 
