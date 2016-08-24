@@ -14,9 +14,16 @@ namespace AD419.DataHelper.Web.Controllers
             return View(categories);
         }
 
+        [HttpPost]
         public ActionResult Completed(int id)
         {
-            var category = DbContext.ProcessCategories.Single(a => a.Id == id);
+            var category = DbContext.ProcessCategories.Find(id);
+            if (category == null)
+            {
+                return HttpNotFound();
+            }
+            category.IsCompleted = true;
+            DbContext.SaveChanges();
 
             return RedirectToAction("Index");
         }
