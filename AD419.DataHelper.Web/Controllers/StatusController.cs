@@ -41,22 +41,17 @@ namespace AD419.DataHelper.Web.Controllers
 
             try
             {
-                ExecuteSproc(category.StoredProcedureName);
+                if(!category.IsCompleted) { ExecuteSproc(category.StoredProcedureName);}
             }
             catch (Exception)
             {
-                Message = "Error Running it";
-                return View(category);
-            }
-            
+                return new JsonResult() {Data = new {Success = false, Message = "There was a problem."}, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }            
 
             category.IsCompleted = true;
-
             DbContext.SaveChanges();
-
-            Message = "Done";
-            return RedirectToAction("Index");
-
+           
+            return new JsonResult() { Data = new { Success = true, Message = "Done." }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
 
@@ -66,11 +61,10 @@ namespace AD419.DataHelper.Web.Controllers
             SqlParameter param1 = new SqlParameter("@FiscalYear", year);
             SqlParameter param2 = new SqlParameter("@IsDebug", 0);
 
-
-
-            DbContext.Database.ExecuteSqlCommand(string.Format("{0} @FiscalYear @IsDebug", sprocName), param1, param2);
-
+            DbContext.Database.ExecuteSqlCommand(string.Format("{0} @FiscalYear @IsDebug", sprocName), param1, param2);            
         }
+
+        
 
     }
 }
