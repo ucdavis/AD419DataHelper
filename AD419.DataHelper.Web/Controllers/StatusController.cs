@@ -2,9 +2,11 @@
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Mvc;
+using AD419.DataHelper.Web.Attributes;
 
 namespace AD419.DataHelper.Web.Controllers
 {
+    [UseAntiForgeryTokenOnPostByDefault]
     public class StatusController : SuperController
     {
         // GET: Status
@@ -16,7 +18,6 @@ namespace AD419.DataHelper.Web.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Completed(int id)
         {
             var category = DbContext.ProcessCategories.Find(id);
@@ -32,7 +33,6 @@ namespace AD419.DataHelper.Web.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult RunSproc(int id)
         {
             var category = DbContext.ProcessCategories.Find(id);
