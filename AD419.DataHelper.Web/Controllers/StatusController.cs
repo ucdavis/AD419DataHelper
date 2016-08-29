@@ -16,6 +16,7 @@ namespace AD419.DataHelper.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Completed(int id)
         {
             var category = DbContext.ProcessCategories.Find(id);
@@ -31,6 +32,7 @@ namespace AD419.DataHelper.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult RunSproc(int id)
         {
             var category = DbContext.ProcessCategories.Find(id);
@@ -38,7 +40,7 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return HttpNotFound();
             }
-
+            
             try
             {
                 if(!category.IsCompleted) { ExecuteSproc(category.StoredProcedureName);}
