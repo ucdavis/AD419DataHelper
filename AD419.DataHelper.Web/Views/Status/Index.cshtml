@@ -12,6 +12,8 @@
     var currentCategoryId = nonCompleted.Any() ? nonCompleted.Min(c => c.Id) : 0;
 }
 
+@Html.AntiForgeryToken()
+
 @foreach (var category in Model)
 {
     <div class="panel panel-default">
@@ -31,11 +33,8 @@
             @if (!string.IsNullOrWhiteSpace(category.StoredProcedureName))
             {
                 var disabled = category.Id != currentCategoryId ? "disabled='disabled" : string.Empty;
-                //using (Html.BeginForm("RunSproc", "Status", new {id = category.Id}, FormMethod.Post))
-                //{
-                    @Html.AntiForgeryToken()
-                    <button data-id="@category.Id" data-name="@category.Name" class="sproc btn btn-primary" @disabled><i class="fa fa-spin" > </i> <span> Click here to</span> @category.Name</button>
-                //}
+
+                <button data-id="@category.Id" data-name="@category.Name" class="sproc btn btn-primary" @disabled><i class="fa fa-spin" > </i> <span> Click here to</span> @category.Name</button>
 
             }
             <ul class="checklist">

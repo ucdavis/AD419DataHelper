@@ -2,9 +2,11 @@
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Mvc;
+using AD419.DataHelper.Web.Attributes;
 
 namespace AD419.DataHelper.Web.Controllers
 {
+    [UseAntiForgeryTokenOnPostByDefault]
     public class StatusController : SuperController
     {
         // GET: Status
@@ -38,7 +40,7 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return HttpNotFound();
             }
-
+            
             try
             {
                 if(!category.IsCompleted) { ExecuteSproc(category.StoredProcedureName);}
