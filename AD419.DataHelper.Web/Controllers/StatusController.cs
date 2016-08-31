@@ -45,9 +45,9 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 if(!category.IsCompleted) { ExecuteSproc(category.StoredProcedureName);}
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return new JsonResult() {Data = new {Success = false, Message = "There was a problem."}, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                return new JsonResult() {Data = new {Success = false, Message = "There was a problem.", ErrorMessage = ex.Message}, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             }            
 
             category.IsCompleted = true;
@@ -61,12 +61,9 @@ namespace AD419.DataHelper.Web.Controllers
         {
             var year = FiscalYearService.FiscalYear;
             SqlParameter param1 = new SqlParameter("@FiscalYear", year);
-            SqlParameter param2 = new SqlParameter("@IsDebug", 0);
+            SqlParameter param2 = new SqlParameter("@IsDebug", false);
 
-            DbContext.Database.ExecuteSqlCommand(string.Format("{0} @FiscalYear @IsDebug", sprocName), param1, param2);            
-        }
-
-        
-
+            DbContext.Database.ExecuteSqlCommand(string.Format("{0} @FiscalYear, @IsDebug", sprocName), param1, param2);            
+        }        
     }
 }
