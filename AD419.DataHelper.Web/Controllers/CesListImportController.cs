@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AD419.DataHelper.Web.Helpers;
 using AD419.DataHelper.Web.Models;
 using Excel;
 
@@ -159,6 +160,7 @@ namespace AD419.DataHelper.Web.Controllers
                 if (ModelState.IsValid)
                 {
                     DbContext.CesListImports.AddRange(cesEntries);
+                    DbContext.MarkStatusCompleted(ProcessStatuses.ImportCeSpecialists);
                     DbContext.SaveChanges();
                 }
             }
