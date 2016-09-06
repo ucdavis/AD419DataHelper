@@ -49,7 +49,16 @@
                         {
                             <i class="fa fa-circle-thin bullet"></i>
                         }
-                        <h2>@status.Name</h2>
+                        <h2>
+                            @if (string.IsNullOrWhiteSpace(status.Hyperlink))
+                            {
+                                @status.Name
+                            }
+                            else
+                            {
+                                <a disabled href="@Url.Action("", status.Hyperlink)" target="_blank">@status.Name <i class="fa fa-external-link"></i></a>
+                            }
+                        </h2>
                         <p>@status.Notes</p>
                     </li>
                 }
