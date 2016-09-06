@@ -159,7 +159,7 @@ namespace AD419.DataHelper.Web.Controllers
                 if (ModelState.IsValid)
                 {
                     DbContext.FieldStationExpenseListImports.AddRange(fieldStationExpenseEntries);
-                    DbContext.MarkStatusCompleted(ProcessStatuses.ImportProjects);
+                    DbContext.MarkStatusCompleted(ProcessStatuses.ImportFieldStationExpenses);
                     DbContext.SaveChanges();
                 }
             }
