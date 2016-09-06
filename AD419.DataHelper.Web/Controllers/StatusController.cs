@@ -63,7 +63,9 @@ namespace AD419.DataHelper.Web.Controllers
             SqlParameter param1 = new SqlParameter("@FiscalYear", year);
             SqlParameter param2 = new SqlParameter("@IsDebug", false);
 
-            DbContext.Database.ExecuteSqlCommand(string.Format("{0} @FiscalYear, @IsDebug", sprocName), param1, param2);            
+            DbContext.Database.CommandTimeout = 60*5; // 5 minute timeout
+            DbContext.Database.ExecuteSqlCommand(string.Format("{0} @FiscalYear, @IsDebug", sprocName), param1, param2);
+            DbContext.Database.CommandTimeout = null;
         }        
     }
 }
