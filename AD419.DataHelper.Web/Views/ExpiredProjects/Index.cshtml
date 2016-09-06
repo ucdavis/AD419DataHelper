@@ -152,7 +152,7 @@
             var directorSearchUrl = '@(Url.Action("FindByDirector", "AllProjectsNew"))';
             $('#searchByDirector')
                 .click(function () {
-                    projectTable.ajax.url(directorSearchUrl + '/' + director).load();
+                    projectTable.ajax.url(directorSearchUrl + '?director=' + director).load();
                 });
 
             var organizationSearchUrl = '@(Url.Action("FindByOrganization", "AllProjectsNew"))';
