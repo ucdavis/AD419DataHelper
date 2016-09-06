@@ -63,7 +63,7 @@
                     </li>
                 }
             </ul>
-            @if (string.IsNullOrWhiteSpace(category.StoredProcedureName) && category.Statuses.All(a => !a.IsCompleted))
+            @if (string.IsNullOrWhiteSpace(category.StoredProcedureName))
             {
                 var disabled = category.Id != currentCategoryId ? "disabled='disabled" : string.Empty;
                 using (Html.BeginForm("Completed", "Status", new {id = category.Id}, FormMethod.Post))
