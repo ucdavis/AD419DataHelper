@@ -1,13 +1,18 @@
-﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AD419.DataHelper.Web.Models
 {
-    [Table("ProcessStatus")]
-    public class ProcessStatus
+    [Table("ProcessCategory")]
+    public class ProcessCategory
     {
+        public ProcessCategory()
+        {
+            Statuses = new List<ProcessStatus>();
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -19,9 +24,8 @@ namespace AD419.DataHelper.Web.Models
 
         public string Notes { get; set; }
 
-        public int CategoryId { get; set; }
+        public string StoredProcedureName { get; set; }
 
-        [ForeignKey("CategoryId")]
-        public ProcessCategory Category { get; set; }
+        public ICollection<ProcessStatus> Statuses { get; set; }
     }
 }

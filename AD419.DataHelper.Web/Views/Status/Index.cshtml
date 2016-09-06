@@ -1,24 +1,107 @@
-﻿@model List<AD419.DataHelper.Web.Models.ProcessStatus>
+﻿@model List<AD419.DataHelper.Web.Models.ProcessCategory>
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Project Status</h2>
 
-<ul class="checklist">
-    @foreach (var status in Model)
-    {
-        <li class="@(status.IsCompleted ? "complete" : "incomplete")">
-            @if (status.IsCompleted)
+@{
+    // First let's find the lowest non-completed category, aka the current category
+    var nonCompleted = Model.Where(c => !c.IsCompleted).ToArray();
+    
+    var currentCategoryId = nonCompleted.Any() ? nonCompleted.Min(c => c.Id) : 0;
+}
+
+@Html.AntiForgeryToken()
+
+@foreach (var category in Model)
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a role="button" data-toggle="collapse" href="#collapse-@category.Id">
+
+                <h3 class="panel-title category @(category.IsCompleted ? "complete" : "incomplete")" title="@category.Notes">@category.Id. @category.Name</h3>
+            </a>
+        </div>
+        <div id="collapse-@category.Id" class="panel-body collapse @(category.Id == currentCategoryId ? "in active-category" : "out inactive-category")">
+            @if (!string.IsNullOrWhiteSpace(category.Notes))
             {
-                <i class="fa fa-check-circle bullet"></i>
+                <div class="well well-sm">
+                    @category.Notes
+                </div>
             }
-            else
+            @if (!string.IsNullOrWhiteSpace(category.StoredProcedureName))
             {
-                <i class="fa fa-circle-thin bullet"></i>
+                var disabled = category.Id != currentCategoryId ? "disabled='disabled" : string.Empty;
+
+                <button data-id="@category.Id" data-name="@category.Name" class="sproc btn btn-primary" @disabled><i class="fa fa-spin" > </i> <span> Click here to</span> @category.Name</button>
+
             }
-            <h2>@status.Name</h2>
-            <p>@status.Notes</p>
-        </li>
-    }
-</ul>
+            <ul class="checklist">
+                @foreach (var status in category.Statuses)
+                {
+                    <li class="@(status.IsCompleted ? "complete" : "incomplete")">
+                        @if (status.IsCompleted)
+                        {
+                            <i class="fa fa-check-circle bullet"></i>
+                        }
+                        else
+                        {
+                            <i class="fa fa-circle-thin bullet"></i>
+                        }
+                        <h2>@status.Name</h2>
+                        <p>@status.Notes</p>
+                    </li>
+                }
+            </ul>
+            @if (string.IsNullOrWhiteSpace(category.StoredProcedureName) && category.Statuses.All(a => !a.IsCompleted))
+            {
+                var disabled = category.Id != currentCategoryId ? "disabled='disabled" : string.Empty;
+                using (Html.BeginForm("Completed", "Status", new {id = category.Id}, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="submit" class="btn btn-primary" @disabled value="I've done these steps"/>
+
+                }
+            }
+        </div>
+    </div>
+}
+@section AdditionalScripts
+{
+    <script type="text/javascript">
+        $(".sproc").on('click', function () {
+            var $theButton = $(this);
+            var id = $theButton.data("id");
+            var $buttonIcon = $('i', $theButton);
+            var $buttontext = $('span', $theButton);
+            $buttonIcon.addClass('fa-spinner');
+            $buttontext.text(" Please wait, executing:");
+            $theButton.prop("disabled", true);
+
+            var antiforgery = $("input[name='__RequestVerificationToken']").val();
+            $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("RunSproc")',
+                    data: { id: id, __RequestVerificationToken: antiforgery }
+                })
+                .success(function(data) {                    
+                    $buttonIcon.removeClass('fa-spinner');
+                    if (data.Success === false) {
+                        $buttontext.text(" Error executing:");
+                        $theButton.removeClass("btn-primary");
+                        $theButton.addClass("btn-danger");
+                    }
+                    if (data.Success === true) {
+                        location.reload();
+                    }
+                })
+                .fail(function() {
+                    $theButton.prop("disabled", false);
+                    $buttonIcon.removeClass('fa-spinner');
+                    $buttontext.text(" Error executing:");
+                });
+
+        });
+    </script>
+}
