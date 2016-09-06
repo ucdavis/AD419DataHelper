@@ -26,4 +26,14 @@ namespace AD419.DataHelper.Web.Models
         [ForeignKey("CategoryId")]
         public ProcessCategory Category { get; set; }
     }
+
+    // For now we'll hardcode the process statuses here so we can look them up in the DB.
+    public enum ProcessStatuses
+    {
+        ImportProjects = 2,
+        ImportInterdepartmentalProjects = 3,
+        ImportCfdaNumbers = 4,
+        ImportCeSpecialists = 5,
+        ImportFieldStationExpenses = 6
+    }
 }

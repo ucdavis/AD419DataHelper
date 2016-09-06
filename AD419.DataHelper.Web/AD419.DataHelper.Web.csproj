@@ -257,6 +257,7 @@
     <Compile Include="Helpers\CasHelper.cs" />
     <Compile Include="Helpers\DataTableExtensions.cs" />
     <Compile Include="Helpers\HttpCorrelationIdEnricher.cs" />
+    <Compile Include="Helpers\ProcessStatusExtensions.cs" />
     <Compile Include="Models\AllProjectsNew.cs" />
     <Compile Include="Models\ArcCodeSelections.cs" />
     <Compile Include="Models\ArcCodeAccountExclusionSelections.cs" />

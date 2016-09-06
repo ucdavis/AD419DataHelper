@@ -170,6 +170,7 @@ namespace AD419.DataHelper.Web.Controllers
             try
             {
                 DbContext.Interdepartmentals.AddRange(list);
+                DbContext.MarkStatusCompleted(ProcessStatuses.ImportInterdepartmentalProjects);
                 DbContext.SaveChanges();
             }
             catch (DbUpdateException dbEx)

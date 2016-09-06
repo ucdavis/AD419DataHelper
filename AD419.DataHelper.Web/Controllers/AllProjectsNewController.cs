@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AD419.DataHelper.Web.Helpers;
 using AD419.DataHelper.Web.Models;
 using AD419.DataHelper.Web.Services;
 using Excel;
@@ -206,7 +207,7 @@ namespace AD419.DataHelper.Web.Controllers
                 errors.Add(state);
             }
             ViewBag.Errors = errors;
-            
+
             return PartialView("_uploadData", projects);
         }
 
@@ -224,6 +225,7 @@ namespace AD419.DataHelper.Web.Controllers
             }
 
             DbContext.AllProjectsNew.AddRange(projects);
+            DbContext.MarkStatusCompleted(ProcessStatuses.ImportProjects);
             DbContext.SaveChanges();
 
             return RedirectToAction("Index");
