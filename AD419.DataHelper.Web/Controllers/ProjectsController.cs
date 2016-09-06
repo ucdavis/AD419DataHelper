@@ -117,8 +117,8 @@ namespace AD419.DataHelper.Web.Controllers
 
         public ActionResult FindAccessionNumbers(string query)
         {
-            var accessions = DbContext.AllProjects
-                .Select(p => p.Accession)
+            var accessions = DbContext.AllProjectsNew
+                .Select(p => p.AccessionNumber)
                 .Where(a => a.Contains(query))
                 .Distinct()
                 .ToList();
@@ -146,8 +146,8 @@ namespace AD419.DataHelper.Web.Controllers
 
         public ActionResult FindProjectNumbers(string query)
         {
-            var projects = DbContext.AllProjects
-                .Select(p => p.Project)
+            var projects = DbContext.AllProjectsNew
+                .Select(p => p.ProjectNumber)
                 .Where(p => p.Contains(query))
                 .Distinct()
                 .ToList();
