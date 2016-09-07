@@ -56,7 +56,6 @@ namespace AD419.DataHelper.Web.Controllers
                 return View(match);
             }
 
-
             match.MatchName = name.Name;
 
             DbContext.Entry(match).State = EntityState.Modified;
@@ -65,6 +64,7 @@ namespace AD419.DataHelper.Web.Controllers
             return RedirectToAction("UnproratedMatches");
         }
 
+        [HttpPost]
         public ActionResult ProrateMatch(int id)
         {
             var match = DbContext.PrincipalInvestigatorMatches.Find(id);
@@ -79,20 +79,6 @@ namespace AD419.DataHelper.Web.Controllers
 
             match.IsProrated = true;
 
-            // Adding these lines here allows the user to simply click on the Prorate link to prorate the entry
-            // without the need to navigate to another page.
-            DbContext.Entry(match).State = EntityState.Modified;
-            DbContext.SaveChanges();
-
-            return RedirectToAction("UnproratedMatches");
-            // end added lines
-
-            //return View(match);
-        }
-
-        [HttpPost]
-        public ActionResult ProrateMatch(PrincipalInvestigatorMatch match)
-        {
             DbContext.Entry(match).State = EntityState.Modified;
             DbContext.SaveChanges();
 

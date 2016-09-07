@@ -51,7 +51,12 @@
                     @Html.ActionLink("Match", "FindMatch", new { id = item.Id })
                 </td>
                 <td>
-                    @Html.ActionLink("Prorate", "ProrateMatch", new { id = item.Id })
+                    @using (Html.BeginForm("ProrateMatch", "Principals", FormMethod.Post, new { id = "ProrateForm", enctype = "multipart/form-data", @class = "" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("id", item.Id)
+                        <input type="submit" class="btn-link" value="Prorate" />
+                    }
                 </td>
             </tr>
         }
