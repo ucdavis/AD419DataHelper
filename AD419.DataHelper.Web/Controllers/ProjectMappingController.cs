@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Models;
-using Microsoft.Ajax.Utilities;
 
 namespace AD419.DataHelper.Web.Controllers
 {
@@ -73,7 +72,7 @@ namespace AD419.DataHelper.Web.Controllers
 
             DbContext.Entry(ffySfnEntry).State = EntityState.Modified;
 
-            if (!ffySfnEntry.AccessionNumber.IsNullOrWhiteSpace() && ffySfnEntry.ProjectNumber.IsNullOrWhiteSpace())
+            if (!String.IsNullOrWhiteSpace(ffySfnEntry.AccessionNumber) && String.IsNullOrWhiteSpace(ffySfnEntry.ProjectNumber))
             {
                 // Find the associated project number and populate:
                 var foundProject =
@@ -81,13 +80,17 @@ namespace AD419.DataHelper.Web.Controllers
 
                 ffySfnEntry.ProjectNumber = foundProject.ProjectNumber.Trim();
             }
-            else if (!ffySfnEntry.ProjectNumber.IsNullOrWhiteSpace() && ffySfnEntry.AccessionNumber.IsNullOrWhiteSpace())
+            else if (!String.IsNullOrWhiteSpace(ffySfnEntry.ProjectNumber) && String.IsNullOrWhiteSpace(ffySfnEntry.AccessionNumber))
             {
                 var start = FiscalYearService.FiscalStartDate;
                 var end = FiscalYearService.FiscalEndDate;
+
+                var foundProjects =
+                    DbContext.AllProjectsNew.Where(p => p.ProjectNumber.Trim().Equals(ffySfnEntry.ProjectNumber.Trim()));
+
                 var foundProject = DbContext.AllProjectsNew
                     .Where(p => p.ProjectStartDate <= end) //project has actually started
-                    .Where(p => p.ProjectEndDate >= start).FirstOrDefault(p => p.ProjectNumber.Trim().Equals(ffySfnEntry.ProjectNumber.Trim()));
+                    .Where(p => p.ProjectEndDate >= start).OrderByDescending(p => p.Id).FirstOrDefault();//project has not ended.
                     
                 ffySfnEntry.AccessionNumber = foundProject.AccessionNumber.Trim();
             }
