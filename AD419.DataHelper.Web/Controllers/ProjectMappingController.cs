@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace AD419.DataHelper.Web.Controllers
 {
@@ -71,6 +72,26 @@ namespace AD419.DataHelper.Web.Controllers
             if (!ModelState.IsValid) return View(ffySfnEntry);
 
             DbContext.Entry(ffySfnEntry).State = EntityState.Modified;
+
+            if (!ffySfnEntry.AccessionNumber.IsNullOrWhiteSpace() && ffySfnEntry.ProjectNumber.IsNullOrWhiteSpace())
+            {
+                // Find the associated project number and populate:
+                var foundProject =
+                    DbContext.AllProjectsNew.FirstOrDefault(p => p.AccessionNumber.Equals(ffySfnEntry.AccessionNumber));
+
+                ffySfnEntry.ProjectNumber = foundProject.ProjectNumber.Trim();
+            }
+            else if (!ffySfnEntry.ProjectNumber.IsNullOrWhiteSpace() && ffySfnEntry.AccessionNumber.IsNullOrWhiteSpace())
+            {
+                var start = FiscalYearService.FiscalStartDate;
+                var end = FiscalYearService.FiscalEndDate;
+                var foundProject = DbContext.AllProjectsNew
+                    .Where(p => p.ProjectStartDate <= end) //project has actually started
+                    .Where(p => p.ProjectEndDate >= start).FirstOrDefault(p => p.ProjectNumber.Trim().Equals(ffySfnEntry.ProjectNumber.Trim()));
+                    
+                ffySfnEntry.AccessionNumber = foundProject.AccessionNumber.Trim();
+            }
+
             DbContext.SaveChanges();
 
             return RedirectToAction("Index");
