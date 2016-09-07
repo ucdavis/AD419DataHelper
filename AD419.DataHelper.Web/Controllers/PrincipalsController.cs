@@ -79,7 +79,15 @@ namespace AD419.DataHelper.Web.Controllers
 
             match.IsProrated = true;
 
-            return View(match);
+            // Adding these lines here allows the user to simply click on the Prorate link to prorate the entry
+            // without the need to navigate to another page.
+            DbContext.Entry(match).State = EntityState.Modified;
+            DbContext.SaveChanges();
+
+            return RedirectToAction("UnproratedMatches");
+            // end added lines
+
+            //return View(match);
         }
 
         [HttpPost]
