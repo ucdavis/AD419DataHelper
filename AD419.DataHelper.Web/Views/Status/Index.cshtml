@@ -14,6 +14,16 @@
 
 @Html.AntiForgeryToken()
 
+@using (Html.BeginForm("Reset", "Status", FormMethod.Post, new { id = "ResetForm", enctype = "multipart/form-data", @class = "" }))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <p>
+            Selecting this button will reset <i><strong>ALL</strong></i> completed steps you have accomplished and allow you to begin again at Step 1.&nbsp; &nbsp; <input type="submit" data-confirm="Are you sure you want to start over?" class="btn btn-warning" value="Reset" />
+        </p>
+    </div>
+}
+
 @foreach (var category in Model)
 {
     <div class="panel panel-default">
@@ -79,38 +89,46 @@
 @section AdditionalScripts
 {
     <script type="text/javascript">
-        $(".sproc").on('click', function () {
-            var $theButton = $(this);
-            var id = $theButton.data("id");
-            var $buttonIcon = $('i', $theButton);
-            var $buttontext = $('span', $theButton);
-            $buttonIcon.addClass('fa-spinner');
-            $buttontext.text(" Please wait, executing:");
-            $theButton.prop("disabled", true);
-
-            var antiforgery = $("input[name='__RequestVerificationToken']").val();
-            $.ajax({
-                    type: 'POST',
-                    url: '@Url.Action("RunSproc")',
-                    data: { id: id, __RequestVerificationToken: antiforgery }
-                })
-                .success(function(data) {                    
-                    $buttonIcon.removeClass('fa-spinner');
-                    if (data.Success === false) {
-                        $buttontext.text(" Error executing:");
-                        $theButton.removeClass("btn-primary");
-                        $theButton.addClass("btn-danger");
-                    }
-                    if (data.Success === true) {
-                        location.reload();
-                    }
-                })
-                .fail(function() {
-                    $theButton.prop("disabled", false);
-                    $buttonIcon.removeClass('fa-spinner');
-                    $buttontext.text(" Error executing:");
-                });
-
+        $('[data-confirm]').on('click', function(e) {
+            if (!confirm(jQuery(this).attr("data-confirm"))) {
+                e.preventDefault();
+            }
         });
     </script>
+
+     <script type="text/javascript">
+         $(".sproc").on('click', function () {
+             var $theButton = $(this);
+             var id = $theButton.data("id");
+             var $buttonIcon = $('i', $theButton);
+             var $buttontext = $('span', $theButton);
+             $buttonIcon.addClass('fa-spinner');
+             $buttontext.text(" Please wait, executing:");
+             $theButton.prop("disabled", true);
+
+             var antiforgery = $("input[name='__RequestVerificationToken']").val();
+             $.ajax({
+                 type: 'POST',
+                 url: '@Url.Action("RunSproc")',
+                 data: { id: id, __RequestVerificationToken: antiforgery }
+             })
+                 .success(function(data) {
+                     $buttonIcon.removeClass('fa-spinner');
+                     if (data.Success === false) {
+                         $buttontext.text(" Error executing:");
+                         $theButton.removeClass("btn-primary");
+                         $theButton.addClass("btn-danger");
+                     }
+                     if (data.Success === true) {
+                         location.reload();
+                     }
+                 })
+                 .fail(function() {
+                     $theButton.prop("disabled", false);
+                     $buttonIcon.removeClass('fa-spinner');
+                     $buttontext.text(" Error executing:");
+                 });
+
+         });
+</script>
 }
