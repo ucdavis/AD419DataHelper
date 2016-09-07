@@ -14,6 +14,16 @@
 
 @Html.AntiForgeryToken()
 
+@using (Html.BeginForm("Reset", "Status", FormMethod.Post, new { id = "ResetForm", enctype = "multipart/form-data", @class = "" }))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <p>
+            Selecting this button will reset <i><strong>ALL</strong></i> completed steps you have accomplished and allow you to begin again at Step 1. Use this button with extreme caution!&nbsp; &nbsp; <input type="submit" class="btn btn-warning" value="Reset" />
+        </p>
+    </div>
+}
+
 @foreach (var category in Model)
 {
     <div class="panel panel-default">
