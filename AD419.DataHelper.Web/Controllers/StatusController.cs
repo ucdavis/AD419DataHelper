@@ -44,8 +44,6 @@ namespace AD419.DataHelper.Web.Controllers
                 return new JsonResult() { Data = new { Success = false, Message = "There was a problem.", ErrorMessage = ex.Message }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             }
 
-            DbContext.SaveChanges();
-
             return RedirectToAction("Index");
         }
 
