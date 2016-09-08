@@ -115,7 +115,7 @@
                  .success(function(data) {
                      $buttonIcon.removeClass('fa-spinner');
                      if (data.Success === false) {
-                         $buttontext.text(" Error executing:");
+                         $buttontext.text(data.ErrorMessage +" Error executing:");
                          $theButton.removeClass("btn-primary");
                          $theButton.addClass("btn-danger");
                      }
