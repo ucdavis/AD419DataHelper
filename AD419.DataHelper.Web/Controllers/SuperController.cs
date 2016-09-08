@@ -1,4 +1,5 @@
-﻿using AD419.DataHelper.Web.Models;
+﻿using System.Configuration;
+using AD419.DataHelper.Web.Models;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Services;
 
@@ -10,6 +11,7 @@ namespace AD419.DataHelper.Web.Controllers
         protected AD419DataContext DbContext;
         protected FISDataContext FisDbContext;
         protected FiscalYearService FiscalYearService;
+        protected static readonly string ReportServerUrl = ConfigurationManager.AppSettings["ReportServerUrl"];
 
         public SuperController()
         {

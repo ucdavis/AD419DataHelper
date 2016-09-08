@@ -6,11 +6,9 @@ using Microsoft.Reporting.WebForms;
 
 namespace AD419.DataHelper.Web.Controllers
 {
-    public class FinalReportsController : Controller
+    public class FinalReportsController : SuperController
     {
         // GET: FinalReports
-        private static readonly string ReportServerUrl = ConfigurationManager.AppSettings["ReportServerUrl"];
-
         public ActionResult Index()
         {
             return View();

@@ -34,7 +34,7 @@ namespace AD419.DataHelper.Web.Controllers
 
             reportViewer.ServerReport.ReportPath = "/AD419Reports/FTE Greater than 1";
             reportViewer.ServerReport.ReportServerUrl =
-                new Uri("http://testreports.caes.ucdavis.edu/ReportServer/");
+                new Uri(ReportServerUrl);
 
             ViewBag.ReportViewer = reportViewer;
             return View();
