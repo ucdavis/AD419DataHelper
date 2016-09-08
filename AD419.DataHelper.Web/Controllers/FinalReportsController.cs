@@ -9,7 +9,7 @@ namespace AD419.DataHelper.Web.Controllers
     public class FinalReportsController : Controller
     {
         // GET: FinalReports
-        private static string _reportServerUrl = ConfigurationManager.AppSettings["ReportServerUrl"];
+        private static readonly string ReportServerUrl = ConfigurationManager.AppSettings["ReportServerUrl"];
 
         public ActionResult Index()
         {
@@ -28,7 +28,7 @@ namespace AD419.DataHelper.Web.Controllers
 
             reportViewer.ServerReport.ReportPath = "/AD419Reports/AD-419 Non-Admin Report";
             reportViewer.ServerReport.ReportServerUrl =
-                new Uri(_reportServerUrl);
+                new Uri(ReportServerUrl);
 
             ViewBag.ReportViewer = reportViewer;
             return View();
@@ -46,7 +46,7 @@ namespace AD419.DataHelper.Web.Controllers
 
             reportViewer.ServerReport.ReportPath = "/AD419Reports/AD-419 Admin Report - multi report";
             reportViewer.ServerReport.ReportServerUrl =
-                new Uri(_reportServerUrl);
+                new Uri(ReportServerUrl);
 
             ViewBag.ReportViewer = reportViewer;
             return View();
@@ -64,7 +64,7 @@ namespace AD419.DataHelper.Web.Controllers
 
             reportViewer.ServerReport.ReportPath = "/AD419Reports/AD-419 Non-Admin Report with Prorate Amounts - multi report";
             reportViewer.ServerReport.ReportServerUrl =
-                new Uri(_reportServerUrl);
+                new Uri(ReportServerUrl);
 
             ViewBag.ReportViewer = reportViewer;
             return View();
@@ -82,7 +82,7 @@ namespace AD419.DataHelper.Web.Controllers
 
             reportViewer.ServerReport.ReportPath = "/AD419Reports/AD-419 Unassociated Totals - multi report";
             reportViewer.ServerReport.ReportServerUrl =
-                new Uri(_reportServerUrl);
+                new Uri(ReportServerUrl);
 
             ViewBag.ReportViewer = reportViewer;
             return View();
