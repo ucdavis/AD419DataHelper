@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "AD-419 Final Reports";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<h3>Select any of the following reports:</h3>
+<div>
+    <ul>
+        <li>@Html.ActionLink("AD-419 Non-Admin Report", "NonAdminReport", "FinalReports")</li>
+       
+        <li>@Html.ActionLink("AD-419 Admin Report", "AdminReport", "FinalReports")</li>
+
+        <li>@Html.ActionLink("AD-419 Non-Admin Report with Prorate Amounts", "NonAdminReportWithProrateAmounts", "FinalReports")</li>
+       
+        <li>@Html.ActionLink("AD-419 Unassociated Totals Report", "UnassociatedTotalsReport", "FinalReports")</li>
+    </ul>
+</div>
