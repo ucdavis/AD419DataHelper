@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -8,7 +9,7 @@ using Microsoft.Reporting.WebForms;
 
 namespace AD419.DataHelper.Web.Controllers
 {
-    public class CurrentProjectsReportController : Controller
+    public class CurrentProjectsReportController : SuperController
     {
         // GET: CurrentProjectsReport
         public ActionResult Index()
@@ -23,7 +24,7 @@ namespace AD419.DataHelper.Web.Controllers
 
             reportViewer.ServerReport.ReportPath = "/AD419Reports/Current AD419 Projects";
             reportViewer.ServerReport.ReportServerUrl =
-                new Uri("http://testreports.caes.ucdavis.edu/ReportServer/");
+                new Uri(ReportServerUrl);
             
             ViewBag.ReportViewer = reportViewer;
             return View();

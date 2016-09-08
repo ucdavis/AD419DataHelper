@@ -11,7 +11,6 @@ namespace AD419.DataHelper.Web.Controllers
     public class FFYExpensesByARCReportController : SuperController
     {
         // GET: FFYExpensesByARCReport
-        
         public ActionResult Index()
         {
             var year = FiscalYearService.FiscalYear;
@@ -49,7 +48,7 @@ namespace AD419.DataHelper.Web.Controllers
 
             reportViewer.ServerReport.ReportPath = "/AD419Reports/Direct and Indirect FFY Expenses by ARC w Account";
             reportViewer.ServerReport.ReportServerUrl =
-                new Uri("http://testreports.caes.ucdavis.edu/ReportServer/");
+                new Uri(ReportServerUrl);
             reportViewer.ServerReport.SetParameters(reportParameters);
 
             ViewBag.ReportViewer = reportViewer;

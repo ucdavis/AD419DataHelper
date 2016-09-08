@@ -241,6 +241,7 @@
     <Compile Include="Controllers\DosCodesController.cs" />
     <Compile Include="Controllers\ExpenseOrgMappingsController.cs" />
     <Compile Include="Controllers\ExpiredProjectsController.cs" />
+    <Compile Include="Controllers\FinalReportsController.cs" />
     <Compile Include="Controllers\PrincipalsController.cs" />
     <Compile Include="Controllers\ProjectMappingController.cs" />
     <Compile Include="Controllers\FieldStationExpensesImportController.cs" />
@@ -491,6 +492,11 @@
     <Content Include="Views\Principals\UnproratedMatches.cshtml" />
     <Content Include="Views\Principals\FindMatch.cshtml" />
     <Content Include="Views\Status\Index.cshtml" />
+    <Content Include="Views\FinalReports\Index.cshtml" />
+    <Content Include="Views\FinalReports\NonAdminReport.cshtml" />
+    <Content Include="Views\FinalReports\AdminReport.cshtml" />
+    <Content Include="Views\FinalReports\UnassociatedTotalsReport.cshtml" />
+    <Content Include="Views\FinalReports\NonAdminReportWithProrateAmounts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,10 @@
+﻿@using ReportViewerForMvc
+@{
+    ViewBag.Title = "AD-419 Non-Admin Report with Prorate Amounts";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<div>
+    @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { style = "border: none" })
+</div>
