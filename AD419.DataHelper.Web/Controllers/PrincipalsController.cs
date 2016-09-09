@@ -26,18 +26,19 @@ namespace AD419.DataHelper.Web.Controllers
 
             var names = DbContext.PrincipalInvestigators
                 .Where(p => p.Organization == match.Organization)
-                .OrderBy(p => p.EmployeeId)
+                .OrderBy(p => p.EmployeeName)
                 .ToList() // pull from db
                 .Select(p => new SelectListItem()
                 {
-                    Text = string.Format("({0}) - {1}", p.EmployeeId,  p.EmployeeName.Replace("(CE PI)", "")),
+                    Text = string.Format("({0}) - {1}", p.EmployeeId, p.EmployeeName),
                     Value = p.EmployeeId
                 })
                 .ToList();
 
 
+
             // add empty
-            names.Insert(0, new SelectListItem());
+            names.Insert(0, new SelectListItem(){Text="Prorate"});
 
             ViewBag.NamesInOrg = names;
 
@@ -50,13 +51,17 @@ namespace AD419.DataHelper.Web.Controllers
             // check matched employee id, fetch and insert name
             var name = DbContext.PrincipalInvestigators
                 .FirstOrDefault(p => p.EmployeeId == match.EmployeeId);
+
             if (name == null)
             {
-                ErrorMessage = "Could not match";
-                return View(match);
+                // Let's assume a null name means they want to prorate the match, instead of assigning a PI Name.
+                //ErrorMessage = "Could not match";
+                //return View(match);
+                match.IsProrated = true;
+                match.EmployeeId = null;  // This gets set to "Prorate" if I don't clear it out.
             }
 
-            match.MatchName = name.Name;
+            if (name != null) match.MatchName = name.Name;
 
             DbContext.Entry(match).State = EntityState.Modified;
             DbContext.SaveChanges();
