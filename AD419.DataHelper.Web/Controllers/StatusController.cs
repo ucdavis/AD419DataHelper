@@ -78,7 +78,7 @@ namespace AD419.DataHelper.Web.Controllers
             SqlParameter param1 = new SqlParameter("@FiscalYear", year);
             SqlParameter param2 = new SqlParameter("@IsDebug", false);
 
-            DbContext.Database.CommandTimeout = 60*15; // 15 minute timeout, are reports take about 12 minutes to run.
+            DbContext.Database.CommandTimeout = 60*15; // 15 minute timeout, as reports take about 12 minutes to run.
             DbContext.Database.ExecuteSqlCommand(string.Format("{0} @FiscalYear, @IsDebug", sprocName), param1, param2);
             DbContext.Database.CommandTimeout = null;
         }        
