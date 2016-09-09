@@ -26,6 +26,7 @@
 
 @foreach (var category in Model)
 {
+    var isActiveCategory = category.Id == currentCategoryId;
     <div class="panel panel-default">
         <div class="panel-heading">
             <a role="button" data-toggle="collapse" href="#collapse-@category.Id">
@@ -33,7 +34,7 @@
                 <h3 class="panel-title category @(category.IsCompleted ? "complete" : "incomplete")" title="@category.Notes">@category.Id. @category.Name</h3>
             </a>
         </div>
-        <div id="collapse-@category.Id" class="panel-body collapse @(category.Id == currentCategoryId ? "in active-category" : "out inactive-category")">
+        <div id="collapse-@category.Id" class="panel-body collapse @(isActiveCategory ? "in active-category" : "out inactive-category")">
             @if (!string.IsNullOrWhiteSpace(category.Notes))
             {
                 <div class="well well-sm">
@@ -69,6 +70,16 @@
                                 <a disabled href="@Url.Action("", status.Hyperlink)" target="_blank">@status.Name <i class="fa fa-external-link"></i></a>
                             }
                         </h2>
+                        @if (isActiveCategory && !status.IsCompleted && status.NoProcessingRequired == true)
+                        {
+                            <p>
+                                @using (Html.BeginForm("StatusCompleted", "Status", new {id = status.Id}, FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-info"><i class="fa fa-check-circle"></i> Done with this step</button>
+                                }
+                            </p>
+                        }
                         <p>@status.Notes</p>
                     </li>
                 }

@@ -32,6 +32,25 @@ namespace AD419.DataHelper.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Completes a step
+        /// </summary>
+        [HttpPost]
+        public ActionResult StatusCompleted(int id)
+        {
+            var status = DbContext.ProcessStatuses.Find(id);
+            if (status == null)
+            {
+                return HttpNotFound();
+            }
+
+            status.IsCompleted = true;
+
+            DbContext.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         public ActionResult Reset()
         {
