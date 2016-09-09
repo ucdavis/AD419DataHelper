@@ -19,6 +19,8 @@ namespace AD419.DataHelper.Web.Models
 
         public string Notes { get; set; }
 
+        public bool? NoProcessingRequired { get; set; }
+
         public string Hyperlink { get; set; }
 
         public int CategoryId { get; set; }
