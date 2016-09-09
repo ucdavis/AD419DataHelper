@@ -44,7 +44,8 @@ namespace AD419.DataHelper.Web.Controllers
             var projects = DbContext.AllProjectsNew
                 .Where(p => p.ProjectStartDate <= end) //project has actually started
                 .Where(p => p.ProjectEndDate >= start) //project hasn't ended yet
-                .Where(p => p.ProjectDirector.Equals(director));
+                .Where(p => p.ProjectDirector.Equals(director))
+                .Where(p => !p.ProjectStatus.Equals("Unknown"));
 
             var results = new
             {
@@ -69,7 +70,8 @@ namespace AD419.DataHelper.Web.Controllers
             var projects = DbContext.AllProjectsNew
                 .Where(p => p.ProjectStartDate <= end) //project has actually started
                 .Where(p => p.ProjectEndDate >= start) //project hasn't ended yet
-                .Where(p => p.OrgR.Equals(organization));
+                .Where(p => p.OrgR.Equals(organization))
+                .Where(p => !p.ProjectStatus.Equals("Unknown")); 
 
             var results = new
             {
