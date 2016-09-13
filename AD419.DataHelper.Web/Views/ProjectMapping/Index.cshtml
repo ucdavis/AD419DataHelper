@@ -1,13 +1,20 @@
-﻿@model IEnumerable<AD419.DataHelper.Web.Models.FfySfnEntryWithAccount>
+﻿@using System.Web.UI.WebControls
+@model IEnumerable<AD419.DataHelper.Web.Models.FfySfnEntryWithAccount>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "204-20x Project Mappings";
 }
 
-<h2>Index</h2>
+@section AdditionalStyles
+{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.2.1/css/buttons.bootstrap.min.css" />
+}
 
-<p>
-    @Html.ActionLink("Create New", "Create")
+<h2>@ViewBag.Title</h2>
+
+<br/>
+<p id="actionButtons" class="btn-group">
+    <a href="@Url.Action("Create")" target="_blank" class="btn btn-default">Create New</a>
 </p>
 <table id="ffyTable" class="table">
     <thead>
@@ -121,15 +128,26 @@
 
 @section AdditionalScripts
 {
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.flash.min.js"></script> 
+
     <script>
         $(function() {
-            $('#ffyTable').DataTable({
+            var table = $('#ffyTable').DataTable({
+                buttons: [
+                   'copy', 'excel'
+                ],
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 columnDefs: [
                     { targets: [-1, -2, -3], sortable: false }
                 ],
                 order: [[5, "asc"]]
             });
+            table.buttons().container()
+                .appendTo($('#actionButtons'));
         })
     </script>
 }
