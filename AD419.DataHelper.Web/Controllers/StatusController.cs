@@ -3,6 +3,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Attributes;
+using Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution;
 
 namespace AD419.DataHelper.Web.Controllers
 {
@@ -43,8 +44,8 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return HttpNotFound();
             }
-
-            status.IsCompleted = true;
+            
+            status.IsCompleted = !status.IsCompleted;  // toggle from true to false, false to true, etc.
 
             DbContext.SaveChanges();
 

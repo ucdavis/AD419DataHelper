@@ -55,46 +55,68 @@
                
                     <li class="@(status.IsCompleted ? "complete" : "incomplete")">
                         
-                            @if (status.IsCompleted)
+                            @if (isActiveCategory && status.NoProcessingRequired == true)
                             {
-                                <i class="fa fa-check-circle bullet"></i>
-                                if (string.IsNullOrWhiteSpace(status.Hyperlink))
-                                {
-                                    @status.Name
-                                }
-                                else
-                                {
-                                    <h2><a class="disabled" href="@Url.Action("", status.Hyperlink)" target="_blank">@status.Name <i class="fa fa-external-link"></i></a></h2>
-                                }
-                            }
-                            else if (isActiveCategory && !status.IsCompleted && status.NoProcessingRequired == true)
-                            {
+                                // Active category
                                 using (Html.BeginForm("StatusCompleted", "Status", new { id = status.Id }, FormMethod.Post))
                                 {
                                     @Html.AntiForgeryToken()
-                                    <button type="submit" class="fa fa-circle-thin"></button>
-                                    if (string.IsNullOrWhiteSpace(status.Hyperlink))
+                                    <h2>
+                                        @if (status.IsCompleted == false)
+                                        {
+                                            <button type="submit" class="fa fa-circle-thin btn-xs"></button>
+
+                                            if (string.IsNullOrWhiteSpace(status.Hyperlink))
+                                            {
+                                                @status.Name
+                                            }
+                                            else
+                                            {
+                                                <a class="disabled display-inline" href="@Url.Action("", status.Hyperlink)" target="_blank">@status.Name <i class="fa fa-external-link"></i></a>
+                                            }
+                                        }
+                                        else
+                                        {
+                                           <button type="submit" class="fa fa-check-circle btn-xs"></button>
+                                           if (string.IsNullOrWhiteSpace(status.Hyperlink))
+                                            {
+                                                @status.Name
+                                            }
+                                            else
+                                            {
+                                                <a class="disabled" href="@Url.Action("", status.Hyperlink)" target="_blank">@status.Name <i class="fa fa-external-link"></i></a>
+                                            }
+                                        }
+                                    </h2>
+                                }
+                            }
+                            else if (status.IsCompleted)
+                            { // Completed, inactive category
+                                <i class="fa fa-check-circle bullet"></i>
+                                <h2>
+                                    @if (string.IsNullOrWhiteSpace(status.Hyperlink))
                                     {
                                         @status.Name
                                     }
                                     else
                                     {
-                                        <h2><a class="disabled display-inline" href="@Url.Action("", status.Hyperlink)" target="_blank">@status.Name <i class="fa fa-external-link"></i></a></h2>
+                                        <a class="disabled" href="@Url.Action("", status.Hyperlink)" target="_blank">@status.Name <i class="fa fa-external-link"></i></a>
                                     }
-                                }
+                                </h2>
                             }
-                            else //Not active category
+                            else // Not completed, inactive category.
                             {
                                 <i class="fa fa-circle-thin bullet"></i>
-                                if (string.IsNullOrWhiteSpace(status.Hyperlink))
-                                {
-                                    @status.Name
-                                }
-                                else
-                                {
-                                    <h2><a class="disabled" href="@Url.Action("", status.Hyperlink)" target="_blank">@status.Name <i class="fa fa-external-link"></i></a></h2>
-                                }
-
+                                <h2>
+                                    @if (string.IsNullOrWhiteSpace(status.Hyperlink))
+                                          {
+                                              @status.Name
+                                          }
+                                          else
+                                          {
+                                              <a class="disabled" href="@Url.Action("", status.Hyperlink)" target="_blank">@status.Name <i class="fa fa-external-link"></i></a>
+                                          }
+                                </h2>
                             }
 
                         <p>@status.Notes</p>
