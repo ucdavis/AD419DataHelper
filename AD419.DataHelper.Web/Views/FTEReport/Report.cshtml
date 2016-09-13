@@ -7,6 +7,6 @@
 <hr/>
 <div>
     <p><i>The criteria used to calculate FTE and generate this report can be reviewed here: @Html.ActionLink("Review FTE Report generation criteria", "Index", "FteReport").</i></p>
-        @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { style = "border: none" })
+        @Html.ReportViewer(@Model.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { style = "border: none" })
 </div>
 

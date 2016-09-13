@@ -292,6 +292,7 @@
     <Compile Include="Models\ProcessCategory.cs" />
     <Compile Include="Models\ProcessStatus.cs" />
     <Compile Include="Models\ReportingOrganization.cs" />
+    <Compile Include="Models\ReportViewerModel.cs" />
     <Compile Include="Models\TransDocTypesForFTECalc.cs" />
     <Compile Include="Models\TransDocTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -493,10 +494,7 @@
     <Content Include="Views\Principals\FindMatch.cshtml" />
     <Content Include="Views\Status\Index.cshtml" />
     <Content Include="Views\FinalReports\Index.cshtml" />
-    <Content Include="Views\FinalReports\NonAdminReport.cshtml" />
-    <Content Include="Views\FinalReports\AdminReport.cshtml" />
-    <Content Include="Views\FinalReports\UnassociatedTotalsReport.cshtml" />
-    <Content Include="Views\FinalReports\NonAdminReportWithProrateAmounts.cshtml" />
+    <Content Include="Views\FinalReports\Report.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

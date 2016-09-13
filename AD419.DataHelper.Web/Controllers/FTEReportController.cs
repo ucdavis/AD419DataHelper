@@ -24,20 +24,10 @@ namespace AD419.DataHelper.Web.Controllers
 
         public ActionResult Report()
         {
-            var reportViewer = new ReportViewer
-            {
-                SizeToReportContent = true,
-                Width = Unit.Percentage(100),
-                Height = Unit.Percentage(100),
-                ProcessingMode = ProcessingMode.Remote
-            };
+            var reportName = @"FTE Greater than 1";
+            var model = new ReportViewerModel(reportName);
 
-            reportViewer.ServerReport.ReportPath = "/AD419Reports/FTE Greater than 1";
-            reportViewer.ServerReport.ReportServerUrl =
-                new Uri(ReportServerUrl);
-
-            ViewBag.ReportViewer = reportViewer;
-            return View();
+            return View(model);
         }
     }
 }

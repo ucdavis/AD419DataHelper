@@ -35,24 +35,15 @@ namespace AD419.DataHelper.Web.Controllers
 
         public ActionResult Report()
         {
+            var reportName = @"Direct and Indirect FFY Expenses by ARC w Account";
             var year = FiscalYearService.FiscalYear;
             var yearParameter = new ReportParameter("FiscalYear", year.ToString());
-            var reportParameters = new ReportParameterCollection() { yearParameter };            
-            var reportViewer = new ReportViewer
-            {
-                SizeToReportContent = true,
-                Width = Unit.Percentage(100),
-                Height = Unit.Percentage(100),
-                ProcessingMode = ProcessingMode.Remote
-            };
+            var reportParameters = new ReportParameterCollection() { yearParameter };
 
-            reportViewer.ServerReport.ReportPath = "/AD419Reports/Direct and Indirect FFY Expenses by ARC w Account";
-            reportViewer.ServerReport.ReportServerUrl =
-                new Uri(ReportServerUrl);
-            reportViewer.ServerReport.SetParameters(reportParameters);
+            var model = new ReportViewerModel(reportName);
+            model.ReportViewer.ServerReport.SetParameters(reportParameters);
 
-            ViewBag.ReportViewer = reportViewer;
-            return View();
+            return View(model);
         }
     }
 }
