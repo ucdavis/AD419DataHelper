@@ -22,11 +22,11 @@ namespace AD419.DataHelper.Web.Models
         public string Sfn { get; set; }
 
         [Column("Accounts_AwardNum")]
-        [DisplayName("Account Award Number")]
+        [DisplayName("Account Award Num")]
         public string AccountsAwardNumber { get; set; }
 
         [Column("OpFund_AwardNum")]
-        [DisplayName("OP Fund Award Number")]
+        [DisplayName("OP Fund Award Num")]
         public string OpFundAwardNumber { get; set; }
 
         [DisplayName("Accession Number")]
@@ -39,16 +39,18 @@ namespace AD419.DataHelper.Web.Models
         public bool? IsExpired { get; set; }
 
         [DisplayName("Project End Date")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? ProjectEndDate { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:0,0.00}")]
         public decimal? Expenses { get; set; }
 
         [Column("FTE")]
-        [DisplayName("Full Time Employees")]
+        [DisplayName("FTE")]
         public decimal? FullTimeEmployees { get; set; }
 
         [Column("PrincipalInvestigatorName")]
-        [DisplayName("Principal Investigator Name")]
+        [DisplayName("PI Name")]
         public string PrincipalInvestigator { get; set; }
 
         public string Purpose { get; set; }

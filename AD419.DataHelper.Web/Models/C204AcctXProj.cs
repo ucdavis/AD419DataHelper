@@ -17,7 +17,8 @@ namespace AD419.DataHelper.Web.Models
         public string AccountID { get; set; }
 
         [Required]
-        [DisplayFormat(DataFormatString = "{0:C}")]
+        //[DisplayFormat(DataFormatString = "{0:C}")]
+        [DisplayFormat(DataFormatString = "{0:0,0.00}")]
         public double Expenses { get; set; }
 
         [StringLength(7)]
@@ -42,7 +43,7 @@ namespace AD419.DataHelper.Web.Models
         public string CSREES_ContractNo { get; set; }
 
         [StringLength(50)]
-        [Display(Name = "Account Award Number (OP Fund Award Number)")]
+        [Display(Name = "Account Award Num (OP Fund Award Num)")]
         public string AwardNum { get; set; }
 
         [StringLength(6)]
