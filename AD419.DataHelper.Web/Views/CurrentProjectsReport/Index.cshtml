@@ -6,5 +6,5 @@
 <h2>@ViewBag.Title</h2>
 <hr />
 <div>
-    @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { style = "border: none" })
+    @Html.ReportViewer(@Model.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { style = "border: none" })
 </div>

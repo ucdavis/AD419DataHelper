@@ -1,8 +1,5 @@
-﻿using System;
-using System.Configuration;
+﻿using AD419.DataHelper.Web.Models;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
-using Microsoft.Reporting.WebForms;
 
 namespace AD419.DataHelper.Web.Controllers
 {
@@ -16,74 +13,34 @@ namespace AD419.DataHelper.Web.Controllers
 
         public ActionResult NonAdminReport()
         {
-            var reportViewer = new ReportViewer
-            {
-                SizeToReportContent = true,
-                Width = Unit.Percentage(100),
-                Height = Unit.Percentage(100),
-                ProcessingMode = ProcessingMode.Remote
-            };
-
-            reportViewer.ServerReport.ReportPath = "/AD419Reports/AD-419 Non-Admin Report";
-            reportViewer.ServerReport.ReportServerUrl =
-                new Uri(ReportServerUrl);
-
-            ViewBag.ReportViewer = reportViewer;
-            return View();
+            var reportName = @"AD-419 Non-Admin Report";
+            var model = new ReportViewerModel(reportName);
+        
+            return View("Report", model);
         }
 
         public ActionResult AdminReport()
         {
-            var reportViewer = new ReportViewer
-            {
-                SizeToReportContent = true,
-                Width = Unit.Percentage(100),
-                Height = Unit.Percentage(100),
-                ProcessingMode = ProcessingMode.Remote
-            };
+            var reportName = @"AD-419 Admin Report - multi report";
+            var model = new ReportViewerModel(reportName);
 
-            reportViewer.ServerReport.ReportPath = "/AD419Reports/AD-419 Admin Report - multi report";
-            reportViewer.ServerReport.ReportServerUrl =
-                new Uri(ReportServerUrl);
-
-            ViewBag.ReportViewer = reportViewer;
-            return View();
+            return View("Report", model);
         }
 
         public ActionResult NonAdminReportWithProrateAmounts()
         {
-            var reportViewer = new ReportViewer
-            {
-                SizeToReportContent = true,
-                Width = Unit.Percentage(100),
-                Height = Unit.Percentage(100),
-                ProcessingMode = ProcessingMode.Remote
-            };
+            var reportName = @"AD-419 Non-Admin Report with Prorate Amounts - multi report";
+            var model = new ReportViewerModel(reportName);
 
-            reportViewer.ServerReport.ReportPath = "/AD419Reports/AD-419 Non-Admin Report with Prorate Amounts - multi report";
-            reportViewer.ServerReport.ReportServerUrl =
-                new Uri(ReportServerUrl);
-
-            ViewBag.ReportViewer = reportViewer;
-            return View();
+            return View("Report", model);
         }
 
         public ActionResult UnassociatedTotalsReport()
         {
-            var reportViewer = new ReportViewer
-            {
-                SizeToReportContent = true,
-                Width = Unit.Percentage(100),
-                Height = Unit.Percentage(100),
-                ProcessingMode = ProcessingMode.Remote
-            };
+            var reportName = @"AD-419 Unassociated Totals - multi report";
+            var model = new ReportViewerModel(reportName);
 
-            reportViewer.ServerReport.ReportPath = "/AD419Reports/AD-419 Unassociated Totals - multi report";
-            reportViewer.ServerReport.ReportServerUrl =
-                new Uri(ReportServerUrl);
-
-            ViewBag.ReportViewer = reportViewer;
-            return View();
+            return View("Report", model);
         }
     }
 }
