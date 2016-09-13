@@ -24,6 +24,11 @@ namespace AD419.DataHelper.Web.Models
         [MinLength(7)]
         public string Accession { get; set; }
 
+        [StringLength(11)]
+        [MinLength(11)]
+        [Display(Name = "Project Number")]
+        public string ProjectNumber { get; set; }
+
         [StringLength(1)]
         [MinLength(1)]
         [Required]
@@ -39,6 +44,11 @@ namespace AD419.DataHelper.Web.Models
         [StringLength(50)]
         [Display(Name = "Account Award Number (OP Fund Award Number)")]
         public string AwardNum { get; set; }
+
+        [StringLength(6)]
+        [MinLength(6)]
+        [Display(Name = "OP Fund Number)")]
+        public string OpfundNum { get; set; }
 
         [Display(Name = "Is Current AD-419 Project?")]
         public bool? IsCurrentProject { get; set; }
