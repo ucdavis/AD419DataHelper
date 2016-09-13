@@ -1,4 +1,5 @@
-﻿@model List<AD419.DataHelper.Web.Models.ProcessCategory>
+﻿@using ICSharpCode.SharpZipLib.Core
+@model List<AD419.DataHelper.Web.Models.ProcessCategory>
 @{
     ViewBag.Title = "Index";
 }
@@ -51,35 +52,51 @@
             <ul class="checklist">
                 @foreach (var status in category.Statuses)
                 {
+               
                     <li class="@(status.IsCompleted ? "complete" : "incomplete")">
-                        @if (status.IsCompleted)
-                        {
-                            <i class="fa fa-check-circle bullet"></i>
-                        }
-                        else
-                        {
-                            <i class="fa fa-circle-thin bullet"></i>
-                        }
-                        <h2>
-                            @if (string.IsNullOrWhiteSpace(status.Hyperlink))
+                        
+                            @if (status.IsCompleted)
                             {
-                                @status.Name
+                                <i class="fa fa-check-circle bullet"></i>
+                                if (string.IsNullOrWhiteSpace(status.Hyperlink))
+                                {
+                                    @status.Name
+                                }
+                                else
+                                {
+                                    <h2><a class="disabled" href="@Url.Action("", status.Hyperlink)" target="_blank">@status.Name <i class="fa fa-external-link"></i></a></h2>
+                                }
                             }
-                            else
+                            else if (isActiveCategory && !status.IsCompleted && status.NoProcessingRequired == true)
                             {
-                                <a disabled href="@Url.Action("", status.Hyperlink)" target="_blank">@status.Name <i class="fa fa-external-link"></i></a>
-                            }
-                        </h2>
-                        @if (isActiveCategory && !status.IsCompleted && status.NoProcessingRequired == true)
-                        {
-                            <p>
-                                @using (Html.BeginForm("StatusCompleted", "Status", new {id = status.Id}, FormMethod.Post))
+                                using (Html.BeginForm("StatusCompleted", "Status", new { id = status.Id }, FormMethod.Post))
                                 {
                                     @Html.AntiForgeryToken()
-                                    <button type="submit" class="btn btn-info"><i class="fa fa-check-circle"></i> Done with this step</button>
+                                    <button type="submit" class="fa fa-circle-thin"></button>
+                                    if (string.IsNullOrWhiteSpace(status.Hyperlink))
+                                    {
+                                        @status.Name
+                                    }
+                                    else
+                                    {
+                                        <h2><a class="disabled display-inline" href="@Url.Action("", status.Hyperlink)" target="_blank">@status.Name <i class="fa fa-external-link"></i></a></h2>
+                                    }
                                 }
-                            </p>
-                        }
+                            }
+                            else //Not active category
+                            {
+                                <i class="fa fa-circle-thin bullet"></i>
+                                if (string.IsNullOrWhiteSpace(status.Hyperlink))
+                                {
+                                    @status.Name
+                                }
+                                else
+                                {
+                                    <h2><a class="disabled" href="@Url.Action("", status.Hyperlink)" target="_blank">@status.Name <i class="fa fa-external-link"></i></a></h2>
+                                }
+
+                            }
+
                         <p>@status.Notes</p>
                     </li>
                 }
