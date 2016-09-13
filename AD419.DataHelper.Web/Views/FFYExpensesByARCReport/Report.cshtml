@@ -1,5 +1,4 @@
-﻿@using Microsoft.Reporting.WebForms
-@using ReportViewerForMvc
+﻿@using ReportViewerForMvc
 @{
     ViewBag.Title = "FFY Expenses by ARC Report";
 }
@@ -8,7 +7,6 @@
 <hr />
 <div>
     <p><i>The criteria used to generate this report can be reviewed here: @Html.ActionLink("Review FFY Expenses by ARC Report generation criteria", "Index", "FteReport").</i></p>
-    @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { style = "border: none" })
+    @Html.ReportViewer(@Model.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { style = "border: none" })
 </div>
 
-@*//ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer,*@

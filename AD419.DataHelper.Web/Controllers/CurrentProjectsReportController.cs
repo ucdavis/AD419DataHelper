@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
+using AD419.DataHelper.Web.Models;
 using Microsoft.Reporting.WebForms;
 
 namespace AD419.DataHelper.Web.Controllers
@@ -14,20 +15,10 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: CurrentProjectsReport
         public ActionResult Index()
         {
-            var reportViewer = new ReportViewer
-            {
-                SizeToReportContent = true,
-                Width = Unit.Percentage(100),
-                Height = Unit.Percentage(100),
-                ProcessingMode = ProcessingMode.Remote
-            };
+            var reportName = @"Current AD419 Projects";
+            var model = new ReportViewerModel(reportName);
 
-            reportViewer.ServerReport.ReportPath = "/AD419Reports/Current AD419 Projects";
-            reportViewer.ServerReport.ReportServerUrl =
-                new Uri(ReportServerUrl);
-            
-            ViewBag.ReportViewer = reportViewer;
-            return View();
+            return View(model);
         }
     }
 }

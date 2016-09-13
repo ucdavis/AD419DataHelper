@@ -1,10 +1,11 @@
 ﻿@using ReportViewerForMvc
-@{
-    ViewBag.Title = "Current AD-419 Projects";
-}
 
-<h2>@ViewBag.Title</h2>
+<h2>@Model.ReportName</h2>
 <hr />
 <div>
     @Html.ReportViewer(@Model.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { style = "border: none" })
+</div>
+
+<div>
+    @Html.ActionLink("Back to Final Report List", "Index")
 </div>
