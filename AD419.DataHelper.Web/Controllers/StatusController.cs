@@ -43,8 +43,8 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return HttpNotFound();
             }
-
-            status.IsCompleted = true;
+            
+            status.IsCompleted = !status.IsCompleted;  // toggle from true to false, false to true, etc.
 
             DbContext.SaveChanges();
 
