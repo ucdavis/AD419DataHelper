@@ -494,10 +494,6 @@
     <Content Include="Views\Principals\FindMatch.cshtml" />
     <Content Include="Views\Status\Index.cshtml" />
     <Content Include="Views\FinalReports\Index.cshtml" />
-    <Content Include="Views\FinalReports\NonAdminReport.cshtml" />
-    <Content Include="Views\FinalReports\AdminReport.cshtml" />
-    <Content Include="Views\FinalReports\UnassociatedTotalsReport.cshtml" />
-    <Content Include="Views\FinalReports\NonAdminReportWithProrateAmounts.cshtml" />
     <Content Include="Views\FinalReports\Report.cshtml" />
   </ItemGroup>
   <ItemGroup>
