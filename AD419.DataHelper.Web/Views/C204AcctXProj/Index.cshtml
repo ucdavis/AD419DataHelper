@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<AD419.DataHelper.Web.Models.C204AcctXProj>
 
 @{
-    ViewBag.Title = "Index -SFN 204 Acct to Project Mapping";
+    ViewBag.Title = "SFN 204 Acct to Project Mapping";
 }
 
 @section AdditionalStyles 
@@ -10,7 +10,7 @@
 }
 
 <h2>@ViewBag.Title</h2>
-
+<br />
 <p id="actionButtons" class="btn-group">
     <a href="@Url.Action("Create")" target="_blank" class="btn btn-default">Create New</a>
 </p>
@@ -30,6 +30,9 @@
                 @Html.DisplayNameFor(model => model.Accession)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.ProjectNumber)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Expenses)
             </th>
             <th>
@@ -40,6 +43,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.AwardNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OpfundNum)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IsCurrentProject)
@@ -66,6 +72,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Accession)
                 </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectNumber)
+                </td>
                 <td class="text-right">
                     @Html.DisplayFor(modelItem => item.Expenses)
                 </td>
@@ -77,6 +86,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.AwardNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpfundNum)
                 </td>
                 <td>
                     @item.IsCurrentProject
