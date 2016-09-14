@@ -11,7 +11,7 @@ namespace AD419.DataHelper.Web.Models
         [StringLength(4)]
         [Column("Obj_Consolidatn_Num")]
         [Required]
-        [Display(Name = "Object Consolidation Number")]
+        [Display(Name = "Object Consolidation Code")]
         public string ObjectConsolidationNumber { get; set; }
 
         [StringLength(255)]

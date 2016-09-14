@@ -11,7 +11,7 @@ namespace AD419.DataHelper.Web.Models
         public string DocumentType { get; set; }
 
         [StringLength(200)]
-        [Display(Name = "Document Type")]
+        [Display(Name = "Description")]
         public string Description { get; set; }
 
         [Display(Name = "Include In FTE Calculation?")]
