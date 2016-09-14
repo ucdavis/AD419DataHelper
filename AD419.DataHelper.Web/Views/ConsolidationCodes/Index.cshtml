@@ -13,6 +13,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.ObjectConsolidationNumber)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.ObjectConsolidationName)
             </th>
             <th>
@@ -30,6 +33,9 @@
         @foreach (var item in Model)
         {
             <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ObjectConsolidationNumber)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ObjectConsolidationName)
                 </td>
