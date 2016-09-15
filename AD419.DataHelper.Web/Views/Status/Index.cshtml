@@ -9,7 +9,7 @@
     // First let's find the lowest non-completed category, aka the current category
     var nonCompleted = Model.Where(c => !c.IsCompleted).ToArray();
     
-    var currentCategoryId = nonCompleted.Any() ? nonCompleted.Min(c => c.Id) : 0;
+    var currentSequenceOrder = nonCompleted.Any() ? nonCompleted.Min(c => c.SequenceOrder) : 0;
 }
 
 @Html.AntiForgeryToken()
@@ -24,14 +24,14 @@
     </div>
 }
 
-@foreach (var category in Model)
+@foreach (var category in Model.OrderBy(c => c.SequenceOrder))
 {
-    var isActiveCategory = category.Id == currentCategoryId;
+    var isActiveCategory = category.SequenceOrder == currentSequenceOrder;
     <div class="panel panel-default">
         <div class="panel-heading">
             <a role="button" data-toggle="collapse" href="#collapse-@category.Id">
 
-                <h3 class="panel-title category @(category.IsCompleted ? "complete" : "incomplete")" title="@category.Notes">@category.Id. @category.Name</h3>
+                <h3 class="panel-title category @(category.IsCompleted ? "complete" : "incomplete")" title="@category.Notes">@category.SequenceOrder. @category.Name</h3>
             </a>
         </div>
         <div id="collapse-@category.Id" class="panel-body collapse @(isActiveCategory ? "in active-category" : "out inactive-category")">
@@ -43,13 +43,13 @@
             }
             @if (!string.IsNullOrWhiteSpace(category.StoredProcedureName))
             {
-                var disabled = category.Id != currentCategoryId ? "disabled='disabled" : string.Empty;
+                var disabled = category.Id != currentSequenceOrder ? "disabled='disabled" : string.Empty;
 
                 <button data-id="@category.Id" data-name="@category.Name" class="sproc btn btn-primary" @disabled><i class="fa fa-spin" > </i> <span> Click here to</span> @category.Name</button>
 
             }
             <ul class="checklist">
-                @foreach (var status in category.Statuses)
+                @foreach (var status in category.Statuses.OrderBy(c=>c.SequenceOrder))
                 {
                
                     <li class="@(status.IsCompleted ? "complete" : "incomplete")">
@@ -124,7 +124,7 @@
             </ul>
             @if (string.IsNullOrWhiteSpace(category.StoredProcedureName))
             {
-                var disabled = category.Id != currentCategoryId ? "disabled='disabled" : string.Empty;
+                var disabled = category.Id != currentSequenceOrder ? "disabled='disabled" : string.Empty;
                 using (Html.BeginForm("Completed", "Status", new {id = category.Id}, FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()

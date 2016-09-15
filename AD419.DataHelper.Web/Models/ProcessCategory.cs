@@ -16,6 +16,8 @@ namespace AD419.DataHelper.Web.Models
         [Key]
         public int Id { get; set; }
 
+        public int SequenceOrder { get; set; }
+
         [MaxLength(100)]
         public string Name { get; set; }
 
