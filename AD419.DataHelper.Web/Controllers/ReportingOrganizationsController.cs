@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -12,11 +11,15 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: ReportingOrganizations
         public ActionResult Index()
         {
-            var orgs = DbContext.ReportingOrganizations
-                .Where(r => r.IsActive)
-                .ToList();
+            var model = new ReportingOrganizationsModel
+            {
+                ReportingOrganizations = DbContext.ReportingOrganizations
+                    .Where(r => r.IsActive)
+                    .ToList(),
+                UnknownDepartments = DbContext.GetUnknownDepartments().ToList()
+            };
 
-            return View(orgs);
+            return View(model);
         }
 
         // GET: ReportingOrganizations/Details/5

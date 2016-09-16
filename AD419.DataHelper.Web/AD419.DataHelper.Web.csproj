@@ -292,9 +292,11 @@
     <Compile Include="Models\ProcessCategory.cs" />
     <Compile Include="Models\ProcessStatus.cs" />
     <Compile Include="Models\ReportingOrganization.cs" />
+    <Compile Include="Models\ReportingOrganizationsModel.cs" />
     <Compile Include="Models\ReportViewerModel.cs" />
     <Compile Include="Models\TransDocTypesForFTECalc.cs" />
     <Compile Include="Models\TransDocTypes.cs" />
+    <Compile Include="Models\UnknownDepartment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\FiscalYearService.cs" />
     <Compile Include="Services\ProjectImportService.cs" />
