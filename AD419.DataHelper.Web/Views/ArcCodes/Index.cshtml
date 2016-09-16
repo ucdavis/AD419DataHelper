@@ -5,7 +5,8 @@
 }
 
 <h2>@ViewBag.Title</h2>
-
+<br/>
+<p id="actionButtons" class="btn-group"></p>
 <table id="arcCodeTable" class="table">
     <thead>
         <tr>
@@ -75,9 +76,19 @@
 
 @section AdditionalScripts
 {
+    @*These scripts allow the copy/export buttons to work:*@
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.flash.min.js"></script>
+
     <script>
         $(function() {
-            $('#arcCodeTable').DataTable({
+            var table = $('#arcCodeTable').DataTable({
+                buttons: [
+                    'copy', 'excel'
+                ],
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 columnDefs: [
                     { targets: [-1, -2], sortable: false }
@@ -89,6 +100,9 @@
                 ],
                 displayLength: 25
             });
+
+            table.buttons().container()
+                .appendTo($('#actionButtons'));
         })
     </script>
 }
