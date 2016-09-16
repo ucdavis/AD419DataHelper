@@ -6,11 +6,6 @@
 
 <div class="pull-right">
     <a class="btn btn-default" href="@Url.Action("Create")">Create New</a>
-    <form action="@Url.Action("ImportOld")" method="POST" class="display-inline">
-        @Html.AntiForgeryToken()
-        <input type="submit" id="btnImportOld" value="Import From Last Year" title="Import From Last Year" class="btn btn-danger" 
-               onclick="return confirm('Are you sure you want to import records into the currently selected year?')" />
-    </form>
 </div>
 
 <h2>ARC Code Account Exclusions</h2>
