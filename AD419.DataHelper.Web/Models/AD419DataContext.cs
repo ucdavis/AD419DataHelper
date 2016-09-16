@@ -78,6 +78,12 @@ namespace AD419.DataHelper.Web.Models
                 ).ToListAsync();
         }
 
+        public virtual DbRawSqlQuery<UnknownDepartment> GetUnknownDepartments()
+        {
+            return Database.SqlQuery<UnknownDepartment>(
+                "SELECT * FROM [dbo].[udf_GetExpensesForNullOrUnknownDepartments] ()");
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             CreateAllProject(modelBuilder);
