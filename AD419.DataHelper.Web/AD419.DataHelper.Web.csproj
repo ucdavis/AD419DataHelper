@@ -264,6 +264,7 @@
     <Compile Include="Models\ArcCodeAccountExclusionSelections.cs" />
     <Compile Include="Models\ConsolidationCodesForFTECalc.cs" />
     <Compile Include="Models\ConsolidationCodes.cs" />
+    <Compile Include="Models\ConsolidationCodesModel.cs" />
     <Compile Include="Models\DosCodesForFTECalc.cs" />
     <Compile Include="Models\DosCode.cs" />
     <Compile Include="Models\CfdaNumberImport.cs" />
@@ -287,6 +288,7 @@
     <Compile Include="Models\FISDataContext.cs" />
     <Compile Include="Models\FTEGreaterThanOneReportModel.cs" />
     <Compile Include="Models\Interdepartmental.cs" />
+    <Compile Include="Models\LaborTransaction.cs" />
     <Compile Include="Models\PrincipalInvestigator.cs" />
     <Compile Include="Models\PrincipalInvestigatorMatch.cs" />
     <Compile Include="Models\ProcessCategory.cs" />
@@ -497,6 +499,7 @@
     <Content Include="Views\Status\Index.cshtml" />
     <Content Include="Views\FinalReports\Index.cshtml" />
     <Content Include="Views\FinalReports\Report.cshtml" />
+    <Content Include="Views\Shared\_LaborTransactionsForMissingCodes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

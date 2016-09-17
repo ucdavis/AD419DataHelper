@@ -1,0 +1,148 @@
+﻿@model IList<AD419.DataHelper.Web.Models.LaborTransaction>
+<div>
+    @if (Model.Count > 0)
+    {
+        <h2>Labor Transactions for Unknown Codes</h2>
+
+        <h4> The following labor transactions have Unknown AD-419 Code(s):</h4>
+        <i>Please review the transactions and add new Code(s) as applicable.</i>
+        <table id="laborTransactionsTable" class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].Chart)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].Account)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].SubAccount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].Org)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].ObjConsol)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].FinanceDocTypeCd)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].DosCd)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].EmployeeID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].EmployeeName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].TitleCd)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].RateTypeCd)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].Payrate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].Amount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].PayPeriodEndDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].FringeBenefitSalaryCd)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].AnnualReportCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].ExcludedByARC)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].ExcludedByOrg)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].ExcludedByAccount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].ExcludedByObjConsol)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Chart)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Account)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SubAccount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Org)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.ObjConsol)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.FinanceDocTypeCd)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.DosCd)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.EmployeeID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.EmployeeName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.TitleCd)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.RateTypeCd)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Payrate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Amount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.PayPeriodEndDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.FringeBenefitSalaryCd)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.AnnualReportCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.ExcludedByARC)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.ExcludedByOrg)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.ExcludedByAccount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.ExcludedByObjConsol)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p><br /><h4><i>Note: There are <strong>zero</strong> labor transactions for the following codes that need to be reviewed at this time.</i></h4></p>
+    }
+    <hr />
+</div>
