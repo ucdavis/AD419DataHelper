@@ -1,78 +1,78 @@
-﻿@model IList<AD419.DataHelper.Web.Models.LaborTransaction>
+﻿@model AD419.DataHelper.Web.Models.LaborTransactionsForMissingCodesModel
 <div>
-    @if (Model.Count > 0)
+    @if (Model.LaborTransactions.Count > 0)
     {
-        <h2>Labor Transactions for Unknown Codes</h2>
+        <h2>Labor Transactions for Unknown @Model.CodeTypeName</h2>
 
-        <h4> The following labor transactions have Unknown AD-419 Code(s):</h4>
-        <i>Please review the transactions and add new Code(s) as applicable.</i>
+        <h4> The following labor transactions have Unknown AD-419 @Model.CodeTypeName:</h4>
+        <i>Please review the transactions and add new @Model.CodeTypeName as applicable.</i>
         <table id="laborTransactionsTable" class="table">
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model[0].Chart)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].Chart)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model[0].Account)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].Account)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model[0].SubAccount)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].SubAccount)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model[0].Org)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].Org)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model[0].ObjConsol)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].ObjConsol)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model[0].FinanceDocTypeCd)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].FinanceDocTypeCd)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model[0].DosCd)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].DosCd)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model[0].EmployeeID)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].EmployeeID)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model[0].EmployeeName)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].EmployeeName)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model[0].TitleCd)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].TitleCd)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model[0].RateTypeCd)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].RateTypeCd)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model[0].Payrate)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].Payrate)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model[0].Amount)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].Amount)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model[0].PayPeriodEndDate)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].PayPeriodEndDate)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model[0].FringeBenefitSalaryCd)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].FringeBenefitSalaryCd)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model[0].AnnualReportCode)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].AnnualReportCode)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model[0].ExcludedByARC)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].ExcludedByARC)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model[0].ExcludedByOrg)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].ExcludedByOrg)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model[0].ExcludedByAccount)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].ExcludedByAccount)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model[0].ExcludedByObjConsol)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].ExcludedByObjConsol)
                     </th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
+                @foreach (var item in Model.LaborTransactions)
                 {
                     <tr>
                         <td>
@@ -142,7 +142,7 @@
     }
     else
     {
-        <p><br /><h4><i>Note: There are <strong>zero</strong> labor transactions for the following codes that need to be reviewed at this time.</i></h4></p>
+        <p><br /><h4><i>Note: There are <strong>zero</strong> labor transactions for @Model.CodeTypeName that need to be reviewed at this time.</i></h4></p>
     }
     <hr />
 </div>

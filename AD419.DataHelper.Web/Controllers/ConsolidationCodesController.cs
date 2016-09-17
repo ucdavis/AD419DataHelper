@@ -14,8 +14,9 @@ namespace AD419.DataHelper.Web.Controllers
             var model = new ConsolidationCodesModel
             {
                 ConsolidationCodes = DbContext.ConsolidationCodes.ToList(),
-                LaborTransactions =
-                    DbContext.GetLaborTransactions((int) LaborTransactionsOptions.ConsolidationCodes).ToList()
+                LaborTransactionsForMissingCodesModel = new LaborTransactionsForMissingCodesModel() { 
+                    LaborTransactions = DbContext.GetLaborTransactions((int)LaborTransactionsOptions.ConsolidationCodes).ToList(), 
+                    CodeTypeName = "Consolidation Codes" }
             };
 
             return View(model);
