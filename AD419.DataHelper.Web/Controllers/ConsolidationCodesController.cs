@@ -11,7 +11,14 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: ConsolidationCodes
         public ActionResult Index()
         {
-            return View(DbContext.ConsolidationCodes.ToList());
+            var model = new ConsolidationCodesViewModel
+            {
+                ConsolidationCodes = DbContext.ConsolidationCodes.ToList(),
+                LaborTransactions  = DbContext.GetLaborTransactions((int)LaborTransactionsOptions.ConsolidationCodes).ToList(), 
+                CodeTypeName = "Consolidation Codes" 
+            };
+
+            return View(model);
         }
 
         // GET: ConsolidationCodes/Details/5

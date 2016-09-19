@@ -1,10 +1,13 @@
-﻿@model IEnumerable<AD419.DataHelper.Web.Models.ConsolidationCodes>
+﻿@model AD419.DataHelper.Web.Models.ConsolidationCodesViewModel
 
 @{
-    ViewBag.Title = "Index";
+    //ViewBag.Title = "Consolidation Codes";
+    ViewBag.Title = @Model.CodeTypeName;
 }
 
-<h2>Index</h2>
+@Html.Partial("_LaborTransactionsForMissingCodes", @Model)
+
+<h2>@ViewBag.Title</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -13,16 +16,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ObjectConsolidationNumber)
+                @Html.DisplayNameFor(model => model.ConsolidationCodes[0].ObjectConsolidationNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ObjectConsolidationName)
+                @Html.DisplayNameFor(model => model.ConsolidationCodes[0].ObjectConsolidationName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IncludeInFTECalc)
+                @Html.DisplayNameFor(model => model.ConsolidationCodes[0].IncludeInFTECalc)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IncludeInLaborTransactions)
+                @Html.DisplayNameFor(model => model.ConsolidationCodes[0].IncludeInLaborTransactions)
             </th>
             <th></th>
             <th></th>
@@ -30,7 +33,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.ConsolidationCodes)
         {
             <tr>
                 <td>

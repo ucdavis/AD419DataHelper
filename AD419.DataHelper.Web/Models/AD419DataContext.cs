@@ -48,7 +48,7 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<Interdepartmental> Interdepartmentals { get; set; }
 
-        public virtual DbSet<TransDocTypes> TransDocTypes { get; set; }
+        public virtual DbSet<TransDocType> TransDocTypes { get; set; }
 
         public virtual DbSet<TransDocTypesForFTECalc> TransDocTypesForFTECalc { get; set; }
 
@@ -61,6 +61,8 @@ namespace AD419.DataHelper.Web.Models
         public virtual DbSet<ProcessStatus> ProcessStatuses { get; set; }
 
         public virtual DbSet<ProcessCategory> ProcessCategories { get; set; }
+
+        public virtual DbSet<LaborTransaction> LaborTransactions { get; set; } 
 
         public virtual DbRawSqlQuery<AllProjectsNew> GetNewProjects(int fiscalYear)
         {
@@ -82,6 +84,20 @@ namespace AD419.DataHelper.Web.Models
         {
             return Database.SqlQuery<UnknownDepartment>(
                 "SELECT * FROM [dbo].[udf_GetExpensesForNullOrUnknownDepartments] ()");
+        }
+
+        /// <summary>
+        /// Gets a list of missing Labor Transactions for which we the corresponding type of code is
+        /// not one we were aware of so it can be reviewed and added, included or excluded from the 
+        /// appropriate list. 
+        /// </summary>
+        /// <param name="option">0: All, 1: ConsolidationCodes, 2: TransDocTypes, 3: DosCodes</param>
+        /// <returns>A list of Labor Transactions for the option provided.</returns>
+        public virtual DbRawSqlQuery<LaborTransaction> GetLaborTransactions(int option)
+        {
+            return Database.SqlQuery<LaborTransaction>(
+                "SELECT * FROM [dbo].[udf_GetTransactionsForUnknownCodes] (@Option)",
+                    new SqlParameter("@Option", SqlDbType.Int) { Value = option });
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

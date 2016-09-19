@@ -1,10 +1,13 @@
-﻿@model IEnumerable<AD419.DataHelper.Web.Models.TransDocTypes>
+﻿@model AD419.DataHelper.Web.Models.TransDocTypesViewModel
 
 @{
-    ViewBag.Title = "Index";
+    //ViewBag.Title = "Trans. Doc. Types";
+    ViewBag.Title = @Model.CodeTypeName;
 }
 
-<h2>Index</h2>
+@Html.Partial("_LaborTransactionsForMissingCodes", @Model)
+
+<h2>@ViewBag.Title</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,21 +15,21 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.DocumentType)
+            @Html.DisplayNameFor(model => model.TransDocTypes[0].DocumentType)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.TransDocTypes[0].Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IncludeInFTECalc)
+            @Html.DisplayNameFor(model => model.TransDocTypes[0].IncludeInFTECalc)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IncludeInFISExpenses)
+            @Html.DisplayNameFor(model => model.TransDocTypes[0].IncludeInFISExpenses)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.TransDocTypes) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.DocumentType)

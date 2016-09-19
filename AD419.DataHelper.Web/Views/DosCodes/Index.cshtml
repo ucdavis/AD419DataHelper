@@ -1,10 +1,13 @@
-﻿@model IEnumerable<AD419.DataHelper.Web.Models.DosCode>
+﻿@model AD419.DataHelper.Web.Models.DosCodesViewModel
 
 @{
-    ViewBag.Title = "Index";
+    //ViewBag.Title = "D.O.S. Codes";
+    ViewBag.Title = @Model.CodeTypeName;
 }
 
-<h2>Index</h2>
+@Html.Partial("_LaborTransactionsForMissingCodes", @Model)
+
+<h2>@ViewBag.Title</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -13,13 +16,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Code)
+                @Html.DisplayNameFor(model => model.DosCodes[0].Code)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                @Html.DisplayNameFor(model => model.DosCodes[0].Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IncludeInAD419FTE)
+                @Html.DisplayNameFor(model => model.DosCodes[0].IncludeInAD419FTE)
             </th>
             <th></th>
             <th></th>
@@ -27,7 +30,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.DosCodes)
         {
             <tr>
                 <td>
