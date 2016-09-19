@@ -48,7 +48,7 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<Interdepartmental> Interdepartmentals { get; set; }
 
-        public virtual DbSet<TransDocTypes> TransDocTypes { get; set; }
+        public virtual DbSet<TransDocType> TransDocTypes { get; set; }
 
         public virtual DbSet<TransDocTypesForFTECalc> TransDocTypesForFTECalc { get; set; }
 

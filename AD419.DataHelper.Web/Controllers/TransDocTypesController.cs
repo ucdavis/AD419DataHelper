@@ -11,7 +11,14 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: TransDocTypes
         public ActionResult Index()
         {
-            return View(DbContext.TransDocTypes.ToList());
+            var model = new TransDocTypesViewModel
+            {
+                TransDocTypes = DbContext.TransDocTypes.ToList(),
+                LaborTransactions = DbContext.GetLaborTransactions((int)LaborTransactionsOptions.DocTypeCodes).ToList(),
+                CodeTypeName = "Trans. Doc. Types (Doc. Type Codes)"
+            };
+
+            return View(model);
         }
 
         // GET: TransDocTypes/Details/5
@@ -21,7 +28,7 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TransDocTypes transDocTypes = DbContext.TransDocTypes.Find(id);
+            TransDocType transDocTypes = DbContext.TransDocTypes.Find(id);
             if (transDocTypes == null)
             {
                 return HttpNotFound();
@@ -40,7 +47,7 @@ namespace AD419.DataHelper.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DocumentType,Description,IncludeInFTECalc,IncludeInFISExpenses")] TransDocTypes transDocTypes)
+        public ActionResult Create([Bind(Include = "DocumentType,Description,IncludeInFTECalc,IncludeInFISExpenses")] TransDocType transDocTypes)
         {
             if (ModelState.IsValid)
             {
@@ -59,7 +66,7 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TransDocTypes transDocTypes = DbContext.TransDocTypes.Find(id);
+            TransDocType transDocTypes = DbContext.TransDocTypes.Find(id);
             if (transDocTypes == null)
             {
                 return HttpNotFound();
@@ -72,7 +79,7 @@ namespace AD419.DataHelper.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DocumentType,Description,IncludeInFTECalc,IncludeInFISExpenses")] TransDocTypes transDocTypes)
+        public ActionResult Edit([Bind(Include = "DocumentType,Description,IncludeInFTECalc,IncludeInFISExpenses")] TransDocType transDocTypes)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +97,7 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TransDocTypes transDocTypes = DbContext.TransDocTypes.Find(id);
+            TransDocType transDocTypes = DbContext.TransDocTypes.Find(id);
             if (transDocTypes == null)
             {
                 return HttpNotFound();
@@ -103,7 +110,7 @@ namespace AD419.DataHelper.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            TransDocTypes transDocTypes = DbContext.TransDocTypes.Find(id);
+            TransDocType transDocTypes = DbContext.TransDocTypes.Find(id);
             DbContext.TransDocTypes.Remove(transDocTypes);
             DbContext.SaveChanges();
             return RedirectToAction("Index");

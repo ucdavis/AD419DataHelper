@@ -11,12 +11,11 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: ConsolidationCodes
         public ActionResult Index()
         {
-            var model = new ConsolidationCodesModel
+            var model = new ConsolidationCodesViewModel
             {
                 ConsolidationCodes = DbContext.ConsolidationCodes.ToList(),
-                LaborTransactionsForMissingCodesModel = new LaborTransactionsForMissingCodesModel() { 
-                    LaborTransactions = DbContext.GetLaborTransactions((int)LaborTransactionsOptions.ConsolidationCodes).ToList(), 
-                    CodeTypeName = "Consolidation Codes" }
+                LaborTransactions  = DbContext.GetLaborTransactions((int)LaborTransactionsOptions.ConsolidationCodes).ToList(), 
+                CodeTypeName = "Consolidation Codes" 
             };
 
             return View(model);

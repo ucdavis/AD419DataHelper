@@ -2,7 +2,7 @@ namespace AD419.DataHelper.Web.Models
 {
     using System.ComponentModel.DataAnnotations;
 
-    public partial class TransDocTypes
+    public partial class TransDocType
     {
         [Key]
         [StringLength(4)]

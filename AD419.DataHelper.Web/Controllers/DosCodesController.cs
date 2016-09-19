@@ -10,8 +10,14 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: DOS_Codes
         public ActionResult Index()
         {
-            var codes = DbContext.DosCodes.ToList();
-            return View(codes);
+            var model = new DosCodesViewModel
+            {
+                DosCodes = DbContext.DosCodes.ToList(),
+                LaborTransactions = DbContext.GetLaborTransactions((int)LaborTransactionsOptions.DosCodes).ToList(), 
+                CodeTypeName = "D.O.S. Codes" 
+            };
+
+            return View(model);
         }
 
         // GET: DOS_Codes/Details/5

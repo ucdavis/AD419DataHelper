@@ -2,10 +2,8 @@
 
 namespace AD419.DataHelper.Web.Models
 {
-    public class ConsolidationCodesModel
+    public class ConsolidationCodesViewModel : LaborTransactionsForMissingCodesModel
     {
         public List<ConsolidationCodes> ConsolidationCodes { get; set; }
-
-        public LaborTransactionsForMissingCodesModel LaborTransactionsForMissingCodesModel { get; set; }
     }
 }
