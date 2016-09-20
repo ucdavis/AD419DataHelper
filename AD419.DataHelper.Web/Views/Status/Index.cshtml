@@ -43,7 +43,7 @@
             }
             @if (!string.IsNullOrWhiteSpace(category.StoredProcedureName))
             {
-                var disabled = category.Id != currentSequenceOrder ? "disabled='disabled" : string.Empty;
+                var disabled = category.SequenceOrder != currentSequenceOrder ? "disabled='disabled" : string.Empty;
 
                 <button data-id="@category.Id" data-name="@category.Name" class="sproc btn btn-primary" @disabled><i class="fa fa-spin" > </i> <span> Click here to</span> @category.Name</button>
 
@@ -124,7 +124,7 @@
             </ul>
             @if (string.IsNullOrWhiteSpace(category.StoredProcedureName))
             {
-                var disabled = category.Id != currentSequenceOrder ? "disabled='disabled" : string.Empty;
+                var disabled = category.SequenceOrder != currentSequenceOrder ? "disabled='disabled" : string.Empty;
                 using (Html.BeginForm("Completed", "Status", new {id = category.Id}, FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
