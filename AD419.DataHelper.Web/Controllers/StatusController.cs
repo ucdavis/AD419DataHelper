@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Attributes;
 
+
 namespace AD419.DataHelper.Web.Controllers
 {
     [UseAntiForgeryTokenOnPostByDefault]
@@ -25,7 +26,14 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return HttpNotFound();
             }
+
             category.IsCompleted = true;
+
+            var statuses = DbContext.ProcessStatuses.Where(s => s.CategoryId == id);
+            foreach (var status in statuses)
+            {
+                status.IsCompleted = true;
+            }
 
             DbContext.SaveChanges();
 
@@ -43,7 +51,7 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return HttpNotFound();
             }
-            
+
             status.IsCompleted = !status.IsCompleted;  // toggle from true to false, false to true, etc.
 
             DbContext.SaveChanges();
@@ -82,9 +90,16 @@ namespace AD419.DataHelper.Web.Controllers
             catch (Exception ex)
             {
                 return new JsonResult() {Data = new {Success = false, Message = "There was a problem.", ErrorMessage = ex.Message}, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-            }            
+            }
 
             category.IsCompleted = true;
+
+            var statuses = DbContext.ProcessStatuses.Where(s => s.CategoryId == id);
+            foreach (var status in statuses)
+            {
+                status.IsCompleted = true;
+            }
+
             DbContext.SaveChanges();
            
             return new JsonResult() { Data = new { Success = true, Message = "Done." }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
