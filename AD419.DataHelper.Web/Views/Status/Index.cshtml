@@ -48,22 +48,33 @@
                 <button data-id="@category.Id" data-name="@category.Name" class="sproc btn btn-primary" @disabled><i class="fa fa-spin" > </i> <span> Click here to</span> @category.Name</button>
 
             }
+            @{
+                var orderedStatuses = category.Statuses.OrderBy(c => c.SequenceOrder);
+                var currentStatusSequenceOrder = orderedStatuses.Any(s => !s.IsCompleted) ? orderedStatuses.Where(s => !s.IsCompleted).Min(c => c.SequenceOrder) : 0;
+            }
             <ul class="checklist">
                 @foreach (var status in category.Statuses.OrderBy(c=>c.SequenceOrder))
                 {
-               
                     <li class="@(status.IsCompleted ? "complete" : "incomplete")">
-                        
                             @if (isActiveCategory && status.NoProcessingRequired == true)
                             {
                                 // Active category
-                                using (Html.BeginForm("StatusCompleted", "Status", new { id = status.Id }, FormMethod.Post))
-                                {
+                                    using (Html.BeginForm("StatusCompleted", "Status", new { id = status.Id }, FormMethod.Post))
+                                    {
                                     @Html.AntiForgeryToken()
                                     <h2>
                                         @if (status.IsCompleted == false)
                                         {
-                                            <button type="submit" class="fa fa-circle-thin btn-xs"></button>
+                                            if (status.SequenceOrder == currentStatusSequenceOrder)
+                                            {
+                                                <button type="submit" class="fa fa-circle-thin btn-xs" style="color:black"></button>
+
+                                            }
+                                            else
+                                            {
+                                                <button type="submit" class="fa fa-circle-thin btn-xs" style="color: white" disabled="disabled"></button>
+                                                @*<i class="fa fa-circle-thin bullet"></i>*@
+                                            }
 
                                             if (string.IsNullOrWhiteSpace(status.Hyperlink))
                                             {
@@ -76,8 +87,8 @@
                                         }
                                         else
                                         {
-                                           <button type="submit" class="fa fa-check-circle btn-xs"></button>
-                                           if (string.IsNullOrWhiteSpace(status.Hyperlink))
+                                            <button type="submit" class="fa fa-check-circle btn-xs"></button>
+                                            if (string.IsNullOrWhiteSpace(status.Hyperlink))
                                             {
                                                 @status.Name
                                             }
@@ -87,7 +98,8 @@
                                             }
                                         }
                                     </h2>
-                                }
+                                    }
+                                
                             }
                             else if (status.IsCompleted)
                             { // Completed, inactive category
