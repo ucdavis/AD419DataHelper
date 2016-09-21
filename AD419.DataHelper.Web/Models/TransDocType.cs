@@ -17,7 +17,7 @@ namespace AD419.DataHelper.Web.Models
         [Display(Name = "Include In FTE Calculation?")]
         public bool? IncludeInFTECalc { get; set; }
 
-         [Display(Name = "Include In FIS Expenses?")]
+         [Display(Name = "Not Included in Labor Data; Include In FIS Expenses?")]
         public bool? IncludeInFISExpenses { get; set; }
     }
 }
