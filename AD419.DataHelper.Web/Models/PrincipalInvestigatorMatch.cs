@@ -25,7 +25,7 @@ namespace AD419.DataHelper.Web.Models
         [DisplayName("Match Name")]
         public string MatchName { get; set; }
 
-        [DisplayName("Is Prorated?")]
+        [DisplayName("No Employee Match")]
         public bool? IsProrated { get; set; }
     }
 }
