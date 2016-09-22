@@ -19,7 +19,7 @@ namespace AD419.DataHelper.Web.Controllers
 
         public AllProjectsNewController()
         {
-            _projectImportService = new ProjectImportService(DbContext);
+            _projectImportService = new ProjectImportService(DbContext, FiscalYearService);
         }
 
         // GET: AllProjectsNew
