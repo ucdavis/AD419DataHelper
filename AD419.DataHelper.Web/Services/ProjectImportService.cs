@@ -11,18 +11,19 @@ namespace AD419.DataHelper.Web.Services
     public class ProjectImportService
     {
         private readonly AD419DataContext _dataContext;
+        private static DateTime _fiscalStartDate;
 
-
-        public ProjectImportService(AD419DataContext dataContext)
+        public ProjectImportService(AD419DataContext dataContext, DateTime fiscalStartDate)
         {
             _dataContext = dataContext;
+            _fiscalStartDate = fiscalStartDate;
         }
 
         public IEnumerable<AllProjectsNew> GetProjectsFromRows(DataRowCollection rows)
         {
             var projects = rows.ToEnumerable().Select(GetProjectFromRow).ToList();
             
-            // setup organiztion references
+            // setup organization references
             var reportingOrganizations = _dataContext.ReportingOrganizations
                 .Where(r => r.IsActive).ToList();
 
@@ -85,13 +86,15 @@ namespace AD419.DataHelper.Web.Services
             project.Is204               = Is204Project(project.ProjectNumber);
             project.IsUcDavis           = IsUCDavisProject(project.OrganizationName);
             project.IsInterdepartmental = IsInterdepartmentalProject(project.ProjectNumber);
+            if (project.ProjectEndDate != null)
+                project.IsExpired = IsExpired((DateTime)project.ProjectEndDate);
 
             return project;
         }
 
         private void ConfigureReportingOrg(AllProjectsNew project, ReportingOrganization organization)
         {
-            // don't set orgR on non ucdavis projects
+            // don't set orgR on non UC Davis projects
             if (!project.IsUcDavis)
                 return;
 
@@ -113,7 +116,7 @@ namespace AD419.DataHelper.Web.Services
             // check for XXX
             if (!string.IsNullOrEmpty(project.ShortCode) && project.ShortCode.Equals("XXX", StringComparison.OrdinalIgnoreCase))
             {
-                project.OrgR = "XXXX";
+                project.OrgR = "AINT";
                 project.IsInterdepartmental = true;
                 return;
             }
@@ -184,6 +187,11 @@ namespace AD419.DataHelper.Web.Services
         public static bool IsInterdepartmentalProject(string projectNumber)
         {
             return !string.IsNullOrWhiteSpace(projectNumber) && projectNumber.Contains("XXX");
+        }
+
+        public static bool IsExpired(DateTime endDate)
+        {
+            return  endDate < _fiscalStartDate;
         }
     }
 }
