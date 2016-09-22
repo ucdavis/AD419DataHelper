@@ -1,4 +1,5 @@
-﻿<div class="navbar navbar-inverse navbar-fixed-top">
+﻿@using System.Configuration
+<div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -57,6 +58,7 @@
                         <li>@Html.ActionLink("AD-419 Final Reports", "Index", "FinalReports")</li>
                     </ul>
                 </li>
+                <li><a href="@ConfigurationManager.AppSettings["AD419AppUrl"]" target="_blank">AD-419 Application</a></li>
             </ul>
             @Html.Partial("_LoginPartial")
         </div>
