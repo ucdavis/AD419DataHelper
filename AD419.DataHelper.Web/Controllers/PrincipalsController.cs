@@ -26,6 +26,7 @@ namespace AD419.DataHelper.Web.Controllers
 
             var names = DbContext.PrincipalInvestigators
                 .Where(p => p.Organization == match.Organization)
+                .Where(p => !p.EmployeeName.StartsWith("(CE PI)"))
                 .OrderBy(p => p.EmployeeName)
                 .ToList() // pull from db
                 .Select(p => new SelectListItem()
@@ -35,10 +36,8 @@ namespace AD419.DataHelper.Web.Controllers
                 })
                 .ToList();
 
-
-
             // add empty
-            names.Insert(0, new SelectListItem(){Text="Prorate"});
+            names.Insert(0, new SelectListItem(){Text="No Employee Expense"});
 
             ViewBag.NamesInOrg = names;
 
@@ -61,7 +60,12 @@ namespace AD419.DataHelper.Web.Controllers
                 match.EmployeeId = null;  // This gets set to "Prorate" if I don't clear it out.
             }
 
-            if (name != null) match.MatchName = name.Name;
+            if (name != null)
+            {
+                match.MatchName = name.Name;
+                match.IsProrated = false;
+            }
+
 
             DbContext.Entry(match).State = EntityState.Modified;
             DbContext.SaveChanges();

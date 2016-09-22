@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Principal Investigator to Employee Matching</h2>
 
 <table id="matchesTable" class="table">
     <thead>
@@ -55,7 +55,7 @@
                     {
                         @Html.AntiForgeryToken()
                         @Html.Hidden("id", item.Id)
-                        <input type="submit" class="btn btn-sm" value="Prorate" />
+                        <input type="submit" class="btn btn-info btn-sm" value="No Employee Match" />
                     }
                 </td>
             </tr>
