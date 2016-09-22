@@ -45,6 +45,9 @@
         <th>
             @Html.DisplayNameFor(model => model.IsInterdepartmental)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsExpired)
+        </th>
         <th></th>
         <th></th>
         <th></th>
@@ -95,6 +98,9 @@
             </td>
             <td>
                 @item.IsInterdepartmental
+            </td>
+            <td>
+                @item.IsExpired
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new {id = item.Id})

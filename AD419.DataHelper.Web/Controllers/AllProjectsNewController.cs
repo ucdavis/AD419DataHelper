@@ -19,18 +19,22 @@ namespace AD419.DataHelper.Web.Controllers
 
         public AllProjectsNewController()
         {
-            _projectImportService = new ProjectImportService(DbContext, FiscalYearService);
+            _projectImportService = new ProjectImportService(DbContext, FiscalYearService.FiscalStartDate);
         }
 
         // GET: AllProjectsNew
         public ActionResult Index()
         {
-            var start = FiscalYearService.FiscalStartDate;
+            var start = FiscalYearService.FiscalStartDate;  
             var end = FiscalYearService.FiscalEndDate;
+            var sevenMonthsPriorToStart = start.AddMonths(-7);
 
+            // Projects where project has started (project start date is < end date)  
+            // and has not ended or whose end date is no earlier than 7 months prior to the start date (project end date >= 7 months to start date):
             var projects = DbContext.AllProjectsNew
-                .Where(p => p.ProjectStartDate >= start)
-                .Where(p => p.ProjectEndDate >= end)
+                .Where(p => p.ProjectEndDate >= sevenMonthsPriorToStart)
+                .Where(p => p.ProjectStartDate <  end)
+                
                 .ToList();
 
             return View(projects);
@@ -42,8 +46,8 @@ namespace AD419.DataHelper.Web.Controllers
             var end = FiscalYearService.FiscalEndDate;
 
             var projects = DbContext.AllProjectsNew
-                .Where(p => p.ProjectStartDate <= end) //project has actually started
                 .Where(p => p.ProjectEndDate >= start) //project hasn't ended yet
+                .Where(p => p.ProjectStartDate < end) //project has actually started
                 .Where(p => p.ProjectDirector.Equals(director))
                 .Where(p => !p.ProjectStatus.Equals("Unknown"));
 
@@ -68,8 +72,8 @@ namespace AD419.DataHelper.Web.Controllers
             var end = FiscalYearService.FiscalEndDate;
 
             var projects = DbContext.AllProjectsNew
-                .Where(p => p.ProjectStartDate <= end) //project has actually started
                 .Where(p => p.ProjectEndDate >= start) //project hasn't ended yet
+                .Where(p => p.ProjectStartDate < end) //project has actually started
                 .Where(p => p.OrgR.Equals(organization))
                 .Where(p => !p.ProjectStatus.Equals("Unknown")); 
 

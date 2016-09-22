@@ -13,10 +13,10 @@ namespace AD419.DataHelper.Web.Services
         private readonly AD419DataContext _dataContext;
         private static DateTime _fiscalStartDate;
 
-        public ProjectImportService(AD419DataContext dataContext, FiscalYearService fiscalYearService)
+        public ProjectImportService(AD419DataContext dataContext, DateTime fiscalStartDate)
         {
             _dataContext = dataContext;
-            _fiscalStartDate = fiscalYearService.FiscalStartDate;
+            _fiscalStartDate = fiscalStartDate;
         }
 
         public IEnumerable<AllProjectsNew> GetProjectsFromRows(DataRowCollection rows)
