@@ -1,21 +1,21 @@
 ﻿@model AD419.DataHelper.Web.Models.FFYExpensesByARCReportModel
 @{
-    ViewBag.Title = "FFY Expenses by ARC Report Generation Criteria";
+    ViewBag.Title = "Expenses by ARC/Account Report Generation Criteria";
 }
 
 <h2>@ViewBag.Title</h2>
 <hr />
 <div>
-    <h4>Prior to calculating the FFY Expense totals the following steps must have already been completed:</h4>
+    <h4>Prior to calculating the Expense totals by ARC/Account the following steps must have already been completed:</h4>
     <ol>
-        <li>The @Html.ActionLink("ARC Codes", "Index", "ArcCodes") to be included in the FFY Expense Totals must have been selected.</li>
-        <li>The @Html.ActionLink("ARC/Account Exclusions", "Index", "ArcCodeAccountExclusions") to be excluded from the FFY Expense Totals must have been entered.</li>
+        <li>The @Html.ActionLink("ARC Codes", "Index", "ArcCodes") to be included in the Expense Totals by ARC/Account must have been selected.</li>
+        <li>The @Html.ActionLink("ARC/Account Exclusions", "Index", "ArcCodeAccountExclusions") to be excluded from the Expense Totals by ARC/Account must have been entered.</li>
     </ol>
     <i>(Select any of the above links to modify the corresponding entries as desired, and then refresh the page to see the updated results.)</i>
     <div>
-        <br /><h4>Once the criteria has been verified, the FFY Expense Totals by ARC Report can be viewed here: @Html.ActionLink("View FFY Expenses Totals by ARC Report", "Report", "FFYExpensesByARCReport").</h4><br />
+        <br /><h4>Once the criteria has been verified, the Expense Totals by ARC/Account Report can be viewed here: @Html.ActionLink("View Expenses Totals by ARC Report", "Report", "FFYExpensesByARCReport").</h4><br />
     </div>
-
+    <i>*Note: The same ARC Codes and Exclusions are used for generating both the FFY and SFY reports.</i>
 </div>
 
 <h4>These are the Annual Report Codes and ARC/Account Exclusions that are currently selected:</h4>

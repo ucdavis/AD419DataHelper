@@ -1,10 +1,7 @@
 ﻿using AD419.DataHelper.Web.Models;
 using Microsoft.Reporting.WebForms;
-using System;
-using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
 
 namespace AD419.DataHelper.Web.Controllers
 {
@@ -28,20 +25,30 @@ namespace AD419.DataHelper.Web.Controllers
                         Account = a.Account,
                         Comments = a.Comments
 
-                    }).ToList();            
+                    }).ToList();
+
+            model.UseStateFiscalYear = false;
 
             return View(model);
         }
 
-        public ActionResult Report()
+        public ActionResult Report(int id)
         {
-            var reportName = @"Direct and Indirect FFY Expenses by ARC w Account";
+            var useStateFiscalYear = id;
+            var fiscalYearTitleSegment = useStateFiscalYear == 0 ? "FFY" : "SFY";
+
+            const string reportName = @"Direct and Indirect FFY Expenses by ARC w Account";
+            
             var year = FiscalYearService.FiscalYear;
             var yearParameter = new ReportParameter("FiscalYear", year.ToString());
             var reportParameters = new ReportParameterCollection() { yearParameter };
 
+            var useStateFiscalYearParameter = new ReportParameter("UseStateFiscalYear", useStateFiscalYear.ToString());
+            reportParameters.Add(useStateFiscalYearParameter);
+
             var model = new ReportViewerModel(reportName);
             model.ReportViewer.ServerReport.SetParameters(reportParameters);
+            model.ReportTitle = fiscalYearTitleSegment + " Expenses by ARC w/Account Report";
 
             return View(model);
         }

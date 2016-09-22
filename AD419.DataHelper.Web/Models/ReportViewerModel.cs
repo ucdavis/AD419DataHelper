@@ -19,6 +19,8 @@ namespace AD419.DataHelper.Web.Models
 
         public string ReportName { get; set; }
 
+        public string ReportTitle { get; set; }
+
         public ReportViewerModel(string reportName) : this()
         {
             ReportName = reportName;
