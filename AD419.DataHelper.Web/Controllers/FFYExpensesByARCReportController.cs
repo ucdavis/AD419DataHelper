@@ -32,7 +32,7 @@ namespace AD419.DataHelper.Web.Controllers
             return View(model);
         }
 
-        public ActionResult Report(bool useStateFiscalYear = false)
+        public ActionResult Report(bool useStateFiscalYear = true)
         {
             var fiscalYearTitleSegment = useStateFiscalYear ? "SFY" : "FFY";
 
