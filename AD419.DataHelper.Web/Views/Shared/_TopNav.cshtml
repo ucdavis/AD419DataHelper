@@ -48,8 +48,8 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Review <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li>@Html.ActionLink("Expenses by ARC/Account Report Generation Criteria", "Index", "FFYExpensesByARCReport")</li>
-                        <li>@Html.ActionLink("FFY Expenses by ARC", "Report/0", "FFYExpensesByARCReport")</li>
-                        <li>@Html.ActionLink("SFY Expenses by ARC", "Report/1", "FFYExpensesByARCReport")</li>
+                        <li>@Html.ActionLink("FFY Expenses by ARC", "Report", "FFYExpensesByARCReport", new {useStateFiscalYear = false}, null)</li>
+                        <li>@Html.ActionLink("SFY Expenses by ARC", "Report", "FFYExpensesByARCReport", new {useStateFiscalYear= true}, null)</li>
                         <li>@Html.ActionLink("Current AD-419 Projects", "Index", "CurrentProjectsReport")</li>
                         <li>@Html.ActionLink("204 Project Associations", "Index", "C204AcctXProj")</li>
                         <li>@Html.ActionLink("ARC/Account Exclusions", "Review", "ArcCodeAccountExclusions")</li>

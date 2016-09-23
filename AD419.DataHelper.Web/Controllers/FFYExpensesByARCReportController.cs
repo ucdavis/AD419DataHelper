@@ -32,10 +32,9 @@ namespace AD419.DataHelper.Web.Controllers
             return View(model);
         }
 
-        public ActionResult Report(int id)
+        public ActionResult Report(bool useStateFiscalYear = false)
         {
-            var useStateFiscalYear = id;
-            var fiscalYearTitleSegment = useStateFiscalYear == 0 ? "FFY" : "SFY";
+            var fiscalYearTitleSegment = useStateFiscalYear ? "SFY" : "FFY";
 
             const string reportName = @"Direct and Indirect FFY Expenses by ARC w Account";
             
