@@ -1,12 +1,12 @@
 ﻿@using ReportViewerForMvc
 @{
-    ViewBag.Title = "FFY Expenses by ARC Report";
+    ViewBag.Title = @Model.ReportTitle; //"Expenses by ARC/Account Report";
 }
 
 <h2>@ViewBag.Title</h2>
 <hr />
 <div>
-    <p><i>The criteria used to generate this report can be reviewed here: @Html.ActionLink("Review FFY Expenses by ARC Report generation criteria", "Index", "FteReport").</i></p>
+    <p><i>The criteria used to generate this report can be reviewed here: @Html.ActionLink("Review Expenses by ARC/Account Report generation criteria", "Index", "FFYExpensesByARCReport").</i></p>
     @Html.ReportViewer(@Model.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { style = "border: none" })
 </div>
 
