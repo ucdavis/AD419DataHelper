@@ -1,0 +1,84 @@
+﻿@model IEnumerable<AD419.DataHelper.Web.Models.DataClasses.FileNames>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>AD-419 Instruction Upload</h2>
+
+@if (TempData["Message"] != null)
+{
+    <br />
+    <i>@TempData["Message"]</i>
+}
+
+<div>
+    @using (Html.BeginForm("Upload", "InstructionUpload", FormMethod.Post, new { id = "UploadForm", enctype = "multipart/form-data" }))
+    {
+        <b> Please select a instruction file: </b>
+        <input type="file" id="FileUpload1" name="FileUpload1" required="required" />
+        <br />
+        <input type="submit" value="Upload File" title="Upload" />
+    }
+
+</div>
+<br />
+<hr />
+<h2>Uploaded Instruction Files:</h2>
+
+@if (Model.Any())
+{
+    <div class="tab-content">
+        <table class="table">
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    File Name
+                </th>
+                <th>
+                    Timestamp
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FileId)
+                    </td>
+                    <td>
+                        <p id="tooltip1"><a href="InstructionUpload/Download/@item.FileId">@Html.DisplayFor(modelItem => item.FileName)</a></p>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TimeStamp)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Download", "Download", new { id = item.FileId }, new { @class = "btn btn-primary" })
+                    </td>
+
+                    @{
+                
+                        <td>@Html.ActionLink("Delete", "Delete", new { id = item.FileId }, new
+                       {
+                           @class = "btn btn-warning",
+                           onclick = "return confirm('Are you sure?');"})</td>
+                           
+                        <td><br /></td>
+                        <td><br /></td>
+                        <td><br /></td>
+                        <td><br /></td>
+                        <td><br /></td>
+                        <td><br /></td>
+                    }
+                </tr>
+            }
+
+        </table>
+    </div>
+}
+else
+{
+    <h3>No Files Found</h3>
+}
