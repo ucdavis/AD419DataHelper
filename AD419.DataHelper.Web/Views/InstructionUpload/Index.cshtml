@@ -15,7 +15,7 @@
 <div>
     @using (Html.BeginForm("Upload", "InstructionUpload", FormMethod.Post, new { id = "UploadForm", enctype = "multipart/form-data" }))
     {
-        <b> Please select a instruction file: </b>
+        <b> Please select an instruction file: </b>
         <input type="file" id="FileUpload1" name="FileUpload1" required="required" />
         <br />
         <input type="submit" value="Upload File" title="Upload" />
@@ -32,13 +32,16 @@
         <table class="table">
             <tr>
                 <th>
-                    Id
+                    @Html.DisplayNameFor(model => model.FileId)
                 </th>
                 <th>
-                    File Name
+                    @Html.DisplayNameFor(model => model.FileName)
                 </th>
                 <th>
-                    Timestamp
+                    @Html.DisplayNameFor(model => model.TimeStamp)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FileLength)
                 </th>
             </tr>
 
@@ -49,17 +52,19 @@
                         @Html.DisplayFor(modelItem => item.FileId)
                     </td>
                     <td>
-                        <p id="tooltip1"><a href="InstructionUpload/Download/@item.FileId">@Html.DisplayFor(modelItem => item.FileName)</a></p>
+                        <p id="tooltip1">@Html.ActionLink(@Html.DisplayFor(modelItem => item.FileName).ToString(),"Download", new {id=item.FileId}, null)</p>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.TimeStamp)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FileLength) KB
                     </td>
                     <td>
                         @Html.ActionLink("Download", "Download", new { id = item.FileId }, new { @class = "btn btn-primary" })
                     </td>
 
                     @{
-                
                         <td>@Html.ActionLink("Delete", "Delete", new { id = item.FileId }, new
                        {
                            @class = "btn btn-warning",
