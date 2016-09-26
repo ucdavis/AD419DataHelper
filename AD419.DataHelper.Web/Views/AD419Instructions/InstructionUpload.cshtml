@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<AD419.DataHelper.Web.Models.DataClasses.FileNames>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Files";
 }
 
 <h2>AD-419 Instruction Upload</h2>
@@ -27,7 +27,7 @@
 </div>
 <hr/>
 <div>
-    @using (Html.BeginForm("Upload", "InstructionUpload", FormMethod.Post, new { id = "UploadForm", enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Upload", "Ad419Instructions", FormMethod.Post, new { id = "UploadForm", enctype = "multipart/form-data" }))
     {
         <b> Please select a PDF version of the AD-419 instruction file: </b>
         <input type="file" id="FileUpload1" name="FileUpload1" required="required" accept=".pdf"/>
@@ -66,7 +66,7 @@
                         @Html.DisplayFor(modelItem => item.FileId)
                     </td>
                     <td>
-                        <p id="tooltip1">@Html.ActionLink(@Html.DisplayFor(modelItem => item.FileName).ToString(),"Index", "Ad419Instructions",new {id=item.FileId}, null)</p>
+                        <p id="tooltip1">@Html.ActionLink(@Html.DisplayFor(modelItem => item.FileName).ToString(),"Index", "Ad419Instructions", new {id=item.FileId}, null)</p>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.TimeStamp)
@@ -75,11 +75,11 @@
                         @Html.DisplayFor(modelItem => item.FileLength) KB
                     </td>
                     <td>
-                        @Html.ActionLink("Download", "Download", new { id = item.FileId }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Download", "Download", "Ad419Instructions", new { id = item.FileId }, new { @class = "btn btn-primary" })
                     </td>
 
                     @{
-                        <td>@Html.ActionLink("Delete", "Delete", new { id = item.FileId }, new
+                        <td>@Html.ActionLink("Delete", "Delete", "Ad419Instructions", new { id = item.FileId }, new
                        {
                            @class = "btn btn-warning",
                            onclick = "return confirm('Are you sure?');"})</td>
