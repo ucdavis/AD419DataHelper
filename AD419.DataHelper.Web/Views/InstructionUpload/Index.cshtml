@@ -65,7 +65,7 @@
                         @Html.DisplayFor(modelItem => item.FileId)
                     </td>
                     <td>
-                        <p id="tooltip1">@Html.ActionLink(@Html.DisplayFor(modelItem => item.FileName).ToString(),"Download", new {id=item.FileId}, null)</p>
+                        <p id="tooltip1">@Html.ActionLink(@Html.DisplayFor(modelItem => item.FileName).ToString(),"Index", "Ad419Instructions",new {id=item.FileId}, null)</p>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.TimeStamp)
