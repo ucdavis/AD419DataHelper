@@ -230,6 +230,7 @@
     <Compile Include="Attributes\UseAntiForgeryTokenOnPostByDefault.cs" />
     <Compile Include="Attributes\ValidateAntiForgeryTokenHeaderOrFormAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AD419InstructionsController.cs" />
     <Compile Include="Controllers\AllProjectsNewController.cs" />
     <Compile Include="Controllers\ArcCodeAccountExclusionsController.cs" />
     <Compile Include="Controllers\ArcCodesController.cs" />
@@ -506,9 +507,11 @@
     <Content Include="Views\FinalReports\Report.cshtml" />
     <Content Include="Views\Shared\_LaborTransactionsForMissingCodes.cshtml" />
     <Content Include="Views\InstructionUpload\Index.cshtml" />
+    <Content Include="Views\AD419Instructions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Instructions\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,7 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Models;
 
@@ -12,7 +13,8 @@ namespace AD419.DataHelper.Web.Controllers
     public class InstructionUploadController : SuperController
     {
         readonly DataClasses _objData;
-        private readonly string _instructionsDirectory = ConfigurationManager.AppSettings["InstructionsDirectory"]; 
+        private readonly string _instructionsDirectory = ConfigurationManager.AppSettings["InstructionsDirectory"];
+        private readonly string _ad419InstructionsFileName = ConfigurationManager.AppSettings["AD419InstructionsFileName"];
 
         public InstructionUploadController()
         {
@@ -22,7 +24,7 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: InstructionUpload
         public ActionResult Index()
         {
-            var files = _objData.GetFiles(_instructionsDirectory);
+            var files = _objData.GetFiles(HostingEnvironment.MapPath(_instructionsDirectory));
             return View(files);
         }
 
@@ -31,18 +33,16 @@ namespace AD419.DataHelper.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Upload(IEnumerable<HttpPostedFileBase> file)
         {
-            const string ad419InstructionsFileName = "AD419Instructions.pdf";
-
-            string uploadPath = _instructionsDirectory + "\\";
+            string uploadPath = HostingEnvironment.MapPath(_instructionsDirectory) + "\\";
 
             for (int i = 0; i < Request.Files.Count; i++)
             {
                 var fileName = Request.Files[i].FileName;
-                
-                Request.Files[0].SaveAs(uploadPath + ad419InstructionsFileName);
+
+                Request.Files[0].SaveAs(uploadPath + _ad419InstructionsFileName);
 
 
-                TempData.Add("Message", "\"" + fileName + "\" has been uploaded as " + ad419InstructionsFileName + ".");
+                TempData.Add("Message", "\"" + fileName + "\" has been uploaded as " + _ad419InstructionsFileName + ".");
             }
             return RedirectToAction("Index", "InstructionUpload");
         }
@@ -50,7 +50,7 @@ namespace AD419.DataHelper.Web.Controllers
         public ActionResult Delete(string id)
         {
             int fid = Convert.ToInt32(id);
-            var files = _objData.GetFiles(_instructionsDirectory);
+            var files = _objData.GetFiles(HostingEnvironment.MapPath(_instructionsDirectory));
             string fullPath = (from f in files
                                where f.FileId == fid
                                select f.FilePath).First();
@@ -62,7 +62,7 @@ namespace AD419.DataHelper.Web.Controllers
                 file.Delete();
             }
 
-            files = _objData.GetFiles(_instructionsDirectory);
+            files = _objData.GetFiles(HostingEnvironment.MapPath(_instructionsDirectory));
             TempData["Message"] = "File \"" + file.Name + "\" has been deleted.";
             return RedirectToAction("Index", "InstructionUpload");
         }
@@ -70,7 +70,7 @@ namespace AD419.DataHelper.Web.Controllers
         public FileResult Download(string id)
         {
             int fid = Convert.ToInt32(id);
-            var files = _objData.GetFiles(_instructionsDirectory);
+            var files = _objData.GetFiles(HostingEnvironment.MapPath(_instructionsDirectory));
             string filename = (from f in files
                                where f.FileId == fid
                                select f.FileName).First();
