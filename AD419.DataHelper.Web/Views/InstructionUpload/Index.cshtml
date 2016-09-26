@@ -12,11 +12,24 @@
     <i>@TempData["Message"]</i>
 }
 
+<div id="directions">
+    <h4>How to prepare and Upload the AD-419 Instruction Set:</h4>
+    <ol>
+        <li>Create the instructions using a word processing program.</li>
+        <li>Save a copy of the instructions should you desire to edit the instructions later.</li>
+        <li>Save another copy of the same instructions as PDF, as these are the instructions you will need to upload below.<br />Note that you may want to save this file as AD-419 Instructions for yyyy, where <i>yyyy</i> is the current reporting year.</li>
+        <li>Optional step: Download the previous set of instructions should you desire to retain a copy of the old instructions.</li>
+        <li>Delete the previous set of instructions.</li>
+        <li>Use the file browser (below) to select the PDF version of the newly created instructions.</li>
+        <li>Select the <strong>Upload File</strong> button (below) to upload and save the newly created instructions as "AD419Instructions.pdf".</li>
+    </ol>
+</div>
+<hr/>
 <div>
     @using (Html.BeginForm("Upload", "InstructionUpload", FormMethod.Post, new { id = "UploadForm", enctype = "multipart/form-data" }))
     {
-        <b> Please select an instruction file: </b>
-        <input type="file" id="FileUpload1" name="FileUpload1" required="required" />
+        <b> Please select a PDF version of the AD-419 instruction file: </b>
+        <input type="file" id="FileUpload1" name="FileUpload1" required="required" accept=".pdf"/>
         <br />
         <input type="submit" value="Upload File" title="Upload" />
     }

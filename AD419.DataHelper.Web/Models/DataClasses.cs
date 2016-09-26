@@ -30,30 +30,6 @@ namespace AD419.DataHelper.Web.Models
             return lstFiles;
         }
 
-        public enum DataTypes
-        {
-            None, Hidden, Label, TextBox, DropDownList
-        }
-
-        public class ListItem
-        {
-            public string Name { get; set; }
-            public string Value { get; set; }
-        }
-
-        public class TemplateField
-        {
-            public TemplateField()
-            {
-                Items = new List<ListItem>();
-            }
-            public string Alias { get; set; }
-            public string Tag { get; set; }
-            public string Text { get; set; }
-            public DataTypes DataType { get; set; }
-            public List<ListItem> Items { get; set; }
-        }
-
         public class FileNames
         {
             [Display(Name = "Id")]
