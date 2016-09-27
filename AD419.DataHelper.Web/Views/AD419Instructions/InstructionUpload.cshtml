@@ -1,0 +1,103 @@
+﻿@model IEnumerable<AD419.DataHelper.Web.Models.DataClasses.FileNames>
+
+@{
+    ViewBag.Title = "Files";
+}
+
+<h2>AD-419 Instruction Upload</h2>
+
+@if (TempData["Message"] != null)
+{
+    <br />
+    <i>@TempData["Message"]</i>
+}
+
+<div id="directions">
+    <h4>How to prepare and Upload the AD-419 Instruction Set:</h4>
+    <ol>
+        <li>Create the instructions using a word processing program.</li>
+        <li>Save a copy of the instructions should you desire to edit the instructions later.</li>
+        <li>Save another copy of the same instructions as PDF, as these are the instructions you will need to upload below.<br />Note that you may want to save this file as AD-419 Instructions for yyyy, where <i>yyyy</i> is the current reporting year.</li>
+        <li>Optional step: Download the previous set of instructions should you desire to retain a copy of the old instructions.</li>
+        <li>Delete the previous set of instructions.</li>
+        <li>Use the file browser (below) to select the PDF version of the newly created instructions.</li>
+        <li>Select the <strong>Upload File</strong> button (below) to upload and save the newly created instructions as "AD419Instructions.pdf".</li>
+        <li>Once uploaded, you may click on the filename's link to view the uploaded contents.</li>
+    </ol>
+</div>
+<hr/>
+<div>
+    @using (Html.BeginForm("Upload", "Ad419Instructions", FormMethod.Post, new { id = "UploadForm", enctype = "multipart/form-data" }))
+    {
+        <b> Please select a PDF version of the AD-419 instruction file: </b>
+        <input type="file" id="FileUpload1" name="FileUpload1" required="required" accept=".pdf"/>
+        <br />
+        <input type="submit" value="Upload File" title="Upload" />
+    }
+
+</div>
+<br />
+<hr />
+<h2>Uploaded Instruction Files:</h2>
+
+@if (Model.Any())
+{
+    <div class="tab-content">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FileId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FileName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TimeStamp)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FileLength)
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FileId)
+                    </td>
+                    <td>
+                        <p id="tooltip1">@Html.ActionLink(@Html.DisplayFor(modelItem => item.FileName).ToString(),"Index", "Ad419Instructions", new {id=item.FileId}, null)</p>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TimeStamp)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FileLength) KB
+                    </td>
+                    <td>
+                        @Html.ActionLink("Download", "Download", "Ad419Instructions", new { id = item.FileId }, new { @class = "btn btn-primary" })
+                    </td>
+
+                    @{
+                        <td>@Html.ActionLink("Delete", "Delete", "Ad419Instructions", new { id = item.FileId }, new
+                       {
+                           @class = "btn btn-warning",
+                           onclick = "return confirm('Are you sure?');"})</td>
+                           
+                        <td><br /></td>
+                        <td><br /></td>
+                        <td><br /></td>
+                        <td><br /></td>
+                        <td><br /></td>
+                        <td><br /></td>
+                    }
+                </tr>
+            }
+
+        </table>
+    </div>
+}
+else
+{
+    <h3>No Files Found</h3>
+}
