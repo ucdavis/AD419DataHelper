@@ -7,14 +7,12 @@ namespace AD419.DataHelper.Web.Controllers
 {
     public class ArcCodesController : SuperController
     {
-        private readonly FISDataContext _fisContext = new FISDataContext();
-
         // GET: ARC_Codes
         public ActionResult Index()
         {
-            var codes = _fisContext.ARC_Codes
+            var codes = DbContext.ARC_Codes
                 .OrderByDescending(a => a.IsAES)
-                .ThenBy(a => a.Code)
+                .ThenBy(a => a.Id)
                 .ToList();
 
             return View(codes);
@@ -23,7 +21,7 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: ARC_Codes/Details/5
         public ActionResult Details(string id)
         {
-            var code = _fisContext.ARC_Codes.Find(id);
+            var code = DbContext.ARC_Codes.Find(id);
             if (code == null)
             {
                 return HttpNotFound();
@@ -35,7 +33,7 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: ARC_Codes/Edit/5
         public ActionResult Edit(string id)
         {
-            var code = _fisContext.ARC_Codes.Find(id);
+            var code = DbContext.ARC_Codes.Find(id);
             if (code == null)
             {
                 return HttpNotFound();
@@ -49,12 +47,13 @@ namespace AD419.DataHelper.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ARC_Cd,ARC_Name,OP_Func_Name,ARC_Category_Cd, ARC_Sub_Category_Cd, DS_Last_Update_Date,isAES")] ArcCode code)
+        public ActionResult Edit([Bind(Include = "Id, Name, FunctionName, UpdatedDate, IsAES, CategoryCode, SubCategoryCode")] ArcCode code)
         {
+            var newCode = code;
             if (!ModelState.IsValid) return View(code);
 
-            _fisContext.Entry(code).State = EntityState.Modified;
-            _fisContext.SaveChanges();
+            DbContext.Entry(code).State = EntityState.Modified;
+            DbContext.SaveChanges();
 
             return RedirectToAction("Index");
         }
@@ -63,7 +62,7 @@ namespace AD419.DataHelper.Web.Controllers
         {
             if (disposing)
             {
-                _fisContext.Dispose();
+                DbContext.Dispose();
             }
             base.Dispose(disposing);
         }

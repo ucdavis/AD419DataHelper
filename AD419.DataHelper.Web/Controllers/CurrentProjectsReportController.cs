@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Web;
+﻿using AD419.DataHelper.Web.Models;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
-using AD419.DataHelper.Web.Models;
-using Microsoft.Reporting.WebForms;
 
 namespace AD419.DataHelper.Web.Controllers
 {
@@ -17,6 +10,11 @@ namespace AD419.DataHelper.Web.Controllers
         {
             var reportName = @"Current AD419 Projects";
             var model = new ReportViewerModel(reportName);
+
+            var endingYear = FiscalYearService.FiscalYear;
+            var startingYear = endingYear - 1;
+            var reportPeriodString = startingYear.ToString() + "-" + endingYear.ToString();
+            ViewBag.ReportingPeriod = reportPeriodString;
 
             return View(model);
         }

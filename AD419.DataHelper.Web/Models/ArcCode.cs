@@ -9,10 +9,11 @@ namespace AD419.DataHelper.Web.Models
     {
         [Key]
         [StringLength(6)]
+        [MinLength(6)]
         [Required]
         [Display(Name = "ARC Code")]
         [Column("ARC_Cd")]
-        public string Code { get; set; }
+        public string Id { get; set; }
 
         [StringLength(40)]
         [Required]
