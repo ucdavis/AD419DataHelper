@@ -10,7 +10,7 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: ARC_Codes
         public ActionResult Index()
         {
-            var codes = DbContext.ARC_Codes
+            var codes = FisDbContext.ARC_Codes
                 .OrderByDescending(a => a.IsAES)
                 .ThenBy(a => a.Id)
                 .ToList();
@@ -21,7 +21,7 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: ARC_Codes/Details/5
         public ActionResult Details(string id)
         {
-            var code = DbContext.ARC_Codes.Find(id);
+            var code = FisDbContext.ARC_Codes.Find(id);
             if (code == null)
             {
                 return HttpNotFound();
@@ -33,7 +33,7 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: ARC_Codes/Edit/5
         public ActionResult Edit(string id)
         {
-            var code = DbContext.ARC_Codes.Find(id);
+            var code = FisDbContext.ARC_Codes.Find(id);
             if (code == null)
             {
                 return HttpNotFound();
@@ -52,8 +52,8 @@ namespace AD419.DataHelper.Web.Controllers
             var newCode = code;
             if (!ModelState.IsValid) return View(code);
 
-            DbContext.Entry(code).State = EntityState.Modified;
-            DbContext.SaveChanges();
+            FisDbContext.Entry(code).State = EntityState.Modified;
+            FisDbContext.SaveChanges();
 
             return RedirectToAction("Index");
         }
@@ -62,7 +62,7 @@ namespace AD419.DataHelper.Web.Controllers
         {
             if (disposing)
             {
-                DbContext.Dispose();
+                FisDbContext.Dispose();
             }
             base.Dispose(disposing);
         }
