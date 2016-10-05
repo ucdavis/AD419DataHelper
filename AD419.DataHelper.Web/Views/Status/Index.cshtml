@@ -3,6 +3,14 @@
     ViewBag.Title = "Index";
 }
 
+@section AdditionalStyles {
+    <style>
+        .align-btn-xs {
+            margin-left: -8px;
+        }
+    </style>
+}
+
 <h2>Project Status</h2>
 
 @{
@@ -67,12 +75,12 @@
                                         {
                                             if (status.SequenceOrder == currentStatusSequenceOrder)
                                             {
-                                                <button type="submit" class="fa fa-circle-thin btn-xs" style="color:black"></button>
+                                                <button type="submit" class="fa fa-circle-thin btn-xs align-btn-xs" style="color:black"></button>
 
                                             }
                                             else
                                             {
-                                                <button type="submit" class="fa fa-circle-thin btn-xs" style="color: white" disabled="disabled"></button>
+                                                <button type="submit" class="fa fa-circle-thin btn-xs align-btn-xs" style="color: white" disabled="disabled"></button>
                                                 @*<i class="fa fa-circle-thin bullet"></i>*@
                                             }
 
@@ -87,7 +95,7 @@
                                         }
                                         else
                                         {
-                                            <button type="submit" class="fa fa-check-circle btn-xs"></button>
+                                            <button type="submit" class="fa fa-check-circle btn-xs align-btn-xs"></button>
                                             if (string.IsNullOrWhiteSpace(status.Hyperlink))
                                             {
                                                 @status.Name
