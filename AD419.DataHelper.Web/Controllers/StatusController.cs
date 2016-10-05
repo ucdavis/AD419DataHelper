@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Mvc;
@@ -10,6 +11,25 @@ namespace AD419.DataHelper.Web.Controllers
     [UseAntiForgeryTokenOnPostByDefault]
     public class StatusController : SuperController
     {
+        private readonly int _sqlCommandTimeout;
+        private const int DefaultSqlCommandTimeout = 15;
+
+        public StatusController()
+        {
+            try
+            {
+                _sqlCommandTimeout = Convert.ToInt32(ConfigurationManager.AppSettings.Get("SqlCommandTimeout"));
+            }
+            catch (System.FormatException ex)
+            {
+                _sqlCommandTimeout = DefaultSqlCommandTimeout;
+            }
+            catch (System.OverflowException ex)
+            {
+                _sqlCommandTimeout = DefaultSqlCommandTimeout;
+            }
+        }
+
         // GET: Status
         public ActionResult Index()
         {
@@ -112,7 +132,9 @@ namespace AD419.DataHelper.Web.Controllers
             SqlParameter param1 = new SqlParameter("@FiscalYear", year);
             SqlParameter param2 = new SqlParameter("@IsDebug", false);
 
-            DbContext.Database.CommandTimeout = 60*15; // 15 minute timeout, as reports take about 12 minutes to run.
+            DbContext.Database.CommandTimeout = 60 * _sqlCommandTimeout; // 15 default minute timeout, as reports take about 12 minutes to run,
+                                                                         // but usp_BeginProcessForNewReportingYear takes over 21 minutes to run;
+                                                                         // therefore, this value can now be set from the Web.config.
             DbContext.Database.ExecuteSqlCommand(string.Format("{0} @FiscalYear, @IsDebug", sprocName), param1, param2);
             DbContext.Database.CommandTimeout = null;
         }        

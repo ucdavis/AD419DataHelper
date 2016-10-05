@@ -37,8 +37,7 @@ namespace AD419.DataHelper.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "pk,AccountID,Expenses,Accession,Chart,Is219,CSREES_ContractNo,AwardNum,IsCurrentProject,Org,OrgR,IsExcludedExpense")] C204AcctXProj project)
-        {
+        public ActionResult Create([Bind(Include = "Id,AccountID,Expenses,Accession,ProjectNumber,Chart,Is219,CSREES_ContractNo,AwardNum,OpFundNum,IsCurrentProject,Org,OrgR,IsExcludedExpense")] C204AcctXProj project) {
             if (!ModelState.IsValid) return View(project);
 
             DbContext.C204AcctXProj.Add(project);
@@ -64,7 +63,7 @@ namespace AD419.DataHelper.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "pk,AccountID,Expenses,Accession,Chart,Is219,CSREES_ContractNo,AwardNum,IsCurrentProject,Org,OrgR,IsExcludedExpense")] C204AcctXProj project)
+        public ActionResult Edit([Bind(Include = "Id,AccountID,Expenses,Accession,ProjectNumber,Chart,Is219,CSREES_ContractNo,AwardNum,OpFundNum,IsCurrentProject,Org,OrgR,IsExcludedExpense")] C204AcctXProj project)
         {
             if (!ModelState.IsValid) return View(project);
 

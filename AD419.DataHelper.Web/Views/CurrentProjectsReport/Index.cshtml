@@ -4,7 +4,9 @@
 }
 
 <h2>@ViewBag.Title</h2>
+<h4>This is an all-inclusive list of every project for the @ViewBag.ReportingPeriod reporting period for which we're going to be submitting expenses to ANR.</h4>
 <hr />
+
 <div>
     @Html.ReportViewer(@Model.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { style = "border: none" })
 </div>

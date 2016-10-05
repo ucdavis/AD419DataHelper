@@ -16,7 +16,7 @@ namespace AD419.DataHelper.Web.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ArcCode>()
-                .Property(e => e.Code)
+                .Property(e => e.Id)
                 .IsFixedLength()
                 .IsUnicode(false);
 
