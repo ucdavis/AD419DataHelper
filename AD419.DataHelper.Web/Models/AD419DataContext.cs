@@ -14,6 +14,10 @@ namespace AD419.DataHelper.Web.Models
         {
         }
 
+        public virtual DbSet<ArcCode> ARC_Codes { get; set; }
+
+        public virtual DbSet<ArcCodeSelections> ArcCodes { get; set; }
+
         public virtual DbSet<AllProject> AllProjects { get; set; }
 
         public virtual DbSet<AllProjectsNew> AllProjectsNew { get; set; }
