@@ -78,6 +78,12 @@ namespace AD419.DataHelper.Web.Controllers
                 var foundProject =
                     DbContext.AllProjectsNew.FirstOrDefault(p => p.AccessionNumber.Equals(ffySfnEntry.AccessionNumber));
 
+                if (foundProject == null)
+                {
+                    TempData.Add("ErrorMessage", "Unable to locate corresponding project.  Please try match using Project Number.");
+                    return View(ffySfnEntry);
+                }
+             
                 ffySfnEntry.ProjectNumber = foundProject.ProjectNumber.Trim();
             }
             else if (!String.IsNullOrWhiteSpace(ffySfnEntry.ProjectNumber) && String.IsNullOrWhiteSpace(ffySfnEntry.AccessionNumber))
@@ -86,10 +92,15 @@ namespace AD419.DataHelper.Web.Controllers
                 var end = FiscalYearService.FiscalEndDate;
 
                 var foundProject =
-                    DbContext.AllProjectsNew.Where(p => p.ProjectNumber.Trim().Equals(ffySfnEntry.ProjectNumber.Trim()))
+                    DbContext.AllProjectsNew.Where(p => p.ProjectNumber.Trim().StartsWith(ffySfnEntry.ProjectNumber.Trim()))
                     .Where(p => p.ProjectStartDate <= end) //project has actually started
                     .Where(p => p.ProjectEndDate >= start).OrderByDescending(p => p.Id).FirstOrDefault();
-           
+
+                if (foundProject == null)
+                {
+                    TempData.Add("ErrorMessage", "Unable to locate corresponding project.  Please try match using Accession Number.");
+                    return View(ffySfnEntry);
+                }
                 ffySfnEntry.AccessionNumber = foundProject.AccessionNumber.Trim();
             }
 
