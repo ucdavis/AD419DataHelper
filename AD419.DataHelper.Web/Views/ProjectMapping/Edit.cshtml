@@ -6,12 +6,15 @@
 
 <h2>Edit</h2>
 
+<h4>Note: Use the <a href="@Url.Action("Index", "CurrentProjectsReport")" target="_blank">Current AD-419 Projects Report&nbsp;<i class="fa fa-external-link"></i></a> to identify the correct project, if you were unable locate the project from information listed on the previous page.</h4>
+
+<hr/>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>FfySfnEntities</h4>
+        <h4>SFN 204 Project Mapping</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)

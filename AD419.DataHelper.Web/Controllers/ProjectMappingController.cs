@@ -85,13 +85,11 @@ namespace AD419.DataHelper.Web.Controllers
                 var start = FiscalYearService.FiscalStartDate;
                 var end = FiscalYearService.FiscalEndDate;
 
-                var foundProjects =
-                    DbContext.AllProjectsNew.Where(p => p.ProjectNumber.Trim().Equals(ffySfnEntry.ProjectNumber.Trim()));
-
-                var foundProject = DbContext.AllProjectsNew
+                var foundProject =
+                    DbContext.AllProjectsNew.Where(p => p.ProjectNumber.Trim().Equals(ffySfnEntry.ProjectNumber.Trim()))
                     .Where(p => p.ProjectStartDate <= end) //project has actually started
-                    .Where(p => p.ProjectEndDate >= start).OrderByDescending(p => p.Id).FirstOrDefault();//project has not ended.
-                    
+                    .Where(p => p.ProjectEndDate >= start).OrderByDescending(p => p.Id).FirstOrDefault();
+           
                 ffySfnEntry.AccessionNumber = foundProject.AccessionNumber.Trim();
             }
 
