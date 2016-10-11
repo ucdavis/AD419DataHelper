@@ -72,36 +72,42 @@ namespace AD419.DataHelper.Web.Controllers
 
             DbContext.Entry(ffySfnEntry).State = EntityState.Modified;
 
-            if (!String.IsNullOrWhiteSpace(ffySfnEntry.AccessionNumber) && String.IsNullOrWhiteSpace(ffySfnEntry.ProjectNumber))
+            if (String.IsNullOrWhiteSpace(ffySfnEntry.AccessionNumber) || String.IsNullOrWhiteSpace(ffySfnEntry.ProjectNumber))
             {
-                // Find the associated project number and populate:
-                var foundProject =
-                    DbContext.AllProjectsNew.FirstOrDefault(p => p.AccessionNumber.Equals(ffySfnEntry.AccessionNumber));
-
-                if (foundProject == null)
+                var foundProject = new AllProjectsNew();
+                if (!String.IsNullOrWhiteSpace(ffySfnEntry.AccessionNumber) && String.IsNullOrWhiteSpace(ffySfnEntry.ProjectNumber))
                 {
-                    TempData.Add("ErrorMessage", "Unable to locate corresponding project.  Please try match using Project Number.");
-                    return View(ffySfnEntry);
+                    // Find the associated project number and populate:
+                    foundProject =
+                        DbContext.AllProjectsNew.FirstOrDefault(p => p.AccessionNumber.Equals(ffySfnEntry.AccessionNumber));
+
+                    if (foundProject == null)
+                    {
+                        TempData.Add("ErrorMessage", "Unable to locate corresponding project.  Please try match using Project Number.");
+                        return View(ffySfnEntry);
+                    }
+
+                    ffySfnEntry.ProjectNumber = foundProject.ProjectNumber.Trim();
                 }
-             
-                ffySfnEntry.ProjectNumber = foundProject.ProjectNumber.Trim();
-            }
-            else if (!String.IsNullOrWhiteSpace(ffySfnEntry.ProjectNumber) && String.IsNullOrWhiteSpace(ffySfnEntry.AccessionNumber))
-            {
-                var start = FiscalYearService.FiscalStartDate;
-                var end = FiscalYearService.FiscalEndDate;
-
-                var foundProject =
-                    DbContext.AllProjectsNew.Where(p => p.ProjectNumber.Trim().StartsWith(ffySfnEntry.ProjectNumber.Trim()))
-                    .Where(p => p.ProjectStartDate <= end) //project has actually started
-                    .Where(p => p.ProjectEndDate >= start).OrderByDescending(p => p.Id).FirstOrDefault();
-
-                if (foundProject == null)
+                else if (!String.IsNullOrWhiteSpace(ffySfnEntry.ProjectNumber) && String.IsNullOrWhiteSpace(ffySfnEntry.AccessionNumber))
                 {
-                    TempData.Add("ErrorMessage", "Unable to locate corresponding project.  Please try match using Accession Number.");
-                    return View(ffySfnEntry);
+                    var start = FiscalYearService.FiscalStartDate;
+                    var end = FiscalYearService.FiscalEndDate;
+
+                    foundProject =
+                        DbContext.AllProjectsNew.Where(p => p.ProjectNumber.Trim().StartsWith(ffySfnEntry.ProjectNumber.Trim()))
+                        .Where(p => p.ProjectStartDate <= end) //project has actually started
+                        .Where(p => p.ProjectEndDate >= start).OrderByDescending(p => p.Id).FirstOrDefault();
+
+                    if (foundProject == null)
+                    {
+                        TempData.Add("ErrorMessage", "Unable to locate corresponding project.  Please try match using Accession Number.");
+                        return View(ffySfnEntry);
+                    }
+                    ffySfnEntry.AccessionNumber = foundProject.AccessionNumber.Trim();
                 }
-                ffySfnEntry.AccessionNumber = foundProject.AccessionNumber.Trim();
+                ffySfnEntry.ProjectEndDate = foundProject.ProjectEndDate;
+                ffySfnEntry.IsExpired = foundProject.IsExpired;
             }
 
             DbContext.SaveChanges();
