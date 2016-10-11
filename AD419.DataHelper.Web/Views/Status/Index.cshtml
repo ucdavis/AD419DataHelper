@@ -35,7 +35,8 @@
 @foreach (var category in Model.OrderBy(c => c.SequenceOrder))
 {
     var isActiveCategory = category.SequenceOrder == currentSequenceOrder;
-    <div class="panel panel-default">
+    var activePannel = isActiveCategory ? "activePannel" : string.Empty;
+    <div class="panel panel-default @activePannel">
         <div class="panel-heading">
             <a role="button" data-toggle="collapse" href="#collapse-@category.Id">
 
@@ -165,39 +166,46 @@
         });
     </script>
 
-     <script type="text/javascript">
-         $(".sproc").on('click', function () {
-             var $theButton = $(this);
-             var id = $theButton.data("id");
-             var $buttonIcon = $('i', $theButton);
-             var $buttontext = $('span', $theButton);
-             $buttonIcon.addClass('fa-spinner');
-             $buttontext.text(" Please wait, executing:");
-             $theButton.prop("disabled", true);
+    <script type="text/javascript">
+        $(".sproc").on('click', function () {
+            var $theButton = $(this);
+            var id = $theButton.data("id");
+            var $buttonIcon = $('i', $theButton);
+            var $buttontext = $('span', $theButton);
+            $buttonIcon.addClass('fa-spinner');
+            $buttontext.text(" Please wait, executing:");
+            $theButton.prop("disabled", true);
 
-             var antiforgery = $("input[name='__RequestVerificationToken']").val();
-             $.ajax({
-                 type: 'POST',
-                 url: '@Url.Action("RunSproc")',
-                 data: { id: id, __RequestVerificationToken: antiforgery }
-             })
-                 .success(function(data) {
-                     $buttonIcon.removeClass('fa-spinner');
-                     if (data.Success === false) {
-                         $buttontext.text(data.ErrorMessage +" Error executing:");
-                         $theButton.removeClass("btn-primary");
-                         $theButton.addClass("btn-danger");
-                     }
-                     if (data.Success === true) {
-                         location.reload();
-                     }
-                 })
-                 .fail(function() {
-                     $theButton.prop("disabled", false);
-                     $buttonIcon.removeClass('fa-spinner');
-                     $buttontext.text(" Error executing:");
-                 });
+            var antiforgery = $("input[name='__RequestVerificationToken']").val();
+            $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("RunSproc")',
+                    data: { id: id, __RequestVerificationToken: antiforgery }
+                })
+                .success(function(data) {
+                    $buttonIcon.removeClass('fa-spinner');
+                    if (data.Success === false) {
+                        $buttontext.text(data.ErrorMessage +" Error executing:");
+                        $theButton.removeClass("btn-primary");
+                        $theButton.addClass("btn-danger");
+                    }
+                    if (data.Success === true) {
+                        location.reload();
+                    }
+                })
+                .fail(function() {
+                    $theButton.prop("disabled", false);
+                    $buttonIcon.removeClass('fa-spinner');
+                    $buttontext.text(" Error executing:");
+                });
 
-         });
-</script>
+        });
+    </script>
+    <script type="text/javascript">
+        $(function() {
+            $('html, body').animate({
+                scrollTop: $('.activePannel').offset().top - $("#nav").height()
+            }, 'slow');
+        });
+    </script>
 }
