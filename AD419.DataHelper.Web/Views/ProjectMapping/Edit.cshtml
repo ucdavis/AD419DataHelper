@@ -22,7 +22,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Chart, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Chart, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.HiddenFor(model => model.Chart)
+                @Html.DisplayFor(model => model.Chart, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.Chart, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -30,7 +31,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Account, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Account, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.HiddenFor(model => model.Account)
+                @Html.DisplayFor(model => model.Account, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.Account, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -38,7 +40,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Sfn, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Sfn, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.HiddenFor(model => model.Sfn)
+                @Html.DisplayFor(model => model.Sfn, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.Sfn, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -46,7 +49,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.AccountsAwardNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.AccountsAwardNumber, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.HiddenFor(model => model.AccountsAwardNumber)
+                @Html.DisplayFor(model => model.AccountsAwardNumber, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.AccountsAwardNumber, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -54,7 +58,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OpFundAwardNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.OpFundAwardNumber, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.HiddenFor(model => model.OpFundAwardNumber)
+                @Html.DisplayFor(model => model.OpFundAwardNumber, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.OpFundAwardNumber, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -78,7 +83,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.IsExpired, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.IsExpired, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.HiddenFor(model => model.IsExpired)
+                @Html.DisplayFor(model => model.IsExpired, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.IsExpired, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -86,7 +92,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ProjectEndDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ProjectEndDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.HiddenFor(model => model.ProjectEndDate)
+                @Html.DisplayFor(model => model.ProjectEndDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.ProjectEndDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -94,7 +101,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Expenses, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Expenses, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.HiddenFor(model => model.Expenses)
+                @Html.DisplayFor(model => model.Expenses, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.Expenses, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -102,7 +110,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FullTimeEmployees, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FullTimeEmployees, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.HiddenFor(model => model.FullTimeEmployees)
+                @Html.DisplayFor(model => model.FullTimeEmployees, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.FullTimeEmployees, "", new { @class = "text-danger" })
             </div>
         </div>
