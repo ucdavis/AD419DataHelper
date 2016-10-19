@@ -2,7 +2,7 @@
 @model IEnumerable<AD419.DataHelper.Web.Models.FfySfnEntryWithAccount>
 
 @{
-    ViewBag.Title = "204-20x Project Mappings";
+    ViewBag.Title = "204/20x Project Mappings";
 }
 
 @section AdditionalStyles
@@ -26,6 +26,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Account)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AnnualReportCode)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Sfn)
@@ -79,6 +82,9 @@
                     @Html.DisplayFor(modelItem => item.Account)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.AnnualReportCode)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Sfn)
                 </td>
                 <td>
@@ -123,7 +129,12 @@
                 <td>
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                 </td>
-            </tr>
+        <td>
+            @Html.ActionLink("Add Exclusion", "Exclude", "ProjectMapping", new { id = item.Id },
+                new { onclick = "return confirm('Are you sure you want to add an exception for account " + item.Chart + "-" + item.Account + "?  (Once added it will be automatically removed from this list.)')" }
+                )
+        </td>
+                </tr>
         }
     </tbody>
 </table>

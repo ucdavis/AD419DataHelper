@@ -18,6 +18,9 @@ namespace AD419.DataHelper.Web.Models
 
         public string Account { get; set; }
 
+        [DisplayName("Annual Report Code")]
+        public string AnnualReportCode { get; set; }
+
         [DisplayName("SFN")]
         public string Sfn { get; set; }
 

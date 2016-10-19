@@ -14,7 +14,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>SFN 204 Project Mapping</h4>
+        <h4>SFN 204/20x Project Mapping</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -83,8 +83,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.IsExpired, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.HiddenFor(model => model.IsExpired)
-                @Html.DisplayFor(model => model.IsExpired, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @*@Html.HiddenFor(model => model.IsExpired)*@
+                @Html.EditorFor(model => model.IsExpired, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.IsExpired, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -92,8 +92,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ProjectEndDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.HiddenFor(model => model.ProjectEndDate)
-                @Html.DisplayFor(model => model.ProjectEndDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @*@Html.HiddenFor(model => model.ProjectEndDate)*@
+                @Html.EditorFor(model => model.ProjectEndDate, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ProjectEndDate, "", new { @class = "text-danger" })
             </div>
         </div>
