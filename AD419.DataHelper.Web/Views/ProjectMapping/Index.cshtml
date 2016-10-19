@@ -131,7 +131,7 @@
                 </td>
         <td>
             @Html.ActionLink("Add Exclusion", "Exclude", "ProjectMapping", new { id = item.Id },
-                new { onclick = "return confirm('Are you sure you want to add an exception for account " + item.Chart + "-" + item.Account + "?  (Once added it will be automatically removed from this list.)')" }
+                new { onclick = "return confirm('Are you sure you want to add an exclusion for account " + item.Chart + "-" + item.Account + "?  (Once added it will be automatically removed from this list.)')" }
                 )
         </td>
                 </tr>
