@@ -150,28 +150,23 @@ namespace AD419.DataHelper.Web.Controllers
             var entry = DbContext.FfySfnEntriesWithAccounts.Find(id);
 
             if (entry == null)
-                return HttpNotFound();
-
-            var exclusion = new ArcCodeAccountExclusion()
             {
-                Year = FiscalYearService.FiscalYear,
-                Chart = entry.Chart,
-                Account = entry.Account,
-                AnnualReportCode = entry.AnnualReportCode,
-                AwardNumber = (String.IsNullOrWhiteSpace(entry.OpFundAwardNumber) ? entry.AccountsAwardNumber : entry.OpFundAwardNumber),
-                Comments = entry.AccountName + ": " + entry.Purpose,
-                Is204 = (entry.Sfn.Equals("204") ? true : false),
-                ProjectNumber = entry.ProjectNumber
-            };
-
-            if (!ModelState.IsValid) return View("Index");
-
-            DbContext.ArcCodeAccountExclusions.Add(exclusion);
-            DbContext.SaveChanges();
-
-            TempData["Message"] = "New ARC Code/Account exclusion entry added for account " + exclusion.Chart + "-" + exclusion.Account + ".";
-
-            return RedirectToAction("Index");
+                TempData["ErrorMessage"] = "Error: Unable to find matching FFY SFN Entry.  Please try again.";
+                RedirectToAction("Index");
+            }
+ 
+            return RedirectToAction("CreateExclusionFromProjectMapping", "ArcCodeAccountExclusions",
+                new
+                {
+                    Year = FiscalYearService.FiscalYear,
+                    Chart = entry.Chart,
+                    Account = entry.Account,
+                    AnnualReportCode = entry.AnnualReportCode,
+                    AwardNumber = (String.IsNullOrWhiteSpace(entry.OpFundAwardNumber) ? entry.AccountsAwardNumber : entry.OpFundAwardNumber),
+                    Comments = entry.AccountName + ": " + entry.Purpose,
+                    Is204 = (entry.Sfn.Equals("204") ? true : false),
+                    ProjectNumber = entry.ProjectNumber
+                });
         }
     }
 }
