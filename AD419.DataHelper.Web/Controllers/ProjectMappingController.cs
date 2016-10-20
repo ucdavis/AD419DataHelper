@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using System.Web.Routing;
 using AD419.DataHelper.Web.Models;
 
 namespace AD419.DataHelper.Web.Controllers
@@ -139,6 +140,33 @@ namespace AD419.DataHelper.Web.Controllers
             DbContext.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Exclude(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            var entry = DbContext.FfySfnEntriesWithAccounts.Find(id);
+
+            if (entry == null)
+            {
+                TempData["ErrorMessage"] = "Error: Unable to find matching FFY SFN Entry.  Please try again.";
+                RedirectToAction("Index");
+            }
+ 
+            return RedirectToAction("CreateExclusionFromProjectMapping", "ArcCodeAccountExclusions",
+                new
+                {
+                    Year = FiscalYearService.FiscalYear,
+                    Chart = entry.Chart,
+                    Account = entry.Account,
+                    AnnualReportCode = entry.AnnualReportCode,
+                    AwardNumber = (String.IsNullOrWhiteSpace(entry.OpFundAwardNumber) ? entry.AccountsAwardNumber : entry.OpFundAwardNumber),
+                    Comments = entry.AccountName + ": " + entry.Purpose,
+                    Is204 = (entry.Sfn.Equals("204") ? true : false),
+                    ProjectNumber = entry.ProjectNumber
+                });
         }
     }
 }

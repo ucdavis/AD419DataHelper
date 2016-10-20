@@ -80,10 +80,25 @@ namespace AD419.DataHelper.Web.Controllers
             return View(exclusion);
         }
 
+        public ActionResult CreateExclusionFromProjectMapping(ArcCodeAccountExclusion exclusion)
+        {
+            if (exclusion == null)
+            {
+                TempData["ErrorMessage"] =
+                    "Error: Unable to redirect to ARC/Account Exclusions page.  Try selecting \"ARC/Account Exclusions\" link listed under maintenance tab.";
+                return RedirectToAction("Index", "ProjectMapping");
+            }
+                
+            return View("Create", exclusion);
+        }
+
         // GET: ArcCodeAccountExclusions/Create
         public ActionResult Create()
         {
-            var model = new ArcCodeAccountExclusion() {Year = DateTime.Now.Year};
+            var model = new ArcCodeAccountExclusion()
+            {
+                Year = FiscalYearService.FiscalYear
+            };
             return View(model);
         }
 
