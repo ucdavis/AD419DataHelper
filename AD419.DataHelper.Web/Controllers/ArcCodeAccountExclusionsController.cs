@@ -114,6 +114,8 @@ namespace AD419.DataHelper.Web.Controllers
             DbContext.ArcCodeAccountExclusions.Add(exclusion);
             DbContext.SaveChanges();
 
+            TempData["Message"] = "Exclusion added for ARC: " + exclusion.AnnualReportCode + "; Account: " + exclusion.Chart + "-" + exclusion.Account + ".";
+
             return RedirectToAction("Index");
         }
 
