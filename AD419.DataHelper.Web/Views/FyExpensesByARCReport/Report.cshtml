@@ -6,7 +6,7 @@
 <h2>@ViewBag.Title</h2>
 <hr />
 <div>
-    <p><i>The criteria used to generate this report can be reviewed here: @Html.ActionLink("Review Expenses by ARC/Account Report generation criteria", "Index", "FFYExpensesByARCReport").</i></p>
+    <p><i>The criteria used to generate this report can be reviewed here: @Html.ActionLink("Review Expenses by ARC/Account Report generation criteria", "Index", "FyExpensesByARCReport").</i></p>
     @Html.ReportViewer(@Model.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { style = "border: none" })
 </div>
 
