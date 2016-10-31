@@ -246,7 +246,7 @@
     <Compile Include="Controllers\PrincipalsController.cs" />
     <Compile Include="Controllers\ProjectMappingController.cs" />
     <Compile Include="Controllers\FieldStationExpensesImportController.cs" />
-    <Compile Include="Controllers\FFYExpensesByARCReportController.cs" />
+    <Compile Include="Controllers\FyExpensesByARCReportController.cs" />
     <Compile Include="Controllers\FTEReportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InterdepartmentalsController.cs" />
@@ -468,8 +468,8 @@
     <Content Include="Views\TransDocTypes\Edit.cshtml" />
     <Content Include="Views\TransDocTypes\Index.cshtml" />
     <Content Include="Views\FTEReport\Report.cshtml" />
-    <Content Include="Views\FFYExpensesByARCReport\Report.cshtml" />
-    <Content Include="Views\FFYExpensesByARCReport\Index.cshtml" />
+    <Content Include="Views\FyExpensesByARCReport\Report.cshtml" />
+    <Content Include="Views\FyExpensesByARCReport\Index.cshtml" />
     <Content Include="Views\CurrentProjectsReport\Index.cshtml" />
     <Content Include="Views\Interdepartmentals\Create.cshtml" />
     <Content Include="Views\Interdepartmentals\Delete.cshtml" />

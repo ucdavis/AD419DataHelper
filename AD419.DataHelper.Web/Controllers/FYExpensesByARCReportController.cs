@@ -5,7 +5,7 @@ using System.Web.Mvc;
 
 namespace AD419.DataHelper.Web.Controllers
 {
-    public class FFYExpensesByARCReportController : SuperController
+    public class FyExpensesByARCReportController : SuperController
     {
         // GET: FFYExpensesByARCReport
         public ActionResult Index()
@@ -36,7 +36,7 @@ namespace AD419.DataHelper.Web.Controllers
         {
             var fiscalYearTitleSegment = useStateFiscalYear ? "SFY" : "FFY";
 
-            const string reportName = @"Direct and Indirect FFY Expenses by ARC w Account";
+            var reportName = string.Format("Direct and Indirect {0} Expenses by ARC w Account", fiscalYearTitleSegment);
             
             var year = FiscalYearService.FiscalYear;
             var yearParameter = new ReportParameter("FiscalYear", year.ToString());
@@ -47,7 +47,7 @@ namespace AD419.DataHelper.Web.Controllers
 
             var model = new ReportViewerModel(reportName);
             model.ReportViewer.ServerReport.SetParameters(reportParameters);
-            model.ReportTitle = fiscalYearTitleSegment + " Expenses by ARC w/Account Report";
+            model.ReportTitle = string.Format("{0} Expenses by ARC w/Account Report", fiscalYearTitleSegment);
 
             return View(model);
         }
