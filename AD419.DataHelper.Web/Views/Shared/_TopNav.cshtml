@@ -42,14 +42,15 @@
                         <li>@Html.ActionLink("OrgR Expense Department Remapping", "Index", "ExpenseOrgMappings")</li>
                         <li>@Html.ActionLink("Reporting Organization", "Index", "ReportingOrganizations")</li>
                         <li>@Html.ActionLink("Principal Investigator Matches", "UnproratedMatches", "Principals")</li>
+                        <li>@Html.ActionLink("Project Status", "Index", "ProjectStatus")</li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Review <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li>@Html.ActionLink("Expenses by ARC/Account Report Generation Criteria", "Index", "FFYExpensesByARCReport")</li>
-                        <li>@Html.ActionLink("FFY Expenses by ARC", "Report", "FFYExpensesByARCReport", new {useStateFiscalYear = false}, null)</li>
-                        <li>@Html.ActionLink("SFY Expenses by ARC", "Report", "FFYExpensesByARCReport", new {useStateFiscalYear= true}, null)</li>
+                        <li>@Html.ActionLink("FFY Expenses by ARC", "Report", "FyExpensesByARCReport", new {useStateFiscalYear = false}, null)</li>
+                        <li>@Html.ActionLink("SFY Expenses by ARC", "Report", "FyExpensesByARCReport", new {useStateFiscalYear= true}, null)</li>
                         <li>@Html.ActionLink("Current AD-419 Projects", "Index", "CurrentProjectsReport")</li>
                         <li>@Html.ActionLink("204 Project Associations", "Index", "C204AcctXProj")</li>
                         <li>@Html.ActionLink("ARC/Account Exclusions", "Review", "ArcCodeAccountExclusions")</li>
