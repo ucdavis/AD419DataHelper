@@ -1,0 +1,126 @@
+﻿
+@model AD419.DataHelper.Web.Models.ProjectStatusViewModel
+    
+<div>
+    @if (Model.CurrentAd419Projects.Count > 0)
+    {
+        <h2>Current AD-419 Projects with Unknown Project Status</h2>
+
+        <h4> The following @Model.CurrentAd419Projects.Count Current AD-419 Projects have an Unknown Project Status:</h4>
+        <i>Please review the projects and add new Project Status as applicable.</i>
+        <table id="currentAd419ProjectsTable" class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CurrentAd419Projects[0].AccessionNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CurrentAd419Projects[0].ProjectNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CurrentAd419Projects[0].ProposalNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CurrentAd419Projects[0].AwardNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CurrentAd419Projects[0].Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CurrentAd419Projects[0].OrganizationName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CurrentAd419Projects[0].OrgR)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CurrentAd419Projects[0].Department)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CurrentAd419Projects[0].ProjectDirector)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CurrentAd419Projects[0].CoProjectDirectors)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CurrentAd419Projects[0].FundingSource)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CurrentAd419Projects[0].ProjectStartDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CurrentAd419Projects[0].ProjectEndDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CurrentAd419Projects[0].ProjectStatus)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CurrentAd419Projects[0].IsInterdepartmental)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CurrentAd419Projects[0].IsAssociable)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.CurrentAd419Projects)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AccessionNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProjectNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProposalNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AwardNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.OrganizationName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.OrgR)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Department)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.ProjectDirector)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.CoProjectDirectors)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.FundingSource)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.ProjectStartDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.ProjectEndDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.ProjectStatus)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.IsInterdepartmental)
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(model => item.IsAssociable)*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p><br /><h4><i>Note: There are <strong>zero</strong> Current AD-419 Projects with an Unknown Project Status that need to be reviewed at this time.</i></h4></p>
+    }
+    <hr />
+</div>
