@@ -252,6 +252,7 @@
     <Compile Include="Controllers\InterdepartmentalsController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\C204ExclusionsController.cs" />
+    <Compile Include="Controllers\ProjectStatusController.cs" />
     <Compile Include="Controllers\ReportingOrganizationsController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\SuperController.cs" />
@@ -266,6 +267,7 @@
     <Compile Include="Models\DataClasses.cs" />
     <Compile Include="Models\ConsolidationCodesForFTECalc.cs" />
     <Compile Include="Models\ConsolidationCodes.cs" />
+    <Compile Include="Models\ProjectStatus.cs" />
     <Compile Include="Models\TransDocTypesViewModel.cs" />
     <Compile Include="Models\DosCodesViewModel.cs" />
     <Compile Include="Models\ConsolidationCodesViewModel.cs" />
@@ -508,6 +510,11 @@
     <Content Include="Views\Shared\_LaborTransactionsForMissingCodes.cshtml" />
     <Content Include="Views\AD419Instructions\InstructionUpload.cshtml" />
     <Content Include="Views\AD419Instructions\Index.cshtml" />
+    <Content Include="Views\ProjectStatus\Create.cshtml" />
+    <Content Include="Views\ProjectStatus\Delete.cshtml" />
+    <Content Include="Views\ProjectStatus\Details.cshtml" />
+    <Content Include="Views\ProjectStatus\Edit.cshtml" />
+    <Content Include="Views\ProjectStatus\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

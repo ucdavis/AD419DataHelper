@@ -66,6 +66,8 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<ProcessCategory> ProcessCategories { get; set; }
 
+        public virtual DbSet<ProjectStatus> ProjectStatus { get; set; }
+
         public virtual DbSet<LaborTransaction> LaborTransactions { get; set; } 
 
         public virtual DbRawSqlQuery<AllProjectsNew> GetNewProjects(int fiscalYear)
