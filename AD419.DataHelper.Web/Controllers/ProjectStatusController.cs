@@ -1,23 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Models;
 
 namespace AD419.DataHelper.Web.Controllers
 {
-    public class ProjectStatusController : Controller
+    public class ProjectStatusController : SuperController
     {
-        private AD419DataContext db = new AD419DataContext();
-
+       
         // GET: ProjectStatus
         public ActionResult Index()
         {
-            return View(db.ProjectStatus.ToList());
+            var statuses = DbContext.ProjectStatus.ToList();
+            var statusNames = statuses.Select(s => s.Status).ToList();
+            var model = new ProjectStatusViewModel
+            {
+                ProjectStatuses = statuses,
+                CurrentAd419Projects = DbContext.CurrentAd419Projects.Where(p => !statusNames.Contains(p.ProjectStatus)).ToList()
+            };
+
+            return View(model);
         }
 
         // GET: ProjectStatus/Details/5
@@ -27,7 +30,7 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProjectStatus projectStatus = db.ProjectStatus.Find(id);
+            ProjectStatus projectStatus = DbContext.ProjectStatus.Find(id);
             if (projectStatus == null)
             {
                 return HttpNotFound();
@@ -50,8 +53,8 @@ namespace AD419.DataHelper.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.ProjectStatus.Add(projectStatus);
-                db.SaveChanges();
+                DbContext.ProjectStatus.Add(projectStatus);
+                DbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +68,7 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProjectStatus projectStatus = db.ProjectStatus.Find(id);
+            ProjectStatus projectStatus = DbContext.ProjectStatus.Find(id);
             if (projectStatus == null)
             {
                 return HttpNotFound();
@@ -82,8 +85,8 @@ namespace AD419.DataHelper.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(projectStatus).State = EntityState.Modified;
-                db.SaveChanges();
+                DbContext.Entry(projectStatus).State = EntityState.Modified;
+                DbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(projectStatus);
@@ -96,7 +99,7 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProjectStatus projectStatus = db.ProjectStatus.Find(id);
+            ProjectStatus projectStatus = DbContext.ProjectStatus.Find(id);
             if (projectStatus == null)
             {
                 return HttpNotFound();
@@ -109,19 +112,10 @@ namespace AD419.DataHelper.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ProjectStatus projectStatus = db.ProjectStatus.Find(id);
-            db.ProjectStatus.Remove(projectStatus);
-            db.SaveChanges();
+            ProjectStatus projectStatus = DbContext.ProjectStatus.Find(id);
+            DbContext.ProjectStatus.Remove(projectStatus);
+            DbContext.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

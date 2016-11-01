@@ -36,6 +36,8 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<ConsolidationCodesForFTECalc> ConsolidationCodesForFTECalc { get; set; }
 
+        public virtual DbSet<CurrentAd419Project> CurrentAd419Projects { get; set; }
+
         public virtual DbSet<DosCode> DosCodes { get; set; }
 
         public virtual DbSet<DosCodesForFTECalc> DosCodesForFTECalc { get; set; }

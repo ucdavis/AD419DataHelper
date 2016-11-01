@@ -1,8 +1,10 @@
-﻿@model IEnumerable<AD419.DataHelper.Web.Models.ProjectStatus>
+﻿@model AD419.DataHelper.Web.Models.ProjectStatusViewModel
 
 @{
     ViewBag.Title = "Index - Project Status";
 }
+
+@Html.Partial("_CurrentAd419ProjectsForMissingProjectStatuses", @Model)
 
 <h2>@ViewBag.Title</h2>
 
@@ -12,15 +14,15 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.ProjectStatuses[0].Status)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsExcluded)
+            @Html.DisplayNameFor(model => model.ProjectStatuses[0].IsExcluded)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.ProjectStatuses) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Status)

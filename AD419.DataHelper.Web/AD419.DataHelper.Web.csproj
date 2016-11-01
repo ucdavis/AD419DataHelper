@@ -261,6 +261,7 @@
     <Compile Include="Helpers\DataTableExtensions.cs" />
     <Compile Include="Helpers\HttpCorrelationIdEnricher.cs" />
     <Compile Include="Helpers\ProcessStatusExtensions.cs" />
+    <Compile Include="Models\CurrentAd419Project.cs" />
     <Compile Include="Models\AllProjectsNew.cs" />
     <Compile Include="Models\ArcCodeSelections.cs" />
     <Compile Include="Models\ArcCodeAccountExclusionSelections.cs" />
@@ -268,6 +269,7 @@
     <Compile Include="Models\ConsolidationCodesForFTECalc.cs" />
     <Compile Include="Models\ConsolidationCodes.cs" />
     <Compile Include="Models\ProjectStatus.cs" />
+    <Compile Include="Models\ProjectStatusViewModel.cs" />
     <Compile Include="Models\TransDocTypesViewModel.cs" />
     <Compile Include="Models\DosCodesViewModel.cs" />
     <Compile Include="Models\ConsolidationCodesViewModel.cs" />
@@ -515,6 +517,10 @@
     <Content Include="Views\ProjectStatus\Details.cshtml" />
     <Content Include="Views\ProjectStatus\Edit.cshtml" />
     <Content Include="Views\ProjectStatus\Index.cshtml" />
+    <Content Include="Views\ProjectStatus\_CurrentAd419ProjectsForMissingProjectStatuses.cshtml" />
+    <None Include="Web.Test.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -533,6 +539,15 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
