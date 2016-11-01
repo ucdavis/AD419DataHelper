@@ -13,6 +13,23 @@
 
 <h2>AD-419 Reporting Process Status</h2>
 
+<div>
+    <h3>This page displays a list of all steps necessary to complete the AD-419 Reporting Process, as well as their completion status.</h3>
+    <br/>
+    <h4> Although there are a large number of steps listed on this page, they are basically comprised of the following: </h4>
+    
+    <ol>
+        <li>Data collection from both internal (campus data warehouses) and external (Excel spreadsheets) data sources,</li>
+        <li>Reviewing the collected data to ensure accuracy,</li>
+        <li>Loading that data into the AD-419 Data Association application,</li>
+        <li>Associating the Expenses within the AD-419 Data Association application by the College's departments,</li>
+        <li>Reviewing those associations by the Dean's Office, and</li>
+        <li>Creating the Final Reports based off of the associated data and submitting the results to ANR.</li>
+    </ol>
+
+</div>
+
+<hr/>
 @{
     // First let's find the lowest non-completed category, aka the current category
     var nonCompleted = Model.Where(c => !c.IsCompleted).ToArray();
