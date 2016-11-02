@@ -95,6 +95,21 @@ namespace AD419.DataHelper.Web.Controllers
         }
 
         [HttpPost]
+        public ActionResult ClearAssociations()
+        {
+            try
+            {
+                ExecuteSproc("usp_DeleteAllExpensesAndAssocoationsAndResetStatus");
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult() { Data = new { Success = false, Message = "There was a problem.", ErrorMessage = ex.Message }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
         public ActionResult RunSproc(int id)
         {
             var category = DbContext.ProcessCategories.Find(id);
