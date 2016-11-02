@@ -46,9 +46,20 @@
 {
     @Html.AntiForgeryToken()
     <div>
-        <p>
-            Selecting this button will reset <i><strong>ALL</strong></i> completed steps you have accomplished and allow you to begin again at Step 1.&nbsp; &nbsp; <input type="submit" data-confirm="Are you sure you want to start over?" class="btn btn-warning" value="Reset" />
-        </p>
+        <dl>
+            <dt>Selecting this button will <i><strong>RESET</strong></i> all completed steps you have accomplished and allow you to restart at the beginning.&nbsp; &nbsp; </dt>
+            <dd><input type="submit" data-confirm="Are you sure you want to start over?" class="btn btn-warning" value="Reset Status" /></dd>
+
+        </dl>
+    </div>
+}
+
+@using (Html.BeginForm("ClearAssociations", "Status", FormMethod.Post, new { id = "ResetForm", enctype = "multipart/form-data", @class = "" }))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <dl><dt>Selecting this button will <i><strong>DELETE</strong></i> all of the Expense and Association data from the AD-419 application's data set, but keep all the preliminary data you have imported and reviewed up to and including step 12.  It will allow you to pickup the process at step 13 without having to restart back at the beginning.</dt>
+        <dd><input type="submit" data-confirm="Are you sure you want to delete all AD-419 Associations?" class="btn btn-warning" value="Delete Associations" /></dd></dl>
     </div>
 }
 
