@@ -1,4 +1,5 @@
-﻿using AD419.DataHelper.Web.Models;
+﻿using System.Collections.Generic;
+using AD419.DataHelper.Web.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -14,6 +15,7 @@ namespace AD419.DataHelper.Web.Controllers
             var model = new TransDocTypesViewModel
             {
                 TransDocTypes = DbContext.TransDocTypes.ToList(),
+                MissingDocTypes = GetMissingDocTypes(),
                 LaborTransactions = DbContext.GetLaborTransactions((int)LaborTransactionsOptions.DocTypeCodes).ToList(),
                 CodeTypeName = "Trans. Doc. Types (Doc. Type Codes)"
             };
@@ -114,6 +116,27 @@ namespace AD419.DataHelper.Web.Controllers
             DbContext.TransDocTypes.Remove(transDocTypes);
             DbContext.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        private List<TransDocType> GetMissingDocTypes()
+        {
+            var retval = new List<TransDocType>();
+            var query = DbContext.Database.SqlQuery<TransDocType>(
+                @"
+        SELECT DISTINCT 
+            [TransDocType] DocumentType, 'Unknown' AS Description, 0 IncludeInFTECalc, 1 IncludeInFISExpenses 
+	    FROM [dbo].[UFY_FFY_FIS_Expenses] 
+	    WHERE [TransDocType] IN (
+            select distinct [TransDocType] from [dbo].[UFY_FFY_FIS_Expenses]
+            except 
+            select DocumentType [TransDocType] from TransDocTypes
+        )  AND ConsolidationCode  IN (SELECT Obj_Consolidatn_Num 
+                                      FROM   ConsolCodesForLaborTransactions)");
+
+            if (query.Any())
+                retval = query.ToList();
+
+            return retval;
         }
     }
 }
