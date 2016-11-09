@@ -14,10 +14,10 @@ namespace AD419.DataHelper.Web.Models
         [Display(Name = "Description")]
         public string Description { get; set; }
 
-        [Display(Name = "Include In FTE Calculation?")]
+        [Display(Name = "Include in FTE Calculation?")]
         public bool? IncludeInFTECalc { get; set; }
 
-         [Display(Name = "Not Included in Labor Data; Include In FIS Expenses?")]
+         [Display(Name = "Keep in Non-Labor FIS Expenses?”")]
         public bool? IncludeInFISExpenses { get; set; }
     }
 }
