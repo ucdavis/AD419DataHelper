@@ -43,11 +43,11 @@ namespace AD419.DataHelper.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DOS_Code,Description,IncludeInAD419FTE")] DosCode code)
+        public ActionResult Create([Bind(Include = "Code,Description,IncludeInAD419FTE")] DosCode dosCodes)
         {
-            if (!ModelState.IsValid) return View(code);
+            if (!ModelState.IsValid) return View(dosCodes);
 
-            DbContext.DosCodes.Add(code);
+            DbContext.DosCodes.Add(dosCodes);
             DbContext.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -69,11 +69,11 @@ namespace AD419.DataHelper.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DOS_Code,Description,IncludeInAD419FTE")] DosCode code)
+        public ActionResult Edit([Bind(Include = "Code,Description,IncludeInAD419FTE")] DosCode dosCodes)
         {
-            if (!ModelState.IsValid) return View(code);
+            if (!ModelState.IsValid) return View(dosCodes);
 
-            DbContext.Entry(code).State = EntityState.Modified;
+            DbContext.Entry(dosCodes).State = EntityState.Modified;
             DbContext.SaveChanges();
 
             return RedirectToAction("Index");

@@ -1,0 +1,56 @@
+﻿@model List<AD419.DataHelper.Web.Models.TransDocType>
+
+<div>
+    @if (Model.Count > 0)
+    {
+        <h2>Missing Trans Doc Types</h2>
+
+        <h4> The following @Model.Count Trans Doc Types are present in the financial data for labor related Consolidation Codes:</h4>
+        <i>Please review the items and create a new Trans Doc Type for each item.</i>
+        <table id="missingDocTypesTable" class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].DocumentType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].IncludeInFTECalc)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model[0].IncludeInFISExpenses)
+                    </th>
+                    <th></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DocumentType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IncludeInFTECalc)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IncludeInFISExpenses)
+                        </td>
+                        <td>@Html.ActionLink("Create", "CreateWithData", new { DocumentType = item.DocumentType, Description = item.Description, IncludeInFTECalc = item.IncludeInFTECalc, IncludeInFISExpenses = item.IncludeInFISExpenses }) </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p><br /><h4><i>Note: There are <strong>zero</strong> Trans Doc Types for Labor Related Consolidation Codes that need to be added at this time.</i></h4></p>
+    }
+    <hr />
+</div>

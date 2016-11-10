@@ -5,5 +5,7 @@ namespace AD419.DataHelper.Web.Models
     public class TransDocTypesViewModel : LaborTransactionsForMissingCodesModel
     {
         public List<TransDocType> TransDocTypes { get; set; }
+
+        public List<TransDocType> MissingDocTypes { get; set; }
     }
 }

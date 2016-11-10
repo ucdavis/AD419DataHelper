@@ -1,4 +1,5 @@
-﻿using AD419.DataHelper.Web.Models;
+﻿using System.Collections.Generic;
+using AD419.DataHelper.Web.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -14,6 +15,7 @@ namespace AD419.DataHelper.Web.Controllers
             var model = new TransDocTypesViewModel
             {
                 TransDocTypes = DbContext.TransDocTypes.ToList(),
+                MissingDocTypes = GetMissingDocTypes(),
                 LaborTransactions = DbContext.GetLaborTransactions((int)LaborTransactionsOptions.DocTypeCodes).ToList(),
                 CodeTypeName = "Trans. Doc. Types (Doc. Type Codes)"
             };
@@ -42,15 +44,29 @@ namespace AD419.DataHelper.Web.Controllers
             return View();
         }
 
+        public ActionResult CreateWithData(string documentType, string description, bool includeInFteCalc, bool includeInFisExpenses)
+        {
+            var model = new TransDocType()
+            {
+                Description = description,
+                DocumentType = documentType,
+                IncludeInFISExpenses = includeInFisExpenses,
+                IncludeInFTECalc = includeInFteCalc
+
+            };
+            return View("Create",model);
+        }
+
         // POST: TransDocTypes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DocumentType,Description,IncludeInFTECalc,IncludeInFISExpenses")] TransDocType transDocTypes)
+        public ActionResult CreateNew([Bind(Include = "DocumentType,Description,IncludeInFTECalc,IncludeInFISExpenses")] TransDocType transDocTypes)
         {
             if (ModelState.IsValid)
             {
+                transDocTypes.DocumentType = transDocTypes.DocumentType.Trim();
                 DbContext.TransDocTypes.Add(transDocTypes);
                 DbContext.SaveChanges();
                 return RedirectToAction("Index");
@@ -114,6 +130,27 @@ namespace AD419.DataHelper.Web.Controllers
             DbContext.TransDocTypes.Remove(transDocTypes);
             DbContext.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        private List<TransDocType> GetMissingDocTypes()
+        {
+            var retval = new List<TransDocType>();
+            var query = DbContext.Database.SqlQuery<TransDocType>(
+                @"
+        SELECT DISTINCT 
+            [TransDocType] DocumentType, 'Unknown' AS Description, CONVERT(bit, 0) IncludeInFTECalc, CONVERT(bit,1) IncludeInFISExpenses 
+	    FROM [dbo].[UFY_FFY_FIS_Expenses] 
+	    WHERE [TransDocType] IN (
+            select distinct [TransDocType] from [dbo].[UFY_FFY_FIS_Expenses]
+            except 
+            select DocumentType [TransDocType] from TransDocTypes
+        )  AND ConsolidationCode  IN (SELECT Obj_Consolidatn_Num 
+                                      FROM   ConsolCodesForLaborTransactions)");
+
+            if (query.Any())
+                retval = query.ToList();
+
+            return retval;
         }
     }
 }

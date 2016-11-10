@@ -518,6 +518,7 @@
     <Content Include="Views\ProjectStatus\Edit.cshtml" />
     <Content Include="Views\ProjectStatus\Index.cshtml" />
     <Content Include="Views\ProjectStatus\_CurrentAd419ProjectsForMissingProjectStatuses.cshtml" />
+    <Content Include="Views\TransDocTypes\_MissingTransDocTypes.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
