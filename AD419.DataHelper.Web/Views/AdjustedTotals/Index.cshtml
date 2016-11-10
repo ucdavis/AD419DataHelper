@@ -1,0 +1,56 @@
+﻿@model AD419.DataHelper.Web.Models.ExpenseAdjustments
+
+@{
+    ViewBag.Title = "FFY Expenses Vs. Adjusted Ad-419 Totals Comparison";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h4>This page displays a comparison between the FFY Expenses by ARC report and the Adjusted AD-419 Total All Research Funds amount displayed on SFN line 234 in the UI.</h4>
+<br/>
+<div>
+    <table id="totalsTable" class="table">
+        <tr><th class="thead">@Html.DisplayNameFor(model => model.TotalAllResearchFundsAd419):</th>
+            <th class="thead">@Html.DisplayFor(model => model.TotalAllResearchFundsAd419)</th></tr>
+        <tr>
+            
+            <th class="thead">@Html.DisplayNameFor(model => model.FieldStationExpenses):</th>
+            <td class="tbody">- @Html.DisplayFor(model => model.FieldStationExpenses)</td>
+        </tr>
+
+        <tr>
+            <th class="thead">@Html.DisplayNameFor(model => model.CeSpecialistExpenses):</th>
+            <td class="tbody">- @Html.DisplayFor(model => model.CeSpecialistExpenses)</td></tr>
+        <tr>
+            <th class="thead">@Html.DisplayNameFor(model => model.OutsideArcExpenses):</th>
+            <td class="tbody">- @Html.DisplayFor(model => model.OutsideArcExpenses)</td>
+        </tr>
+        
+        <tr>
+            <th class="thead">@Html.DisplayNameFor(model => model.Expired204Expenses):</th>
+            <td class="tbody">+ @Html.DisplayFor(model => model.Expired204Expenses)</td>
+        </tr>
+        
+        <tr>
+            <th class="thead">@Html.DisplayNameFor(model => model.TotalProjectLessThanCutoffAmount204Expenses):</th>
+            <td class="tbody">+ @Html.DisplayFor(model => model.TotalProjectLessThanCutoffAmount204Expenses)</td>
+        </tr>
+
+        <tr>
+            <th class="thead">@Html.DisplayNameFor(model => model.TotalAdjustedAd419Expenses):</th>
+            <th class="thead">= @Html.DisplayFor(model => model.TotalAdjustedAd419Expenses)</th>
+        </tr>
+        
+        <tr>
+            <th class="thead">@Html.DisplayNameFor(model => model.TotalFfyExpensesByArc):</th>
+            <td class="tbody">- @Html.DisplayFor(model => model.TotalFfyExpensesByArc)</td>
+        </tr>
+        
+        <tr>
+            <th class="thead">@Html.DisplayNameFor(model => model.DifferenceBetweenExpenseTotals):</th>
+            <th class="thead">= @Html.DisplayFor(model => model.DifferenceBetweenExpenseTotals)</th>
+        </tr>
+    </table>
+</div>
+
+
