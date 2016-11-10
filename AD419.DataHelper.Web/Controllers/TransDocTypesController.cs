@@ -44,15 +44,29 @@ namespace AD419.DataHelper.Web.Controllers
             return View();
         }
 
+        public ActionResult CreateWithData(string documentType, string description, bool includeInFteCalc, bool includeInFisExpenses)
+        {
+            var model = new TransDocType()
+            {
+                Description = description,
+                DocumentType = documentType,
+                IncludeInFISExpenses = includeInFisExpenses,
+                IncludeInFTECalc = includeInFteCalc
+
+            };
+            return View("Create",model);
+        }
+
         // POST: TransDocTypes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DocumentType,Description,IncludeInFTECalc,IncludeInFISExpenses")] TransDocType transDocTypes)
+        public ActionResult CreateNew([Bind(Include = "DocumentType,Description,IncludeInFTECalc,IncludeInFISExpenses")] TransDocType transDocTypes)
         {
             if (ModelState.IsValid)
             {
+                transDocTypes.DocumentType = transDocTypes.DocumentType.Trim();
                 DbContext.TransDocTypes.Add(transDocTypes);
                 DbContext.SaveChanges();
                 return RedirectToAction("Index");
@@ -124,7 +138,7 @@ namespace AD419.DataHelper.Web.Controllers
             var query = DbContext.Database.SqlQuery<TransDocType>(
                 @"
         SELECT DISTINCT 
-            [TransDocType] DocumentType, 'Unknown' AS Description, 0 IncludeInFTECalc, 1 IncludeInFISExpenses 
+            [TransDocType] DocumentType, 'Unknown' AS Description, CONVERT(bit, 0) IncludeInFTECalc, CONVERT(bit,1) IncludeInFISExpenses 
 	    FROM [dbo].[UFY_FFY_FIS_Expenses] 
 	    WHERE [TransDocType] IN (
             select distinct [TransDocType] from [dbo].[UFY_FFY_FIS_Expenses]

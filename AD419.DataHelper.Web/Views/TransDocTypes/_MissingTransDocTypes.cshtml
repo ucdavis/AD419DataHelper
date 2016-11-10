@@ -8,7 +8,6 @@
         <h4> The following @Model.Count Trans Doc Types are present in the financial data for labor related Consolidation Codes:</h4>
         <i>Please review the items and create a new Trans Doc Type for each item.</i>
         <table id="missingDocTypesTable" class="table">
-            class="table">
             <thead>
                 <tr>
                     <th>
@@ -23,6 +22,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model[0].IncludeInFISExpenses)
                     </th>
+                    <th></th>
 
                 </tr>
             </thead>
@@ -42,6 +42,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.IncludeInFISExpenses)
                         </td>
+                        <td>@Html.ActionLink("Create", "CreateWithData", new { DocumentType = item.DocumentType, Description = item.Description, IncludeInFTECalc = item.IncludeInFTECalc, IncludeInFISExpenses = item.IncludeInFISExpenses }) </td>
                     </tr>
                 }
             </tbody>

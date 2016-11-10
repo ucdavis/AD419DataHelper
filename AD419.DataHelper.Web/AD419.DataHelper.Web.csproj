@@ -268,7 +268,6 @@
     <Compile Include="Models\DataClasses.cs" />
     <Compile Include="Models\ConsolidationCodesForFTECalc.cs" />
     <Compile Include="Models\ConsolidationCodes.cs" />
-    <Compile Include="Models\MissingDocType.cs" />
     <Compile Include="Models\ProjectStatus.cs" />
     <Compile Include="Models\ProjectStatusViewModel.cs" />
     <Compile Include="Models\TransDocTypesViewModel.cs" />
