@@ -230,6 +230,7 @@
     <Compile Include="Attributes\UseAntiForgeryTokenOnPostByDefault.cs" />
     <Compile Include="Attributes\ValidateAntiForgeryTokenHeaderOrFormAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdjustedTotalsController.cs" />
     <Compile Include="Controllers\AllProjectsNewController.cs" />
     <Compile Include="Controllers\ArcCodeAccountExclusionsController.cs" />
     <Compile Include="Controllers\ArcCodesController.cs" />
@@ -268,6 +269,7 @@
     <Compile Include="Models\DataClasses.cs" />
     <Compile Include="Models\ConsolidationCodesForFTECalc.cs" />
     <Compile Include="Models\ConsolidationCodes.cs" />
+    <Compile Include="Models\ExpenseAdjustments.cs" />
     <Compile Include="Models\ProjectStatus.cs" />
     <Compile Include="Models\ProjectStatusViewModel.cs" />
     <Compile Include="Models\TransDocTypesViewModel.cs" />
@@ -519,6 +521,7 @@
     <Content Include="Views\ProjectStatus\Index.cshtml" />
     <Content Include="Views\ProjectStatus\_CurrentAd419ProjectsForMissingProjectStatuses.cshtml" />
     <Content Include="Views\TransDocTypes\_MissingTransDocTypes.cshtml" />
+    <Content Include="Views\AdjustedTotals\Index.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
