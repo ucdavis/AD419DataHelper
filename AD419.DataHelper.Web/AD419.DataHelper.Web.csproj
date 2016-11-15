@@ -312,6 +312,7 @@
     <Compile Include="Models\UnknownDepartment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\FiscalYearService.cs" />
+    <Compile Include="Services\FieldStationExpenseService.cs" />
     <Compile Include="Services\ProjectImportService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ExpiringProjectMatch.cs" />

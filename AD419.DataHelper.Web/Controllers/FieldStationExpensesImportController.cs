@@ -6,12 +6,20 @@ using System.Web;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Helpers;
 using AD419.DataHelper.Web.Models;
+using AD419.DataHelper.Web.Services;
 using Excel;
 
 namespace AD419.DataHelper.Web.Controllers
 {
     public class FieldStationExpensesImportController : SuperController
     {
+        private readonly FieldStationExpenseService _fieldStationExpenseService;
+
+        public FieldStationExpensesImportController()
+        {
+            _fieldStationExpenseService = new FieldStationExpenseService(DbContext, FiscalYearService.FiscalEndDate);
+        }
+
         // GET: FieldStationExpensesImport
         public ActionResult Index()
         {
@@ -127,26 +135,43 @@ namespace AD419.DataHelper.Web.Controllers
             var myFile = Request.Files[0];
             if (myFile == null) return RedirectToAction("Index");
 
-            var fieldStationExpenseEntries = new List<FieldStationExpenseListImport>();
-
             var fileName = myFile.FileName;
+
+            // setup reader:
             var excelReader = ExcelReaderFactory.CreateOpenXmlReader(myFile.InputStream);
             excelReader.IsFirstRowAsColumnNames = true;
+
+            // read data:
             var result = excelReader.AsDataSet();
+            excelReader.Close();
+
+            // transform:
+            var fieldStationExpenses = _fieldStationExpenseService.GetFieldStationsExpensesFromRows(result.Tables[0].Rows).ToList();
+
+            // validate:
+            var errors = new List<ModelStateDictionary>();
+            foreach (var fieldStationExpense in fieldStationExpenses)
+            {
+                // clear and check
+                ModelState.Clear();
+                TryValidateModel(fieldStationExpense);
+
+                if (fieldStationExpense.IsCurrentAd419Project == null ||
+                    (bool) !fieldStationExpense.IsCurrentAd419Project)
+                {
+                    ModelState.AddModelError("IsCurrentAd419Project", "This expense is not assigned to a current project!  Please select one that is not expired and is currently active.");
+                }
+
+                // copy out errors
+                var state = new ModelStateDictionary();
+                state.Merge(ModelState);
+                errors.Add(state);
+            }
+            ViewBag.Errors = errors;
 
             TempData.Add("Message", "Now viewing \"" + fileName + "\".");
-            excelReader.Close();
-            var range = from DataRow row in result.Tables[0].Rows where !string.IsNullOrWhiteSpace(row["FieldStationCharge"].ToString()) select new FieldStationExpenseListImport(row);
-            fieldStationExpenseEntries.AddRange(range);
 
-            // This works.  Would now like the user to have a chance to review upload first.
-            //if (ModelState.IsValid)
-            //{
-            //    db.FieldStationExpenseListImport.AddRange(fieldStationExpenseEntries);
-            //    db.SaveChanges();
-            //}
-
-            return View("Display", fieldStationExpenseEntries);
+            return View("Display", fieldStationExpenses);
         }
 
         [HttpPost]
