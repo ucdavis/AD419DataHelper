@@ -41,6 +41,7 @@ namespace AD419.DataHelper.Web.Models
         /// </summary>
         [Display(Name = "Project Num")]
         [StringLength(24)]
+        [NotMapped]
         public string ProjectNumber { get; set; }
 
         /// <summary>
@@ -52,9 +53,18 @@ namespace AD419.DataHelper.Web.Models
         /// </summary>
         
         [Display(Name = "Is Current AD-419 Project?")]
-        public bool? IsCurrentAd419Project
+        [NotMapped]
+        public bool IsCurrentAd419Project
         {
             get; set; 
+        }
+
+        [Display(Name = "Notes")]
+        [NotMapped]
+        public string Message
+        {
+            get;
+            set;
         }
     }
 }

@@ -156,10 +156,9 @@ namespace AD419.DataHelper.Web.Controllers
                 ModelState.Clear();
                 TryValidateModel(fieldStationExpense);
 
-                if (fieldStationExpense.IsCurrentAd419Project == null ||
-                    (bool) !fieldStationExpense.IsCurrentAd419Project)
+                if ( !fieldStationExpense.IsCurrentAd419Project)
                 {
-                    ModelState.AddModelError("IsCurrentAd419Project", "This expense is not assigned to a current project!  Please select one that is not expired and is currently active.");
+                    ModelState.AddModelError("IsCurrentAd419Project", "This expense is not assigned to an active project!  Please select one that is not expired and is currently active.");
                 }
 
                 // copy out errors
@@ -169,9 +168,9 @@ namespace AD419.DataHelper.Web.Controllers
             }
             ViewBag.Errors = errors;
 
-            TempData.Add("Message", "Now viewing \"" + fileName + "\".");
+            //TempData.Add("Message", "Now viewing \"" + fileName + "\".");
 
-            return View("Display", fieldStationExpenses);
+            return PartialView("_UploadData", fieldStationExpenses);
         }
 
         [HttpPost]

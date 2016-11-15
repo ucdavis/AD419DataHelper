@@ -523,6 +523,9 @@
     <Content Include="Views\ProjectStatus\_CurrentAd419ProjectsForMissingProjectStatuses.cshtml" />
     <Content Include="Views\TransDocTypes\_MissingTransDocTypes.cshtml" />
     <Content Include="Views\AdjustedTotals\Index.cshtml" />
+    <Content Include="Views\FieldStationExpensesImport\_FieldStationExpensesTable.cshtml" />
+    <Content Include="Views\FieldStationExpensesImport\_UploadData.cshtml" />
+    <Content Include="Views\FieldStationExpensesImport\_Upload.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

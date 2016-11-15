@@ -40,10 +40,43 @@ namespace AD419.DataHelper.Web.Services
                 ConfigureFieldStationExpense(match.FieldStationExpense, match.Project);
             }
 
+            // Get a list of all current AD-419 projects:
+            var currentProjects = _dataContext.CurrentAd419Projects.ToList();
+
+            // Loop through the list of expenses that are not current linked to current projects:
+            foreach (var fieldStationExpense in fieldStationExpenses.Where(f => !f.IsCurrentAd419Project))
+            {
+                
+                // Try updating the expense with a current project with the same project number:
+                var originalAccessionNumber = fieldStationExpense.ProjectAccessionNum;
+                var projectNumber = fieldStationExpense.ProjectNumber;
+                var currentProject =
+                    currentProjects.FirstOrDefault(p => p.ProjectNumber.Trim().Equals(projectNumber));
+                
+                // Update the accession number to the current project with a matching project number,
+                // and update the message accordingly:
+                if (currentProject != null)
+                {
+                    fieldStationExpense.Message =
+                        string.Format(
+                            "Expired accession number {0} was remapped to active accession number {2} for project {1}.",
+                            originalAccessionNumber, projectNumber, currentProject.AccessionNumber);
+                    fieldStationExpense.ProjectAccessionNum =
+                        currentProjects.Where(p => p.ProjectNumber.Equals(projectNumber))
+                            .Select(p => p.AccessionNumber)
+                            .FirstOrDefault();
+                    fieldStationExpense.IsCurrentAd419Project = true;
+                }
+                else
+                {
+                    // Otherwise, set the message that we were unable to find a current project with a matching project number:
+                    fieldStationExpense.Message = string.Format("Unable to find active project for accession number {0}.", originalAccessionNumber);
+                }
+            }
+
             //var correspondingProjects =
             //    fieldStationExpenses.Where(f => _dataContext.AllProjectsNew.Where(p => p.IsUcDavis).
             //        All(p => f.ProjectAccessionNum.Equals(p.AccessionNumber)));
-           
          
             return fieldStationExpenses;
         }
@@ -54,10 +87,11 @@ namespace AD419.DataHelper.Web.Services
             {
                 // Use the project number provided; otherwise update if blank:
                 if (string.IsNullOrWhiteSpace(fieldStationExpense.ProjectNumber))
-                    fieldStationExpense.ProjectNumber = project.ProjectNumber;
+                    fieldStationExpense.ProjectNumber = project.ProjectNumber.Trim();
 
                 // Determine if the expense belongs to a current project:
-                fieldStationExpense.IsCurrentAd419Project = IsCurrentAd419Project(project.ProjectStartDate, project.IsExpired);
+                fieldStationExpense.IsCurrentAd419Project = IsCurrentAd419Project(project.ProjectStartDate,
+                    project.IsExpired);
             }
         }
 
@@ -66,7 +100,6 @@ namespace AD419.DataHelper.Web.Services
             var fieldStationExpense = new FieldStationExpenseListImport()
             {
                 ProjectAccessionNum= row["ProjectAccessionNum"].ToString(),
-                ProjectNumber      = row["Project"].ToString(),
                 FieldStationCharge = string.IsNullOrWhiteSpace(row["FieldStationCharge"].ToString()) ? 0 : Convert.ToDecimal(row["FieldStationCharge"].ToString())
             };
 

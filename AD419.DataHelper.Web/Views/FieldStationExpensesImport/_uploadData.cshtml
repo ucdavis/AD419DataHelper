@@ -1,0 +1,81 @@
+﻿@model List<AD419.DataHelper.Web.Models.FieldStationExpenseListImport>
+
+@{
+    var errors = ViewBag.Errors as List<ModelStateDictionary>;
+    if (errors == null)
+    {
+        errors = Model.Select(m => new ModelStateDictionary()).ToList();
+
+    }
+}
+
+<table id="uploadTable" class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(x => Model[0].ProjectAccessionNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => Model[0].ProjectNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => Model[0].FieldStationCharge)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => Model[0].IsCurrentAd419Project)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => Model[0].Message)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            var item = Model[i];
+            var error = errors[i];
+            <tr>
+                <td>
+                    @if (!error.IsValid)
+                    {
+                        var message = string.Join("\n",
+                            error.Values
+                                .SelectMany(v => v.Errors)
+                                .Select(e => e.ErrorMessage));
+                        
+                        <span class="text-danger" title="@message">
+                            <i class="fa fa-exclamation-triangle"></i>
+                        </span>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(x => item.ProjectAccessionNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => item.ProjectNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => item.FieldStationCharge)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => item.IsCurrentAd419Project)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => item.Message)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form id="confirmForm" method="POST" action="@Url.Action("Save")">
+    @Html.AntiForgeryToken()
+    @for (var i = 0; i < Model.Count; i++)
+    {
+        @Html.HiddenFor(m => m[i].ProjectAccessionNum)
+        @Html.HiddenFor(m => m[i].ProjectNumber)
+        @Html.HiddenFor(m => m[i].FieldStationCharge)
+        @Html.HiddenFor(m => m[i].IsCurrentAd419Project)
+    }
+</form>
