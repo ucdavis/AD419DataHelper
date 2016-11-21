@@ -255,6 +255,7 @@
     <Compile Include="Controllers\C204ExclusionsController.cs" />
     <Compile Include="Controllers\ProjectStatusController.cs" />
     <Compile Include="Controllers\ReportingOrganizationsController.cs" />
+    <Compile Include="Controllers\SfnClassificationLogicController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\SuperController.cs" />
     <Compile Include="Controllers\TransDocTypesController.cs" />
@@ -272,6 +273,7 @@
     <Compile Include="Models\ExpenseAdjustments.cs" />
     <Compile Include="Models\ProjectStatus.cs" />
     <Compile Include="Models\ProjectStatusViewModel.cs" />
+    <Compile Include="Models\SfnClassificationLogic.cs" />
     <Compile Include="Models\TransDocTypesViewModel.cs" />
     <Compile Include="Models\DosCodesViewModel.cs" />
     <Compile Include="Models\ConsolidationCodesViewModel.cs" />
@@ -522,6 +524,11 @@
     <Content Include="Views\ProjectStatus\_CurrentAd419ProjectsForMissingProjectStatuses.cshtml" />
     <Content Include="Views\TransDocTypes\_MissingTransDocTypes.cshtml" />
     <Content Include="Views\AdjustedTotals\Index.cshtml" />
+    <Content Include="Views\SfnClassificationLogic\Create.cshtml" />
+    <Content Include="Views\SfnClassificationLogic\Delete.cshtml" />
+    <Content Include="Views\SfnClassificationLogic\Details.cshtml" />
+    <Content Include="Views\SfnClassificationLogic\Edit.cshtml" />
+    <Content Include="Views\SfnClassificationLogic\Index.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
