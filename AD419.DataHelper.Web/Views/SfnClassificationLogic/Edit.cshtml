@@ -43,7 +43,7 @@
                 @Html.EditorFor(model => model.SubParameterOrder, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.SubParameterOrder, "", new { @class = "text-danger" })
                 The order in which sub parameters are evaluated within a particular grouping.<br/>
-                It must be set when both the evaluation order AND the parameter order and the same for multiple conditions within a set. <br/>
+                It is only set when both the evaluation order AND the parameter order and the same for multiple conditions within a group. <br/>
                 It is typically present when using "OR" as the conditional operator to identify where to place the parenthesis.<br />
                 It is left blank when there is no need for grouping as in evaluating a statement consisting only of "AND"s or when no logical operators are present. 
             </div>
