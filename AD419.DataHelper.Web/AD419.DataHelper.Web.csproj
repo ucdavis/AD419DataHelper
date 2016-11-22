@@ -317,6 +317,7 @@
     <Compile Include="Services\ProjectImportService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ExpiringProjectMatch.cs" />
+    <Compile Include="ViewModels\SfnClassificationLogicViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -529,8 +530,7 @@
     <Content Include="Views\SfnClassificationLogic\Details.cshtml" />
     <Content Include="Views\SfnClassificationLogic\Edit.cshtml" />
     <Content Include="Views\SfnClassificationLogic\Index.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\_sfnClassificationLogicConditionalOperatorEditorTemplate.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\_sfnClassificationLogicLogicalOperatorEditorTemplate.cshtml" />
+    <Content Include="Views\SfnClassificationLogic\Display.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -539,7 +539,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Instructions\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\Shared\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

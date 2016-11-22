@@ -1,5 +1,5 @@
 ﻿@using AD419.DataHelper.Web.Models
-@model SfnClassificationLogic
+@model AD419.DataHelper.Web.ViewModels.SfnClassificationLogicViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -15,33 +15,33 @@
         <h4>SFN Classification Logic</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.SfnClassificationLogic.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EvaluationOrder, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SfnClassificationLogic.EvaluationOrder, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EvaluationOrder, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EvaluationOrder, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.SfnClassificationLogic.EvaluationOrder, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SfnClassificationLogic.EvaluationOrder, "", new { @class = "text-danger" })
                 The SFN evaluation precedence across the entire SFN list, meaning the SFN processing order from narrower to broader matching criteria.<br />
                 Note that several entries may share the same evaluation order if they are part of the same statement.
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ParameterOrder, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SfnClassificationLogic.ParameterOrder, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ParameterOrder, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ParameterOrder, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.SfnClassificationLogic.ParameterOrder, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SfnClassificationLogic.ParameterOrder, "", new { @class = "text-danger" })
                 The order in which the parameters, i.e., columns, conditions and values are evaluated for a particular SFN statement.<br/>
                 A value of "1" will be present if there is only 1 entry present in the evaluation order; otherwise, it will be an ascending order from left to right. 
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SubParameterOrder, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SfnClassificationLogic.SubParameterOrder, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.SubParameterOrder, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SubParameterOrder, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.SfnClassificationLogic.SubParameterOrder, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SfnClassificationLogic.SubParameterOrder, "", new { @class = "text-danger" })
                 The order in which sub parameters are evaluated within a particular grouping.<br/>
                 It is only set when both the evaluation order AND the parameter order and the same for multiple conditions within a group. <br/>
                 It is typically present when using "OR" as the conditional operator to identify where to place the parenthesis.<br />
@@ -50,59 +50,59 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.LogicalOperator, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SfnClassificationLogic.LogicalOperator, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorForModel("_sfnClassificationLogicLogicalOperatorEditorTemplate", new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LogicalOperator, "", new { @class = "text-danger" })
-                <br/>The logical operator to apply if the condition was preceded by another comparison in the same logical set.<br/>
+                @Html.DropDownListFor(model => model.SfnClassificationLogic.LogicalOperator, Model.LogicalOperatorsSelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SfnClassificationLogic.LogicalOperator, "", new { @class = "text-danger" })
+                <br />The logical operator to apply if the condition was preceded by another comparison in the same logical set.<br />
                 Note: This should be blank for the first condition in each set or if there is only a single condition to be evaluated.
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ColumnName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SfnClassificationLogic.ColumnName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ColumnName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ColumnName, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.SfnClassificationLogic.ColumnName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SfnClassificationLogic.ColumnName, "", new { @class = "text-danger" })
                 The column name to be evaluated along with any string manipulation commands, i.e. "LEFT(...)", etc.
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.NegateCondition, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SfnClassificationLogic.NegateCondition, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.NegateCondition)
-                    @Html.ValidationMessageFor(model => model.NegateCondition, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.SfnClassificationLogic.NegateCondition)
+                    @Html.ValidationMessageFor(model => model.SfnClassificationLogic.NegateCondition, "", new { @class = "text-danger" })
                     Setting this option applies the inverse to the result of the conditional operator, i.e. NOT IN or !=, etc.
                 </div>
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ConditionalOperator, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SfnClassificationLogic.ConditionalOperator, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorForModel("_sfnClassificationLogicConditionalOperatorEditorTemplate", new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ConditionalOperator, "", new { @class = "text-danger" })
-                <br/>The condition to be applied to the values entered below.<br/>
+               @Html.DropDownListFor(model => model.SfnClassificationLogic.ConditionalOperator, Model.ConditionalOperatorsSelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SfnClassificationLogic.ConditionalOperator, "", new { @class = "text-danger" })
+                <br />The condition to be applied to the values entered below.<br />
                 Note: It may also be the inverse of the condition to apply if "Negate Condition?" is checked above.
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Values, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SfnClassificationLogic.Values, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Values, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Values, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.SfnClassificationLogic.Values, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SfnClassificationLogic.Values, "", new { @class = "text-danger" })
                 The values to be tested for the condition selected previously.
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SFN, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SfnClassificationLogic.SFN, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.SFN, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SFN, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.SfnClassificationLogic.SFN, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SfnClassificationLogic.SFN, "", new { @class = "text-danger" })
                 The SFN to be assigned if the condition is met.
             </div>
         </div>

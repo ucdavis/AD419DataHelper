@@ -1,8 +1,12 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Models;
+using AD419.DataHelper.Web.ViewModels;
 
 namespace AD419.DataHelper.Web.Controllers
 {
@@ -64,7 +68,8 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return HttpNotFound();
             }
-            return View(sfnClassificationLogic);
+            //return View(sfnClassificationLogic);
+            return View(new SfnClassificationLogicViewModel(sfnClassificationLogic));
         }
 
         // POST: SfnClassificationLogic/Edit/5
@@ -81,6 +86,15 @@ namespace AD419.DataHelper.Web.Controllers
                 return RedirectToAction("Index");
             }
             return View(sfnClassificationLogic);
+        }
+
+        public ActionResult Display()
+        {
+            var caseStatement = DbContext.GetSfnCaseStatement();
+            caseStatement = caseStatement.Replace("\r\n", "<br/>");
+            caseStatement = caseStatement.Replace("\t", "&nbsp;&nbsp;");
+            ViewBag.CaseStatement = caseStatement;
+            return View();
         }
 
         // GET: SfnClassificationLogic/Delete/5
