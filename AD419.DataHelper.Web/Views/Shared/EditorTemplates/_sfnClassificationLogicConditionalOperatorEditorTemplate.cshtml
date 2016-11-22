@@ -1,0 +1,19 @@
+﻿
+@using AD419.DataHelper.Web.Models
+@model AD419.DataHelper.Web.Models.SfnClassificationLogic
+           
+@{
+    var conditionalOperators = new List<SelectListItem>();
+
+  foreach (var conditionalOperator in SfnClassificationLogic.ConditionalOperators)
+  {
+      conditionalOperators.Add(new SelectListItem()
+      {
+          Text = conditionalOperator,
+          Value = conditionalOperator,
+          Selected = Model.ConditionalOperator.Equals(conditionalOperator)
+      });
+  }
+}
+
+@Html.DropDownListFor(logic => logic.ConditionalOperator, conditionalOperators)

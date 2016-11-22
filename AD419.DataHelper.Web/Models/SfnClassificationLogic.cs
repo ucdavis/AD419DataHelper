@@ -3,10 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AD419.DataHelper.Web.Models
 {
+    [Table("SfnClassificationLogic")]
     public partial class SfnClassificationLogic
     {
         [NotMapped]
-        public static string[] LogicalOperators = {"AND", "OR", "NULL"};
+        public static string[] LogicalOperators = {"AND", "OR"};
 
         [NotMapped]
         public static string[] ConditionalOperators = {"=", "BETWEEN", "IN", "LIKE"};
@@ -26,7 +27,6 @@ namespace AD419.DataHelper.Web.Models
         [Display(Name = "Sub Parameter Order")]
         public int? SubParameterOrder { get; set; }
 
-        [Required]
         [Display(Name = "Logical Operator")]
         public string LogicalOperator { get; set; }
 
@@ -35,7 +35,7 @@ namespace AD419.DataHelper.Web.Models
         public string ColumnName { get; set; }
 
         [Display(Name = "Negate Condition?")]
-        public bool? NegateCondition { get; set; }
+        public bool NegateCondition { get; set; }
 
         [Required]
         [Display(Name = "Conditional Operator")]

@@ -59,7 +59,7 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SfnClassificationLogic sfnClassificationLogic = db.SfnClassificationLogic.Find(id);
+            SfnClassificationLogic sfnClassificationLogic = DbContext.SfnClassificationLogic.Find(id);
             if (sfnClassificationLogic == null)
             {
                 return HttpNotFound();

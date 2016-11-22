@@ -1,4 +1,5 @@
-﻿@model AD419.DataHelper.Web.Models.SfnClassificationLogic
+﻿@using AD419.DataHelper.Web.Models
+@model AD419.DataHelper.Web.Models.SfnClassificationLogic
 
 @{
     ViewBag.Title = "Edit";
@@ -9,7 +10,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>SfnClassificationLogic</h4>
         <hr />
@@ -21,6 +22,7 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.EvaluationOrder, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.EvaluationOrder, "", new { @class = "text-danger" })
+                The SFN evaluation precedence, meaning the SFN processing order from narrower to broader matching criteria.
             </div>
         </div>
 
@@ -29,6 +31,7 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ParameterOrder, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ParameterOrder, "", new { @class = "text-danger" })
+                The order in which the parameters, i.e., columns, conditions and values are evaluated for a particular SFN statement.
             </div>
         </div>
 
@@ -37,14 +40,27 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SubParameterOrder, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.SubParameterOrder, "", new { @class = "text-danger" })
+                The order in which sub parameters are evaluated within a particular grouping.
+                It is typically set when using "OR" as the conditional operator to identify where to place the parenthesis.
+                It is left blank when there is no need for grouping as in evaluating a statement consisting only of "AND"s or when no logical operators are present. 
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.LogicalOperator, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.LogicalOperator, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.LogicalOperator, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.LogicalOperator, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorForModel("_sfnClassificationLogicLogicalOperatorEditorTemplate", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LogicalOperator, "", new { @class = "text-danger" })
+                The logical operator to apply if the condition was preceded by another comparison in the same logical set.  
+                Note: This should be blank for the first condition in each set or if there is only a single condition to be evaluated.
             </div>
         </div>
 
@@ -53,6 +69,7 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ColumnName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ColumnName, "", new { @class = "text-danger" })
+                The column name to be evaluated along with any string manipulation commands, i.e. "LEFT(...)", etc.
             </div>
         </div>
 
@@ -62,15 +79,25 @@
                 <div class="checkbox">
                     @Html.EditorFor(model => model.NegateCondition)
                     @Html.ValidationMessageFor(model => model.NegateCondition, "", new { @class = "text-danger" })
+                    Setting this option checks for the inverse result of the conditional operator, i.e. NOT IN or !=, etc.
                 </div>
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.ConditionalOperator, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ConditionalOperator, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ConditionalOperator, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConditionalOperator, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorForModel("_sfnClassificationLogicConditionalOperatorEditorTemplate", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ConditionalOperator, "", new { @class = "text-danger" })
+                The condition to be applied to the values entered below.  Note: It may also be the inverse of the condition to apply if "Negate Condition" is checked above.
             </div>
         </div>
 
@@ -79,6 +106,7 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Values, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Values, "", new { @class = "text-danger" })
+                The values to be tested for the condition selected previously.
             </div>
         </div>
 
@@ -87,6 +115,7 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SFN, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.SFN, "", new { @class = "text-danger" })
+                The SFN to be assigned if the condition is met.
             </div>
         </div>
 

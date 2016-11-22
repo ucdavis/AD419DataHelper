@@ -1,0 +1,25 @@
+﻿
+@using AD419.DataHelper.Web.Models
+@model AD419.DataHelper.Web.Models.SfnClassificationLogic
+           
+@{
+    var logicalOperators = new List<SelectListItem>
+    {
+        new SelectListItem()
+        {
+            Text = "", Value = null, Selected = true
+        }
+    };
+
+  foreach (var logicalOperator in SfnClassificationLogic.LogicalOperators)
+  {
+      logicalOperators.Add(new SelectListItem()
+      {
+          Text = logicalOperator,
+          Value = logicalOperator,
+          Selected = (!string.IsNullOrEmpty(Model.LogicalOperator) && Model.LogicalOperator.Equals(logicalOperator))
+      });
+  }
+}
+
+@Html.DropDownListFor(l => l.LogicalOperator, logicalOperators)
