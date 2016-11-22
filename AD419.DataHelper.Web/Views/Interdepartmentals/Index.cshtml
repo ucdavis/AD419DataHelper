@@ -12,7 +12,7 @@
     </form>
 </div>
 
-<h2>Interdepartmental Projects</h2>
+<h2>Interdepartmental Project Accession Number to OrgR Mapping</h2>
 <p>
     <a href="@Url.Action("Create")" target="_blank" class="btn btn-default">Create New</a>
 </p>
@@ -76,12 +76,13 @@
         });
 
         $(function() {
-            $('#interdepartmentalTable').DataTable({
-                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                columnDefs: [
-                    { targets: [-1, -2, -3], sortable: false }
-                ]
-            });
-        })
+            $('#interdepartmentalTable')
+                .DataTable({
+                    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                    columnDefs: [
+                        { targets: [-1, -2, -3], sortable: false }
+                    ]
+                });
+        });
     </script>
 }

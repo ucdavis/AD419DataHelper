@@ -180,11 +180,15 @@ namespace AD419.DataHelper.Web.Controllers
             if (fieldStationExpenseEntries != null)
             {
                 // This works.  Would now like the user to have a chance to review upload first.
-                if (ModelState.IsValid)
+                if (ModelState.IsValid && fieldStationExpenseEntries.All(f => f.IsCurrentAd419Project))
                 {
                     DbContext.FieldStationExpenseListImports.AddRange(fieldStationExpenseEntries);
                     DbContext.MarkStatusCompleted(ProcessStatuses.ImportFieldStationExpenses);
                     DbContext.SaveChanges();
+                }
+                else
+                {
+                    TempData.Add("ErrorMessage", string.Format("ERROR! Your import file could not be saved.  It contained {0} records with expired projects that could not be automatically remapped.  Please make corrections and try again.", fieldStationExpenseEntries.Count(f => f.IsCurrentAd419Project == false)));
                 }
             }
             return RedirectToAction("Index");

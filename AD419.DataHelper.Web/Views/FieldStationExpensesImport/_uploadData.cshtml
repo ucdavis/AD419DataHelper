@@ -1,12 +1,7 @@
 ﻿@model List<AD419.DataHelper.Web.Models.FieldStationExpenseListImport>
 
 @{
-    var errors = ViewBag.Errors as List<ModelStateDictionary>;
-    if (errors == null)
-    {
-        errors = Model.Select(m => new ModelStateDictionary()).ToList();
-
-    }
+    var errors = ViewBag.Errors as List<ModelStateDictionary> ?? Model.Select(m => new ModelStateDictionary()).ToList();
 }
 
 <table id="uploadTable" class="table">
