@@ -1,0 +1,90 @@
+﻿@model AD419.DataHelper.Web.Models.SfnClassificationLogic
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SFN Classification Logic</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EvaluationOrder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EvaluationOrder)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ParameterOrder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParameterOrder)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubParameterOrder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubParameterOrder)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LogicalOperator)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LogicalOperator)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ColumnName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ColumnName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NegateCondition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NegateCondition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConditionalOperator)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConditionalOperator)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Values)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Values)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SFN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SFN)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
