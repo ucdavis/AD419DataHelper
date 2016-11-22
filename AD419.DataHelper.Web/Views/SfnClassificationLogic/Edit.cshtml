@@ -22,7 +22,7 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.EvaluationOrder, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.EvaluationOrder, "", new { @class = "text-danger" })
-                The SFN evaluation precedence across the entire SFN list, meaning the SFN processing order from narrower to broader matching criteria.
+                The SFN evaluation precedence across the entire SFN list, meaning the SFN processing order from narrower to broader matching criteria.<br />
                 Note that several entries may share the same evaluation order if they are part of the same statement.
             </div>
         </div>
@@ -43,7 +43,7 @@
                 @Html.EditorFor(model => model.SubParameterOrder, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.SubParameterOrder, "", new { @class = "text-danger" })
                 The order in which sub parameters are evaluated within a particular grouping.<br/>
-                It must be set when both the evaluation order AND the parameter order and the same for multiple conditions within a set. 
+                It must be set when both the evaluation order AND the parameter order and the same for multiple conditions within a set. <br/>
                 It is typically present when using "OR" as the conditional operator to identify where to place the parenthesis.<br />
                 It is left blank when there is no need for grouping as in evaluating a statement consisting only of "AND"s or when no logical operators are present. 
             </div>
@@ -82,7 +82,7 @@
                 <div class="checkbox">
                     @Html.EditorFor(model => model.NegateCondition)
                     @Html.ValidationMessageFor(model => model.NegateCondition, "", new { @class = "text-danger" })
-                    Setting this option checks for the inverse result of the conditional operator, i.e. NOT IN or !=, etc.
+                    Setting this option applies the inverse to the result of the conditional operator, i.e. NOT IN or !=, etc.
                 </div>
             </div>
         </div>
