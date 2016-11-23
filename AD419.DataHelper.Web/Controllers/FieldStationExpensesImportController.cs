@@ -188,7 +188,7 @@ namespace AD419.DataHelper.Web.Controllers
                 }
                 else
                 {
-                    TempData.Add("ErrorMessage", string.Format("ERROR! Your import file could not be saved.  It contained {0} records with expired projects that could not be automatically remapped.  Please make corrections and try again.", fieldStationExpenseEntries.Count(f => f.IsCurrentAd419Project == false)));
+                    ErrorMessage = string.Format("ERROR! Your import file could not be saved.  It contained {0} records with expired projects that could not be automatically remapped.  Please make corrections and try again.", fieldStationExpenseEntries.Count(f => f.IsCurrentAd419Project == false));
                 }
             }
             return RedirectToAction("Index");
