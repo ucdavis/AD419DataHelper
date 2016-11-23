@@ -69,7 +69,7 @@ namespace AD419.DataHelper.Web.Services
                 {
                     // Otherwise, set the message that we were unable to find a current project with a matching project number:
                     interdepartmentalProject.IsCurrentAd419Project = false;
-                    interdepartmentalProject.Message = string.Format("Unable to find active project for accession number {0}.", originalAccessionNumber);
+                    interdepartmentalProject.Message = string.Format("Unable to find an active interdepartmental project for accession number {0}.", originalAccessionNumber);
                 }
             }
 
@@ -108,7 +108,7 @@ namespace AD419.DataHelper.Web.Services
                 project.Message = string.Format("Warning: The OrgR {1} provided for accession number {0}, is not valid.  Please update the entry to contain a valid OrgR and try again.", 
                     project.AccessionNumber, project.OrgR);
             }
-         
+
             return interdepartmentalProjects;
         }
 

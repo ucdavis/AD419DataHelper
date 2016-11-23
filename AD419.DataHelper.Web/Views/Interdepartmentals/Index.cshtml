@@ -69,7 +69,11 @@
     <script type="text/javascript">
         $(function() {
             UploadWizard.setup({
-                uploadUrl: '@Url.Action("Upload")'
+                uploadUrl: '@Url.Action("Upload")',
+                tableOptions: {
+                    order: [[0, "desc"]]
+                    //,displayLength: -1
+                }
             });
 
             $('#uploadModal').on('hidden.bs.modal', UploadWizard.reset);

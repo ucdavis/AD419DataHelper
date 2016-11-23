@@ -24,6 +24,9 @@
             @Html.DisplayNameFor(x => Model[0].IsValidOrgR)
         </th>
         <th>
+            @Html.DisplayNameFor(x => Model[0].IsInterdepartmentalProject)
+        </th>
+        <th>
             @Html.DisplayNameFor(x => Model[0].Message)
         </th>
     </tr>
@@ -63,6 +66,9 @@
                         @Html.DisplayFor(x => item.IsValidOrgR)
                     </td>
                     <td>
+                        @Html.DisplayFor(x => item.IsInterdepartmentalProject)
+                    </td>
+                    <td>
                         @Html.DisplayFor(x => item.Message)
                     </td>
                 </tr>
@@ -80,5 +86,6 @@
         @Html.HiddenFor(m => m[i].OrgR)
         @Html.HiddenFor(m => m[i].IsCurrentAd419Project)
         @Html.HiddenFor(m => m[i].IsValidOrgR)
+        @Html.HiddenFor(m => m[i].IsPresentInFile)
     }
 </form>

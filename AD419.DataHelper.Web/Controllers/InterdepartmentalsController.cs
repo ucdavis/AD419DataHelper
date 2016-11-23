@@ -217,14 +217,14 @@ namespace AD419.DataHelper.Web.Controllers
                 }
                 else
                 {
-                    TempData.Add("ErrorMessage", string.Format("ERROR! Your import file could not be saved.  " +
+                    ErrorMessage = string.Format("ERROR! Your import file could not be saved.  " +
                                                                "It contained {0} records with expired projects that could not be automatically remapped, " +
                                                                "{1} entries with invalid OrgRs, and " +
-                                                               "{2} interdepartmental projects that were missing from the upload file.  " +
+                                                               "{2} interdepartmental projects that were missing from the upload file." +
                                                                "Please make corrections and try again.", 
                                                                list.Count(i => i.IsCurrentAd419Project == false),
                                                                list.Count(i => i.IsValidOrgR == false),
-                                                               list.Count(i => i.IsPresentInFile == false)));
+                                                               list.Count(i => i.IsPresentInFile == false));
                 }
             }
             catch (DbUpdateException dbEx)
