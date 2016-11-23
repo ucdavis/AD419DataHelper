@@ -166,7 +166,7 @@ namespace AD419.DataHelper.Web.Controllers
 
                 if (!interdepartmentProject.IsCurrentAd419Project)
                 {
-                    ModelState.AddModelError("IsCurrentAd419Project", "This entry is not assigned to an active project.");
+                    ModelState.AddModelError("IsCurrentAd419Project", "This entry is not assigned to an active interdepartmental project.");
                 }
 
                 if (!interdepartmentProject.IsValidOrgR)
