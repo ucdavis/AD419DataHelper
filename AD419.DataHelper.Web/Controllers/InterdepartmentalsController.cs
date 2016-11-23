@@ -156,16 +156,7 @@ namespace AD419.DataHelper.Web.Controllers
 
             // transform
             var interdepartmentalProjects = _InterdepartmentalProjectService.GetInterdepartmentalProjectsFromRows(result.Tables[0].Rows).ToList();
-            //var year = FiscalYearService.FiscalYear;
-            //var data = result.Tables[0].Rows
-            //    .ToEnumerable()
-            //    .Select(r => new Interdepartmental()
-            //    {
-            //        Year            = year,
-            //        OrgR            = r["OrgR"].ToString(),
-            //        AccessionNumber = r["AccessionNumber"].ToString()
-            //    });
-
+            
             // validate:
             var errors = new List<ModelStateDictionary>();
             foreach (var interdepartmentProject in interdepartmentalProjects)
@@ -196,7 +187,6 @@ namespace AD419.DataHelper.Web.Controllers
             }
             ViewBag.Errors = errors;
 
-            //return PartialView("_uploadData", data.ToList());
             return PartialView("_uploadData", interdepartmentalProjects);
         }
 
