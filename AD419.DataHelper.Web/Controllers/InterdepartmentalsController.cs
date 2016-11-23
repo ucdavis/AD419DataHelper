@@ -9,12 +9,20 @@ using System.Web;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Helpers;
 using AD419.DataHelper.Web.Models;
+using AD419.DataHelper.Web.Services;
 using Excel;
 
 namespace AD419.DataHelper.Web.Controllers
 {
     public class InterdepartmentalsController : SuperController
     {
+        private readonly InterdepartmentalProjectService _InterdepartmentalProjectService;
+
+        public InterdepartmentalsController()
+        {
+            _InterdepartmentalProjectService = new InterdepartmentalProjectService(DbContext, FiscalYearService.FiscalEndDate);
+        }
+
         // GET: Interdepartmentals
         public ActionResult Index()
         {
@@ -147,17 +155,44 @@ namespace AD419.DataHelper.Web.Controllers
             excelReader.Close();
 
             // transform
-            var year = FiscalYearService.FiscalYear;
-            var data = result.Tables[0].Rows
-                .ToEnumerable()
-                .Select(r => new Interdepartmental()
-                {
-                    Year            = year,
-                    OrgR            = r["OrgR"].ToString(),
-                    AccessionNumber = r["AccessionNumber"].ToString()
-                });
+            var interdepartmentalProjects = _InterdepartmentalProjectService.GetInterdepartmentalProjectsFromRows(result.Tables[0].Rows).ToList();
+            //var year = FiscalYearService.FiscalYear;
+            //var data = result.Tables[0].Rows
+            //    .ToEnumerable()
+            //    .Select(r => new Interdepartmental()
+            //    {
+            //        Year            = year,
+            //        OrgR            = r["OrgR"].ToString(),
+            //        AccessionNumber = r["AccessionNumber"].ToString()
+            //    });
 
-            return PartialView("_uploadData", data.ToList());
+            // validate:
+            var errors = new List<ModelStateDictionary>();
+            foreach (var interdepartmentProject in interdepartmentalProjects)
+            {
+                // clear and check
+                ModelState.Clear();
+                TryValidateModel(interdepartmentalProjects);
+
+                if (!interdepartmentProject.IsCurrentAd419Project)
+                {
+                    ModelState.AddModelError("IsCurrentAd419Project", "This entry is not assigned to an active project!  Please select one that is not expired and is currently active.");
+                }
+
+                if (!interdepartmentProject.IsValidOrgR)
+                {
+                    ModelState.AddModelError("IsValidOrgR", "This entry is not assigned to an active OrgR!  Please select a Department that is currently active.");
+                }
+
+                // copy out errors
+                var state = new ModelStateDictionary();
+                state.Merge(ModelState);
+                errors.Add(state);
+            }
+            ViewBag.Errors = errors;
+
+            //return PartialView("_uploadData", data.ToList());
+            return PartialView("_uploadData", interdepartmentalProjects);
         }
 
         [HttpPost]

@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -43,6 +44,11 @@ namespace AD419.DataHelper.Web.Models
             get;
             set;
         }
+
+        [NotMapped]
+        [DefaultValue(true)]
+        [Display(Name = "Is Valid OrgR?")]
+        public bool IsValidOrgR { get; set; }
 
         [Display(Name = "Notes")]
         [NotMapped]

@@ -68,6 +68,7 @@ namespace AD419.DataHelper.Web.Services
                 else
                 {
                     // Otherwise, set the message that we were unable to find a current project with a matching project number:
+                    interdepartmentalProject.IsCurrentAd419Project = false;
                     interdepartmentalProject.Message = string.Format("Unable to find active project for accession number {0}.", originalAccessionNumber);
                 }
             }
@@ -88,11 +89,24 @@ namespace AD419.DataHelper.Web.Services
                     OrgR = "AINT",
                     Year = _fiscalEndDate.Year,
                     Message = string.Format("Warning: There is no entry present for accession number {0}.  Please add an entry for interdepartmental project {1}.", 
-                    project.AccessionNumber, project.ProjectNumber)
+                    project.AccessionNumber, project.ProjectNumber),
+                    IsValidOrgR = true
                 });
             }
 
+            // Check that all interdepartmental projects have valid orgRs assigned:
             var activeOrgRs = _dataContext.ReportingOrganizations.Where(r => r.IsActive || r.Code.Equals("AINT")).ToList();
+
+            var projectsWithInvalidOrgRs =
+                interdepartmentalProjects.Where(i => activeOrgRs.
+                    All(o => !i.OrgR.Equals(o.Code)));
+
+            foreach (var project in projectsWithInvalidOrgRs)
+            {
+                project.IsValidOrgR = false;
+                project.Message = string.Format("Warning: The OrgR {2} provided for project {1}; accession number {0}, is not a valid organization.  Please update the entry to contain a valid OrgR.", 
+                    project.AccessionNumber, project.ProjectNumber, project.OrgR);
+            }
          
             return interdepartmentalProjects;
         }
