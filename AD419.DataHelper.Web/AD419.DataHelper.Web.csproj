@@ -255,6 +255,7 @@
     <Compile Include="Controllers\C204ExclusionsController.cs" />
     <Compile Include="Controllers\ProjectStatusController.cs" />
     <Compile Include="Controllers\ReportingOrganizationsController.cs" />
+    <Compile Include="Controllers\SfnClassificationLogicController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\SuperController.cs" />
     <Compile Include="Controllers\TransDocTypesController.cs" />
@@ -272,6 +273,7 @@
     <Compile Include="Models\ExpenseAdjustments.cs" />
     <Compile Include="Models\ProjectStatus.cs" />
     <Compile Include="Models\ProjectStatusViewModel.cs" />
+    <Compile Include="Models\SfnClassificationLogic.cs" />
     <Compile Include="Models\TransDocTypesViewModel.cs" />
     <Compile Include="Models\DosCodesViewModel.cs" />
     <Compile Include="Models\ConsolidationCodesViewModel.cs" />
@@ -317,6 +319,7 @@
     <Compile Include="Services\ProjectImportService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ExpiringProjectMatch.cs" />
+    <Compile Include="ViewModels\SfnClassificationLogicViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -527,6 +530,12 @@
     <Content Include="Views\FieldStationExpensesImport\_FieldStationExpensesTable.cshtml" />
     <Content Include="Views\FieldStationExpensesImport\_UploadData.cshtml" />
     <Content Include="Views\FieldStationExpensesImport\_Upload.cshtml" />
+    <Content Include="Views\SfnClassificationLogic\Create.cshtml" />
+    <Content Include="Views\SfnClassificationLogic\Delete.cshtml" />
+    <Content Include="Views\SfnClassificationLogic\Details.cshtml" />
+    <Content Include="Views\SfnClassificationLogic\Edit.cshtml" />
+    <Content Include="Views\SfnClassificationLogic\Index.cshtml" />
+    <Content Include="Views\SfnClassificationLogic\Display.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

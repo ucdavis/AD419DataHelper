@@ -70,7 +70,9 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<ProjectStatus> ProjectStatus { get; set; }
 
-        public virtual DbSet<LaborTransaction> LaborTransactions { get; set; } 
+        public virtual DbSet<LaborTransaction> LaborTransactions { get; set; }
+
+        public virtual DbSet<SfnClassificationLogic> SfnClassificationLogic { get; set; } 
 
         public virtual DbRawSqlQuery<AllProjectsNew> GetNewProjects(int fiscalYear)
         {
@@ -106,6 +108,33 @@ namespace AD419.DataHelper.Web.Models
             return Database.SqlQuery<LaborTransaction>(
                 "SELECT * FROM [dbo].[udf_GetTransactionsForUnknownCodes] (@Option)",
                     new SqlParameter("@Option", SqlDbType.Int) { Value = option });
+        }
+
+        public virtual string GetSfnCaseStatement()
+        {
+            using (var conn = Database.Connection)
+            {
+                using (var command = conn.CreateCommand())
+                {
+                    conn.Open();
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "[dbo].[usp_GenerateNewAccountSfnCaseStatement]";
+
+                    var parameter = command.CreateParameter();
+                    parameter.DbType = DbType.String;
+                    parameter.Size = int.MaxValue;
+                    parameter.Direction = ParameterDirection.Output;
+                    parameter.ParameterName = "@CaseStatement";
+                    parameter.Value = string.Empty;
+                    command.Parameters.Add(parameter);
+                    
+                    command.ExecuteNonQuery();
+                    var caseStatement = command.Parameters["@CaseStatement"].Value as string;
+
+                    return caseStatement;
+                }
+            }
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
