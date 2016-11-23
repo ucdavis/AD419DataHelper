@@ -90,7 +90,8 @@ namespace AD419.DataHelper.Web.Services
                     Year = _fiscalEndDate.Year,
                     Message = string.Format("Warning: There is no entry present for accession number {0}.  Please add an entry for interdepartmental project {1}.", 
                     project.AccessionNumber, project.ProjectNumber),
-                    IsValidOrgR = true
+                    IsValidOrgR = true,
+                    IsPresentInFile = false
                 });
             }
 
@@ -104,8 +105,8 @@ namespace AD419.DataHelper.Web.Services
             foreach (var project in projectsWithInvalidOrgRs)
             {
                 project.IsValidOrgR = false;
-                project.Message = string.Format("Warning: The OrgR {2} provided for project {1}; accession number {0}, is not a valid organization.  Please update the entry to contain a valid OrgR.", 
-                    project.AccessionNumber, project.ProjectNumber, project.OrgR);
+                project.Message = string.Format("Warning: The OrgR {1} provided for accession number {0}, is not valid.  Please update the entry to contain a valid OrgR and try again.", 
+                    project.AccessionNumber, project.OrgR);
             }
          
             return interdepartmentalProjects;
@@ -139,6 +140,9 @@ namespace AD419.DataHelper.Web.Services
                 interdepartmentalProject.AccessionNumber = "0000000";
             }
             interdepartmentalProject.AccessionNumber = interdepartmentalProject.AccessionNumber.PadLeft(7, '0');
+
+            interdepartmentalProject.IsValidOrgR = true;
+            interdepartmentalProject.IsPresentInFile = true;
 
             return interdepartmentalProject;
         }

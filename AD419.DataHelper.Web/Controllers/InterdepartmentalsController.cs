@@ -176,12 +176,17 @@ namespace AD419.DataHelper.Web.Controllers
 
                 if (!interdepartmentProject.IsCurrentAd419Project)
                 {
-                    ModelState.AddModelError("IsCurrentAd419Project", "This entry is not assigned to an active project!  Please select one that is not expired and is currently active.");
+                    ModelState.AddModelError("IsCurrentAd419Project", "This entry is not assigned to an active project.");
                 }
 
                 if (!interdepartmentProject.IsValidOrgR)
                 {
-                    ModelState.AddModelError("IsValidOrgR", "This entry is not assigned to an active OrgR!  Please select a Department that is currently active.");
+                    ModelState.AddModelError("IsValidOrgR", "This entry is not assigned to an active OrgR.");
+                }
+
+                if (!interdepartmentProject.IsPresentInFile)
+                {
+                    ModelState.AddModelError("IsPresentInFile", "There is no entry present for this interdepartmental project.");
                 }
 
                 // copy out errors
@@ -204,9 +209,23 @@ namespace AD419.DataHelper.Web.Controllers
 
             try
             {
-                DbContext.Interdepartmentals.AddRange(list);
-                DbContext.MarkStatusCompleted(ProcessStatuses.ImportInterdepartmentalProjects);
-                DbContext.SaveChanges();
+                if (ModelState.IsValid && list.All(f => f.IsCurrentAd419Project && f.IsPresentInFile && f.IsValidOrgR))
+                {
+                    DbContext.Interdepartmentals.AddRange(list);
+                    DbContext.MarkStatusCompleted(ProcessStatuses.ImportInterdepartmentalProjects);
+                    DbContext.SaveChanges();
+                }
+                else
+                {
+                    TempData.Add("ErrorMessage", string.Format("ERROR! Your import file could not be saved.  " +
+                                                               "It contained {0} records with expired projects that could not be automatically remapped, " +
+                                                               "{1} entries with invalid OrgRs, and " +
+                                                               "{2} interdepartmental projects that were missing from the upload file.  " +
+                                                               "Please make corrections and try again.", 
+                                                               list.Count(i => i.IsCurrentAd419Project == false),
+                                                               list.Count(i => i.IsValidOrgR == false),
+                                                               list.Count(i => i.IsPresentInFile == false)));
+                }
             }
             catch (DbUpdateException dbEx)
             {

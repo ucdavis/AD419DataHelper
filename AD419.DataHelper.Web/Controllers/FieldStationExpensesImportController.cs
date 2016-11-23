@@ -158,7 +158,7 @@ namespace AD419.DataHelper.Web.Controllers
 
                 if ( !fieldStationExpense.IsCurrentAd419Project)
                 {
-                    ModelState.AddModelError("IsCurrentAd419Project", "This expense is not assigned to an active project!  Please select one that is not expired and is currently active.");
+                    ModelState.AddModelError("IsCurrentAd419Project", "This expense is not assigned to an active project.");
                 }
 
                 // copy out errors

@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.SqlTypes;
 
 namespace AD419.DataHelper.Web.Models
 {
@@ -49,6 +50,11 @@ namespace AD419.DataHelper.Web.Models
         [DefaultValue(true)]
         [Display(Name = "Is Valid OrgR?")]
         public bool IsValidOrgR { get; set; }
+
+        [NotMapped]
+        [DefaultValue(true)]
+        [Display(Name = "Is Present In File?")]
+        public bool IsPresentInFile { get; set; }
 
         [Display(Name = "Notes")]
         [NotMapped]
