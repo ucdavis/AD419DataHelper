@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
@@ -9,12 +8,20 @@ using System.Web;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Helpers;
 using AD419.DataHelper.Web.Models;
+using AD419.DataHelper.Web.Services;
 using Excel;
 
 namespace AD419.DataHelper.Web.Controllers
 {
     public class InterdepartmentalsController : SuperController
     {
+        private readonly InterdepartmentalProjectService _InterdepartmentalProjectService;
+
+        public InterdepartmentalsController()
+        {
+            _InterdepartmentalProjectService = new InterdepartmentalProjectService(DbContext, FiscalYearService.FiscalEndDate);
+        }
+
         // GET: Interdepartmentals
         public ActionResult Index()
         {
@@ -147,17 +154,39 @@ namespace AD419.DataHelper.Web.Controllers
             excelReader.Close();
 
             // transform
-            var year = FiscalYearService.FiscalYear;
-            var data = result.Tables[0].Rows
-                .ToEnumerable()
-                .Select(r => new Interdepartmental()
-                {
-                    Year            = year,
-                    OrgR            = r["OrgR"].ToString(),
-                    AccessionNumber = r["AccessionNumber"].ToString()
-                });
+            var interdepartmentalProjects = _InterdepartmentalProjectService.GetInterdepartmentalProjectsFromRows(result.Tables[0].Rows).ToList();
+            
+            // validate:
+            var errors = new List<ModelStateDictionary>();
+            foreach (var interdepartmentProject in interdepartmentalProjects)
+            {
+                // clear and check
+                ModelState.Clear();
+                TryValidateModel(interdepartmentalProjects);
 
-            return PartialView("_uploadData", data.ToList());
+                if (!interdepartmentProject.IsCurrentAd419Project)
+                {
+                    ModelState.AddModelError("IsCurrentAd419Project", "This entry is not assigned to an active interdepartmental project.");
+                }
+
+                if (!interdepartmentProject.IsValidOrgR)
+                {
+                    ModelState.AddModelError("IsValidOrgR", "This entry is not assigned to an active OrgR.");
+                }
+
+                if (!interdepartmentProject.IsPresentInFile)
+                {
+                    ModelState.AddModelError("IsPresentInFile", "There is no entry present for this interdepartmental project.");
+                }
+
+                // copy out errors
+                var state = new ModelStateDictionary();
+                state.Merge(ModelState);
+                errors.Add(state);
+            }
+            ViewBag.Errors = errors;
+
+            return PartialView("_uploadData", interdepartmentalProjects);
         }
 
         [HttpPost]
@@ -169,9 +198,23 @@ namespace AD419.DataHelper.Web.Controllers
 
             try
             {
-                DbContext.Interdepartmentals.AddRange(list);
-                DbContext.MarkStatusCompleted(ProcessStatuses.ImportInterdepartmentalProjects);
-                DbContext.SaveChanges();
+                if (ModelState.IsValid && list.All(f => f.IsCurrentAd419Project && f.IsPresentInFile && f.IsValidOrgR))
+                {
+                    DbContext.Interdepartmentals.AddRange(list);
+                    DbContext.MarkStatusCompleted(ProcessStatuses.ImportInterdepartmentalProjects);
+                    DbContext.SaveChanges();
+                }
+                else
+                {
+                    ErrorMessage = string.Format("ERROR! Your import file could not be saved.  " +
+                                                               "It contained {0} records with expired projects that could not be automatically remapped, " +
+                                                               "{1} entries with invalid OrgRs, and " +
+                                                               "{2} interdepartmental projects that were missing from the upload file." +
+                                                               "Please make corrections and try again.", 
+                                                               list.Count(i => i.IsCurrentAd419Project == false),
+                                                               list.Count(i => i.IsValidOrgR == false),
+                                                               list.Count(i => i.IsPresentInFile == false));
+                }
             }
             catch (DbUpdateException dbEx)
             {

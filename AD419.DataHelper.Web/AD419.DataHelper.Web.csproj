@@ -313,7 +313,9 @@
     <Compile Include="Models\TransDocType.cs" />
     <Compile Include="Models\UnknownDepartment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\InterdepartmentalProjectService.cs" />
     <Compile Include="Services\FiscalYearService.cs" />
+    <Compile Include="Services\FieldStationExpenseService.cs" />
     <Compile Include="Services\ProjectImportService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ExpiringProjectMatch.cs" />
@@ -525,6 +527,9 @@
     <Content Include="Views\ProjectStatus\_CurrentAd419ProjectsForMissingProjectStatuses.cshtml" />
     <Content Include="Views\TransDocTypes\_MissingTransDocTypes.cshtml" />
     <Content Include="Views\AdjustedTotals\Index.cshtml" />
+    <Content Include="Views\FieldStationExpensesImport\_FieldStationExpensesTable.cshtml" />
+    <Content Include="Views\FieldStationExpensesImport\_UploadData.cshtml" />
+    <Content Include="Views\FieldStationExpensesImport\_Upload.cshtml" />
     <Content Include="Views\SfnClassificationLogic\Create.cshtml" />
     <Content Include="Views\SfnClassificationLogic\Delete.cshtml" />
     <Content Include="Views\SfnClassificationLogic\Details.cshtml" />

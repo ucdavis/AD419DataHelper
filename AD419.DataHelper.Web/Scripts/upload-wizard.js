@@ -63,11 +63,13 @@
                 $('#reviewTab').addClass('active');
                 $('#confirmTab').removeClass('active');
                 $('#confirmStepper').removeClass('active');
+                //$('.flex-between', '#reviewTab').show();  // Use this if we want to be able to see what we're saving to the database. 
             });
 
         $('#continueConfirmButton')
             .click(function () {
-                $('#reviewTab').removeClass('active');
+                $('#reviewTab').removeClass('active'); // Comment this out and
+                //$('.flex-between', '#reviewTab').hide();  // use this if we want to be able to see what we're saving to the database.
                 $('#confirmTab').addClass('active');
                 $('#confirmStepper').addClass('active');
             });

@@ -1,6 +1,4 @@
-﻿@using System.Data
-@using Microsoft.Ajax.Utilities
-@model List<AD419.DataHelper.Web.Models.FieldStationExpenseListImport>
+﻿@model List<AD419.DataHelper.Web.Models.FieldStationExpenseListImport>
 @{
 
     ViewBag.Title = "View Field Station Expenses Excel File";
@@ -67,41 +65,44 @@
         }
     </style>*@
 <div>
-    <table class="table table-striped table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>@Html.DisplayNameFor(m => m[0].ProjectAccessionNum)</th> 
-                <th>@Html.DisplayNameFor(m => m[0].FieldStationCharge)</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.ProjectAccessionNum</td>
-                    <td>@item.FieldStationCharge</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
-<div class="form-horizontal">
-    @using (Html.BeginForm("Save", "FieldStationExpensesImport", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-        for (var i = 0; i < Model.Count; i++)
-        {
-            @Html.HiddenFor(m => m[i].ProjectAccessionNum)
-            @Html.HiddenFor(m => m[i].FieldStationCharge)
-        }
-        
-        <p>If all looks good, you can upload the values to the database.<br/>
-        <i>Note: You can also edit the values once they have been saved.</i></p>
+    @Html.Partial("_UploadData", Model)
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save Field Station Expenses to Database" class="btn btn-default" />
-            </div>
-        </div>
-    }
-</div>
+@*<table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(m => m[0].ProjectAccessionNum)</th>
+                    <th>@Html.DisplayNameFor(m => m[0].FieldStationCharge)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ProjectAccessionNum</td>
+                        <td>@item.FieldStationCharge</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="form-horizontal">
+        @using (Html.BeginForm("Save", "FieldStationExpensesImport", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            for (var i = 0; i < Model.Count; i++)
+            {
+                @Html.HiddenFor(m => m[i].ProjectAccessionNum)
+                @Html.HiddenFor(m => m[i].FieldStationCharge)
+            }
+
+            <p>If all looks good, you can upload the values to the database.<br/>
+            <i>Note: You can also edit the values once they have been saved.</i></p>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save Field Station Expenses to Database" class="btn btn-default" />
+                </div>
+    </div>
+        } *@
+    </div>
+   

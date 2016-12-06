@@ -1,27 +1,71 @@
 ﻿@model List<AD419.DataHelper.Web.Models.Interdepartmental>
 
+@{
+    var errors = ViewBag.Errors as List<ModelStateDictionary> ?? Model.Select(m => new ModelStateDictionary()).ToList();
+}
+
 <table id="uploadTable" class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(x => Model[0].AccessionNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(x => Model[0].OrgR)
-            </th>
-        </tr>
+    <tr>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(x => Model[0].AccessionNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => Model[0].ProjectNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => Model[0].OrgR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => Model[0].IsCurrentAd419Project)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => Model[0].IsValidOrgR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => Model[0].Message)
+        </th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @for (var i = 0; i < Model.Count; i++)
         {
-            <tr>
+            var item = Model[i];
+            var error = errors[i];
+                <tr>
                 <td>
-                    @Html.DisplayFor(x => item.AccessionNumber)
+                    @if (!error.IsValid)
+                    {
+                        var message = string.Join("\n",
+                            error.Values
+                                .SelectMany(v => v.Errors)
+                                .Select(e => e.ErrorMessage));
+
+                        <span class="text-danger" title="@message">
+                                <i class="fa fa-exclamation-triangle"></i>
+                            </span>
+                    }
                 </td>
-                <td>
-                    @Html.DisplayFor(x => item.OrgR)
-                </td>
-            </tr>
+                    <td>
+                        @Html.DisplayFor(x => item.AccessionNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => item.ProjectNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => item.OrgR)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => item.IsCurrentAd419Project)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => item.IsValidOrgR)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => item.Message)
+                    </td>
+                </tr>
         }
     </tbody>
 </table>
@@ -32,6 +76,10 @@
     {
         @Html.HiddenFor(m => m[i].Year)
         @Html.HiddenFor(m => m[i].AccessionNumber)
+        @Html.HiddenFor(m => m[1].ProjectNumber)
         @Html.HiddenFor(m => m[i].OrgR)
+        @Html.HiddenFor(m => m[i].IsCurrentAd419Project)
+        @Html.HiddenFor(m => m[i].IsValidOrgR)
+        @Html.HiddenFor(m => m[i].IsPresentInFile)
     }
 </form>
