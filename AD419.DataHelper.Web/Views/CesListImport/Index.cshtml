@@ -129,18 +129,29 @@ else
     <p>Select the "Create New" (above) or browse and display an existing CES List Excel file (above).</p>
 }
 
-@Html.Partial("_CesFileUpload")
+@Html.Partial("_Upload")
 
 @section AdditionalScripts
 {
-    <script>
-        $(function() {
-            $('#cesImportTable').DataTable({
+    <script type="text/javascript" src="~/Scripts/upload-wizard.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            UploadWizard.setup({
+                uploadUrl: '@Url.Action("Upload")',
+                tableOptions: {
+                    order: [[0, "desc"]]
+                }
+            });
+
+            $('#uploadModal').on('hidden.bs.modal', UploadWizard.reset);
+        });
+        $(function () {
+            $('#fieldImportTable').DataTable({
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 columnDefs: [
                     { targets: [-1, -2, -3], sortable: false }
                 ]
             });
-        })
+        });
     </script>
 }

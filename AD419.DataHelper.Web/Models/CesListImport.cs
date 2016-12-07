@@ -90,5 +90,21 @@ namespace AD419.DataHelper.Web.Models
         }
 
         public int Id { get; set; }
+
+        [Display(Name = "Is Current AD-419 Project?")]
+        [NotMapped]
+        public bool IsCurrentAd419Project
+        {
+            get;
+            set;
+        }
+
+        [Display(Name = "Notes")]
+        [NotMapped]
+        public string Message
+        {
+            get;
+            set;
+        }
     }
 }

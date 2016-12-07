@@ -313,6 +313,7 @@
     <Compile Include="Models\TransDocType.cs" />
     <Compile Include="Models\UnknownDepartment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CeSpecialistService.cs" />
     <Compile Include="Services\InterdepartmentalProjectService.cs" />
     <Compile Include="Services\FiscalYearService.cs" />
     <Compile Include="Services\FieldStationExpenseService.cs" />
@@ -536,6 +537,8 @@
     <Content Include="Views\SfnClassificationLogic\Edit.cshtml" />
     <Content Include="Views\SfnClassificationLogic\Index.cshtml" />
     <Content Include="Views\SfnClassificationLogic\Display.cshtml" />
+    <Content Include="Views\CesListImport\_uploadData.cshtml" />
+    <Content Include="Views\CesListImport\_Upload.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
