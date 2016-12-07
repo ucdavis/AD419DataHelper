@@ -244,6 +244,8 @@
     <Compile Include="Controllers\ExpiredProjectsController.cs" />
     <Compile Include="Controllers\FinalReportsController.cs" />
     <Compile Include="Controllers\Ad419InstructionsController.cs" />
+    <Compile Include="Controllers\TitlesController.cs" />
+    <Compile Include="Models\PPSDataContext.cs" />
     <Compile Include="Controllers\PrincipalsController.cs" />
     <Compile Include="Controllers\ProjectMappingController.cs" />
     <Compile Include="Controllers\FieldStationExpensesImportController.cs" />
@@ -258,6 +260,7 @@
     <Compile Include="Controllers\SfnClassificationLogicController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\SuperController.cs" />
+    <Compile Include="Models\Titles.cs" />
     <Compile Include="Controllers\TransDocTypesController.cs" />
     <Compile Include="Helpers\CasHelper.cs" />
     <Compile Include="Helpers\DataTableExtensions.cs" />
@@ -539,6 +542,11 @@
     <Content Include="Views\SfnClassificationLogic\Display.cshtml" />
     <Content Include="Views\CesListImport\_uploadData.cshtml" />
     <Content Include="Views\CesListImport\_Upload.cshtml" />
+    <Content Include="Views\Titles\Create.cshtml" />
+    <Content Include="Views\Titles\Delete.cshtml" />
+    <Content Include="Views\Titles\Details.cshtml" />
+    <Content Include="Views\Titles\Edit.cshtml" />
+    <Content Include="Views\Titles\Index.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

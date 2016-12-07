@@ -1,6 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System.Data.Entity;
+using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using AD419.DataHelper.Web.Models;
 
 namespace AD419.DataHelper.Web
 {
@@ -13,6 +15,7 @@ namespace AD419.DataHelper.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            Database.SetInitializer<PPSDataContext>(null);
         }
     }
 }

@@ -1,0 +1,111 @@
+﻿@model IEnumerable<AD419.DataHelper.Web.Models.Titles>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AbbreviatedName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PersonnelProgramCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TitleGroup)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OvertimeExemptionCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CTOOccupationSubgroupCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FederalOccupationCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FOCSubcategoryCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LinkTitleGroupCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EE06CategoryCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StaffType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EffectiveDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateTimestamp)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AbbreviatedName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PersonnelProgramCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TitleGroup)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OvertimeExemptionCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CTOOccupationSubgroupCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FederalOccupationCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FOCSubcategoryCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LinkTitleGroupCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EE06CategoryCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StaffType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EffectiveDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateTimestamp)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TitleCode }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TitleCode }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TitleCode })
+        </td>
+    </tr>
+}
+
+</table>
