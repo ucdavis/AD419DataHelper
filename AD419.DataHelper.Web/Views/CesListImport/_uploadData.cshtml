@@ -1,0 +1,92 @@
+﻿@model List<AD419.DataHelper.Web.Models.CesListImport>
+
+@{
+    var errors = ViewBag.Errors as List<ModelStateDictionary> ?? Model.Select(m => new ModelStateDictionary()).ToList();
+}
+
+<table id="uploadTable" class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>@Html.DisplayNameFor(m => m[0].PI)</th>
+            <th>@Html.DisplayNameFor(m => m[0].DeptLevelOrg)</th>
+            <th>@Html.DisplayNameFor(m => m[0].EmployeeId)</th>
+            <th>@Html.DisplayNameFor(m => m[0].ProjectAccessionNum)</th>
+            <th>@Html.DisplayNameFor(m => m[0].ProjectNumber)</th>
+            <th>@Html.DisplayNameFor(m => m[0].PercentCeEffort)</th>
+            <th>@Html.DisplayNameFor(m => m[0].FullAnnualPayRate)</th>
+            <th>@Html.DisplayNameFor(m => m[0].TitleCode)</th>
+            <th>@Html.DisplayNameFor(m => m[0].Chart)</th>
+            <th>@Html.DisplayNameFor(m => m[0].Account)</th>
+            <th>@Html.DisplayNameFor(m => m[0].SubAccount)</th>
+            <th>@Html.DisplayNameFor(m => m[0].FTE)</th>
+            <th>@Html.DisplayNameFor(m => m[0].EstimatedCeExpenses)</th>
+            <th>@Html.DisplayNameFor(m => m[0].IsCurrentAd419Project)</th>
+            <th>
+                @Html.DisplayNameFor(m => m[0].Message)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            var item = Model[i];
+            var error = errors[i];
+            <tr>
+                <td>
+                    @if (!error.IsValid)
+                    {
+                        var message = string.Join("\n",
+                            error.Values
+                                .SelectMany(v => v.Errors)
+                                .Select(e => e.ErrorMessage));
+                        
+                        <span class="text-danger" title="@message">
+                            <i class="fa fa-exclamation-triangle"></i>
+                        </span>
+                    }
+                </td>
+                <td>@Html.DisplayFor(x => item.PI)</td>
+                <td>@Html.DisplayFor(x => item.DeptLevelOrg)</td>
+                <td>@Html.DisplayFor(x => item.EmployeeId)</td>
+                <td>@Html.DisplayFor(x => item.ProjectAccessionNum)</td>
+                <td>@Html.DisplayFor(x => item.ProjectNumber)</td>
+                <td>@Html.DisplayFor(x => item.PercentCeEffort)</td>
+                <td>@Html.DisplayFor(x => item.FullAnnualPayRate)</td>
+                <td>@Html.DisplayFor(x => item.TitleCode)</td>
+                <td>@Html.DisplayFor(x => item.Chart)</td>
+                <td>@Html.DisplayFor(x => item.Account)</td>
+                <td>@Html.DisplayFor(x => item.SubAccount)</td>
+                <td>@Html.DisplayFor(x => item.FTE)</td>
+                <td>@Html.DisplayFor(x => item.EstimatedCeExpenses)</td>
+                <td>
+                    @Html.DisplayFor(x => item.IsCurrentAd419Project)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => item.Message)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form id="confirmForm" method="POST" action="@Url.Action("Save", "CesListImport")">
+    @Html.AntiForgeryToken()
+    @for (var i = 0; i < Model.Count; i++)
+    {
+        @Html.HiddenFor(m => m[i].PI)
+        @Html.HiddenFor(m => m[i].DeptLevelOrg)
+        @Html.HiddenFor(m => m[i].EmployeeId)
+        @Html.HiddenFor(m => m[i].ProjectAccessionNum)
+        @Html.HiddenFor(m => m[i].ProjectNumber)
+        @Html.HiddenFor(m => m[i].PercentCeEffort)
+        @Html.HiddenFor(m => m[i].FullAnnualPayRate)
+        @Html.HiddenFor(m => m[i].TitleCode)
+        @Html.HiddenFor(m => m[i].Chart)
+        @Html.HiddenFor(m => m[i].Account)
+        @Html.HiddenFor(m => m[i].SubAccount)
+        @Html.HiddenFor(m => m[i].FTE)
+        @Html.HiddenFor(m => m[i].EstimatedCeExpenses)
+        @Html.HiddenFor(m => m[i].IsCurrentAd419Project)
+    }
+</form>

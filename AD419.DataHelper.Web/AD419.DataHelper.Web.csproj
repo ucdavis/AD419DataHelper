@@ -537,6 +537,8 @@
     <Content Include="Views\SfnClassificationLogic\Edit.cshtml" />
     <Content Include="Views\SfnClassificationLogic\Index.cshtml" />
     <Content Include="Views\SfnClassificationLogic\Display.cshtml" />
+    <Content Include="Views\CesListImport\_uploadData.cshtml" />
+    <Content Include="Views\CesListImport\_Upload.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

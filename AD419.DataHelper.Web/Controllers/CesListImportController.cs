@@ -6,12 +6,20 @@ using System.Web;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Helpers;
 using AD419.DataHelper.Web.Models;
+using AD419.DataHelper.Web.Services;
 using Excel;
 
 namespace AD419.DataHelper.Web.Controllers
 {
     public class CesListImportController : SuperController
     {
+        private readonly CeSpecialistService _ceSpecialistService;
+
+        public CesListImportController()
+        {
+            _ceSpecialistService = new CeSpecialistService(DbContext, FiscalYearService.FiscalEndDate);
+        }
+
         // GET: CesListImport
         public ActionResult Index()
         {
@@ -129,25 +137,42 @@ namespace AD419.DataHelper.Web.Controllers
             var myFile = Request.Files[0];
             if (myFile == null) return RedirectToAction("Index");
 
-            var cesEntries = new List<CesListImport>();
             var fileName = myFile.FileName;
+
+            // setup reader:
             var excelReader = ExcelReaderFactory.CreateOpenXmlReader(myFile.InputStream);
             excelReader.IsFirstRowAsColumnNames = true;
+
+            // read data:
             var result = excelReader.AsDataSet();
-               
-            TempData.Add("Message", "Now viewing \"" + fileName + "\".");
             excelReader.Close();
 
-            cesEntries.AddRange(from DataRow row in result.Tables[0].Rows select new CesListImport(row));
+            // transform:
+            var ceSpecialists = _ceSpecialistService.GetCesListImportFromRows(result.Tables[0].Rows).ToList();
 
-            // This works.  Would now like the user to have a chance to review upload first.
-            //if (ModelState.IsValid)
-            //{
-            //    db.CesListImports.AddRange(cesEntries);
-            //    db.SaveChanges();
-            //}
+            // validate:
+            var errors = new List<ModelStateDictionary>();
+            foreach (var ceSpecialist in ceSpecialists)
+            {
+                // clear and check
+                ModelState.Clear();
+                TryValidateModel(ceSpecialist);
 
-            return View("Display", cesEntries);
+                if (!ceSpecialist.IsCurrentAd419Project)
+                {
+                    ModelState.AddModelError("IsCurrentAd419Project", "This expense is not assigned to an active project.");
+                }
+
+                // copy out errors
+                var state = new ModelStateDictionary();
+                state.Merge(ModelState);
+                errors.Add(state);
+            }
+            ViewBag.Errors = errors;
+   
+            //TempData.Add("Message", "Now viewing \"" + fileName + "\".");
+
+            return PartialView("_UploadData", ceSpecialists);
         }
 
         [HttpPost]
@@ -157,11 +182,15 @@ namespace AD419.DataHelper.Web.Controllers
             if (cesEntries != null)
             {
                 // This works.  Would now like the user to have a chance to review upload first.
-                if (ModelState.IsValid)
+                if (ModelState.IsValid && cesEntries.All(f => f.IsCurrentAd419Project))
                 {
                     DbContext.CesListImports.AddRange(cesEntries);
                     DbContext.MarkStatusCompleted(ProcessStatuses.ImportCeSpecialists);
                     DbContext.SaveChanges();
+                }
+                else
+                {
+                    ErrorMessage = string.Format("ERROR! Your import file could not be saved.  It contained {0} records with expired projects that could not be automatically remapped.  Please make corrections and try again.", cesEntries.Count(f => f.IsCurrentAd419Project == false));
                 }
             }
             return RedirectToAction("Index");
