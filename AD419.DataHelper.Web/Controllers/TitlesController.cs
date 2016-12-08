@@ -12,7 +12,13 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: Titles
         public ActionResult Index()
         {
-            return View(PpsDbContext.Titles.ToList());
+            var model = new TitleCodeViewModel
+            {
+                Titles = PpsDbContext.Titles.ToList(),
+                LaborTransactionsForTitlesWithMissingStaffTypes = DbContext.GetTitlesWithMissingStaffTypes().ToList()
+            };
+
+            return View(model);
         }
 
         // GET: Titles/Details/5
@@ -68,7 +74,7 @@ namespace AD419.DataHelper.Web.Controllers
                 RedirectToAction("Index");
             }
 
-            var titleCodeViewModel = new TitleCodeViewModel(title, DbContext.StaffTypes.ToList());
+            var titleCodeViewModel = new TitleCodeEditViewModel(title, DbContext.StaffTypes.ToList());
 
             return View(titleCodeViewModel);
         }
@@ -86,7 +92,7 @@ namespace AD419.DataHelper.Web.Controllers
                 PpsDbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(new TitleCodeViewModel(title, DbContext.StaffTypes.ToList()));
+            return View(new TitleCodeEditViewModel(title, DbContext.StaffTypes.ToList()));
         }
 
         // GET: Titles/Delete/5

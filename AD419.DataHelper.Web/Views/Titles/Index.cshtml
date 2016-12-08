@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AD419.DataHelper.Web.Models.Titles>
+﻿@model AD419.DataHelper.Web.ViewModels.TitleCodeViewModel
 
 @{
     ViewBag.Title = "Index - Title Codes";
@@ -12,54 +12,54 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.TitleCode)
+            @Html.DisplayNameFor(model => model.Titles[0].TitleCode)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Titles[0].Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AbbreviatedName)
+            @Html.DisplayNameFor(model => model.Titles[0].AbbreviatedName)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.PersonnelProgramCode)
+        @Html.DisplayNameFor(model => model.Titles[0].PersonnelProgramCode)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Titles[0].UnitCode)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Titles[0].TitleGroup)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Titles[0].OvertimeExemptionCode)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Titles[0].CTOOccupationSubgroupCode)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Titles[0].FederalOccupationCode)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Titles[0].FOCSubcategoryCode)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Titles[0].LinkTitleGroupCode)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Titles[0].EE06CategoryCode)
+    </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Titles[0].StaffType)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UnitCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TitleGroup)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OvertimeExemptionCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CTOOccupationSubgroupCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FederalOccupationCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FOCSubcategoryCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LinkTitleGroupCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EE06CategoryCode)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.StaffType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EffectiveDate)
+            @Html.DisplayNameFor(model => model.Titles[0].EffectiveDate)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.UpdateTimestamp)
-        </th>*@
+        @Html.DisplayNameFor(model => model.Titles[0].UpdateTimestamp)
+    </th>*@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.Titles) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.TitleCode)

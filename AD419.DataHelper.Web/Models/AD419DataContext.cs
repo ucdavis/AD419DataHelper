@@ -139,6 +139,94 @@ namespace AD419.DataHelper.Web.Models
             }
         }
 
+        public virtual DbRawSqlQuery<LaborTransactionsForTitlesWithMissingStaffTypes> GetTitlesWithMissingStaffTypes()
+        {
+            const string sql = @"SELECT
+       [AnnualReportCode]
+	  ,[ARC_Name]
+	  ,[OrgR]
+	  ,[TitleCd]
+      ,[Name] TitleName
+	  ,[EmployeeName]
+	  ,[EmployeeID]
+	  ,[Chart]
+	  ,[Org]
+      ,[Account]
+      ,[SubAccount]
+      ,[PrincipalInvestigator]
+	  ,SUM([Amount]) Amount  
+      ,SUM([FTE]) FTE
+  FROM [dbo].[PPS_ExpensesForNon204Projects]
+  INNER JOIN PPSDataMart.dbo.Titles ON TitleCd = TitleCode
+  INNER JOIN FISDataMart.dbo.Arc_Codes ON AnnualReportCode = ARC_Cd
+  WHERE StaffType IS NULL OR StaffType LIKE ''
+  GROUP BY  
+       [Chart]
+      ,[Account]
+      ,[SubAccount]
+      ,[PrincipalInvestigator]
+      ,[OrgR]
+      ,[Org]
+      ,[EmployeeID]
+      ,[EmployeeName]
+      ,[TitleCd]
+	  ,[Name]
+	  ,[AnnualReportCode]
+	  ,[ARC_Name]
+  HAVING SUM(FTE) <> 0
+
+  UNION
+
+  SELECT
+       [AnnualReportCode]
+	  ,[ARC_Name]
+	  ,[OrgR]
+	  ,[TitleCd]
+      ,[Name] TitleName
+	  ,[EmployeeName]
+	  ,[EmployeeID]
+	  ,[Chart]
+	  ,[Org]
+      ,[Account]
+      ,[SubAccount]
+      ,[PrincipalInvestigator]
+	  ,SUM([Amount]) Amount  
+      ,SUM([FTE]) FTE
+  FROM [dbo].[PPS_ExpensesFor204Projects]
+  INNER JOIN PPSDataMart.dbo.Titles ON TitleCd = TitleCode
+  INNER JOIN FISDataMart.dbo.Arc_Codes ON AnnualReportCode = ARC_Cd
+  WHERE StaffType IS NULL OR StaffType LIKE ''
+  GROUP BY  
+       [Chart]
+      ,[Account]
+      ,[SubAccount]
+      ,[PrincipalInvestigator]
+      ,[OrgR]
+      ,[Org]
+      ,[EmployeeID]
+      ,[EmployeeName]
+      ,[TitleCd]
+	  ,[Name]
+	  ,[AnnualReportCode]
+	  ,[ARC_Name]
+	HAVING SUM(FTE) <> 0
+	ORDER BY 
+	   [TitleCd]
+	  ,[Name]
+      ,[Chart]
+      ,[Account]
+      ,[SubAccount]
+      ,[PrincipalInvestigator]
+      ,[OrgR]
+      ,[Org]
+      ,[EmployeeID]
+      ,[EmployeeName]
+	  ,[AnnualReportCode]
+	  ,[ARC_Name]";
+
+            return Database.SqlQuery<LaborTransactionsForTitlesWithMissingStaffTypes>(sql);
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             CreateAllProject(modelBuilder);
