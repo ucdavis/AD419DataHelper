@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Models;
+using AD419.DataHelper.Web.ViewModels;
 
 namespace AD419.DataHelper.Web.Controllers
 {
@@ -59,12 +60,17 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Titles titles = PpsDbContext.Titles.Find(id);
-            if (titles == null)
+
+            var title = PpsDbContext.Titles.Find(id);
+            if (title == null)
             {
-                return HttpNotFound();
+                Message = string.Format("Error: Unable to find title code {0} in the database.", id);
+                RedirectToAction("Index");
             }
-            return View(titles);
+
+            var titleCodeViewModel = new TitleCodeViewModel(title, DbContext.StaffTypes.ToList());
+
+            return View(titleCodeViewModel);
         }
 
         // POST: Titles/Edit/5
@@ -72,15 +78,15 @@ namespace AD419.DataHelper.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TitleCode,Name,AbbreviatedName,PersonnelProgramCode,UnitCode,TitleGroup,OvertimeExemptionCode,CTOOccupationSubgroupCode,FederalOccupationCode,FOCSubcategoryCode,LinkTitleGroupCode,EE06CategoryCode,StaffType,EffectiveDate,UpdateTimestamp")] Titles titles)
+        public ActionResult Edit([Bind(Include = "TitleCode,Name,AbbreviatedName,PersonnelProgramCode,UnitCode,TitleGroup,OvertimeExemptionCode,CTOOccupationSubgroupCode,FederalOccupationCode,FOCSubcategoryCode,LinkTitleGroupCode,EE06CategoryCode,StaffType,EffectiveDate,UpdateTimestamp")] Titles title)
         {
             if (ModelState.IsValid)
             {
-                PpsDbContext.Entry(titles).State = EntityState.Modified;
+                PpsDbContext.Entry(title).State = EntityState.Modified;
                 PpsDbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(titles);
+            return View(new TitleCodeViewModel(title, DbContext.StaffTypes.ToList()));
         }
 
         // GET: Titles/Delete/5

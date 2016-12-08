@@ -82,7 +82,7 @@ namespace AD419.DataHelper.Web.Controllers
                 DbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(sfnClassificationLogic);
+            return View(new SfnClassificationLogicViewModel(sfnClassificationLogic));
         }
 
         public ActionResult Display()
