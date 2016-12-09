@@ -10,19 +10,16 @@ namespace AD419.DataHelper.Web.ViewModels
 
         public List<Titles> Titles { get; set; }
 
-        public int TitlesWithoutStaffTypeCount
-        {
-            get { return TitlesWithoutStaffType.Count; }
-        }
-
         public List<Titles> TitlesWithoutStaffType
         {
             get
             {
-                return
-                    LaborTransactionsForTitlesWithMissingStaffTypes.Select(t => new Titles {TitleCode = t.TitleCd, Name = t.TitleName})
-                        .Distinct()
-                        .ToList();
+                var titles = LaborTransactionsForTitlesWithMissingStaffTypes.
+                    GroupBy(l => new {l.TitleCd, l.TitleName}).
+                    Select(g => g.First()).
+                    Select(t => new Titles{TitleCode = t.TitleCd, Name = t.TitleName});
+
+                return titles.ToList();
             }
         }
     }

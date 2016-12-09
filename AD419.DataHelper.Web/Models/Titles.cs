@@ -71,5 +71,20 @@ namespace AD419.DataHelper.Web.Models
 
         [DisplayName("Update Timestamp")]
         public DateTime? UpdateTimestamp { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            var otherTitle = (Titles) obj;
+            if (TitleCode.Equals(otherTitle.TitleCode))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

@@ -551,6 +551,7 @@
     <Content Include="Views\Titles\Details.cshtml" />
     <Content Include="Views\Titles\Edit.cshtml" />
     <Content Include="Views\Titles\Index.cshtml" />
+    <Content Include="Views\Titles\_TransactionsForTitleCodesWithMissingStaffType.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,137 @@
+﻿@model AD419.DataHelper.Web.ViewModels.TitleCodeViewModel
+<div>
+    @if (Model.TitlesWithoutStaffType.Count > 0)
+    {
+        <h2>Title Codes with a Missing Staff Type</h2>
+        <h4>The following Title Codes have labor related FTE expenses, but no corresponding Staff Type:</h4>
+    <table>
+        <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.TitlesWithoutStaffType[0].TitleCode)</th>
+            <th>@Html.DisplayNameFor(model => model.TitlesWithoutStaffType[0].Name)</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.TitlesWithoutStaffType)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => item.TitleCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Name)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+        <hr/>
+        <h2>Labor Transactions for Title Codes with a Missing Staff Type</h2>
+
+        <h4> The following @Model.LaborTransactionsForTitlesWithMissingStaffTypes.Count labor transactions have one of the above Title Codes with a blank Staff Type:</h4>
+        <i>Please review the transactions and update the Title Code's Staff Type as applicable.<br/>
+    Note: Leaving Staff Type blank with automatically default any FTE expenses into the "Other", SFN 244 bucket.</i>
+        <table id="laborTransactionsTable" class="table">
+            <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.LaborTransactionsForTitlesWithMissingStaffTypes[0].AnnualReportCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LaborTransactionsForTitlesWithMissingStaffTypes[0].ArcName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LaborTransactionsForTitlesWithMissingStaffTypes[0].OrgR)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LaborTransactionsForTitlesWithMissingStaffTypes[0].TitleCd)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LaborTransactionsForTitlesWithMissingStaffTypes[0].TitleName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LaborTransactionsForTitlesWithMissingStaffTypes[0].EmployeeName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LaborTransactionsForTitlesWithMissingStaffTypes[0].EmployeeId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LaborTransactionsForTitlesWithMissingStaffTypes[0].Chart)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LaborTransactionsForTitlesWithMissingStaffTypes[0].Org)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LaborTransactionsForTitlesWithMissingStaffTypes[0].Account)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LaborTransactionsForTitlesWithMissingStaffTypes[0].SubAccount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LaborTransactionsForTitlesWithMissingStaffTypes[0].PrincipalInvestigator)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LaborTransactionsForTitlesWithMissingStaffTypes[0].Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LaborTransactionsForTitlesWithMissingStaffTypes[0].FTE)
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.LaborTransactionsForTitlesWithMissingStaffTypes)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => item.AnnualReportCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.ArcName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrgR)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.TitleCd)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.TitleName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.EmployeeName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.EmployeeId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Chart)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Org)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Account)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SubAccount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.PrincipalInvestigator)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Amount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.FTE)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p><br /><h4><i>Note: There are <strong>zero</strong> labor transactions with Title Codes that have a missing Staff Type that need to be reviewed at this time.</i></h4></p>
+    }
+    <hr />
+</div>
