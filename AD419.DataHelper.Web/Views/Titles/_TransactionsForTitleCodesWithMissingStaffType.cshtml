@@ -9,6 +9,7 @@
         <tr>
             <th>@Html.DisplayNameFor(model => model.TitlesWithoutStaffType[0].TitleCode)</th>
             <th>@Html.DisplayNameFor(model => model.TitlesWithoutStaffType[0].Name)</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -21,6 +22,11 @@
                     <td>
                         @Html.DisplayFor(model => item.Name)
                     </td>
+                    <td>
+                        &nbsp;
+                        @Html.ActionLink("Edit", "Edit", new {id = item.TitleCode}) |
+                        @Html.ActionLink("Details", "Details", new {id = item.TitleCode})
+                    </td>
                 </tr>
             }
         </tbody>
@@ -28,9 +34,9 @@
         <hr/>
         <h2>Labor Transactions for Title Codes with a Missing Staff Type</h2>
 
-        <h4> The following @Model.LaborTransactionsForTitlesWithMissingStaffTypes.Count labor transactions have one of the above Title Codes with a blank Staff Type:</h4>
+        <h4> The following @Model.LaborTransactionsForTitlesWithMissingStaffTypes.Count labor transactions have one of the above Title Codes with a missing Staff Type:</h4>
         <i>Please review the transactions and update the Title Code's Staff Type as applicable.<br/>
-    Note: Leaving Staff Type blank with automatically default any FTE expenses into the "Other", SFN 244 bucket.</i>
+    Note: Leaving Staff Type blank with automatically add all FTE expenses for the associated title code to the "Other", SFN 244 bucket.</i>
         <table id="laborTransactionsTable" class="table">
             <thead>
             <tr>
@@ -89,13 +95,13 @@
                             @Html.DisplayFor(model => item.ArcName)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.OrgR)
+                            @Html.DisplayFor(model => item.OrgR)
                         </td>
                         <td>
-                            @Html.DisplayFor(model => item.TitleCd)
+                            @Html.ActionLink(@Html.DisplayFor(model => item.TitleCd).ToString(), "Details", new { id = item.TitleCd })
                         </td>
                         <td>
-                            @Html.DisplayFor(model => item.TitleName)
+                            @Html.ActionLink(@Html.DisplayFor(model => item.TitleName).ToString(), "Details", new { id = item.TitleCd })
                         </td>
                         <td>
                             @Html.DisplayFor(model => item.EmployeeName)
