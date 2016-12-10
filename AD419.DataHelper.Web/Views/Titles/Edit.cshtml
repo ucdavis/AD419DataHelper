@@ -116,8 +116,23 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Title.StaffType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Title.StaffType, Model.StaffTypesSelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.Title.StaffType, Model.StaffTypesSelectList, htmlAttributes: new { @class = "form-control"}, optionLabel:"None")
                 @Html.ValidationMessageFor(model => model.Title.StaffType, "", new {@class = "text-danger"})
+            </div>
+            <div class="tab pull-right">
+                <h4>*Descriptions:</h4>
+                <dl>
+                    <dt>1S: 241 Scientist</dt>
+                    <dd>An individual functioning in the capacity of Principal Investigator, Project Leader or Project Scientist, i.e., Agronomist, Grad Student or any other title functioning in a PI capacity, etc.</dd>
+                    <dt>1P: 242 Professional</dt>
+                    <dd>An individual <i>directly</i> involved with the experiment typically in a scientific or research capacity, i.e., Grad Student (non-PI), Staff Research Associate (non-PI), etc.</dd>
+                    <dt>2P: 242 Professional</dt>
+                    <dd>An individual <i>indirectly</i> involved with the experiment typically in a non-scientific or non-research capacity, i.e., Manager, Dean, Department Chair, Financial Annalist, Computer Programmer, etc.</dd>
+                    <dt>3T: 243 Technical</dt>
+                    <dd>An individual <i>directly</i> involved with building and/or maintaining the experiment in a technical capacity, i.e., Carpenter, Plumber, Electrician, Mechanic, Field Worker, Technician, etc.</dd>
+                    <dt>4C: 244 Other</dt>
+                    <dd>An individual not fitting in to any of the above categories, i.e., Clerical, Labor, Student, Other, etc.</dd>
+                </dl>
             </div>
         </div>
 
