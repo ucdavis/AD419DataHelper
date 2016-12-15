@@ -3,7 +3,7 @@
     @if (Model.TitlesWithoutStaffType.Count > 0)
     {
         <h2>Title Codes with a Missing Staff Type</h2>
-        <h4>The following Title Codes have labor related FTE expenses, but no corresponding Staff Type:</h4>
+        <h4>The following @Model.TitlesWithoutStaffType.Count Title Codes have labor related FTE expenses, but no corresponding Staff Type:</h4>
     <table>
         <thead>
         <tr>
