@@ -244,6 +244,10 @@
     <Compile Include="Controllers\ExpiredProjectsController.cs" />
     <Compile Include="Controllers\FinalReportsController.cs" />
     <Compile Include="Controllers\Ad419InstructionsController.cs" />
+    <Compile Include="Controllers\TitlesController.cs" />
+    <Compile Include="Models\LaborTransactionsForTitlesWithMissingStaffTypes.cs" />
+    <Compile Include="Models\StaffType.cs" />
+    <Compile Include="Models\PPSDataContext.cs" />
     <Compile Include="Controllers\PrincipalsController.cs" />
     <Compile Include="Controllers\ProjectMappingController.cs" />
     <Compile Include="Controllers\FieldStationExpensesImportController.cs" />
@@ -258,6 +262,7 @@
     <Compile Include="Controllers\SfnClassificationLogicController.cs" />
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\SuperController.cs" />
+    <Compile Include="Models\Titles.cs" />
     <Compile Include="Controllers\TransDocTypesController.cs" />
     <Compile Include="Helpers\CasHelper.cs" />
     <Compile Include="Helpers\DataTableExtensions.cs" />
@@ -321,6 +326,8 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ExpiringProjectMatch.cs" />
     <Compile Include="ViewModels\SfnClassificationLogicViewModel.cs" />
+    <Compile Include="ViewModels\TitleCodeEditViewModel.cs" />
+    <Compile Include="ViewModels\TitleCodeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -539,6 +546,12 @@
     <Content Include="Views\SfnClassificationLogic\Display.cshtml" />
     <Content Include="Views\CesListImport\_uploadData.cshtml" />
     <Content Include="Views\CesListImport\_Upload.cshtml" />
+    <Content Include="Views\Titles\Create.cshtml" />
+    <Content Include="Views\Titles\Delete.cshtml" />
+    <Content Include="Views\Titles\Details.cshtml" />
+    <Content Include="Views\Titles\Edit.cshtml" />
+    <Content Include="Views\Titles\Index.cshtml" />
+    <Content Include="Views\Titles\_TransactionsForTitleCodesWithMissingStaffType.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

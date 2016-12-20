@@ -10,6 +10,7 @@ namespace AD419.DataHelper.Web.Controllers
     {
         protected AD419DataContext DbContext;
         protected FISDataContext FisDbContext;
+        protected PPSDataContext PpsDbContext;
         protected FiscalYearService FiscalYearService;
         protected static readonly string ReportServerUrl = ConfigurationManager.AppSettings["ReportServerUrl"];
 
@@ -17,6 +18,7 @@ namespace AD419.DataHelper.Web.Controllers
         {
             DbContext = new AD419DataContext();
             FisDbContext = new FISDataContext();
+            PpsDbContext = new PPSDataContext();
             FiscalYearService = new FiscalYearService(DbContext);
         }
 
@@ -50,6 +52,7 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 DbContext.Dispose();
                 FisDbContext.Dispose();
+                PpsDbContext.Dispose();
             }
             base.Dispose(disposing);
         }

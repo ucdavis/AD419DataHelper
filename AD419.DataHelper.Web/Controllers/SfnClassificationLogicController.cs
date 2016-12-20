@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -85,7 +82,7 @@ namespace AD419.DataHelper.Web.Controllers
                 DbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(sfnClassificationLogic);
+            return View(new SfnClassificationLogicViewModel(sfnClassificationLogic));
         }
 
         public ActionResult Display()

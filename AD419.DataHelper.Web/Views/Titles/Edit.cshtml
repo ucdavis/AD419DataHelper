@@ -1,0 +1,166 @@
+﻿@model AD419.DataHelper.Web.ViewModels.TitleCodeEditViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>@Html.DisplayNameFor(model => model.Title.TitleCode) @Html.DisplayFor(model => model.Title.TitleCode)</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Title.TitleCode)
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title.TitleCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title.TitleCode, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @*@Html.DisplayFor(model => model.Title.TitleCode, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })*@
+                @Html.ValidationMessageFor(model => model.Title.TitleCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title.Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Title.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title.AbbreviatedName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title.AbbreviatedName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Title.AbbreviatedName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title.PersonnelProgramCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title.PersonnelProgramCode, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Title.PersonnelProgramCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title.UnitCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title.UnitCode, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Title.UnitCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title.TitleGroup, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title.TitleGroup, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Title.TitleGroup, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title.OvertimeExemptionCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title.OvertimeExemptionCode, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Title.OvertimeExemptionCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title.CTOOccupationSubgroupCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title.CTOOccupationSubgroupCode, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Title.CTOOccupationSubgroupCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title.FederalOccupationCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title.FederalOccupationCode, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Title.FederalOccupationCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title.FOCSubcategoryCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title.FOCSubcategoryCode, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Title.FOCSubcategoryCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title.LinkTitleGroupCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title.LinkTitleGroupCode, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Title.LinkTitleGroupCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title.EE06CategoryCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title.EE06CategoryCode, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Title.EE06CategoryCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title.StaffType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Title.StaffType, Model.StaffTypesSelectList, htmlAttributes: new { @class = "form-control"}, optionLabel:"None")
+                @Html.ValidationMessageFor(model => model.Title.StaffType, "", new {@class = "text-danger"})
+            </div>
+            <div class="tab container">
+                <br/>
+                <h4>*Descriptions:</h4>
+                <dl>
+                    <dt>1S: 241 Scientist</dt>
+                    <dd>A research worker responsible for original thought, judgments, and accomplishments in independent scientific study. This includes investigation leaders and project leaders and portions of the time of supervising scientists or staff assistants who meet the preceding definition. NIFA Examples: Professor, Associate Professor, Assistant Professor, Scientist; CA&ES Examples: Agronomist, CE Specialist, Researcher or any other title functioning in a PI capacity, etc.</dd>
+                    <dt>1P: 242 Professional</dt>
+                    <dd>A professional does not qualify as a scientist under the preceding definitions but may still significantly contribute to research activities. Professionals usually hold one or more college degrees and have otherwise qualified for employments in a professional category. Generally, professionals have a high degree of research activity responsibility but do not hold principal investigator status or equivalent at the reporting institution. NIFA Examples: Department Head, Resident Director, Statistician, Analyst, Assistant Director, Dean; CA&ES Examples: Professor, Instructor, Agronomist (non-PI), Researcher (non-PI), etc.</dd>
+                    <dt>2P: 242 Professional</dt>
+                    <dd>A professional does not qualify as a scientist under the preceding definitions but may still significantly contribute to research activities. Professionals usually hold one or more college degrees and have otherwise qualified for employments in a professional category. Generally, professionals have a high degree of research activity responsibility but do not hold principal investigator status or equivalent at the reporting institution. NIFA Examples: Department Head, Resident Director, Statistician, Analyst, Assistant Director, Dean; CA&ES Examples: Supervisor, Chancellor, Provost, Dean, Director, Administrator, Lecturer, Gradate Student, Annalist, Accountant, Auditor, Programmer, Staff Research Associate, etc.</dd>
+                    <dt>3T: 243 Technical</dt>
+                    <dd>Technical Staff are associated with research efforts in a technical capacity and do not participate in the investigative aspects of the research. NIFA Examples: Lab Assistant, Mechanic, Carpenter, Machinist, Skilled Tradesperson; CA&ES Examples: Carpenter, Plumber, Electrician, Mechanic, Field Worker, Technician, etc.</dd>
+                    <dt>4C: 244 Other</dt>
+                    <dd>These are clerical and support staff who contribute to the non-technical support of the project. It is often difficult to assess an individual's clerical and labor support to any one project; they usually support groups of researchers of different projects in a broad manner, such as by ordering supplies, typing reports, managing bill payments, performing janitorial work. NIFA Examples: Secretary, Typist, Repairman, Janitor, Data Entry; CA&ES Examples: Clerical, Labor, Student, Other, etc.</dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title.EffectiveDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title.EffectiveDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Title.EffectiveDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title.UpdateTimestamp, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title.UpdateTimestamp, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Title.UpdateTimestamp, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

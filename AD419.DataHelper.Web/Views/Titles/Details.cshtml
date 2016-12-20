@@ -1,0 +1,130 @@
+﻿@model AD419.DataHelper.Web.Models.Titles
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>@Html.DisplayNameFor(model => model.TitleCode) @Html.DisplayFor(model => model.TitleCode)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AbbreviatedName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AbbreviatedName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PersonnelProgramCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PersonnelProgramCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TitleGroup)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TitleGroup)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OvertimeExemptionCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OvertimeExemptionCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CTOOccupationSubgroupCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CTOOccupationSubgroupCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FederalOccupationCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FederalOccupationCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FOCSubcategoryCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FOCSubcategoryCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LinkTitleGroupCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkTitleGroupCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EE06CategoryCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EE06CategoryCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StaffType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StaffType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EffectiveDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EffectiveDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateTimestamp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateTimestamp)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TitleCode }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
