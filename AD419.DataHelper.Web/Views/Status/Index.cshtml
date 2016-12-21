@@ -58,7 +58,8 @@
 {
     @Html.AntiForgeryToken()
     <div>
-        <dl><dt>Selecting this button will <i><strong>DELETE</strong></i> all of the Expense and Association data from the AD-419 application's data set, but keep all the preliminary data you have imported and reviewed up to and including step 12.  It will allow you to pickup the process at step 13 without having to restart back at the beginning.</dt>
+        <dl><dt>Selecting this button will <i><strong>DELETE</strong></i> all of the Expense and Association data from the AD-419 application's data set, and then reload the expenses table, plus the re-associate 204, 20x, CE, Field Station and 241 expenses.  
+            It will reset the status of all the steps after the point at which the expenses were loaded to allow you to pickup the process from that point forward without having to restart back at the beginning.</dt>
         <dd><input type="submit" data-confirm="Are you sure you want to delete all AD-419 Associations?" class="btn btn-warning" value="Delete Associations" /></dd></dl>
     </div>
 }
