@@ -99,7 +99,7 @@ namespace AD419.DataHelper.Web.Controllers
         {
             try
             {
-                ExecuteSproc("usp_DeleteAllExpensesAndAssocoationsAndResetStatus");
+                ExecuteSproc("[usp_RollbackAndReloadExpenses]");
             }
             catch (Exception ex)
             {
