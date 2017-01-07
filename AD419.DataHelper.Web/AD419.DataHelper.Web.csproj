@@ -324,6 +324,7 @@
     <Compile Include="Services\FieldStationExpenseService.cs" />
     <Compile Include="Services\ProjectImportService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ExpenseOrgMappingsViewModel.cs" />
     <Compile Include="ViewModels\ExpiringProjectMatch.cs" />
     <Compile Include="ViewModels\SfnClassificationLogicViewModel.cs" />
     <Compile Include="ViewModels\TitleCodeEditViewModel.cs" />

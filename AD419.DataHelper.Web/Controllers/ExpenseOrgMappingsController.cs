@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Models;
+using AD419.DataHelper.Web.ViewModels;
 
 namespace AD419.DataHelper.Web.Controllers
 {
@@ -11,7 +12,12 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: ExpenseOrgMappings
         public ActionResult Index()
         {
-            return View(DbContext.ExpenseOrgMappings.ToList());
+            var model = new ExpenseOrgMappingsViewModel()
+            {
+                ExpenseOrgMappings = DbContext.ExpenseOrgMappings.ToList(),
+                UnknownDepartments = DbContext.GetUnknownDepartments().ToList()
+            };
+            return View(model);
         }
 
         // GET: ExpenseOrgMappings/Details/5

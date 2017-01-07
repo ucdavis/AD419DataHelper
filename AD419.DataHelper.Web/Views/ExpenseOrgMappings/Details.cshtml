@@ -4,7 +4,7 @@
 }
 
 <div>
-    <h4>ExpenseOrgMapping</h4>
+    <h4>Expense OrgR Mapping</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -21,6 +21,21 @@
     
         <dd>
             @Html.DisplayFor(model => model.ExpenseOrgR)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpenseOrg)
+        </dt>
+
+        <dd>
+            @if (Model.ExpenseOrg == null)
+            {
+                <i>All</i>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.ExpenseOrg)
+            }
         </dd>
     
         <dt>
