@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -15,7 +16,7 @@ namespace AD419.DataHelper.Web.Controllers
             var model = new ExpenseOrgMappingsViewModel()
             {
                 ExpenseOrgMappings = DbContext.ExpenseOrgMappings.ToList(),
-                UnknownDepartments = DbContext.GetUnknownDepartments().ToList()
+                UnknownDepartments = DbContext.GetAccountDetailsForNullOrUnknownDepartments().ToList()
             };
             return View(model);
         }
@@ -46,7 +47,7 @@ namespace AD419.DataHelper.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Chart,ExpenseOrgR,AD419OrgR")] ExpenseOrgMapping expenseOrgMapping)
+        public ActionResult Create([Bind(Include = "Id,Chart,ExpenseOrgR,ExpenseOrg,AD419OrgR")] ExpenseOrgMapping expenseOrgMapping)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +79,7 @@ namespace AD419.DataHelper.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Chart,ExpenseOrgR,AD419OrgR")] ExpenseOrgMapping expenseOrgMapping)
+        public ActionResult Edit([Bind(Include = "Id,Chart,ExpenseOrgR,ExpenseOrg,AD419OrgR")] ExpenseOrgMapping expenseOrgMapping)
         {
             if (ModelState.IsValid)
             {

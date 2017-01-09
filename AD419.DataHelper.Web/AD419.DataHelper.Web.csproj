@@ -316,6 +316,7 @@
     <Compile Include="Models\ReportViewerModel.cs" />
     <Compile Include="Models\TransDocTypesForFTECalc.cs" />
     <Compile Include="Models\TransDocType.cs" />
+    <Compile Include="Models\UnknownDepartmentAccountDetail.cs" />
     <Compile Include="Models\UnknownDepartment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CeSpecialistService.cs" />

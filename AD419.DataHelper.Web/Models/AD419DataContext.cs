@@ -98,6 +98,12 @@ namespace AD419.DataHelper.Web.Models
                 "SELECT * FROM [dbo].[udf_GetExpensesForNullOrUnknownDepartments] ()");
         }
 
+        public virtual DbRawSqlQuery<UnknownDepartmentAccountDetail> GetAccountDetailsForNullOrUnknownDepartments()
+        {
+            return Database.SqlQuery<UnknownDepartmentAccountDetail>(
+                "SELECT * FROM [dbo].[udf_GetAccountDetailsForNullOrUnknownDepartments] ()");
+        }
+
         /// <summary>
         /// Gets a list of missing Labor Transactions for which we the corresponding type of code is
         /// not one we were aware of so it can be reviewed and added, included or excluded from the 

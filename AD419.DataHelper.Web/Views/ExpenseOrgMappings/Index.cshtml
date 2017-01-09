@@ -21,13 +21,37 @@
                         @Html.DisplayNameFor(model => model.UnknownDepartments[0].OrgR)
                     </th>
                     <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartments[0].SuggestedOrgR)
+                    </th>
+                    <th>
                         @Html.DisplayNameFor(model => model.UnknownDepartments[0].Org)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.UnknownDepartments[0].Account)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.UnknownDepartments[0].Expenses)
+                        @Html.DisplayNameFor(model => model.UnknownDepartments[0].AccountName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartments[0].ARCName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartments[0].School)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartments[0].Department)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartments[0].MgrName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartments[0].PrincipalInvestigatorName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartments[0].EmployeeId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartments[0].Purpose)
                     </th>
                 </tr>
             </thead>
@@ -42,13 +66,37 @@
                             @Html.DisplayFor(modelItem => item.OrgR)
                         </td>
                         <td>
+                            @Html.DisplayFor(modelItem => item.SuggestedOrgR)
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.Org)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Account)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Expenses)
+                            @Html.DisplayFor(modelItem => item.AccountName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ARCName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.School)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Department)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MgrName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PrincipalInvestigatorName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Purpose)
                         </td>
                     </tr>
                 }
@@ -75,7 +123,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.ExpenseOrgMappings[0].ExpenseOrgR)
             </th>
-            
             <th>
                 @Html.DisplayNameFor(model => model.ExpenseOrgMappings[0].ExpenseOrg)
             </th>

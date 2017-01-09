@@ -5,7 +5,7 @@ namespace AD419.DataHelper.Web.ViewModels
 {
     public class ExpenseOrgMappingsViewModel
     {
-        public List<UnknownDepartment> UnknownDepartments { get; set; }
+        public List<UnknownDepartmentAccountDetail> UnknownDepartments { get; set; }
 
         public List<ExpenseOrgMapping> ExpenseOrgMappings { get; set; }
     }
