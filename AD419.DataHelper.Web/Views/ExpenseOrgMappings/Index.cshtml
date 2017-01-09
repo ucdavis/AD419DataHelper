@@ -1,16 +1,16 @@
 ﻿@model AD419.DataHelper.Web.ViewModels.ExpenseOrgMappingsViewModel
 
 @{
+    ViewBag.Title = "Expense Department (and Org) to AD-419 OrgR Remapping";
 }
 
-<h2>Expense OrgR (and Org) to AD-419 OrgR Remapping</h2>
 <div>
     @if (Model.UnknownDepartments.Count > 0)
     {
         <h2>Unknown Departments</h2>
 
-        <h4> The following expenses have an Unknown AD-419 Reporting Org:</h4>
-        <i>Please add a new Reporting Organization or @Html.ActionLink("Remap the Expense's Department to an Existing AD-419 Reporting Org", "Index", "ExpenseOrgMappings").</i>
+        <h4> The following accounts have an Unknown AD-419 Reporting Org:</h4>
+        <i>Please remap the Expense Department to an Existing AD-419 Reporting Org (below) or @Html.ActionLink("add a new AD-419 Reporting Org", "Index", "ReportingOrganizations").</i>
         <table id="unknownDepartmentsTable" class="table">
             <thead>
                 <tr>
@@ -110,10 +110,12 @@
 </div>
 <hr />
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<hr/>
+<div class="pull-right">
+    <a href="@Url.Action("Create")" class="btn btn-default display-inline"><i class="fa fa-plus"></i> Create New</a>
+</div>
+
+<h2>@ViewBag.Title</h2>
+
 <table id="expenseMappingsTable" class="table">
     <thead>
         <tr>
