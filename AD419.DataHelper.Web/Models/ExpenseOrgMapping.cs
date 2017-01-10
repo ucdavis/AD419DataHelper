@@ -14,6 +14,8 @@ namespace AD419.DataHelper.Web.Models
 
         public string ExpenseOrgR { get; set; }
 
+        public string ExpenseOrg { get; set; }
+
         public string AD419OrgR { get; set; }
     }
 }

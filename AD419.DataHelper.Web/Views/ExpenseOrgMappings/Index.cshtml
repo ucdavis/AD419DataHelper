@@ -1,22 +1,135 @@
-﻿@model IEnumerable<AD419.DataHelper.Web.Models.ExpenseOrgMapping>
+﻿@model AD419.DataHelper.Web.ViewModels.ExpenseOrgMappingsViewModel
 
 @{
+    ViewBag.Title = "Expense Department (and Org) to AD-419 OrgR Remapping";
 }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div>
+    @if (Model.UnknownDepartments.Count > 0)
+    {
+        <h2>Unknown Departments</h2>
+
+        <h4> The following accounts have an Unknown AD-419 Reporting Org:</h4>
+        <i>Please remap the Expense Department to an Existing AD-419 Reporting Org (below) or @Html.ActionLink("add a new AD-419 Reporting Org", "Index", "ReportingOrganizations").</i>
+        <table id="unknownDepartmentsTable" class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartments[0].Chart)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartments[0].OrgR)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartments[0].SuggestedOrgR)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartments[0].Org)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartments[0].Account)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartments[0].AccountName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartments[0].ARCName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartments[0].School)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartments[0].Department)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartments[0].MgrName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartments[0].PrincipalInvestigatorName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartments[0].EmployeeId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartments[0].Purpose)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.UnknownDepartments)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Chart)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrgR)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SuggestedOrgR)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Org)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Account)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AccountName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ARCName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.School)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Department)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MgrName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PrincipalInvestigatorName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Purpose)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p><br /><h4><i>Note: There are <strong>zero</strong> unknown expense departments that need to be added or remapped at this time.</i></h4></p>
+    }
+</div>
+<hr />
+
+<div class="pull-right">
+    <a href="@Url.Action("Create")" class="btn btn-default display-inline"><i class="fa fa-plus"></i> Create New</a>
+</div>
+
+<h2>@ViewBag.Title</h2>
+
 <table id="expenseMappingsTable" class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Chart)
+                @Html.DisplayNameFor(model => model.ExpenseOrgMappings[0].Chart)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ExpenseOrgR)
+                @Html.DisplayNameFor(model => model.ExpenseOrgMappings[0].ExpenseOrgR)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AD419OrgR)
+                @Html.DisplayNameFor(model => model.ExpenseOrgMappings[0].ExpenseOrg)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpenseOrgMappings[0].AD419OrgR)
             </th>
             <th></th>
             <th></th>
@@ -24,7 +137,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.ExpenseOrgMappings)
         {
             <tr>
                 <td>
@@ -32,6 +145,18 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ExpenseOrgR)
+                </td>
+                
+                <td>
+                    @if (item.ExpenseOrg == null)
+                    {
+                        <i>All</i>
+                    }
+
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.ExpenseOrg)
+                    } 
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.AD419OrgR)
@@ -59,7 +184,8 @@
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 columnDefs: [
                     { targets: [-1, -2, -3], sortable: false }
-                ]
+                ],
+                displayLength: -1
             });
         })
     </script>
