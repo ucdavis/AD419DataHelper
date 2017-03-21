@@ -12,7 +12,9 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: SfnClassificationLogic
         public ActionResult Index()
         {
-            return View(DbContext.SfnClassificationLogic.OrderBy(o => o.EvaluationOrder).ThenBy(o => o.ParameterOrder).ThenBy(o => o.SubParameterOrder).ToList());
+            return View(DbContext.SfnClassificationLogic.
+                OrderBy(o => o.EvaluationOrder).ThenBy(o => o.ParameterOrder).ThenBy(o => o.SubParameterOrder).
+                ToList());
         }
 
         // GET: SfnClassificationLogic/Details/5
