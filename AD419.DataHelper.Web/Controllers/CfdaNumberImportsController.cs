@@ -41,7 +41,7 @@ namespace AD419.DataHelper.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CFDANum")] CfdaNumberImport cfdaNumber)
+        public ActionResult Create([Bind(Include = "Id,Number, ProgramTitle, AgencyOffice, Code")] CfdaNumberImport cfdaNumber)
         {
             if (!ModelState.IsValid) return View(cfdaNumber);
 
@@ -68,7 +68,7 @@ namespace AD419.DataHelper.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CFDANum, ProgramTitle")] CfdaNumberImport cFdaNumberImport)
+        public ActionResult Edit([Bind(Include = "Id,Number, ProgramTitle, AgencyOffice, Code")] CfdaNumberImport cFdaNumberImport)
         {
             if (!ModelState.IsValid) return View(cFdaNumberImport);
 
