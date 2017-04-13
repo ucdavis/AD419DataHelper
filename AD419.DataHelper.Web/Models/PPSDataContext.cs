@@ -71,5 +71,7 @@ namespace AD419.DataHelper.Web.Models
                 .IsFixedLength()
                 .IsUnicode(false);
         }
+
+        public virtual DbSet<SelfCertifyingTitleCode> SelfCertifyingTitleCodes { get; set; }
     }
 }
