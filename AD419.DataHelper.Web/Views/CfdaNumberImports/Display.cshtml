@@ -65,12 +65,40 @@
             padding: 5px;
         }
     </style>*@
+
+<div class="form-horizontal">
+    @using (Html.BeginForm("Save", "CfdaNumberImports", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        for (var i = 0; i < Model.Count; i++)
+        {
+            @Html.HiddenFor(m => m[i].Number)
+            @Html.HiddenFor(m => m[i].ProgramTitle)
+            @Html.HiddenFor(m => m[i].AgencyOffice)
+            @Html.HiddenFor(m => m[i].Code)
+        }
+        <br />
+        <p>
+            If all looks good, you can upload the values to the database.<br />
+            <i>Note: You can also edit the values once they have been saved.</i>
+        </p>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save CFDA Numbers to Database" class="btn btn-default" />
+            </div>
+        </div>
+    }
+</div>
+
 <div>
     <table class="table table-striped table-bordered table-hover">
         <thead>
             <tr>
                 <th>@Html.DisplayNameFor(m => m[0].Number)</th>
                 <th>@Html.DisplayNameFor(m => m[0].ProgramTitle)</th>
+                <th>@Html.DisplayNameFor(m => m[0].AgencyOffice)</th>
+                <th>@Html.DisplayNameFor(m => m[0].Code)</th>
             </tr>
         </thead>
         <tbody>
@@ -79,6 +107,8 @@
                 <tr>
                     <td>@item.Number</td>
                     <td>@item.ProgramTitle</td>
+                    <td>@item.AgencyOffice</td>
+                    <td>@item.Code</td>
                 </tr>
             }
         </tbody>
@@ -92,6 +122,8 @@
         {
             @Html.HiddenFor(m => m[i].Number)
             @Html.HiddenFor(m => m[i].ProgramTitle)
+            @Html.HiddenFor(m => m[i].AgencyOffice)
+            @Html.HiddenFor(m => m[i].Code)
         }
 
         <p>

@@ -28,6 +28,12 @@
                 <th>
                     @Html.DisplayNameFor(model => model.ProgramTitle)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AgencyOffice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Code)
+                </th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -42,6 +48,12 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ProgramTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AgencyOffice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Code)
                     </td>
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = item.Id })
