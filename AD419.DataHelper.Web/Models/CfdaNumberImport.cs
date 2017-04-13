@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -53,11 +54,11 @@ namespace AD419.DataHelper.Web.Models
             if (string.IsNullOrEmpty(agencyOffice))
                 return null;
 
-            if (agencyOffice.StartsWith(USDA) && agencyOffice.Contains(NIFA))
+            if (agencyOffice.StartsWith(USDA, StringComparison.OrdinalIgnoreCase) && agencyOffice.IndexOf(NIFA, StringComparison.OrdinalIgnoreCase) > -1)
             {
                 return "NIFA";
             }
-            else if (agencyOffice.StartsWith(DHHS) && agencyOffice.Contains(NIH))
+            else if (agencyOffice.StartsWith(DHHS, StringComparison.OrdinalIgnoreCase) && agencyOffice.IndexOf(NIH, StringComparison.OrdinalIgnoreCase) > -1)
             {
                 return "NIH";
             }
