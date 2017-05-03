@@ -1,0 +1,42 @@
+﻿@model AD419.DataHelper.Web.Models.SelfCertifyingTitleCode
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Self Certifying Title Code</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TitleCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TitleCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TitleName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TitleName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClassTitleOutline)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClassTitleOutline)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

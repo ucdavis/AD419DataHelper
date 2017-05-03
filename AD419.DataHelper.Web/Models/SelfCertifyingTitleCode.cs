@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
+using System.Linq.Expressions;
 
 namespace AD419.DataHelper.Web.Models
 {
@@ -10,9 +11,25 @@ namespace AD419.DataHelper.Web.Models
         public SelfCertifyingTitleCode() { }
         public SelfCertifyingTitleCode(DataRow row)
         {
-            TitleCode = row["TITLE CODE"].ToString();
-            TitleName = row["TITLE CODE NAME"].ToString();
-            ClassTitleOutline = row["CLASS TITLE OUTLINE"].ToString();
+            foreach (DataColumn column in row.Table.Columns)
+            {
+                if (column.ColumnName != null)
+                {
+                    var columnName = column.ColumnName.Replace('_', ' ').Trim();
+                    if (columnName.Equals("TITLE CODE"))
+                    {
+                        TitleCode = row.ItemArray[column.Ordinal].ToString().Trim();
+                    }
+                    else if (columnName.Equals("TITLE CODE NAME"))
+                    {
+                        TitleName = row.ItemArray[column.Ordinal].ToString().Trim();
+                    }
+                    else if (columnName.Equals("CLASS TITLE OUTLINE"))
+                    {
+                        ClassTitleOutline = row.ItemArray[column.Ordinal].ToString().Trim();
+                    }
+                }
+            }
         }
 
         public int Id { get; set; }
@@ -24,6 +41,7 @@ namespace AD419.DataHelper.Web.Models
 
         [Required]
         [Display(Name = "Title Name")]
+        [Column("Name")]
         [StringLength(150)]
         public string TitleName { get; set; }
 

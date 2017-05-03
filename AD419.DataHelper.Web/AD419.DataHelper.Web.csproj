@@ -245,11 +245,12 @@
     <Compile Include="Controllers\ExpiredProjectsController.cs" />
     <Compile Include="Controllers\FinalReportsController.cs" />
     <Compile Include="Controllers\Ad419InstructionsController.cs" />
+    <Compile Include="Services\SelfCertifyingTitleCodesService.cs" />
     <Compile Include="Controllers\TitlesController.cs" />
     <Compile Include="Models\SelfCertifyingTitleCode.cs" />
     <Compile Include="Models\LaborTransactionsForTitlesWithMissingStaffTypes.cs" />
     <Compile Include="Models\StaffType.cs" />
-    <Compile Include="Models\PPSDataContext.cs" />
+    <Compile Include="Models\PpsDataContext.cs" />
     <Compile Include="Controllers\PrincipalsController.cs" />
     <Compile Include="Controllers\ProjectMappingController.cs" />
     <Compile Include="Controllers\FieldStationExpensesImportController.cs" />
@@ -556,6 +557,15 @@
     <Content Include="Views\Titles\Edit.cshtml" />
     <Content Include="Views\Titles\Index.cshtml" />
     <Content Include="Views\Titles\_TransactionsForTitleCodesWithMissingStaffType.cshtml" />
+    <Content Include="Views\SelfCertifyingTitleCodesImport\_SelfCertifyingTitleCodesUpload.cshtml" />
+    <Content Include="Views\SelfCertifyingTitleCodesImport\Delete.cshtml" />
+    <Content Include="Views\SelfCertifyingTitleCodesImport\Edit.cshtml" />
+    <Content Include="Views\SelfCertifyingTitleCodesImport\Create.cshtml" />
+    <Content Include="Views\SelfCertifyingTitleCodesImport\Index.cshtml" />
+    <Content Include="Views\SelfCertifyingTitleCodesImport\Details.cshtml" />
+    <Content Include="Views\SelfCertifyingTitleCodesImport\Display.cshtml" />
+    <Content Include="Views\SelfCertifyingTitleCodesImport\_Upload.cshtml" />
+    <Content Include="Views\SelfCertifyingTitleCodesImport\_uploadData.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

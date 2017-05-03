@@ -16,20 +16,20 @@ namespace AD419.DataHelper.Web.Controllers
 
         public SelfCertifyingTitleCodesImportController()
         {
-            _selfCertifyingTitleCodesService = new SelfCertifyingTitleCodesService(DbContext);
+            _selfCertifyingTitleCodesService = new SelfCertifyingTitleCodesService(PpsDbContext);
         }
 
-        // GET: CesListImport
+        // GET: SelfCertifyingTitleCode
         public ActionResult Index()
         {
-            var imports = PPSDataContext.SelfCertifyingTitleCodes.ToList();
+            var imports = PpsDbContext.SelfCertifyingTitleCodes.ToList();
             return View(imports);
         }
 
         // GET: CesListImport/Details/5
         public ActionResult Details(int id)
         {
-            var import = DbContext.CesListImports.Find(id);
+            var import = PpsDbContext.SelfCertifyingTitleCodes.Find(id);
             if (import == null)
             {
                 return HttpNotFound();
@@ -38,31 +38,31 @@ namespace AD419.DataHelper.Web.Controllers
             return View(import);
         }
 
-        // GET: CesListImport/Create
+        // GET: SelfCertifyingTitleCode/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CesListImport/Create
+        // POST: SelfCertifyingTitleCode/Create
         // To protect from over-posting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,PI,DeptLevelOrg,EmployeeId,ProjectAccessionNum,ProjectNumber,PercentCeEffort,FullAnnualPayRate,TitleCode,FTE,Chart,Account,SubAccount,EstimatedCeExpenses")] CesListImport cesListImport)
+        public ActionResult Create([Bind(Include = "Id,TitleCode,TitleName,ClassTitleOutline")] SelfCertifyingTitleCode selfCertifyingTitleCode)
         {
-            if (!ModelState.IsValid) return View(cesListImport);
+            if (!ModelState.IsValid) return View(selfCertifyingTitleCode);
 
-            DbContext.CesListImports.Add(cesListImport);
-            DbContext.SaveChanges();
+            PpsDbContext.SelfCertifyingTitleCodes.Add(selfCertifyingTitleCode);
+            PpsDbContext.SaveChanges();
 
             return RedirectToAction("Index");
         }
 
-        // GET: CesListImport/Edit/5
+        // GET: SelfCertifyingTitleCode/Edit/5
         public ActionResult Edit(int id)
         {
-            var import = DbContext.CesListImports.Find(id);
+            var import = PpsDbContext.SelfCertifyingTitleCodes.Find(id);
             if (import == null)
             {
                 return HttpNotFound();
@@ -71,25 +71,25 @@ namespace AD419.DataHelper.Web.Controllers
             return View(import);
         }
 
-        // POST: CesListImport/Edit/5
+        // POST: PpsDbContext/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,PI,DeptLevelOrg,EmployeeId,ProjectAccessionNum,ProjectNumber,PercentCeEffort,FullAnnualPayRate,TitleCode,FTE,Chart,Account,SubAccount,EstimatedCeExpenses")] CesListImport cesListImport)
+        public ActionResult Edit([Bind(Include = "Id,TitleCode,TitleName,ClassTitleOutline")] SelfCertifyingTitleCode selfCertifyingTitleCode)
         {
-            if (!ModelState.IsValid) return View(cesListImport);
+            if (!ModelState.IsValid) return View(selfCertifyingTitleCode);
 
-            DbContext.Entry(cesListImport).State = EntityState.Modified;
-            DbContext.SaveChanges();
+            PpsDbContext.Entry(selfCertifyingTitleCode).State = EntityState.Modified;
+            PpsDbContext.SaveChanges();
 
             return RedirectToAction("Index");
         }
 
-        // GET: CesListImport/Delete/5
+        // GET: SelfCertifyingTitleCode/Delete/5
         public ActionResult Delete(int id)
         {
-            var import = DbContext.CesListImports.Find(id);
+            var import = PpsDbContext.SelfCertifyingTitleCodes.Find(id);
             if (import == null)
             {
                 return HttpNotFound();
@@ -103,28 +103,28 @@ namespace AD419.DataHelper.Web.Controllers
         public ActionResult DeleteAll()
         {
             //This works but doesn't reset the sequence number.
-            //var all = from c in db.CesListImports select c;
-            //db.CesListImports.RemoveRange(all);
+            //var all = from c in db.SelfCertifyingTitleCodes select c;
+            //db.SelfCertifyingTitleCodes.RemoveRange(all);
             //db.SaveChanges();
 
-            DbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE CesListImport");
+            PpsDbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE TitleCodesSelfCertify");
 
             return RedirectToAction("Index");
         }
 
-        // POST: CesListImport/Delete/5
+        // POST: SelfCertifyingTitleCode/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var import = DbContext.CesListImports.Find(id);
+            var import = PpsDbContext.SelfCertifyingTitleCodes.Find(id);
             if (import == null)
             {
                 return HttpNotFound();
             }
 
-            DbContext.CesListImports.Remove(import);
-            DbContext.SaveChanges();
+            PpsDbContext.SelfCertifyingTitleCodes.Remove(import);
+            PpsDbContext.SaveChanges();
 
             return RedirectToAction("Index");
         }
@@ -147,20 +147,15 @@ namespace AD419.DataHelper.Web.Controllers
             excelReader.Close();
 
             // transform:
-            var ceSpecialists = _ceSpecialistService.GetCesListImportFromRows(result.Tables[0].Rows).ToList();
+            var selfCertifyingTitleCodes = _selfCertifyingTitleCodesService.GetSelfCertifyingTitleCodesFromRows(result.Tables[0].Rows).ToList();
 
             // validate:
             var errors = new List<ModelStateDictionary>();
-            foreach (var ceSpecialist in ceSpecialists)
+            foreach (var selfCertifyingTitleCode in selfCertifyingTitleCodes)
             {
                 // clear and check
                 ModelState.Clear();
-                TryValidateModel(ceSpecialist);
-
-                if (!ceSpecialist.IsCurrentAd419Project)
-                {
-                    ModelState.AddModelError("IsCurrentAd419Project", "This expense is not assigned to an active project.");
-                }
+                TryValidateModel(selfCertifyingTitleCode);
 
                 // copy out errors
                 var state = new ModelStateDictionary();
@@ -171,25 +166,27 @@ namespace AD419.DataHelper.Web.Controllers
    
             //TempData.Add("Message", "Now viewing \"" + fileName + "\".");
 
-            return PartialView("_UploadData", ceSpecialists);
+            return PartialView("_uploadData", selfCertifyingTitleCodes);
         }
 
         [HttpPost]
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Save(List<CesListImport> cesEntries)
+        public ActionResult Save(List<SelfCertifyingTitleCode> selfCertifyingTitleCodes)
         {
-            if (cesEntries != null)
+            if (selfCertifyingTitleCodes != null)
             {
                 // This works.  Would now like the user to have a chance to review upload first.
-                if (ModelState.IsValid && cesEntries.All(f => f.IsCurrentAd419Project))
+                if (ModelState.IsValid)
                 {
-                    DbContext.CesListImports.AddRange(cesEntries);
-                    DbContext.MarkStatusCompleted(ProcessStatuses.ImportCeSpecialists);
+                    PpsDbContext.SelfCertifyingTitleCodes.AddRange(selfCertifyingTitleCodes);
+                    PpsDbContext.SaveChanges();
+
+                    DbContext.MarkStatusCompleted(ProcessStatuses.ImportSelfCertifyingTitleCodes);
                     DbContext.SaveChanges();
                 }
                 else
                 {
-                    ErrorMessage = string.Format("ERROR! Your import file could not be saved.  It contained {0} records with expired projects that could not be automatically remapped.  Please make corrections and try again.", cesEntries.Count(f => f.IsCurrentAd419Project == false));
+                    ErrorMessage = "ERROR! Your import file could not be saved.";
                 }
             }
             return RedirectToAction("Index");
