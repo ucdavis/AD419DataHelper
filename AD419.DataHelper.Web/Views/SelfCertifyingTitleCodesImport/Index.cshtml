@@ -14,6 +14,26 @@
 
 <h2>@ViewBag.Title</h2>
 
+<h4>
+    These Title Codes help us identify the conditional "241" title codes.<br /><br/>
+    You may import an entire list using the "Upload New Source File" button (above) or enter them one at a time using the "Create New" button (below).
+</h4>
+
+    There are several types of SFN "241" (PI/Scientist) title codes:<br />
+    <ol>
+        <li>Those that are permanently* "241", meaning employee effort in these title codes is always classified as "241", and </li>
+        <li>those that are conditionally "241", meaning employee effort in these title codes is classified as "241" only if an employee is serving in the capacity as a project PI, and either
+            <ul>
+            <li>have a title code beginning with "33" or a title code like "3200", "3210" or "3220" or</li>
+            <li>are included in this list**.</li>
+        </ul></li>
+    </ol>
+    <i>
+        Notes: <br />
+        *The permanent "241" title codes are maintained under Maintenance -> Title Code Staff Types. <br /> 
+        **Any permanent "241" title codes included in this list will default to permanent, so they need not be excluded when uploading the list.
+    </i>
+<hr />
 <p>
     @Html.ActionLink("Create New", "Create", "SelfCertifyingTitleCodesImport", null, new { @class = "btn btn-default" })
 </p>
@@ -24,6 +44,7 @@
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.TitleCode)
+
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.TitleName)
