@@ -38,6 +38,7 @@ namespace AD419.DataHelper.Web.Models
         ImportInterdepartmentalProjects = 3,
         ImportCfdaNumbers = 4,
         ImportCeSpecialists = 5,
-        ImportFieldStationExpenses = 6
+        ImportFieldStationExpenses = 6,
+        ImportSelfCertifyingTitleCodes = 7
     }
 }

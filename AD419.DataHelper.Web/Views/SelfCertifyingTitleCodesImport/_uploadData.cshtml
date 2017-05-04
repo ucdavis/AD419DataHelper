@@ -1,0 +1,52 @@
+﻿@model List<AD419.DataHelper.Web.Models.SelfCertifyingTitleCode>
+
+@{
+    var errors = ViewBag.Errors as List<ModelStateDictionary> ?? Model.Select(m => new ModelStateDictionary()).ToList();
+}
+
+<table id="uploadTable" class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>@Html.DisplayNameFor(m => m[0].TitleCode)</th>
+            <th>@Html.DisplayNameFor(m => m[0].TitleName)</th>
+            <th>@Html.DisplayNameFor(m => m[0].ClassTitleOutline)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            var item = Model[i];
+            var error = errors[i];
+            <tr>
+                <td>
+                    @if (!error.IsValid)
+                    {
+                        var message = string.Join("\n",
+                            error.Values
+                                .SelectMany(v => v.Errors)
+                                .Select(e => e.ErrorMessage));
+                        
+                        <span class="text-danger" title="@message">
+                            <i class="fa fa-exclamation-triangle"></i>
+                        </span>
+                    }
+                </td>
+                <td>@Html.DisplayFor(x => item.TitleCode)</td>
+                <td>@Html.DisplayFor(x => item.TitleName)</td>
+                <td>@Html.DisplayFor(x => item.ClassTitleOutline)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form id="confirmForm" method="POST" action="@Url.Action("Save", "SelfCertifyingTitleCodesImport")">
+    @Html.AntiForgeryToken()
+    @for (var i = 0; i < Model.Count; i++)
+    {
+        @Html.HiddenFor(m => m[i].Id)
+        @Html.HiddenFor(m => m[i].TitleCode)
+        @Html.HiddenFor(m => m[i].TitleName)
+        @Html.HiddenFor(m => m[i].ClassTitleOutline)
+    }
+</form>

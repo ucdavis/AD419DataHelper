@@ -4,7 +4,7 @@
             
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Upload a CES List Excel file</h4>
+                <h4 class="modal-title">Upload a Self-Certifying Title Codes Excel file</h4>
             </div>
 
             <ul id="uploadTabs" class="step-progressbar">
@@ -20,18 +20,18 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="uploadTab">
                     <div class="modal-image">
-                        <img src="~/Content/Images/CESExample.png" alt="CES Excel upload file example">
+                        <img src="~/Content/Images/TitleCodesSelfCertify.png" alt="Self-Certifying Title Codes Excel upload file example">
                     </div>
                     <form id="uploadForm" enctype="multipart/form-data" class="">
                         @Html.AntiForgeryToken()
                         <div class="modal-body">
                             <p>
                                 Please ensure your spreadsheet has the column names as illustrated above.<br />
-                                Note that FTE, and Estimated Chart L Expenses will be populated automatically.<br />
-                                Download a sample form <a href="~/Content/Sample_Forms/ModifiedCEForImport.xlsx">HERE <i class="fa fa-download"></i></a>
+                                Only the TITLE CODE, TITLE CODE NAME, and CLASS TITLE OUTLINE columns are required.<br />
+                                Download a sample form <a href="~/Content/Sample_Forms/TitleCodesSelfCertify.xlsx">HERE <i class="fa fa-download"></i></a>
                             </p>
                             <div class="form-group">
-                                <label class="control-label">Please select an CES List Excel file to display:</label>
+                                <label class="control-label">Please select a Self-Certifying Title Codes Excel file to display:</label>
                                 <input type="file" id="file" name="file" class="" required/>
                             </div>
                         </div>

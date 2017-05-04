@@ -4,10 +4,10 @@ namespace AD419.DataHelper.Web.Models
 {
     using System.Data.Entity;
 
-    public partial class PPSDataContext : DbContext
+    public partial class PpsDataContext : DbContext
     {
-        public PPSDataContext()
-            : base("name=PPSDataContext")
+        public PpsDataContext()
+            : base("name=PpsDataContext")
         {
         }
 
@@ -71,5 +71,7 @@ namespace AD419.DataHelper.Web.Models
                 .IsFixedLength()
                 .IsUnicode(false);
         }
+
+        public virtual DbSet<SelfCertifyingTitleCode> SelfCertifyingTitleCodes { get; set; }
     }
 }
