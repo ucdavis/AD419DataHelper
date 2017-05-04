@@ -351,6 +351,8 @@
     <Content Include="Content\Images\Interdepartmental.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Images\TitleCodesSelfCertify pg 1.png" />
+    <Content Include="Content\Images\TitleCodesSelfCertify.png" />
     <Content Include="Content\typeahead.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -384,6 +386,7 @@
     <Content Include="Content\Sample_Forms\Interdepartmental.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Sample_Forms\TitleCodesSelfCertify.xlsx" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
