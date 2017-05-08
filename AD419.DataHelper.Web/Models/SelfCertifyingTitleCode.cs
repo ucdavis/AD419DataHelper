@@ -45,7 +45,6 @@ namespace AD419.DataHelper.Web.Models
         [StringLength(150)]
         public string TitleName { get; set; }
 
-        [Required]
         [Display(Name = "Class Title Outline (CTO)")]
         [StringLength(3)]
         public string ClassTitleOutline { get; set; }

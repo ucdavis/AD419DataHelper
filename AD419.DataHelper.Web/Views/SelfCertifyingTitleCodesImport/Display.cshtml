@@ -75,7 +75,7 @@
             @Html.HiddenFor(m => m[i].Id)
             @Html.HiddenFor(m => m[i].TitleCode)
             @Html.HiddenFor(m => m[i].TitleName)
-            @Html.HiddenFor(m => m[i].ClassTitleOutline)
+            @*@Html.HiddenFor(m => m[i].ClassTitleOutline)*@
         }
         <br />
         <p>
@@ -97,7 +97,7 @@
             <tr>
                 <th>@Html.DisplayNameFor(m => m[0].TitleCode)</th>
                 <th>@Html.DisplayNameFor(m => m[0].TitleName)</th>
-                <th>@Html.DisplayNameFor(m => m[0].ClassTitleOutline)</th>
+                @*<th>@Html.DisplayNameFor(m => m[0].ClassTitleOutline)</th>*@
             </tr>
         </thead>
         <tbody>
@@ -106,7 +106,7 @@
                 <tr>
                     <td>@item.TitleCode</td>
                     <td>@item.TitleName</td>
-                    <td>@item.ClassTitleOutline</td>
+                    @*<td>@item.ClassTitleOutline</td>*@
                 </tr>
             }
         </tbody>
@@ -121,7 +121,7 @@
             @Html.HiddenFor(m => m[i].Id)
             @Html.HiddenFor(m => m[i].TitleCode)
             @Html.HiddenFor(m => m[i].TitleName)
-            @Html.HiddenFor(m => m[i].ClassTitleOutline)
+            @*@Html.HiddenFor(m => m[i].ClassTitleOutline)*@
         }
 
         <p>
