@@ -49,9 +49,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.TitleName)
                 </th>
-                <th>
+                @*<th>
                     @Html.DisplayNameFor(model => model.ClassTitleOutline)
-                </th>
+                </th>*@
                 <th></th>
             </tr>
         </thead>
@@ -65,9 +65,9 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.TitleName)
                     </td>
-                    <td>
+                    @*<td>
                         @Html.DisplayFor(modelItem => item.ClassTitleOutline)
-                    </td>
+                    </td>*@
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                         @Html.ActionLink("Details", "Details", new { id = item.Id }) |
