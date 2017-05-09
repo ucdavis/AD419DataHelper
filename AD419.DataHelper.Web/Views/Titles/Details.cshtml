@@ -1,5 +1,4 @@
-﻿@using Microsoft.Ajax.Utilities
-@model AD419.DataHelper.Web.ViewModels.TitleCodeDetailViewModel
+﻿@model AD419.DataHelper.Web.ViewModels.TitleCodeDetailViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -104,7 +103,7 @@
         </dt>
 
         <dd>
-            @Html.DropDownListFor(model => model.Title.StaffType, Model.StaffTypesSelectList, htmlAttributes: new { @class = "form-control", @readonly = "readonly" }, optionLabel: "None")
+            @Html.DisplayFor(model => model.StaffTypeLabel)
         </dd>
 
         <dt>
