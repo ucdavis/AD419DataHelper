@@ -5,9 +5,9 @@ using AD419.DataHelper.Web.Models;
 
 namespace AD419.DataHelper.Web.ViewModels
 {
-    public class TitleCodeEditViewModel
+    public class TitleCodeDetailViewModel
     {
-        public TitleCodeEditViewModel(Titles title, List<StaffType> staffTypes)
+ public TitleCodeDetailViewModel(Titles title, List<StaffType> staffTypes)
         {
             Title = title;
             

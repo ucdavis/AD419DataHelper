@@ -331,6 +331,7 @@
     <Compile Include="ViewModels\ExpenseOrgMappingsViewModel.cs" />
     <Compile Include="ViewModels\ExpiringProjectMatch.cs" />
     <Compile Include="ViewModels\SfnClassificationLogicViewModel.cs" />
+    <Compile Include="ViewModels\TitleCodeDetailViewModel.cs" />
     <Compile Include="ViewModels\TitleCodeEditViewModel.cs" />
     <Compile Include="ViewModels\TitleCodeViewModel.cs" />
   </ItemGroup>
@@ -351,7 +352,6 @@
     <Content Include="Content\Images\Interdepartmental.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Images\TitleCodesSelfCertify pg 1.png" />
     <Content Include="Content\Images\TitleCodesSelfCertify.png" />
     <Content Include="Content\typeahead.css" />
     <Content Include="favicon.ico" />
@@ -569,6 +569,7 @@
     <Content Include="Views\SelfCertifyingTitleCodesImport\Display.cshtml" />
     <Content Include="Views\SelfCertifyingTitleCodesImport\_Upload.cshtml" />
     <Content Include="Views\SelfCertifyingTitleCodesImport\_uploadData.cshtml" />
+    <Content Include="Views\Titles\_StaffTypeDescriptions.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -104,7 +104,10 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.StaffType)
+            @{
+                var staffType = Model.StaffType;
+                @(string.IsNullOrWhiteSpace(staffType) ? Html.Raw("None") : Html.Raw(staffType));
+            }
         </dd>
 
         <dt>
