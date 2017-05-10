@@ -63,6 +63,7 @@ namespace AD419.DataHelper.Web.Models
 
         [StringLength(2)]
         [DisplayName("Staff Type")]
+        [DisplayFormat(NullDisplayText = "None")]
         public string StaffType { get; set; }
 
         [DisplayName("Effective Date")]

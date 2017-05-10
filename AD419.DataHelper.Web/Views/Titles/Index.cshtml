@@ -106,10 +106,7 @@
                         @Html.DisplayFor(modelItem => item.EE06CategoryCode)
                     </td>*@
                 <td>
-                    @{
-                        var staffType = item.StaffType;
-                        @(string.IsNullOrWhiteSpace(staffType) ? Html.Raw("None") : Html.Raw(staffType));
-                    }
+                    @Html.DisplayFor(modelItem => item.StaffType)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.EffectiveDate)
