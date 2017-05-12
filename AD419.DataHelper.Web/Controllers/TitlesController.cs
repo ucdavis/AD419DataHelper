@@ -28,12 +28,14 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Titles titles = PpsDbContext.Titles.Find(id);
-            if (titles == null)
+            var title = PpsDbContext.Titles.Find(id);
+            if (title == null)
             {
                 return HttpNotFound();
             }
-            return View(titles);
+            var staffType = DbContext.StaffTypes.Find(title.StaffType);
+            
+            return View(new TitleCodeDetailViewModel(title, staffType));
         }
 
         // GET: Titles/Create
