@@ -18,7 +18,7 @@ namespace AD419.DataHelper.Web.Models
 
         public int SequenceOrder { get; set; }
 
-        [MaxLength(100)]
+        [MaxLength(200)]
         public string Name { get; set; }
 
         [DisplayName("Is Completed?")]
