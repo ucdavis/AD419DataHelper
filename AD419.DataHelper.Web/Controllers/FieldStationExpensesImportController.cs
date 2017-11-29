@@ -112,7 +112,7 @@ namespace AD419.DataHelper.Web.Controllers
             //                                     "Where Id = " + ProcessStatuses.ImportFieldStationExpenses);
 
             // 1. Use the hard-coded status Id to reset ProcessStatus.IsCompleted.
-            DbContext.ClearStatusCompleted((ProcessStatuses.ImportFieldStationExpenses);
+            DbContext.ClearStatusCompleted(ProcessStatuses.ImportFieldStationExpenses);
            
             // 2. Get it's categoryID and reset ProcessCategory.IsCompleted to false.
 
