@@ -35,7 +35,10 @@ namespace AD419.DataHelper.Web.Helpers
 
         public static void ClearStatusCompletedForNextCategory(this AD419DataContext context, ProcessStatuses status)
         {
-            var nextProcessStatus = context.GetNextProcessCategory(status).Statuses.FirstOrDefault();
+            var nextProcessCategory = context.GetNextProcessCategory(status);
+
+            var nextProcessStatus =
+                context.ProcessStatuses.FirstOrDefault(s => s.CategoryId == nextProcessCategory.Id);
 
             if (nextProcessStatus == null)
             {

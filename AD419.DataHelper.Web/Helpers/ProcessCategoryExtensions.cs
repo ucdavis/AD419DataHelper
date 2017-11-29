@@ -8,10 +8,10 @@ namespace AD419.DataHelper.Web.Helpers
     {
         public static ProcessCategory GetProcessCategory(this AD419DataContext context, ProcessStatuses status)
         {
+            // returns the process status for the given ID
             var processStatus = ProcessStatusExtensions.GetProcessStatus(context, status);
 
-            var processCategory =
-                context.ProcessCategories.FirstOrDefault(c => c.Statuses.FirstOrDefault().Equals(processStatus));
+            var processCategory = context.ProcessCategories.FirstOrDefault(c => c.Id == processStatus.CategoryId);
 
             if (processCategory == null)
             {
@@ -26,7 +26,7 @@ namespace AD419.DataHelper.Web.Helpers
         {
             var processCategory = GetProcessCategory(context, status);
 
-            var nextProcessCategory = context.ProcessCategories.FirstOrDefault(c => c.SequenceOrder.Equals(processCategory.SequenceOrder + 1));
+            var nextProcessCategory = context.ProcessCategories.FirstOrDefault(c => c.SequenceOrder == (processCategory.SequenceOrder + 1));
 
             if (nextProcessCategory == null)
             {
