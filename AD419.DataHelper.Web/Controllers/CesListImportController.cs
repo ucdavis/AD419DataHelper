@@ -109,6 +109,14 @@ namespace AD419.DataHelper.Web.Controllers
 
             DbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE CesListImport");
 
+            // 1. Use the hard-coded status Id to reset ProcessStatus.IsCompleted.
+            DbContext.ClearStatusCompleted(ProcessStatuses.ImportCeSpecialists);
+
+            // 2. Get it's categoryID and reset ProcessCategory.IsCompleted to false.
+            DbContext.ClearCategoryCompleted(ProcessStatuses.ImportCeSpecialists);
+
+            DbContext.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
@@ -185,6 +193,13 @@ namespace AD419.DataHelper.Web.Controllers
                 {
                     DbContext.CesListImports.AddRange(cesEntries);
                     DbContext.MarkStatusCompleted(ProcessStatuses.ImportCeSpecialists);
+                    DbContext.MarkCategoryCompleted(ProcessStatuses.ImportCeSpecialists);
+
+                    // We also need to clear the next category and process so that they 
+                    // can be re-inserted in the expenses table as the new values.
+                    DbContext.ClearStatusCompletedForNextCategory(ProcessStatuses.ImportCeSpecialists);
+                    DbContext.ClearCategoryCompletedForNextCategory(ProcessStatuses.ImportCeSpecialists);
+
                     DbContext.SaveChanges();
                 }
                 else

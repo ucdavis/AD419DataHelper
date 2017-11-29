@@ -37,15 +37,19 @@ namespace AD419.DataHelper.Web.Helpers
         {
             var nextProcessCategory = context.GetNextProcessCategory(status);
 
-            var nextProcessStatus =
-                context.ProcessStatuses.FirstOrDefault(s => s.CategoryId == nextProcessCategory.Id);
+            var nextProcessStatuses =
+                context.ProcessStatuses.Where(s => s.CategoryId == nextProcessCategory.Id);
 
-            if (nextProcessStatus == null)
+            if (nextProcessStatuses == null)
             {
-                throw new ArgumentException(string.Format("Could not find next process status for {0}", status));
+                throw new ArgumentException(string.Format("Could not find next process status(es) for {0}", status));
             }
 
-            nextProcessStatus.IsCompleted = false;
+            // Because there may be more than just a single process status to clear.
+            foreach (var nextProcessStatus in nextProcessStatuses)
+            {
+                nextProcessStatus.IsCompleted = false;
+            }
         }
     }
 }
