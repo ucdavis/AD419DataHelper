@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Linq;
 using AD419.DataHelper.Web.Models;
+using WebGrease.Css.Extensions;
 
 namespace AD419.DataHelper.Web.Helpers
 {
     public static class ProcessStatusExtensions
     {
-        public static AD419.DataHelper.Web.Models.ProcessStatus GetProcessStatus(AD419DataContext context, ProcessStatuses status)
+        public static AD419.DataHelper.Web.Models.ProcessStatus GetProcessStatus(AD419DataContext context,
+            ProcessStatuses status)
         {
-            var processStatus = context.ProcessStatuses.Find((int)status);
+            var processStatus = context.ProcessStatuses.Find((int) status);
 
             if (processStatus == null)
             {
@@ -37,8 +39,7 @@ namespace AD419.DataHelper.Web.Helpers
         {
             var nextProcessCategory = context.GetNextProcessCategory(status);
 
-            var nextProcessStatuses =
-                context.ProcessStatuses.Where(s => s.CategoryId == nextProcessCategory.Id);
+            var nextProcessStatuses = nextProcessCategory.Statuses;
 
             if (nextProcessStatuses == null)
             {
@@ -46,10 +47,9 @@ namespace AD419.DataHelper.Web.Helpers
             }
 
             // Because there may be more than just a single process status to clear.
-            foreach (var nextProcessStatus in nextProcessStatuses)
-            {
-                nextProcessStatus.IsCompleted = false;
-            }
+            //nextProcessStatuses.ForEach(n => n.IsCompleted = false);
+            //nextProcessStatuses.All(c => { c.IsCompleted = false; return true; });
+            nextProcessStatuses.Select(c => { c.IsCompleted = false; return c; }).ToList();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using AD419.DataHelper.Web.Models;
 
@@ -26,7 +27,8 @@ namespace AD419.DataHelper.Web.Helpers
         {
             var processCategory = GetProcessCategory(context, status);
 
-            var nextProcessCategory = context.ProcessCategories.FirstOrDefault(c => c.SequenceOrder == (processCategory.SequenceOrder + 1));
+            var nextProcessCategory = context.ProcessCategories.Where(c => c.SequenceOrder == processCategory.SequenceOrder + 1).
+                Include(c => c.Statuses).FirstOrDefault();
 
             if (nextProcessCategory == null)
             {
