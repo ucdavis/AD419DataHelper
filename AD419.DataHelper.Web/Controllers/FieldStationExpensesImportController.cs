@@ -107,25 +107,6 @@ namespace AD419.DataHelper.Web.Controllers
 
             DbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE FieldStationExpenseListImport");
 
-            //DbContext.Database.ExecuteSqlCommand("Update ProcessStatus " +
-            //                                     "Set IsCompleted = 0  " +
-            //                                     "Where Id = " + ProcessStatuses.ImportFieldStationExpenses);
-
-            // 1. Use the hard-coded status Id to reset ProcessStatus.IsCompleted.
-            DbContext.ClearStatusCompleted(ProcessStatuses.ImportFieldStationExpenses);
-           
-            // 2. Get it's categoryID and reset ProcessCategory.IsCompleted to false.
-
-            //DbContext.Database.ExecuteSqlCommand("Update ProcessCategory " +
-            //                                     "Set IsCompleted = 0 " +
-            //                                     "From ProcessCategory t1 " +
-            //                                     "Inner Join ProcessStatus t2 ON t1.Id = t2.CategoryId " +
-            //                                     "Where t2.Id = " + ProcessStatuses.ImportFieldStationExpenses);
-
-             DbContext.ClearCategoryCompleted(ProcessStatuses.ImportFieldStationExpenses);
-
-             DbContext.SaveChanges();
-
             return RedirectToAction("Index");
         }
 
@@ -202,13 +183,6 @@ namespace AD419.DataHelper.Web.Controllers
                 {
                     DbContext.FieldStationExpenseListImports.AddRange(fieldStationExpenseEntries);
                     DbContext.MarkStatusCompleted(ProcessStatuses.ImportFieldStationExpenses);
-                    DbContext.MarkCategoryCompleted(ProcessStatuses.ImportFieldStationExpenses);
-
-                    // We also need to clear the next category and process so that they 
-                    // can be re-inserted in the expenses table as the new values.
-                    DbContext.ClearStatusCompletedForNextCategory(ProcessStatuses.ImportFieldStationExpenses);
-                    DbContext.ClearCategoryCompletedForNextCategory(ProcessStatuses.ImportFieldStationExpenses);
-
                     DbContext.SaveChanges();
                 }
                 else
