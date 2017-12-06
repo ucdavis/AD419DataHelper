@@ -245,7 +245,6 @@
     <Compile Include="Controllers\ExpiredProjectsController.cs" />
     <Compile Include="Controllers\FinalReportsController.cs" />
     <Compile Include="Controllers\Ad419InstructionsController.cs" />
-    <Compile Include="Helpers\ProcessCategoryExtensions.cs" />
     <Compile Include="Services\SelfCertifyingTitleCodesService.cs" />
     <Compile Include="Controllers\TitlesController.cs" />
     <Compile Include="Models\SelfCertifyingTitleCode.cs" />
