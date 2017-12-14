@@ -10,14 +10,14 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: Projects
         public ActionResult Index()
         {
-            var projects = DbContext.AllProjects.ToList();
+            var projects = DbContext.Projects.ToList();
             return View(projects);
         }
 
         // GET: Projects/Details/5
         public ActionResult Details(int id)
         {
-            var project = DbContext.AllProjects.Find(id);
+            var project = DbContext.Projects.Find(id);
             if (project == null)
             {
                 return HttpNotFound();
@@ -37,11 +37,11 @@ namespace AD419.DataHelper.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idProject,Accession,Project,isInterdepartmental,isValid,BeginDate,TermDate,ProjTypeCd,RegionalProjNum,CRIS_DeptID,CoopDepts,CSREES_ContractNo,StatusCd,Title,UpdateDate,inv1,inv2,inv3,inv4,inv5,inv6,IsCurrentAD419Project")] AllProject allProject)
+        public ActionResult Create([Bind(Include = "idProject,Accession,Project,isInterdepartmental,isValid,BeginDate,TermDate,ProjTypeCd,RegionalProjNum,CRIS_DeptID,CoopDepts,CSREES_ContractNo,StatusCd,Title,UpdateDate,inv1,inv2,inv3,inv4,inv5,inv6,IsCurrentAD419Project")] Projects project)
         {
-            if (!ModelState.IsValid) return View(allProject);
+            if (!ModelState.IsValid) return View(project);
 
-            DbContext.AllProjects.Add(allProject);
+            DbContext.Projects.Add(project);
             DbContext.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -49,7 +49,7 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: Projects/Edit/5
         public ActionResult Edit(int id)
         {
-            var project = DbContext.AllProjects.Find(id);
+            var project = DbContext.Projects.Find(id);
             if (project == null)
             {
                 return HttpNotFound();
@@ -63,11 +63,11 @@ namespace AD419.DataHelper.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idProject,Accession,Project,isInterdepartmental,isValid,BeginDate,TermDate,ProjTypeCd,RegionalProjNum,CRIS_DeptID,CoopDepts,CSREES_ContractNo,StatusCd,Title,UpdateDate,inv1,inv2,inv3,inv4,inv5,inv6,IsCurrentAD419Project")] AllProject allProject)
+        public ActionResult Edit([Bind(Include = "idProject,Accession,Project,isInterdepartmental,isValid,BeginDate,TermDate,ProjTypeCd,RegionalProjNum,CRIS_DeptID,CoopDepts,CSREES_ContractNo,StatusCd,Title,UpdateDate,inv1,inv2,inv3,inv4,inv5,inv6,IsCurrentAD419Project")] Projects project)
         {
-            if (!ModelState.IsValid) return View(allProject);
+            if (!ModelState.IsValid) return View(project);
 
-            DbContext.Entry(allProject).State = EntityState.Modified;
+            DbContext.Entry(project).State = EntityState.Modified;
             DbContext.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -75,7 +75,7 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: Projects/Delete/5
         public ActionResult Delete(int id)
         {
-            var project = DbContext.AllProjects.Find(id);
+            var project = DbContext.Projects.Find(id);
             if (project == null)
             {
                 return HttpNotFound();
@@ -89,13 +89,13 @@ namespace AD419.DataHelper.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var project = DbContext.AllProjects.Find(id);
+            var project = DbContext.Projects.Find(id);
             if (project == null)
             {
                 return HttpNotFound();
             }
 
-            DbContext.AllProjects.Remove(project);
+            DbContext.Projects.Remove(project);
             DbContext.SaveChanges();
 
             return RedirectToAction("Index");
@@ -103,7 +103,7 @@ namespace AD419.DataHelper.Web.Controllers
 
         public ActionResult AccessionNumbers()
         {
-            var accessions = DbContext.AllProjects
+            var accessions = DbContext.Projects
                 .Select(p => p.Accession)
                 .Distinct()
                 .ToList();
@@ -117,8 +117,8 @@ namespace AD419.DataHelper.Web.Controllers
 
         public ActionResult FindAccessionNumbers(string query)
         {
-            var accessions = DbContext.AllProjectsNew
-                .Select(p => p.AccessionNumber)
+            var accessions = DbContext.Projects
+                .Select(p => p.Accession)
                 .Where(a => a.Contains(query))
                 .Distinct()
                 .ToList();
@@ -132,7 +132,7 @@ namespace AD419.DataHelper.Web.Controllers
 
         public ActionResult ProjectNumbers()
         {
-            var projects = DbContext.AllProjects
+            var projects = DbContext.Projects
                 .Select(p => p.Project)
                 .Distinct()
                 .ToList();
@@ -146,8 +146,8 @@ namespace AD419.DataHelper.Web.Controllers
 
         public ActionResult FindProjectNumbers(string query)
         {
-            var projects = DbContext.AllProjectsNew
-                .Select(p => p.ProjectNumber)
+            var projects = DbContext.Projects
+                .Select(p => p.Project)
                 .Where(p => p.Contains(query))
                 .Distinct()
                 .ToList();

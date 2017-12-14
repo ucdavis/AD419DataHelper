@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -35,7 +34,7 @@ namespace AD419.DataHelper.Web.Models
     public enum ProcessStatuses
     {
         ImportProjects = 2,
-        ImportInterdepartmentalProjects = 3,
+        ImportCurrentAd419Projects = 3,
         ImportCfdaNumbers = 4,
         ImportCeSpecialists = 5,
         ImportFieldStationExpenses = 6,

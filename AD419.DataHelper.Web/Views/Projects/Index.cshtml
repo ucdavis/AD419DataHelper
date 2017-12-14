@@ -1,11 +1,22 @@
-﻿@model IEnumerable<AD419.DataHelper.Web.Models.AllProject>
+﻿@model IEnumerable<AD419.DataHelper.Web.Models.Projects>
 
 @{
-    ViewBag.Title = "Index - Projects";
+    ViewBag.Title = "Index - List of Current AD-419 Projects";
 }
 
 <h2>@ViewBag.Title</h2>
 
+<div class="pull-right">
+    <button class="btn btn-default display-inline" data-toggle="modal" data-target="#uploadModal"><i class="fa fa-upload"></i> Upload a Current Project Comparison File</button>
+</div>
+
+<div>
+    @if (Model.Any())
+    {
+        <p><br /><h4>AD-419 Data Hepler is currently aware of the following <strong>@Model.Count()</strong> projects to be reported to ANR:</h4></p>
+        <hr />
+    }
+</div>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -40,9 +51,6 @@
             @Html.DisplayNameFor(model => model.CRIS_DeptID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CoopDepts)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.CSREES_ContractNo)
         </th>
         <th>
@@ -73,7 +81,7 @@
             @Html.DisplayNameFor(model => model.inv6)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsCurrentAD419Project)
+            @Html.DisplayNameFor(model => model.Is204Project)
         </th>
         <th></th>
         <th></th>
@@ -111,10 +119,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.CRIS_DeptID)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CoopDepts)
-                </td>
-                <td>
+               <td>
                     @Html.DisplayFor(modelItem => item.CSREES_ContractNo)
                 </td>
                 <td>
@@ -145,7 +150,7 @@
                     @Html.DisplayFor(modelItem => item.inv6)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IsCurrentAD419Project)
+                    @Html.DisplayFor(modelItem => item.Is204Project)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.idProject })

@@ -235,6 +235,8 @@
     <Compile Include="Controllers\ArcCodeAccountExclusionsController.cs" />
     <Compile Include="Controllers\ArcCodesController.cs" />
     <Compile Include="Controllers\C204AcctXProjController.cs" />
+    <Compile Include="Controllers\CurrentAd419ProjectsController.cs" />
+    <Compile Include="Controllers\NifaProjectAccessionNumberImportsController.cs" />
     <Compile Include="Controllers\SelfCertifyingTitleCodesImportController.cs" />
     <Compile Include="Controllers\CesListImportController.cs" />
     <Compile Include="Controllers\CfdaNumberImportsController.cs" />
@@ -246,6 +248,10 @@
     <Compile Include="Controllers\FinalReportsController.cs" />
     <Compile Include="Controllers\Ad419InstructionsController.cs" />
     <Compile Include="Helpers\ProcessCategoryExtensions.cs" />
+    <Compile Include="Models\NifaProjectAccessionNumberImport.cs" />
+    <Compile Include="Models\Projects.cs" />
+    <Compile Include="Models\CurrentAd419Project.cs" />
+    <Compile Include="Services\NifaProjectAccessionNumberImportService.cs" />
     <Compile Include="Services\SelfCertifyingTitleCodesService.cs" />
     <Compile Include="Controllers\TitlesController.cs" />
     <Compile Include="Models\SelfCertifyingTitleCode.cs" />
@@ -272,7 +278,6 @@
     <Compile Include="Helpers\DataTableExtensions.cs" />
     <Compile Include="Helpers\HttpCorrelationIdEnricher.cs" />
     <Compile Include="Helpers\ProcessStatusExtensions.cs" />
-    <Compile Include="Models\CurrentAd419Project.cs" />
     <Compile Include="Models\AllProjectsNew.cs" />
     <Compile Include="Models\ArcCodeSelections.cs" />
     <Compile Include="Models\ArcCodeAccountExclusionSelections.cs" />
@@ -299,7 +304,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AD419DataContext.cs" />
-    <Compile Include="Models\AllProject.cs" />
     <Compile Include="Models\ArcCodeAccountExclusion.cs" />
     <Compile Include="Models\ArcCode.cs" />
     <Compile Include="Models\C204AcctXProj.cs" />
@@ -353,6 +357,8 @@
     <Content Include="Content\Images\Interdepartmental.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Images\NifaProjectAndAccessionNumberImportExample.png" />
+    <Content Include="Content\Images\ProjectsForImport.png" />
     <Content Include="Content\Images\TitleCodesSelfCertify.png" />
     <Content Include="Content\typeahead.css" />
     <Content Include="favicon.ico" />
@@ -388,6 +394,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sample_Forms\TitleCodesSelfCertify.xlsx" />
+    <Content Include="Content\Sample_Forms\NifaProjectAndAccessionNumberImport.xlsx" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
@@ -571,6 +578,24 @@
     <Content Include="Views\SelfCertifyingTitleCodesImport\_Upload.cshtml" />
     <Content Include="Views\SelfCertifyingTitleCodesImport\_uploadData.cshtml" />
     <Content Include="Views\Titles\_StaffTypeDescriptions.cshtml" />
+    <Content Include="Views\CurrentAd419Projects\_CurrentAd419lProjectsUpload.cshtml" />
+    <Content Include="Views\CurrentAd419Projects\_projectsTable.cshtml" />
+    <Content Include="Views\CurrentAd419Projects\_Upload.cshtml" />
+    <Content Include="Views\CurrentAd419Projects\_uploadData.cshtml" />
+    <Content Include="Views\CurrentAd419Projects\Create.cshtml" />
+    <Content Include="Views\CurrentAd419Projects\Delete.cshtml" />
+    <Content Include="Views\CurrentAd419Projects\Details.cshtml" />
+    <Content Include="Views\CurrentAd419Projects\Edit.cshtml" />
+    <Content Include="Views\CurrentAd419Projects\Index.cshtml" />
+    <Content Include="Views\NifaProjectAccessionNumberImports\Create.cshtml" />
+    <Content Include="Views\NifaProjectAccessionNumberImports\Delete.cshtml" />
+    <Content Include="Views\NifaProjectAccessionNumberImports\Details.cshtml" />
+    <Content Include="Views\NifaProjectAccessionNumberImports\Edit.cshtml" />
+    <Content Include="Views\NifaProjectAccessionNumberImports\Index.cshtml" />
+    <Content Include="Views\NifaProjectAccessionNumberImports\_NifaProjectAccessionNumberImportUpload.cshtml" />
+    <Content Include="Views\NifaProjectAccessionNumberImports\_projectsTable.cshtml" />
+    <Content Include="Views\NifaProjectAccessionNumberImports\_Upload.cshtml" />
+    <Content Include="Views\NifaProjectAccessionNumberImports\_uploadData.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

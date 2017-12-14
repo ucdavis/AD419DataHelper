@@ -18,7 +18,7 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<ArcCodeSelections> ArcCodes { get; set; }
 
-        public virtual DbSet<AllProject> AllProjects { get; set; }
+        public virtual DbSet<Projects> Projects { get; set; }
 
         public virtual DbSet<AllProjectsNew> AllProjectsNew { get; set; }
 
@@ -59,6 +59,8 @@ namespace AD419.DataHelper.Web.Models
         public virtual DbSet<TransDocTypesForFTECalc> TransDocTypesForFTECalc { get; set; }
 
         public virtual DbSet<ReportingOrganization> ReportingOrganizations { get; set; }
+
+        public virtual DbSet<NifaProjectAccessionNumberImport> NifaProjectAccessionNumberImports { get; set; }
 
         public virtual DbSet<PrincipalInvestigator> PrincipalInvestigators { get; set; }
 
@@ -367,67 +369,63 @@ namespace AD419.DataHelper.Web.Models
 
         private static void CreateAllProject(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.Accession)
                 .IsFixedLength()
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.Project)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.ProjTypeCd)
                 .IsFixedLength()
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.RegionalProjNum)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.CRIS_DeptID)
                 .IsFixedLength()
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
-                .Property(e => e.CoopDepts)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.CSREES_ContractNo)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.StatusCd)
                 .IsFixedLength()
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.Title)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.inv1)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.inv2)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.inv3)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.inv4)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.inv5)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.inv6)
                 .IsUnicode(false);
         }

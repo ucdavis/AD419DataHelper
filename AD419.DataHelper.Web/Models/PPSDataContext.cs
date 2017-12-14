@@ -1,5 +1,3 @@
-using AD419.DataHelper.Web.Models;
-
 namespace AD419.DataHelper.Web.Models
 {
     using System.Data.Entity;

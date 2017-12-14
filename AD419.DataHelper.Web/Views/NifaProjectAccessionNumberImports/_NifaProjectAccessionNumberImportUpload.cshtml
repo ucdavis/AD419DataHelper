@@ -1,0 +1,16 @@
+﻿
+<div>
+    @using (Html.BeginForm("Upload", "NifaProjectAccessionNumberImports", FormMethod.Post, new { id = "UploadForm", enctype = "multipart/form-data" }))
+    {
+        <div>
+            <h4>Upload the current NIFA Project and Accession Number Excel file:</h4>
+            <i>Please ensure your spreadsheet has the following column names as illustrated below:</i>
+            <p><i>Select <a href="~/Content/Sample_Forms/NifaProjectAndAccessionNumberImport.xlsx" class="btn btn-link">here</a> to download a sample form.</i></p>
+            <img src="/Content/Images/NifaProjectAndAccessionNumberImportExample.png" alt="NIFA Project and AccessionNumbers import example" width="1100">
+        </div>
+        <br />
+        <b>Please select a current NIFA Project and Accession Number Excel file to display:</b><input type="file" id="FileUpload1" name="FileUpload1" required="required" />
+        <br />
+        <input type="submit" value="Display NIFA Project and Accession Number List" title="Upload" class="btn btn-default" />
+    }
+</div>

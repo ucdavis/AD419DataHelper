@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using AD419.DataHelper.Web.Helpers;
 using AD419.DataHelper.Web.Models;
 using AD419.DataHelper.Web.Services;
 using Excel;
@@ -201,7 +200,7 @@ namespace AD419.DataHelper.Web.Controllers
                 if (ModelState.IsValid && list.All(f => f.IsCurrentAd419Project && f.IsPresentInFile && f.IsValidOrgR))
                 {
                     DbContext.Interdepartmentals.AddRange(list);
-                    DbContext.MarkStatusCompleted(ProcessStatuses.ImportInterdepartmentalProjects);
+                    //DbContext.MarkStatusCompleted(ProcessStatuses.ImportInterdepartmentalProjects);
                     DbContext.SaveChanges();
                 }
                 else
