@@ -230,6 +230,7 @@
     <Compile Include="Attributes\UseAntiForgeryTokenOnPostByDefault.cs" />
     <Compile Include="Attributes\ValidateAntiForgeryTokenHeaderOrFormAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AccountWithDifferentTotalsController.cs" />
     <Compile Include="Controllers\AdjustedTotalsController.cs" />
     <Compile Include="Controllers\AllProjectsNewController.cs" />
     <Compile Include="Controllers\ArcCodeAccountExclusionsController.cs" />
@@ -248,6 +249,7 @@
     <Compile Include="Controllers\FinalReportsController.cs" />
     <Compile Include="Controllers\Ad419InstructionsController.cs" />
     <Compile Include="Helpers\ProcessCategoryExtensions.cs" />
+    <Compile Include="Models\AccountWithDifferentTotal.cs" />
     <Compile Include="Models\NifaProjectAccessionNumberImport.cs" />
     <Compile Include="Models\Projects.cs" />
     <Compile Include="Models\CurrentAd419Project.cs" />
@@ -596,6 +598,8 @@
     <Content Include="Views\NifaProjectAccessionNumberImports\_projectsTable.cshtml" />
     <Content Include="Views\NifaProjectAccessionNumberImports\_Upload.cshtml" />
     <Content Include="Views\NifaProjectAccessionNumberImports\_uploadData.cshtml" />
+    <Content Include="Views\AccountWithDifferentTotals\Details.cshtml" />
+    <Content Include="Views\AccountWithDifferentTotals\Index.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

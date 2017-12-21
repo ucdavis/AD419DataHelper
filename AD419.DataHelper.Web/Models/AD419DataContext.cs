@@ -78,6 +78,18 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<StaffType> StaffTypes { get; set; } 
 
+        public virtual DbRawSqlQuery<AccountWithDifferentTotal> GetAccountsWithDifferentTotals(int fiscalYear)
+        {
+            return Database.SqlQuery<AccountWithDifferentTotal>(
+                "SELECT Chart," +
+                "       Account," +
+                "       FFY_ExpensesByARC_Total AS FfyExpensesByArcTotal," +
+                "       ExpensesTotal" +
+                " FROM [dbo].[udf_GetAccountsWithDifferentTotals] (@FiscalYear)",
+                    new SqlParameter("@FiscalYear", SqlDbType.Int) { Value = fiscalYear }
+                );
+        }
+
         public virtual DbRawSqlQuery<AllProjectsNew> GetNewProjects(int fiscalYear)
         {
             return Database.SqlQuery<AllProjectsNew>(
@@ -474,5 +486,7 @@ namespace AD419.DataHelper.Web.Models
                 .Property(e => e.OrgR)
                 .IsUnicode(false);
         }
+
+        public System.Data.Entity.DbSet<AD419.DataHelper.Web.Models.AccountWithDifferentTotal> AccountWithDifferentTotals { get; set; }
     }
 }
