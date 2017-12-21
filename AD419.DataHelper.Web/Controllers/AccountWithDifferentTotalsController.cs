@@ -14,5 +14,25 @@ namespace AD419.DataHelper.Web.Controllers
             var accounts = DbContext.GetAccountsWithDifferentTotals(year);
             return View(accounts.ToList());
         }
+
+        public ActionResult Details(string id)
+        {
+            var query = DbContext.Database.SqlQuery<decimal>(
+                @"
+        SELECT ISNULL(SUM(Expenses),0) FieldStationExpenses
+	    FROM [dbo].[AllExpenses] 
+	    WHERE [DataSource] = '22F'");
+
+            var retval = query.FirstOrDefault();
+
+            return retval;
+            var exclusion = DbContext.C204Exclusions.Find(id);
+            if (exclusion == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(exclusion);
+        }
     }
 }
