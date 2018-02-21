@@ -4,46 +4,48 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-<p/>
+<h2>@ViewBag.Title</h2>
+    <div><h4>Accounts With Different Totals</h4>
+    <hr />
 
-<table class="table">
-    <tr>
-        <th>@Html.DisplayNameFor(model => model.Chart)</th>
-        <th>@Html.DisplayNameFor(model => model.Account)</th>
-        <th>
-            @Html.DisplayNameFor(model => model.FfyExpensesByArcTotal)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ExpensesTotal)
-        </th>
-        <th>Difference</th>
-        <th></th>
-    </tr>
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Chart)</th>
+            <th>@Html.DisplayNameFor(model => model.Account)</th>
+            <th>
+                @Html.DisplayNameFor(model => model.FfyExpensesByArcTotal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpensesTotal)
+            </th>
+            <th>Difference</th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Chart)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Account)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FfyExpensesByArcTotal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExpensesTotal)
-        </td>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Chart)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Account)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FfyExpensesByArcTotal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExpensesTotal)
+                </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.Difference)
-        </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Difference)
+                </td>
 
-        <td>
-            @Html.ActionLink("Details", "Details", new {chart = item.Chart, account = item.Account})
-        </td>
-    </tr>
-}
+                <td>
+                    @Html.ActionLink("Details", "Details", new {chart = item.Chart, account = item.Account})
+                </td>
+            </tr>
+        }
 
-</table>
+    </table></div>
+
