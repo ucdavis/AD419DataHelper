@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -76,7 +77,41 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<SfnClassificationLogic> SfnClassificationLogic { get; set; }
 
-        public virtual DbSet<StaffType> StaffTypes { get; set; } 
+        public virtual DbSet<StaffType> StaffTypes { get; set; }
+
+        public virtual DbRawSqlQuery<AccountWithDifferentTotalDetails> GetAccountWithDifferentTotalDetails(int fiscalYear, string chart, string account)
+        {
+            return Database.SqlQuery<AccountWithDifferentTotalDetails>(
+ 		  @"SELECT 
+			 t1.[Chart]
+			,t1.[Account]
+			,t2.OpFundNum OpFund
+			,t2.AwardNum AccountAwardNum
+			,t3.AwardNum FundAwardNum
+			,PrincipalInvestigatorName AccountPi
+			,t3.PrimaryPIUserName FundPi
+			,t2.AccountName
+			,t3.FundName
+			,t2.Purpose AccountPurpose
+			,t3.ProjectTitle OpFundProjectTitle
+			,t1.FFY_ExpensesByARC_Total AS FfyExpensesByArcTotal
+			,t1.ExpensesTotal Ad419ExpensesTotal 
+			,t2.AwardEndDate
+			,t6.Sfn
+			,t6.ExpirationDate
+			,t2.Org
+			,t2.AnnualReportCode
+		  FROM [dbo].[udf_GetAccountsWithDifferentTotals](@FiscalYear) t1
+		  left outer join FISDatamart.dbo.accounts t2 on t1.Account = t2.Account and t1.chart = t2.chart and year = 9999 --and period = '--'
+		  left outer join FISDatamart.dbo.OPFund t3 ON t2.OpFundNum = t3.FUndNum AND t2.Year = t3.Year and t2.Chart = t3.chart and t2.Period = t3.Period
+		  LEFT OUTER JOIN NewAccountSFN t6 ON t1.Chart = t6.Chart AND t1.Account = t6.Account
+		  WHERE t1.Account = @Account AND t1.Chart = @Chart", 
+                new SqlParameter("@FiscalYear", SqlDbType.Int) { Value = fiscalYear },
+                new SqlParameter("@Chart", SqlDbType.VarChar) { Value = chart },
+                new SqlParameter("@Account", SqlDbType.VarChar) { Value = account }
+            );
+        }
+
 
         public virtual DbRawSqlQuery<AccountWithDifferentTotal> GetAccountsWithDifferentTotals(int fiscalYear)
         {
@@ -488,5 +523,7 @@ namespace AD419.DataHelper.Web.Models
         }
 
         public System.Data.Entity.DbSet<AD419.DataHelper.Web.Models.AccountWithDifferentTotal> AccountWithDifferentTotals { get; set; }
+
+        public System.Data.Entity.DbSet<AD419.DataHelper.Web.Models.AccountWithDifferentTotalDetails> AccountWithDifferentTotalDetails { get; set; }
     }
 }

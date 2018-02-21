@@ -249,6 +249,7 @@
     <Compile Include="Controllers\FinalReportsController.cs" />
     <Compile Include="Controllers\Ad419InstructionsController.cs" />
     <Compile Include="Helpers\ProcessCategoryExtensions.cs" />
+    <Compile Include="Models\AccountWithDifferentTotalDetails.cs" />
     <Compile Include="Models\AccountWithDifferentTotal.cs" />
     <Compile Include="Models\NifaProjectAccessionNumberImport.cs" />
     <Compile Include="Models\Projects.cs" />
@@ -598,8 +599,8 @@
     <Content Include="Views\NifaProjectAccessionNumberImports\_projectsTable.cshtml" />
     <Content Include="Views\NifaProjectAccessionNumberImports\_Upload.cshtml" />
     <Content Include="Views\NifaProjectAccessionNumberImports\_uploadData.cshtml" />
-    <Content Include="Views\AccountWithDifferentTotals\Details.cshtml" />
     <Content Include="Views\AccountWithDifferentTotals\Index.cshtml" />
+    <Content Include="Views\AccountWithDifferentTotals\Details.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

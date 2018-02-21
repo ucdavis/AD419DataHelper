@@ -1,7 +1,5 @@
 ﻿using System.Linq;
-using System.Net;
 using System.Web.Mvc;
-using AD419.DataHelper.Web.Models;
 
 namespace AD419.DataHelper.Web.Controllers
 {
@@ -15,24 +13,13 @@ namespace AD419.DataHelper.Web.Controllers
             return View(accounts.ToList());
         }
 
-        public ActionResult Details(string id)
+        public ActionResult Details(string chart, string account)
         {
-            var query = DbContext.Database.SqlQuery<decimal>(
-                @"
-        SELECT ISNULL(SUM(Expenses),0) FieldStationExpenses
-	    FROM [dbo].[AllExpenses] 
-	    WHERE [DataSource] = '22F'");
+            var year = FiscalYearService.FiscalYear;
+            var accountDetails = DbContext.GetAccountWithDifferentTotalDetails(year, chart, account).FirstOrDefault();
 
-            var retval = query.FirstOrDefault();
-
-            return retval;
-            var exclusion = DbContext.C204Exclusions.Find(id);
-            if (exclusion == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(exclusion);
+            return View(accountDetails);
         }
+
     }
 }

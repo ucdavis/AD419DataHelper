@@ -1,4 +1,4 @@
-﻿@model AD419.DataHelper.Web.Models.AccountWithDifferentTotal
+﻿@model AD419.DataHelper.Web.Models.AccountWithDifferentTotalDetails
 
 @{
     ViewBag.Title = "Details";
@@ -7,9 +7,99 @@
 <h2>Details</h2>
 
 <div>
-    <h4>AccountWithDifferentTotal</h4>
+    <h4>Account With Different Totals Details</h4>
     <hr />
     <dl class="dl-horizontal">
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Chart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Chart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Account)
+        </dt>
+        
+        <dd>
+            @Html.DisplayFor(model => model.Account)
+        </dd>
+        
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OpFund)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OpFund)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountAwardNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccountAwardNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FundAwardNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FundAwardNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountPi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccountPi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FundPi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FundPi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccountName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FundName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FundName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountPurpose)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccountPurpose)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OpFundProjectTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OpFundProjectTitle)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.FfyExpensesByArcTotal)
         </dt>
@@ -19,16 +109,64 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ExpensesTotal)
+            @Html.DisplayNameFor(model => model.Ad419ExpensesTotal)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ExpensesTotal)
+            @Html.DisplayFor(model => model.Ad419ExpensesTotal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Difference)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Difference)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AwardEndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AwardEndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sfn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sfn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpirationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpirationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Org)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Org)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnnualReportCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnnualReportCode)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |*@
     @Html.ActionLink("Back to List", "Index")
 </p>

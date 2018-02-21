@@ -5,12 +5,12 @@
 }
 
 <h2>Index</h2>
+<p/>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
+        <th>@Html.DisplayNameFor(model => model.Chart)</th>
+        <th>@Html.DisplayNameFor(model => model.Account)</th>
         <th>
             @Html.DisplayNameFor(model => model.FfyExpensesByArcTotal)
         </th>
@@ -24,19 +24,25 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.Chart)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Account)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.FfyExpensesByArcTotal)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ExpensesTotal)
         </td>
-            
+
         <td>
             @Html.DisplayFor(modelItem => item.Difference)
         </td>
-           
+
         <td>
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
-        </td> 
+            @Html.ActionLink("Details", "Details", new {chart = item.Chart, account = item.Account})
+        </td>
     </tr>
 }
 
