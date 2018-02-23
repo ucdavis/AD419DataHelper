@@ -153,6 +153,21 @@ namespace AD419.DataHelper.Web.Models
                 "SELECT * FROM [dbo].[udf_GetAccountDetailsForNullOrUnknownDepartments] ()");
         }
 
+        public virtual DbRawSqlQuery<ProjectPiWithMissingEmployeeId> GetProjectPisWithMissingEmployeeId()
+        {
+            return Database.SqlQuery<ProjectPiWithMissingEmployeeId>(
+                @"
+  SELECT t1.[OrgR]
+      ,t1.[Inv1]
+      ,t1.[EmployeeID]
+	  ,t2.Accession
+	  ,t2.Project
+	  ,t2.Title
+  FROM [AD419].[dbo].[ProjectPI] t1
+  INNER JOIN Project t2 ON t1.inv1 = t2.Inv1
+  WHERE t1.EmployeeID IS NULL");
+        }
+
         /// <summary>
         /// Gets a list of missing Labor Transactions for which we the corresponding type of code is
         /// not one we were aware of so it can be reviewed and added, included or excluded from the 
@@ -525,5 +540,7 @@ namespace AD419.DataHelper.Web.Models
         public System.Data.Entity.DbSet<AD419.DataHelper.Web.Models.AccountWithDifferentTotal> AccountWithDifferentTotals { get; set; }
 
         public System.Data.Entity.DbSet<AD419.DataHelper.Web.Models.AccountWithDifferentTotalDetails> AccountWithDifferentTotalDetails { get; set; }
+
+        public System.Data.Entity.DbSet<AD419.DataHelper.Web.Models.ProjectPiWithMissingEmployeeId> ProjectPiWithMissingEmployeeId { get; set; }
     }
 }

@@ -252,6 +252,7 @@
     <Compile Include="Models\AccountWithDifferentTotalDetails.cs" />
     <Compile Include="Models\AccountWithDifferentTotal.cs" />
     <Compile Include="Models\NifaProjectAccessionNumberImport.cs" />
+    <Compile Include="Models\ProjectPiWithMissingEmployeeId.cs" />
     <Compile Include="Models\Projects.cs" />
     <Compile Include="Models\CurrentAd419Project.cs" />
     <Compile Include="Services\NifaProjectAccessionNumberImportService.cs" />
