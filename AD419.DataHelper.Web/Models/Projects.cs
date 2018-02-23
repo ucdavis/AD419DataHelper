@@ -4,7 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AD419.DataHelper.Web.Models
 {
-    public partial class AllProject
+    [Table("Project")]
+    public partial class Projects
     {
         [Required]
         [StringLength(7)]
@@ -43,9 +44,9 @@ namespace AD419.DataHelper.Web.Models
         [Display(Name = "CSREES Dept ID")]
         public string CRIS_DeptID { get; set; }
 
-        [StringLength(50)]
-        [Display(Name = "Coop-Departments")]
-        public string CoopDepts { get; set; }
+        //[StringLength(50)]
+        //[Display(Name = "Coop-Departments")]
+        //public string CoopDepts { get; set; }
 
         [StringLength(20)]
         [Display(Name = "CSREES Contract Num")]
@@ -90,7 +91,8 @@ namespace AD419.DataHelper.Web.Models
         [Key]
         public int idProject { get; set; }
 
-        [Display(Name = "Is Current AD-419 Project?")]
-        public bool? IsCurrentAD419Project { get; set; }
+        [Display(Name = "Is 204 Project?")]
+        [Column("Is204")]
+        public bool? Is204Project { get; set; }
     }
 }

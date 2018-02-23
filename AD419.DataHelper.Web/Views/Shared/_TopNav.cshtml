@@ -1,5 +1,4 @@
 ﻿@using System.Configuration
-@using AD419.DataHelper.Web.Models
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -23,6 +22,8 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Import <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li>@Html.ActionLink("All ANR Projects", "Index", "AllProjectsNew")</li>
+                        <li>@Html.ActionLink("NIFA Projects and Accession Numbers", "Index", "NifaProjectAccessionNumberImports")</li>
+                        @*<li>@Html.ActionLink("Current AD-419 Projects", "Index", "Projects")</li>*@
                         <li>@Html.ActionLink("CFDA Numbers", "Index", "CfdaNumberImports")</li>
                         <li>@Html.ActionLink("CE Specialists", "Index", "CesListImport")</li>
                         <li>@Html.ActionLink("Field Station Expenses", "Index", "FieldStationExpensesImport")</li>
@@ -36,6 +37,7 @@
                         <li>@Html.ActionLink("Annual Report Codes", "Index", "ArcCodes")</li>
                         <li>@Html.ActionLink("ARC/Account Exclusions", "Index", "ArcCodeAccountExclusions")</li>
                         <li>@Html.ActionLink("Project Maintenance", "Index", "AllProjectsNew")</li>
+                        <li>@Html.ActionLink("Current AD-419 Projects", "Index", "Projects")</li>
                         <li>@Html.ActionLink("Non-204 Expired Project Cross Reference", "Index", "ExpiredProjects")</li>
                         <li>@Html.ActionLink("204-20x Project Mappings", "Index", "ProjectMapping")</li>
                         <li>@Html.ActionLink("DOS Codes", "Index", "DosCodes")</li>
@@ -65,6 +67,7 @@
                         <li>@Html.ActionLink("SFN CASE Statement Criteria", "Index", "SfnClassificationLogic")</li>
                         <li>@Html.ActionLink("Generated SFN CASE Statement", "Display", "SfnClassificationLogic")</li>
                         
+                        <li>@Html.ActionLink("Accounts With Different Totals", "Index", "AccountWithDifferentTotals")</li>
                         <li>@Html.ActionLink("FFY Expenses Vs. Adjusted AD-419 Total Comparison", "Index", "AdjustedTotals")</li>
                         <li>@Html.ActionLink("AD-419 Final Reports", "Index", "FinalReports")</li>
                     </ul>

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -18,7 +19,7 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<ArcCodeSelections> ArcCodes { get; set; }
 
-        public virtual DbSet<AllProject> AllProjects { get; set; }
+        public virtual DbSet<Projects> Projects { get; set; }
 
         public virtual DbSet<AllProjectsNew> AllProjectsNew { get; set; }
 
@@ -60,6 +61,8 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<ReportingOrganization> ReportingOrganizations { get; set; }
 
+        public virtual DbSet<NifaProjectAccessionNumberImport> NifaProjectAccessionNumberImports { get; set; }
+
         public virtual DbSet<PrincipalInvestigator> PrincipalInvestigators { get; set; }
 
         public virtual DbSet<PrincipalInvestigatorMatch> PrincipalInvestigatorMatches { get; set; }
@@ -74,7 +77,53 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<SfnClassificationLogic> SfnClassificationLogic { get; set; }
 
-        public virtual DbSet<StaffType> StaffTypes { get; set; } 
+        public virtual DbSet<StaffType> StaffTypes { get; set; }
+
+        public virtual DbRawSqlQuery<AccountWithDifferentTotalDetails> GetAccountWithDifferentTotalDetails(int fiscalYear, string chart, string account)
+        {
+            return Database.SqlQuery<AccountWithDifferentTotalDetails>(
+ 		  @"SELECT 
+			 t1.[Chart]
+			,t1.[Account]
+			,t2.OpFundNum OpFund
+			,t2.AwardNum AccountAwardNum
+			,t3.AwardNum FundAwardNum
+			,PrincipalInvestigatorName AccountPi
+			,t3.PrimaryPIUserName FundPi
+			,t2.AccountName
+			,t3.FundName
+			,t2.Purpose AccountPurpose
+			,t3.ProjectTitle OpFundProjectTitle
+			,t1.FFY_ExpensesByARC_Total AS FfyExpensesByArcTotal
+			,t1.ExpensesTotal Ad419ExpensesTotal 
+			,t2.AwardEndDate
+			,t6.Sfn
+			,t6.ExpirationDate
+			,t2.Org
+			,t2.AnnualReportCode
+		  FROM [dbo].[udf_GetAccountsWithDifferentTotals](@FiscalYear) t1
+		  left outer join FISDatamart.dbo.accounts t2 on t1.Account = t2.Account and t1.chart = t2.chart and year = 9999 --and period = '--'
+		  left outer join FISDatamart.dbo.OPFund t3 ON t2.OpFundNum = t3.FUndNum AND t2.Year = t3.Year and t2.Chart = t3.chart and t2.Period = t3.Period
+		  LEFT OUTER JOIN NewAccountSFN t6 ON t1.Chart = t6.Chart AND t1.Account = t6.Account
+		  WHERE t1.Account = @Account AND t1.Chart = @Chart", 
+                new SqlParameter("@FiscalYear", SqlDbType.Int) { Value = fiscalYear },
+                new SqlParameter("@Chart", SqlDbType.VarChar) { Value = chart },
+                new SqlParameter("@Account", SqlDbType.VarChar) { Value = account }
+            );
+        }
+
+
+        public virtual DbRawSqlQuery<AccountWithDifferentTotal> GetAccountsWithDifferentTotals(int fiscalYear)
+        {
+            return Database.SqlQuery<AccountWithDifferentTotal>(
+                "SELECT Chart," +
+                "       Account," +
+                "       FFY_ExpensesByARC_Total AS FfyExpensesByArcTotal," +
+                "       ExpensesTotal" +
+                " FROM [dbo].[udf_GetAccountsWithDifferentTotals] (@FiscalYear)",
+                    new SqlParameter("@FiscalYear", SqlDbType.Int) { Value = fiscalYear }
+                );
+        }
 
         public virtual DbRawSqlQuery<AllProjectsNew> GetNewProjects(int fiscalYear)
         {
@@ -367,67 +416,63 @@ namespace AD419.DataHelper.Web.Models
 
         private static void CreateAllProject(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.Accession)
                 .IsFixedLength()
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.Project)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.ProjTypeCd)
                 .IsFixedLength()
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.RegionalProjNum)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.CRIS_DeptID)
                 .IsFixedLength()
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
-                .Property(e => e.CoopDepts)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.CSREES_ContractNo)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.StatusCd)
                 .IsFixedLength()
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.Title)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.inv1)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.inv2)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.inv3)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.inv4)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.inv5)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AllProject>()
+            modelBuilder.Entity<Projects>()
                 .Property(e => e.inv6)
                 .IsUnicode(false);
         }
@@ -476,5 +521,9 @@ namespace AD419.DataHelper.Web.Models
                 .Property(e => e.OrgR)
                 .IsUnicode(false);
         }
+
+        public System.Data.Entity.DbSet<AD419.DataHelper.Web.Models.AccountWithDifferentTotal> AccountWithDifferentTotals { get; set; }
+
+        public System.Data.Entity.DbSet<AD419.DataHelper.Web.Models.AccountWithDifferentTotalDetails> AccountWithDifferentTotalDetails { get; set; }
     }
 }

@@ -1,0 +1,199 @@
+﻿@model AD419.DataHelper.Web.Models.AccountWithDifferentTotalDetails
+
+@{
+    ViewBag.Title = "Details - Account With Different Totals";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Typical Reasons for Different Totals and Suggested Corrective Actions</h4>
+   
+    <ul title="Typical Reasons for Exclusions">
+        <li>Expenses are associated with an expired SFN 204 project:
+            <ul><li>Add this account to the ARC/Account exclusions list.</li></ul>
+        </li>
+           
+        <li>Expenses are associated with a chart L account, which was previously excluded on chart 3, but has yet to be added to the ARC/Account exclusion list for chart L:
+            <ul><li>In this case nearly all of the below fields may be blank.</li>
+                <li>Check if the account was previously added to the ARC/Account exclusions list for its chart 3 equivalent.</li>
+                <li>If so, add this account to the ARC/Account exclusions list.</li>
+            </ul>
+        </li>
+
+        <li>Expenses are associated with a sub-award for a project outside of our official list of NIFA projects:
+            <ul><li>Copy the project title* below, typically present in either part of the Account Purpose or the OP fund project title, to locate the project using either of the following techniques:<br/>
+                    <i>*Note make sure you place the project title in quotes; otherwise, the search will probably return zero (0) results.</i>
+                    <ul>
+                        <li>Use the <a href="https://portal.nifa.usda.gov/enterprise-search/project_details/" target="_blank">NIFA enterprise search portal</a> at URL: https://portal.nifa.usda.gov/enterprise-search/project_details.</li>
+                        <li>Or perform a standard web search and select a result that appears on a page located on the https://portal.nifa.usda.gov website.</li>
+                    </ul>
+                </li>
+                <li>Review the project details and verify that the recipient organization and/or performing department are something other than our AES or one within our AES.</li>
+                <li>Add this account, project and accession number to the ARC/Account exclusions list.</li>
+            </ul>
+       </li>
+    </ul>
+    <hr />
+      
+        <dl class="dl-horizontal">
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Chart)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Chart)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Account)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Account)
+            </dd>
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.OpFund)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.OpFund)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AccountAwardNum)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AccountAwardNum)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FundAwardNum)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FundAwardNum)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AccountPi)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AccountPi)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FundPi)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FundPi)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AccountName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AccountName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FundName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FundName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AccountPurpose)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AccountPurpose)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.OpFundProjectTitle)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.OpFundProjectTitle)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FfyExpensesByArcTotal)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FfyExpensesByArcTotal)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Ad419ExpensesTotal)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Ad419ExpensesTotal)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Difference)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Difference)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AwardEndDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AwardEndDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Sfn)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Sfn)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ExpirationDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ExpirationDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Org)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Org)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AnnualReportCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AnnualReportCode)
+            </dd>
+
+        </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |*@
+    @Html.ActionLink("Back to List", "Index")
+</p>

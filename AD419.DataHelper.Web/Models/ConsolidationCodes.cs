@@ -3,8 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AD419.DataHelper.Web.Models
 {
-    using System.Data.Entity;
-
     public partial class ConsolidationCodes
     {
         [Key]

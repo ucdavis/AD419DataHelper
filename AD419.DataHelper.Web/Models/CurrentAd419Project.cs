@@ -4,10 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AD419.DataHelper.Web.Models
 {
-    [Table("AD419CurrentProjectListV")]
+    [Table("CurrentAd419ProjectsImport")]
     public partial class CurrentAd419Project
     {
         [Key]
+        public int Id { get; set; }
+
         [Required]
         [StringLength(20)]
         [Display(Name = "Accession Number")]
@@ -69,7 +71,24 @@ namespace AD419.DataHelper.Web.Models
         [Display(Name = "Interdepartmental?")]
         public bool IsInterdepartmental { get; set; }
 
-        [Display(Name = "Is Associable?")]
-        public bool IsAssociable { get; set; }
+        [Column("IsUCD")]
+        [Display(Name = "Is UC Davis?")]
+        public bool IsUcDavis { get; set; }
+
+        public bool Is204 { get; set; }
+
+        public bool IsExpired { get; set; }
+
+        [NotMapped]
+        public string ShortCode
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(ProjectNumber) || ProjectNumber.Length < 9)
+                    return null;
+
+                return ProjectNumber.Substring(5, 3);
+            }
+        }
     }
 }

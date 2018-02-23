@@ -3,10 +3,8 @@ using System.ComponentModel;
 namespace AD419.DataHelper.Web.Models
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("Titles")]
     public partial class Titles

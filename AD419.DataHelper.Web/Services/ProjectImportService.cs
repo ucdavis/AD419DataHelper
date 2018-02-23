@@ -191,7 +191,11 @@ namespace AD419.DataHelper.Web.Services
 
         public static bool IsExpired(DateTime endDate)
         {
-            return  endDate < _fiscalStartDate;
+            // 2017-12-12 by kjt: Revised from < _fiscalStartDate to
+            // <= _fiscalStartDate as there were issues end dates of 10-01 instead 
+            // of the anticipated 9-30.  This was causing duplicate and unwanted
+            // projects showing up in the current projects list.
+            return endDate <= _fiscalStartDate;
         }
     }
 }
