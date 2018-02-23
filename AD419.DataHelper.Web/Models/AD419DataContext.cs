@@ -163,7 +163,7 @@ namespace AD419.DataHelper.Web.Models
 	  ,t2.Accession
 	  ,t2.Project
 	  ,t2.Title
-  FROM [AD419].[dbo].[ProjectPI] t1
+  FROM [dbo].[ProjectPI] t1
   INNER JOIN Project t2 ON t1.inv1 = t2.Inv1
   WHERE t1.EmployeeID IS NULL");
         }
