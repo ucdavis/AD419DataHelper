@@ -238,6 +238,7 @@
     <Compile Include="Controllers\C204AcctXProjController.cs" />
     <Compile Include="Controllers\CurrentAd419ProjectsController.cs" />
     <Compile Include="Controllers\NifaProjectAccessionNumberImportsController.cs" />
+    <Compile Include="Controllers\ProjectPiWithMissingEmployeeIdsController.cs" />
     <Compile Include="Controllers\SelfCertifyingTitleCodesImportController.cs" />
     <Compile Include="Controllers\CesListImportController.cs" />
     <Compile Include="Controllers\CfdaNumberImportsController.cs" />
@@ -252,6 +253,7 @@
     <Compile Include="Models\AccountWithDifferentTotalDetails.cs" />
     <Compile Include="Models\AccountWithDifferentTotal.cs" />
     <Compile Include="Models\NifaProjectAccessionNumberImport.cs" />
+    <Compile Include="Models\ProjectPi.cs" />
     <Compile Include="Models\ProjectPiWithMissingEmployeeId.cs" />
     <Compile Include="Models\Projects.cs" />
     <Compile Include="Models\CurrentAd419Project.cs" />
@@ -602,6 +604,8 @@
     <Content Include="Views\NifaProjectAccessionNumberImports\_uploadData.cshtml" />
     <Content Include="Views\AccountWithDifferentTotals\Index.cshtml" />
     <Content Include="Views\AccountWithDifferentTotals\Details.cshtml" />
+    <Content Include="Views\ProjectPiWithMissingEmployeeIds\Edit.cshtml" />
+    <Content Include="Views\ProjectPiWithMissingEmployeeIds\Index.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

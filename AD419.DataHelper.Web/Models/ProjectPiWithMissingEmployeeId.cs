@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AD419.DataHelper.Web.Models
 {
-    [Table("Project_PI")]
     public class ProjectPiWithMissingEmployeeId
     {
         [Column(Order = 0), Key]
@@ -14,9 +13,14 @@ namespace AD419.DataHelper.Web.Models
         [Column("Inv1", Order = 1), Key]
         [DisplayName("Project PI")]
         public string Inv1 { get; set; }
-       
+
+        private string _employeeId; 
         [DisplayName("Employee ID")]
-        public string EmployeeId { get; set; }
+        public string EmployeeId
+        {
+            get { return _employeeId ?? "Employee ID not found"; }
+            set { _employeeId = value; } 
+        }
 
         [DisplayName("Accession Number")]
         public string Accession { get; set; }
