@@ -18,7 +18,7 @@ namespace AD419.DataHelper.Web.Models
         [DisplayName("Employee ID")]
         public string EmployeeId
         {
-            get { return _employeeId ?? "Employee ID not found"; }
+            get { return string.IsNullOrWhiteSpace(_employeeId) ? "Employee ID not found" : _employeeId; }
             set { _employeeId = value; } 
         }
 
