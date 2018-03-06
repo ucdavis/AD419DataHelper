@@ -1,0 +1,73 @@
+﻿@model IEnumerable<AD419.DataHelper.Web.Models.ProjectPiWithMissingEmployeeId>
+
+@{
+    ViewBag.Title = "Index - Project PIs with Missing Employee ID";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    @if (Model.Any())
+    {
+        <p>
+            <h4> The following Project PI(s) have Unknown Employee ID(s):</h4>
+            <i>Please locate the employee ID and edit the record accordingly. Thank you!</i>
+        </p>
+        <br/>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrgR)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Inv1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmployeeId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Accession)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Project)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrgR)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Inv1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Accession)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Project)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new {orgR = item.OrgR, inv1 = item.Inv1})
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+    else
+    {
+        <p><br /><h4><i>Note: There are <strong>zero</strong> Project PIs with missing employee IDs that need to be updated at this time. <br/> Please continue on to the next step.</i></h4></p>
+    }
+</div>

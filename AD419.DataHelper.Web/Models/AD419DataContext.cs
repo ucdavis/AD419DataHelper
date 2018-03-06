@@ -71,6 +71,8 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<ProcessCategory> ProcessCategories { get; set; }
 
+        public virtual DbSet<ProjectPi> ProjectPis { get; set; }
+
         public virtual DbSet<ProjectStatus> ProjectStatus { get; set; }
 
         public virtual DbSet<LaborTransaction> LaborTransactions { get; set; }
@@ -151,6 +153,21 @@ namespace AD419.DataHelper.Web.Models
         {
             return Database.SqlQuery<UnknownDepartmentAccountDetail>(
                 "SELECT * FROM [dbo].[udf_GetAccountDetailsForNullOrUnknownDepartments] ()");
+        }
+
+        public virtual DbRawSqlQuery<ProjectPiWithMissingEmployeeId> GetProjectPisWithMissingEmployeeId()
+        {
+            return Database.SqlQuery<ProjectPiWithMissingEmployeeId>(
+                @"
+  SELECT t1.[OrgR]
+      ,t1.[Inv1]
+      ,t1.[EmployeeID]
+	  ,t2.Accession
+	  ,t2.Project
+	  ,t2.Title
+  FROM [dbo].[ProjectPI] t1
+  INNER JOIN Project t2 ON t1.inv1 = t2.Inv1
+  WHERE t1.EmployeeID IS NULL");
         }
 
         /// <summary>
@@ -525,5 +542,7 @@ namespace AD419.DataHelper.Web.Models
         public System.Data.Entity.DbSet<AD419.DataHelper.Web.Models.AccountWithDifferentTotal> AccountWithDifferentTotals { get; set; }
 
         public System.Data.Entity.DbSet<AD419.DataHelper.Web.Models.AccountWithDifferentTotalDetails> AccountWithDifferentTotalDetails { get; set; }
+
+        public System.Data.Entity.DbSet<AD419.DataHelper.Web.Models.ProjectPiWithMissingEmployeeId> ProjectPiWithMissingEmployeeId { get; set; }
     }
 }
