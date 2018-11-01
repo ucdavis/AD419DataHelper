@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Models;
 using AD419.DataHelper.Web.Services;
-using Excel;
+using ExcelDataReader;
 
 namespace AD419.DataHelper.Web.Controllers
 {
@@ -146,10 +146,15 @@ namespace AD419.DataHelper.Web.Controllers
 
             // setup reader
             var excelReader = ExcelReaderFactory.CreateOpenXmlReader(file.InputStream);
-            excelReader.IsFirstRowAsColumnNames = true;
 
             // read data
-            var result = excelReader.AsDataSet();
+            var result = excelReader.AsDataSet(new ExcelDataSetConfiguration()
+            {
+                ConfigureDataTable = (_) => new ExcelDataTableConfiguration()
+                {
+                    UseHeaderRow = true
+                }
+            });
             excelReader.Close();
 
             // transform

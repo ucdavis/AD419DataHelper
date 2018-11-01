@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AD419.DataHelper.Web.Models
 {
-    [Table("CurrentAd419ProjectsImport")]
+    [Table("AD419CurrentProjectListV")]
     public partial class CurrentAd419Project
     {
         [Key]
@@ -71,13 +71,14 @@ namespace AD419.DataHelper.Web.Models
         [Display(Name = "Interdepartmental?")]
         public bool IsInterdepartmental { get; set; }
 
-        [Column("IsUCD")]
+        [NotMapped]
         [Display(Name = "Is UC Davis?")]
-        public bool IsUcDavis { get; set; }
+        public bool IsUcDavis => true;
 
         public bool Is204 { get; set; }
 
-        public bool IsExpired { get; set; }
+        [NotMapped]
+        public bool IsExpired => false;
 
         [NotMapped]
         public string ShortCode
