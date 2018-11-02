@@ -77,6 +77,8 @@ namespace AD419.DataHelper.Web.Models
 
         public bool Is204 { get; set; }
 
+        public bool IsAssociable { get; set; }
+
         [NotMapped]
         public bool IsExpired => false;
 
