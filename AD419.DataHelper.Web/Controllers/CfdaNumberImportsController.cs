@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Helpers;
 using AD419.DataHelper.Web.Models;
-using Excel;
+using ExcelDataReader;
 
 namespace AD419.DataHelper.Web.Controllers
 {
@@ -99,7 +99,9 @@ namespace AD419.DataHelper.Web.Controllers
             //db.CFDANumImport.RemoveRange(all);
             //db.SaveChanges();
 
-            DbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE CFDANumImport");
+            DbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE [dbo].[CFDANumImport]");
+
+            AddNifaDefaultCfdaNum();
 
             return RedirectToAction("Index");
         }
@@ -129,10 +131,16 @@ namespace AD419.DataHelper.Web.Controllers
 
             var cfdaNums = new List<CfdaNumberImport>();
             var fileName = myFile.FileName;
-            var excelReader = ExcelReaderFactory.CreateOpenXmlReader(myFile.InputStream);
-            excelReader.IsFirstRowAsColumnNames = true;
-            var result = excelReader.AsDataSet();
-               
+            var excelReader = ExcelReaderFactory.CreateCsvReader(myFile.InputStream);
+
+            var result = excelReader.AsDataSet(new ExcelDataSetConfiguration()
+            {
+                ConfigureDataTable = (_) => new ExcelDataTableConfiguration()
+                {
+                    UseHeaderRow = true
+                }
+            });
+
             TempData.Add("Message", "Now viewing \"" + fileName + "\".");
             excelReader.Close();
 
@@ -162,7 +170,20 @@ namespace AD419.DataHelper.Web.Controllers
                     DbContext.SaveChanges();
                 }
             }
+
             return RedirectToAction("Index");
+        }
+
+        private void AddNifaDefaultCfdaNum()
+        {
+            var defaultNifaCfdaNum = new CfdaNumberImport()
+            {
+                AgencyOffice = "NATIONAL INSTITUTE OF FOOD AND AGRICULTURE, AGRICULTURE, DEPARTMENT OF",
+                Number = "10.000", Code = "NIFA", ProgramTitle = "MISC ASSIGNED IN SPONSORED PROGRAMS"
+            };
+            DbContext.CfdaNumberImports.Add(defaultNifaCfdaNum);
+            DbContext.SaveChanges();
+
         }
     }
 }

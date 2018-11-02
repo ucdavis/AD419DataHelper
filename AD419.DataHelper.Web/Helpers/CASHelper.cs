@@ -8,7 +8,11 @@ namespace AD419.DataHelper.Web.Helpers
 {
     public static class CasHelper
     {
+#if DEBUG
+        private const string CasBaseUrl = "https://ssodev.ucdavis.edu/cas/";
+#else
         private const string CasBaseUrl = "https://cas.ucdavis.edu/cas";
+#endif
 
         public static string Login()
         {
