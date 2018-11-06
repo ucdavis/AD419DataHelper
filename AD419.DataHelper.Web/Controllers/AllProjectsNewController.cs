@@ -8,6 +8,7 @@ using AD419.DataHelper.Web.Helpers;
 using AD419.DataHelper.Web.Models;
 using AD419.DataHelper.Web.Services;
 using ExcelDataReader;
+using System.Configuration;
 
 namespace AD419.DataHelper.Web.Controllers
 {
@@ -105,7 +106,16 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: AllProjectsNew/Create
         public ActionResult Create()
         {
-            return View();
+            var project = new AllProjectsNew() {
+                ProjectStatus = ConfigurationManager.AppSettings["NewProjectDefaultStatus"],
+                OrganizationName = ConfigurationManager.AppSettings["UcdProjectOrganizationName"],
+                IsUcDavis = true,
+                Is204 = false,
+                IsExpired = false,
+                IsInterdepartmental = false
+        };
+
+            return View(project);
         }
 
         // POST: AllProjectsNew/Create
@@ -115,6 +125,45 @@ namespace AD419.DataHelper.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(AllProjectsNew project)
         {
+            // Update some values if the user entered something incorrectly:
+
+            // Set IsUcd project if OrganizationName matches UCD's:
+            if (ProjectImportService.IsUCDavisProject(project.OrganizationName))
+            {
+                project.IsUcDavis = true;
+            }
+
+            // Set OrganizationName if project is UCD's and OrganizationName is not correct:
+            if (project.IsUcDavis && !ProjectImportService.IsUCDavisProject(project.OrganizationName))
+            {
+                project.OrganizationName = ConfigurationManager.AppSettings["UcdProjectOrganizationName"];
+            }
+            
+            // Set Is204 project if project number matches criteria:
+            if (ProjectImportService.Is204Project(project.ProjectNumber))
+            {
+                    project.Is204 = true;
+            }
+
+            // Set IsInterdepartmental project and OrgR if project number matches criteria: 
+            if (ProjectImportService.IsInterdepartmentalProject(project.ProjectNumber))
+            {
+                project.IsInterdepartmental = true;
+                project.OrgR = "AINT";
+            }
+            
+            // Set IsExpired project 
+            if (!ProjectImportService.IsExpired((System.DateTime)project.ProjectEndDate))
+            {
+                project.IsExpired = false;
+            }
+
+            // Set OrgR if it was left blank and Department Name was provided:
+            if (string.IsNullOrWhiteSpace(project.OrgR) && !string.IsNullOrWhiteSpace(project.Department))
+            {
+                project.OrgR = ProjectImportService.GetDepartmentCode(project.Department);
+            }
+            
             if (!ModelState.IsValid) return View(project);
 
             DbContext.AllProjectsNew.Add(project);

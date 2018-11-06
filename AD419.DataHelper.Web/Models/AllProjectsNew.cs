@@ -15,6 +15,7 @@ namespace AD419.DataHelper.Web.Models
         [Display(Name = "Accession Number")]
         public string AccessionNumber { get; set; }
 
+        [Required]
         [StringLength(255)]
         [Display(Name = "Project Number")]
         public string ProjectNumber { get; set; }
