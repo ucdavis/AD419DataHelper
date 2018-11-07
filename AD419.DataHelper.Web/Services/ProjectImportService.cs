@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using AD419.DataHelper.Web.Helpers;
 using AD419.DataHelper.Web.Models;
+using System.Configuration;
 
 namespace AD419.DataHelper.Web.Services
 {
@@ -164,7 +165,7 @@ namespace AD419.DataHelper.Web.Services
 
         public static bool IsUCDavisProject(string organization)
         {
-            return organization.StartsWith("SAES - UNIVERSITY OF CALIFORNIA AT DAVIS",
+            return organization.StartsWith(ConfigurationManager.AppSettings["UcdProjectOrganizationName"],
                 StringComparison.OrdinalIgnoreCase);
         }
 

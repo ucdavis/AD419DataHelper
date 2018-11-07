@@ -56,13 +56,13 @@
             </div>
         </div>
 
-        @*<div class="form-group">
+        <div class="form-group">
             @Html.LabelFor(model => model.OrganizationName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.OrganizationName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.OrganizationName, "", new { @class = "text-danger" })
             </div>
-        </div>*@
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.OrgR, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -126,8 +126,17 @@
                 @Html.EditorFor(model => model.ProjectStatus, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ProjectStatus, "", new { @class = "text-danger" })
             </div>
-        </div>
 
+            <div class="form-group">
+                @Html.LabelFor(model => model.Is204, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Is204, new { htmlAttributes = new { @class = "form-control" } }))
+                        @Html.ValidationMessageFor(model => model.Is204, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+ 
         <div class="form-group">
             @Html.LabelFor(model => model.IsInterdepartmental, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
