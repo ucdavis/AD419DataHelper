@@ -158,7 +158,7 @@ namespace AD419.DataHelper.Web.Controllers
                 project.IsExpired = false;
             }
 
-            // Set OrgR if it was left blank and Department Name was provided:
+            // Set OrgR if it was left blank and Department was provided:
             if (string.IsNullOrWhiteSpace(project.OrgR) && !string.IsNullOrWhiteSpace(project.Department))
             {
                 project.OrgR = ProjectImportService.GetDepartmentCode(project.Department);
