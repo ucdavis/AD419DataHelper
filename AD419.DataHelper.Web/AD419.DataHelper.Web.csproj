@@ -243,6 +243,7 @@
     <Compile Include="Controllers\C204AcctXProjController.cs" />
     <Compile Include="Controllers\CurrentAd419ProjectsController.cs" />
     <Compile Include="Controllers\NifaProjectAccessionNumberImportsController.cs" />
+    <Compile Include="Controllers\AccountsWithMissingSfnController.cs" />
     <Compile Include="Controllers\ProjectPiWithMissingEmployeeIdsController.cs" />
     <Compile Include="Controllers\SelfCertifyingTitleCodesImportController.cs" />
     <Compile Include="Controllers\CesListImportController.cs" />
@@ -257,6 +258,7 @@
     <Compile Include="Helpers\ProcessCategoryExtensions.cs" />
     <Compile Include="Models\AccountWithDifferentTotalDetails.cs" />
     <Compile Include="Models\AccountWithDifferentTotal.cs" />
+    <Compile Include="Models\NewAccountSfn.cs" />
     <Compile Include="Models\NifaProjectAccessionNumberImport.cs" />
     <Compile Include="Models\ProjectPi.cs" />
     <Compile Include="Models\ProjectPiWithMissingEmployeeId.cs" />
