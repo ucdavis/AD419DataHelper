@@ -10,8 +10,10 @@ namespace AD419.DataHelper.Web.Models
         [Key]
         public int Id { get; set; }
 
+        [Required]
         public string Chart { get; set; }
 
+        [Required]
         [Display(Name = "Expense OrgR")]
         public string ExpenseOrgR { get; set; }
 
