@@ -12,10 +12,13 @@ namespace AD419.DataHelper.Web.Models
 
         public string Chart { get; set; }
 
+        [Display(Name = "Expense OrgR")]
         public string ExpenseOrgR { get; set; }
 
+        [Display(Name = "Expense Org")]
         public string ExpenseOrg { get; set; }
 
+        [Display(Name = "AD-419 OrgR")]
         public string AD419OrgR { get; set; }
     }
 }

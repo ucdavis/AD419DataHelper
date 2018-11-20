@@ -70,7 +70,9 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return HttpNotFound();
             }
-            return View(expenseOrgMapping);
+
+            var expenseOrgMappingViewModel = new ExpenseOrgMappingsEditViewModel(expenseOrgMapping, DbContext.ReportingOrganizations.ToList());
+            return View(expenseOrgMappingViewModel);
         }
 
         // POST: ExpenseOrgMappings/Edit/5
