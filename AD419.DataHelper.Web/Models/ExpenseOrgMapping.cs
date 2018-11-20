@@ -18,6 +18,7 @@ namespace AD419.DataHelper.Web.Models
         [Display(Name = "Expense Org")]
         public string ExpenseOrg { get; set; }
 
+        [Required]
         [Display(Name = "AD-419 OrgR")]
         public string AD419OrgR { get; set; }
     }
