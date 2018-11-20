@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace AD419.DataHelper.Web.Models
 {
+    [Table("NewAccountSFN")]
     public partial class NewAccountSfn
     {
         [Column(Order = 0), Key]
@@ -15,11 +16,12 @@ namespace AD419.DataHelper.Web.Models
         public string Org { get; set; }
 
         [Display(Name = "Is CE?")]
-        public bool IsCE { get; set; }
+        [Column("isCE")]
+        public int? IsCE { get; set; }
 
         [Required]
         [Display(Name = "SFN")]
-        public bool SFN { get; set; }
+        public string SFN { get; set; }
 
         [Display(Name = "CFDA Num")]
         public string CFDANum { get; set; }

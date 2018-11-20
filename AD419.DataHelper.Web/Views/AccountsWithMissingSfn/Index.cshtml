@@ -1,0 +1,141 @@
+﻿@model IEnumerable<AD419.DataHelper.Web.Models.NewAccountSfn>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Org)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsCE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SFN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CFDANum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OpFundGroupCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OpFundNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FederalAgencyCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NIHDocNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SponsorCategoryCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SponsorCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Accounts_AwardNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OpFund_AwardNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpirationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AwardEndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsAccountInFinancialData)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubFundGroupNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubFundGroupTypeCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsNIH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsFederalFund)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsNIFA)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Org)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsCE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SFN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CFDANum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OpFundGroupCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OpFundNum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FederalAgencyCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NIHDocNum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SponsorCategoryCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SponsorCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Accounts_AwardNum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OpFund_AwardNum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpirationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AwardEndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsAccountInFinancialData)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubFundGroupNum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubFundGroupTypeCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsNIH)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsFederalFund)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsNIFA)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { Chart = item.Chart, Account = item.Account }) |
+            @Html.ActionLink("Details", "Details", new { Chart = item.Chart, Account = item.Account })  |
+            @Html.ActionLink("Delete", "Delete", new { Chart = item.Chart, Account = item.Account })
+        </td>
+    </tr>
+}
+
+</table>

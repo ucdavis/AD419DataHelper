@@ -613,6 +613,8 @@
     <Content Include="Views\AccountWithDifferentTotals\Details.cshtml" />
     <Content Include="Views\ProjectPiWithMissingEmployeeIds\Edit.cshtml" />
     <Content Include="Views\ProjectPiWithMissingEmployeeIds\Index.cshtml" />
+    <Content Include="Views\AccountsWithMissingSfn\Index.cshtml" />
+    <Content Include="Views\AccountsWithMissingSfn\Edit.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
