@@ -18,7 +18,7 @@ namespace AD419.DataHelper.Web.ViewModels
             {
                 reportingOrgsSelectList.Add(new SelectListItem()
                 {
-                    Text = string.Format("{0} ({1})", reportingOrg.ShortName, reportingOrg.Code),
+                    Text = string.Format("{1} - {0} ", reportingOrg.ShortName, reportingOrg.Code),
                     Value = reportingOrg.Code,
                     Selected =
                     (!string.IsNullOrEmpty(ExpenseOrgMapping.AD419OrgR) &&
