@@ -14,7 +14,7 @@ namespace AD419.DataHelper.Web.ViewModels
             // Initialize reporting orgs select list:
             var reportingOrgsSelectList = new List<SelectListItem>();
 
-            foreach (var reportingOrg in reportingOrgs.ToList().OrderBy(r => r.Code))
+            foreach (var reportingOrg in reportingOrgs.OrderBy(r => r.Code))
             {
                 reportingOrgsSelectList.Add(new SelectListItem()
                 {
