@@ -1,20 +1,33 @@
 ﻿@model IEnumerable<AD419.DataHelper.Web.Models.NewAccountSfn>
+@{
+    ViewBag.Title = "Accounts with a Blank or Missing SFN";
+}
+<div>
+    @if (Model.Count<AD419.DataHelper.Web.Models.NewAccountSfn>() > 0)
+    {
+        <h2>@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Org)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsCE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SFN)
-        </th>
-        <th>
+        <h4>The following accounts have a blank or missing SFN:</h4>
+        <i>Please classify all accounts by selecting edit and entering a valid SFN for each account listed below.</i>
+        <table id="accountsWithMissingSfnTable" class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Chart)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Account)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Org)
+                    </th>
+                    @*<th>
+                        @Html.DisplayNameFor(model => model.IsCE)
+                    </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.SFN)
+                    </th>
+                    @*<th>
             @Html.DisplayNameFor(model => model.CFDANum)
         </th>
         <th>
@@ -64,78 +77,102 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.IsNIFA)
-        </th>
-        <th></th>
-    </tr>
+        </th>*@
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Org)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsCE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SFN)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CFDANum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OpFundGroupCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OpFundNum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FederalAgencyCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NIHDocNum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SponsorCategoryCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SponsorCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Accounts_AwardNum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OpFund_AwardNum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExpirationDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AwardEndDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsAccountInFinancialData)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SubFundGroupNum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SubFundGroupTypeCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsNIH)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsFederalFund)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsNIFA)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { Chart = item.Chart, Account = item.Account }) |
-            @Html.ActionLink("Details", "Details", new { Chart = item.Chart, Account = item.Account })  |
-            @Html.ActionLink("Delete", "Delete", new { Chart = item.Chart, Account = item.Account })
-        </td>
-    </tr>
-}
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Chart)
+                    </td>
 
-</table>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Account)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Org)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.IsCE)
+                    </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SFN)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.CFDANum)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OpFundGroupCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OpFundNum)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FederalAgencyCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NIHDocNum)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SponsorCategoryCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SponsorCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Accounts_AwardNum)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OpFund_AwardNum)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ExpirationDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AwardEndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsAccountInFinancialData)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SubFundGroupNum)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SubFundGroupTypeCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsNIH)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsFederalFund)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsNIFA)
+                    </td>*@
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { Chart = item.Chart, Account = item.Account }) |
+                        @Html.ActionLink("Details", "Details", new { Chart = item.Chart, Account = item.Account })  @*|
+            @Html.ActionLink("Delete", "Delete", new { Chart = item.Chart, Account = item.Account })*@
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p><br /><h4><i>Note: There are <strong>zero</strong> accounts with a blank or missing SFN that need to be classified at this time.</i></h4></p>
+        <hr />
+        <div>
+            @Html.ActionLink("Back to Status List", "Index","Status")
+        </div>
+    }
+</div>
+    
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@

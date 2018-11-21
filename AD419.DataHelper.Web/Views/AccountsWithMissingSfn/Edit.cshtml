@@ -1,26 +1,41 @@
-﻿@model AD419.DataHelper.Web.Models.NewAccountSfn
+﻿@model AD419.DataHelper.Web.ViewModels.AccountsWithMissingSfnEditViewModel
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>New Account Sfn</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Chart)
+<div class="form-horizontal">
+    <h4>Edit - SFN for Account</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.NewAccountSfn.Chart) 
+    @Html.HiddenFor(model => model.NewAccountSfn.Account)
 
-        @Html.HiddenFor(model => model.Account)
+    <div class="form-group">
+        @Html.LabelFor(model => model.NewAccountSfn.Chart, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NewAccountSfn.Chart, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.NewAccountSfn.Chart, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Org, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.NewAccountSfn.Account, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Org, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.Org, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.NewAccountSfn.Account, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.NewAccountSfn.Account, "", new { @class = "text-danger" })
             </div>
         </div>
+  
+    <div class="form-group">
+        @Html.LabelFor(model => model.NewAccountSfn.Org, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NewAccountSfn.Org, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.NewAccountSfn.Org, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
-        <div class="form-group">
+    @*<div class="form-group">
             @Html.LabelFor(model => model.IsCE, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
@@ -28,19 +43,17 @@
                     @Html.ValidationMessageFor(model => model.IsCE, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
+        </div>*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.SFN, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.SFN)
-                    @Html.ValidationMessageFor(model => model.SFN, "", new { @class = "text-danger" })
-                </div>
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.NewAccountSfn.SFN, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.NewAccountSfn.SFN, Model.SfnSelectList, htmlAttributes: new { @class = "form-control" }, optionLabel: "None")
+            @Html.ValidationMessageFor(model => model.NewAccountSfn.SFN, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
+    @*<div class="form-group">
             @Html.LabelFor(model => model.CFDANum, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.CFDANum, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
@@ -182,14 +195,14 @@
                     @Html.ValidationMessageFor(model => model.IsNIFA, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
+        </div>*@
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
         </div>
     </div>
+</div>
 }
 
 <div>

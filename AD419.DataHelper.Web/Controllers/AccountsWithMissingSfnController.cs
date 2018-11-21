@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Models;
+using AD419.DataHelper.Web.ViewModels;
 
 namespace AD419.DataHelper.Web.Controllers
 {
@@ -14,6 +15,17 @@ namespace AD419.DataHelper.Web.Controllers
             return View(DbContext.GetAccountsWithMissingSfn().ToList());
         }
 
+        public ActionResult Details(string chart, string account)
+        {
+            if (string.IsNullOrWhiteSpace(chart) || string.IsNullOrWhiteSpace(account))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+                var accountDetails = DbContext.AccountsWithMissingSfns.Find(chart, account);
+
+            return View(accountDetails);
+        }
+
         // GET: AccountsWithMissingSfn/Edit/5
         public ActionResult Edit(string Chart, string Account)
         {
@@ -21,12 +33,14 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var accountWithMissingSfn = DbContext.NewAccountSfns.Find(Chart, Account);
+            var accountWithMissingSfn = DbContext.AccountsWithMissingSfns.Find(Chart, Account);
             if (accountWithMissingSfn == null)
             {
                 return HttpNotFound();
             }
-            return View(accountWithMissingSfn);
+
+            var viewModel = new AccountsWithMissingSfnEditViewModel(accountWithMissingSfn, DbContext.SfnListItems.ToList());
+            return View(viewModel);
         }
 
         // POST: AccountsWithMissingSfn/Edit/5
@@ -34,15 +48,22 @@ namespace AD419.DataHelper.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Sfn")] NewAccountSfn accountWithMissingSfn)
+        public ActionResult Edit([Bind(Include = "Chart, Account, Sfn")] NewAccountSfn newAccountSfn)
         {
             if (ModelState.IsValid)
             {
-                DbContext.Entry(accountWithMissingSfn).State = EntityState.Modified;
+                var currentRecord = DbContext.NewAccountSfns.Find(newAccountSfn.Chart, newAccountSfn.Account);
+                if (currentRecord == null)
+                {
+                    return HttpNotFound();
+                }
+                currentRecord.SFN = newAccountSfn.SFN;
+
+                DbContext.Entry(currentRecord).State = EntityState.Modified;
                 DbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(accountWithMissingSfn);
+            return View(newAccountSfn);
         }
     }
 }

@@ -83,6 +83,10 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<NewAccountSfn> NewAccountSfns { get; set; }
 
+        public virtual DbSet<AccountsWithMissingSfn> AccountsWithMissingSfns { get; set; }
+
+        public virtual DbSet<SfnListItem> SfnListItems { get; set; }
+
         public virtual DbRawSqlQuery<AccountWithDifferentTotalDetails> GetAccountWithDifferentTotalDetails(int fiscalYear, string chart, string account)
         {
             return Database.SqlQuery<AccountWithDifferentTotalDetails>(
