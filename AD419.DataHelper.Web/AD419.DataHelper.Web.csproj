@@ -348,6 +348,7 @@
     <Compile Include="ViewModels\ExpiringProjectMatch.cs" />
     <Compile Include="ViewModels\SfnClassificationLogicViewModel.cs" />
     <Compile Include="ViewModels\TitleCodeDetailViewModel.cs" />
+    <Compile Include="ViewModels\ExpenseOrgMappingsEditViewModel.cs" />
     <Compile Include="ViewModels\TitleCodeEditViewModel.cs" />
     <Compile Include="ViewModels\TitleCodeViewModel.cs" />
   </ItemGroup>
