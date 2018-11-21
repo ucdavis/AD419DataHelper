@@ -14,7 +14,7 @@ namespace AD419.DataHelper.Web.ViewModels
             // Initialize staff types select list:
             var staffTypesSelectList = new List<SelectListItem>();
 
-            foreach (var staffType in staffTypes.ToList().OrderBy(s => s.Ad419LineNum).ThenBy(s => s.StaffTypeCode))
+            foreach (var staffType in staffTypes.OrderBy(s => s.Ad419LineNum).ThenBy(s => s.StaffTypeCode))
             {
                 staffTypesSelectList.Add(new SelectListItem()
                 {
