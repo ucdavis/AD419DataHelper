@@ -243,6 +243,7 @@
     <Compile Include="Controllers\C204AcctXProjController.cs" />
     <Compile Include="Controllers\CurrentAd419ProjectsController.cs" />
     <Compile Include="Controllers\NifaProjectAccessionNumberImportsController.cs" />
+    <Compile Include="Controllers\AccountsWithMissingSfnController.cs" />
     <Compile Include="Controllers\ProjectPiWithMissingEmployeeIdsController.cs" />
     <Compile Include="Controllers\SelfCertifyingTitleCodesImportController.cs" />
     <Compile Include="Controllers\CesListImportController.cs" />
@@ -255,13 +256,16 @@
     <Compile Include="Controllers\FinalReportsController.cs" />
     <Compile Include="Controllers\Ad419InstructionsController.cs" />
     <Compile Include="Helpers\ProcessCategoryExtensions.cs" />
+    <Compile Include="Models\AccountsWithMissingSfn.cs" />
     <Compile Include="Models\AccountWithDifferentTotalDetails.cs" />
     <Compile Include="Models\AccountWithDifferentTotal.cs" />
+    <Compile Include="Models\NewAccountSfn.cs" />
     <Compile Include="Models\NifaProjectAccessionNumberImport.cs" />
     <Compile Include="Models\ProjectPi.cs" />
     <Compile Include="Models\ProjectPiWithMissingEmployeeId.cs" />
     <Compile Include="Models\Projects.cs" />
     <Compile Include="Models\CurrentAd419Project.cs" />
+    <Compile Include="Models\SfnListItem.cs" />
     <Compile Include="Services\NifaProjectAccessionNumberImportService.cs" />
     <Compile Include="Services\SelfCertifyingTitleCodesService.cs" />
     <Compile Include="Controllers\TitlesController.cs" />
@@ -344,6 +348,7 @@
     <Compile Include="Services\FieldStationExpenseService.cs" />
     <Compile Include="Services\ProjectImportService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AccountsWithMissingSfnEditViewModel.cs" />
     <Compile Include="ViewModels\ExpenseOrgMappingsViewModel.cs" />
     <Compile Include="ViewModels\ExpiringProjectMatch.cs" />
     <Compile Include="ViewModels\SfnClassificationLogicViewModel.cs" />
@@ -612,6 +617,9 @@
     <Content Include="Views\AccountWithDifferentTotals\Details.cshtml" />
     <Content Include="Views\ProjectPiWithMissingEmployeeIds\Edit.cshtml" />
     <Content Include="Views\ProjectPiWithMissingEmployeeIds\Index.cshtml" />
+    <Content Include="Views\AccountsWithMissingSfn\Index.cshtml" />
+    <Content Include="Views\AccountsWithMissingSfn\Edit.cshtml" />
+    <Content Include="Views\AccountsWithMissingSfn\Details.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

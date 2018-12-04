@@ -1,0 +1,243 @@
+﻿@model AD419.DataHelper.Web.Models.AccountsWithMissingSfn
+
+<div>
+    <h4>Account With Missing SFN</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Chart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Chart)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Account)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Account)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Org)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Org)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnnualReportCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnnualReportCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FfyExpensesByArcTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FfyExpensesByArcTotal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CFDANum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CFDANum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OpFundGroupCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OpFundGroupCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OpFundNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OpFundNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubFundGroupNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubFundGroupNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubFundGroupTypeCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubFundGroupTypeCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FederalAgencyCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FederalAgencyCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NIHDocNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NIHDocNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SponsorCategoryCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SponsorCategoryCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SponsorCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SponsorCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Accounts_AwardNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Accounts_AwardNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OpFund_AwardNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OpFund_AwardNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountPi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccountPi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FundPi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FundPi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccountName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FundName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FundName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountPurpose)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccountPurpose)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OpFundProjectTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OpFundProjectTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpirationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpirationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AwardEndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AwardEndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsAccountInFinancialData)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsAccountInFinancialData)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsCE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsCE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsNIH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsNIH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsFederalFund)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsFederalFund)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsNIFA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsNIFA)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { Chart = Model.Chart, Account=Model.Account }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

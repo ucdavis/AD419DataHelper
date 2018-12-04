@@ -73,5 +73,9 @@ namespace AD419.DataHelper.Web.Models
         public virtual DbSet<SelfCertifyingTitleCode> SelfCertifyingTitleCodes { get; set; }
 
         public System.Data.Entity.DbSet<AD419.DataHelper.Web.Models.ProjectPiWithMissingEmployeeId> ProjectPiWithMissingEmployeeIds { get; set; }
+
+        public System.Data.Entity.DbSet<AD419.DataHelper.Web.Models.NewAccountSfn> NewAccountSfns { get; set; }
+
+        public System.Data.Entity.DbSet<AD419.DataHelper.Web.Models.AccountsWithMissingSfn> AccountsWithMissingSfns { get; set; }
     }
 }

@@ -81,6 +81,12 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<StaffType> StaffTypes { get; set; }
 
+        public virtual DbSet<NewAccountSfn> NewAccountSfns { get; set; }
+
+        public virtual DbSet<AccountsWithMissingSfn> AccountsWithMissingSfns { get; set; }
+
+        public virtual DbSet<SfnListItem> SfnListItems { get; set; }
+
         public virtual DbRawSqlQuery<AccountWithDifferentTotalDetails> GetAccountWithDifferentTotalDetails(int fiscalYear, string chart, string account)
         {
             return Database.SqlQuery<AccountWithDifferentTotalDetails>(
@@ -105,7 +111,7 @@ namespace AD419.DataHelper.Web.Models
 			,t2.AnnualReportCode
 		  FROM [dbo].[udf_GetAccountsWithDifferentTotals](@FiscalYear) t1
 		  left outer join FISDatamart.dbo.accounts t2 on t1.Account = t2.Account and t1.chart = t2.chart and year = 9999 --and period = '--'
-		  left outer join FISDatamart.dbo.OPFund t3 ON t2.OpFundNum = t3.FUndNum AND t2.Year = t3.Year and t2.Chart = t3.chart and t2.Period = t3.Period
+		  left outer join FISDatamart.dbo.OPFund t3 ON t2.OpFundNum = t3.FundNum AND t2.Year = t3.Year and t2.Chart = t3.chart and t2.Period = t3.Period
 		  LEFT OUTER JOIN NewAccountSFN t6 ON t1.Chart = t6.Chart AND t1.Account = t6.Account
 		  WHERE t1.Account = @Account AND t1.Chart = @Chart", 
                 new SqlParameter("@FiscalYear", SqlDbType.Int) { Value = fiscalYear },
@@ -168,6 +174,41 @@ namespace AD419.DataHelper.Web.Models
   FROM [dbo].[ProjectPI] t1
   INNER JOIN Project t2 ON t1.inv1 = t2.Inv1
   WHERE t1.EmployeeID IS NULL");
+        }
+
+        /// <summary>
+        /// Gets a list of accounts that the system could not automatically classify, which
+        /// have expenses in the financial data.
+        /// </summary>
+        /// <returns></returns>
+        public virtual DbRawSqlQuery<NewAccountSfn> GetAccountsWithMissingSfn()
+        {
+            return Database.SqlQuery<NewAccountSfn>(
+                @"SELECT
+                       [Chart]
+                      ,[Account]
+                      ,[Org]
+                      ,[isCE]
+                      ,[SFN]
+                      ,[CFDANum]
+                      ,[OpFundGroupCode]
+                      ,[OpFundNum]
+                      ,[FederalAgencyCode]
+                      ,[NIHDocNum]
+                      ,[SponsorCategoryCode]
+                      ,[SponsorCode]
+                      ,[Accounts_AwardNum]
+                      ,[OpFund_AwardNum]
+                      ,[ExpirationDate]
+                      ,[AwardEndDate]
+                      ,[IsAccountInFinancialData]
+                      ,[SubFundGroupNum]
+                      ,[SubFundGroupTypeCode]
+                      ,[IsNIH]
+                      ,[IsFederalFund]
+                      ,[isNIFA]
+              FROM [dbo].[NewAccountSFN]
+              WHERE SFN IS NULL AND IsAccountInFinancialData = 1");
         }
 
         /// <summary>
