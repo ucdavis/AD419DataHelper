@@ -52,7 +52,7 @@ namespace AD419.DataHelper.Web.Models
 
         [Display(Name = "Expiration Date")]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
-        public DateTime ExpirationDate { get; set; }
+        public DateTime? ExpirationDate { get; set; }
 
         [Display(Name = "Award End Date")]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]

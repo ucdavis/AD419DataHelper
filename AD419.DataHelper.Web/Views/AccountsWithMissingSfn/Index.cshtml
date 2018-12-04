@@ -7,7 +7,7 @@
     {
         <h2>@ViewBag.Title</h2>
 
-        <h4>The following accounts have a blank or missing SFN:</h4>
+        <h4>The following @Model.Count() accounts have a blank or missing SFN:</h4>
         <i>Please classify all accounts by selecting edit and entering a valid SFN for each account listed below.</i>
         <table id="accountsWithMissingSfnTable" class="table">
             <thead>
