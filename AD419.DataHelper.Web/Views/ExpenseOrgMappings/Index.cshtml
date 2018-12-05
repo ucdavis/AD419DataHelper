@@ -101,7 +101,7 @@
                         @Html.DisplayFor(modelItem => item.Purpose)
                     </td>
                     <td>
-                        @Html.ActionLink("Create", "Create", new { Chart = item.Chart, OrgR = item.OrgR, Org = item.Org, SuggestedOrgR = item.SuggestedOrgR })
+                        @Html.ActionLink("Create Remap OrgR", "Create", new { Chart = item.Chart, OrgR = item.OrgR, Org = item.Org, SuggestedOrgR = item.SuggestedOrgR }, new { @class="btn btn-default display-inline"})
                     </td>
                 </tr>
                 }
