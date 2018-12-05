@@ -8,48 +8,159 @@
 {
     @Html.AntiForgeryToken()
         
-    <div class="form-horizontal">
-        <h4>@ViewBag.Title - Expense Org Mapping</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.ExpenseOrgMapping.Chart, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ExpenseOrgMapping.Chart, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ExpenseOrgMapping.Chart, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    
-        <div class="form-group">
-            @Html.LabelFor(model => model.ExpenseOrgMapping.ExpenseOrgR, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ExpenseOrgMapping.ExpenseOrgR, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ExpenseOrgMapping.ExpenseOrgR, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        
-        <div class="form-group">
-            @Html.LabelFor(model => model.ExpenseOrgMapping.ExpenseOrg, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ExpenseOrgMapping.ExpenseOrg, new { htmlAttributes = new { @class = "form-control" } }) @Html.Label("(Leave blank if applies to ALL child Orgs)")
-                @Html.ValidationMessageFor(model => model.ExpenseOrgMapping.ExpenseOrg, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    
-        <div class="form-group">
-            @Html.LabelFor(model => model.ExpenseOrgMapping.AD419OrgR, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ExpenseOrgMapping.AD419OrgR, Model.ReportingOrgsSelectList, htmlAttributes: new { @class = "form-control" }, optionLabel: "None")
-                @Html.ValidationMessageFor(model => model.ExpenseOrgMapping.AD419OrgR, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+<div class="form-horizontal">
+
+    <div>
+        <h4>Accounts Details for Unknown Department</h4>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetail.Chart)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UnknownDepartmentAccountDetail.Chart)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetail.OrgR)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UnknownDepartmentAccountDetail.OrgR)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetail.SuggestedOrgR)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UnknownDepartmentAccountDetail.SuggestedOrgR)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetail.Org)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UnknownDepartmentAccountDetail.Org)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetail.Account)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UnknownDepartmentAccountDetail.Account)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetail.AccountName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UnknownDepartmentAccountDetail.AccountName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetail.ARCName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UnknownDepartmentAccountDetail.ARCName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetail.School)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UnknownDepartmentAccountDetail.School)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetail.Department)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UnknownDepartmentAccountDetail.Department)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetail.MgrName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UnknownDepartmentAccountDetail.MgrName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetail.PrincipalInvestigatorName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UnknownDepartmentAccountDetail.PrincipalInvestigatorName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetail.EmployeeId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UnknownDepartmentAccountDetail.EmployeeId)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetail.Purpose)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UnknownDepartmentAccountDetail.Purpose)
+            </dd>
+
+        </dl>
+    </div>
+    <hr />
+    <h4>@ViewBag.Title - Expense Org Mapping</h4>
+   
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.ExpenseOrgMapping.Chart, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ExpenseOrgMapping.Chart, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ExpenseOrgMapping.Chart, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ExpenseOrgMapping.ExpenseOrgR, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ExpenseOrgMapping.ExpenseOrgR, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ExpenseOrgMapping.ExpenseOrgR, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ExpenseOrgMapping.ExpenseOrg, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ExpenseOrgMapping.ExpenseOrg, new { htmlAttributes = new { @class = "form-control" } }) @Html.Label("(Leave blank if applies to ALL child Orgs)")
+            @Html.ValidationMessageFor(model => model.ExpenseOrgMapping.ExpenseOrg, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ExpenseOrgMapping.AD419OrgR, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.ExpenseOrgMapping.AD419OrgR, Model.ReportingOrgsSelectList, htmlAttributes: new { @class = "form-control" }, optionLabel: "None")
+            @Html.ValidationMessageFor(model => model.ExpenseOrgMapping.AD419OrgR, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 }
     
 <div>

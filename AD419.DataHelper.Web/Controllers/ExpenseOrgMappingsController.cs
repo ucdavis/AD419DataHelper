@@ -39,7 +39,12 @@ namespace AD419.DataHelper.Web.Controllers
         public ActionResult Create(string Chart, string OrgR, string Org, string SuggestedOrgR)
         {
             var expenseOrgMapping = new ExpenseOrgMapping() { Chart = Chart, ExpenseOrgR = OrgR, ExpenseOrg = Org, AD419OrgR = SuggestedOrgR };
-            var expenseOrgMappingViewModel = new ExpenseOrgMappingsEditViewModel(expenseOrgMapping, DbContext.ReportingOrganizations.ToList());
+            var unknownDepartmentAccountDetail = DbContext.GetAccountDetailsForNullOrUnknownDepartments().Where(u => u.Chart.Equals(Chart)
+                && u.OrgR.Equals(OrgR) && u.Org.Equals(Org)).FirstOrDefault();
+            var expenseOrgMappingViewModel = new ExpenseOrgMappingsEditViewModel(
+                    expenseOrgMapping, 
+                    DbContext.ReportingOrganizations.ToList(), 
+                    unknownDepartmentAccountDetail);
             return View(expenseOrgMappingViewModel);
         }
 
@@ -73,7 +78,9 @@ namespace AD419.DataHelper.Web.Controllers
                 return HttpNotFound();
             }
 
-            var expenseOrgMappingViewModel = new ExpenseOrgMappingsEditViewModel(expenseOrgMapping, DbContext.ReportingOrganizations.Where(s => s.IsActive).ToList());
+            var unknownDepartmentAccountDetails = DbContext.GetAccountDetailsForNullOrUnknownDepartments().FirstOrDefault(u => u.Chart.Equals(expenseOrgMapping.Chart)
+                && u.OrgR.Equals(expenseOrgMapping.ExpenseOrgR) && u.Org.Equals(expenseOrgMapping.ExpenseOrg));
+            var expenseOrgMappingViewModel = new ExpenseOrgMappingsEditViewModel(expenseOrgMapping, DbContext.ReportingOrganizations.Where(s => s.IsActive).ToList(), unknownDepartmentAccountDetails);
             return View(expenseOrgMappingViewModel);
         }
 

@@ -7,7 +7,7 @@ namespace AD419.DataHelper.Web.ViewModels
 {
     public class ExpenseOrgMappingsEditViewModel
     {
-        public ExpenseOrgMappingsEditViewModel(ExpenseOrgMapping expenseOrgMapping, List<ReportingOrganization> reportingOrgs)
+        public ExpenseOrgMappingsEditViewModel(ExpenseOrgMapping expenseOrgMapping, List<ReportingOrganization> reportingOrgs, UnknownDepartmentAccountDetail unknownDepartmentAccountDetail)
         {
             ExpenseOrgMapping = expenseOrgMapping;
 
@@ -26,10 +26,14 @@ namespace AD419.DataHelper.Web.ViewModels
                 });
             }
             ReportingOrgsSelectList = reportingOrgsSelectList;
+
+            UnknownDepartmentAccountDetail = unknownDepartmentAccountDetail;
         }
 
         public ExpenseOrgMapping ExpenseOrgMapping { get; set; }
 
         public List<SelectListItem> ReportingOrgsSelectList { get; set; }
+
+        public UnknownDepartmentAccountDetail UnknownDepartmentAccountDetail { get; set; }
     }
 }
