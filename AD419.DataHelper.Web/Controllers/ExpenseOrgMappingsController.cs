@@ -36,9 +36,9 @@ namespace AD419.DataHelper.Web.Controllers
         }
 
         // GET: ExpenseOrgMappings/Create
-        public ActionResult Create()
+        public ActionResult Create(string Chart, string OrgR, string Org, string SuggestedOrgR)
         {
-            var expenseOrgMapping = new ExpenseOrgMapping();
+            var expenseOrgMapping = new ExpenseOrgMapping() { Chart = Chart, ExpenseOrgR = OrgR, ExpenseOrg = Org, AD419OrgR = SuggestedOrgR };
             var expenseOrgMappingViewModel = new ExpenseOrgMappingsEditViewModel(expenseOrgMapping, DbContext.ReportingOrganizations.ToList());
             return View(expenseOrgMappingViewModel);
         }

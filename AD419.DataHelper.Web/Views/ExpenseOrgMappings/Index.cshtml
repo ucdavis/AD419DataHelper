@@ -10,7 +10,8 @@
         <h2>Unknown Departments</h2>
 
         <h4> The following @Model.UnknownDepartments.Count accounts have an Unknown AD-419 Reporting Org:</h4>
-        <i>Please remap the Expense Department to an Existing AD-419 Reporting Org (below) or @Html.ActionLink("add a new AD-419 Reporting Org", "Index", "ReportingOrganizations").</i>
+        <i>Please remap the Expense Department to an Existing AD-419 Reporting Org (below), @Html.ActionLink("Add a new AD-419 Reporting Org", "Index", "ReportingOrganizations") or 
+    @Html.ActionLink("Add the expense account to the ARC/Account Exclusions list", "Index", "ArcCodeAccountExclusions").</i>
         <table id="unknownDepartmentsTable" class="table">
             <thead>
                 <tr>
@@ -53,52 +54,56 @@
                     <th>
                         @Html.DisplayNameFor(model => model.UnknownDepartments[0].Purpose)
                     </th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model.UnknownDepartments)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Chart)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.OrgR)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SuggestedOrgR)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Org)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Account)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.AccountName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ARCName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.School)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Department)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MgrName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PrincipalInvestigatorName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.EmployeeId)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Purpose)
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Chart)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrgR)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SuggestedOrgR)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Org)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Account)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AccountName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ARCName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.School)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Department)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MgrName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrincipalInvestigatorName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Purpose)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Create", "Create", new { Chart = item.Chart, OrgR = item.OrgR, Org = item.Org, SuggestedOrgR = item.SuggestedOrgR })
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
@@ -110,9 +115,9 @@
 </div>
 <hr />
 
-<div class="pull-right">
+@*<div class="pull-right">
     <a href="@Url.Action("Create")" class="btn btn-default display-inline"><i class="fa fa-plus"></i> Create New</a>
-</div>
+</div>*@
 
 <h2>@ViewBag.Title</h2>
 

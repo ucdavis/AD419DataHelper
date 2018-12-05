@@ -10,7 +10,10 @@
             <h2>Unknown Departments</h2>
 
             <h4> The following expenses have an Unknown AD-419 Reporting Org:</h4>
-            <i>Please add a new Reporting Organization or @Html.ActionLink("Remap the Expense's Department to an Existing AD-419 Reporting Org", "Index", "ExpenseOrgMappings").</i>
+            <i>
+                Please add a new Reporting Organization, @Html.ActionLink("Remap the Expense's Department to an Existing AD-419 Reporting Org", "Index", "ExpenseOrgMappings") or
+                @Html.ActionLink("Add the expense account to the ARC/Account Exclusions list", "Index", "ArcCodeAccountExclusions").
+            </i>
             <table id="unknownDepartmentsTable" class="table">
                 <thead>
                     <tr>
