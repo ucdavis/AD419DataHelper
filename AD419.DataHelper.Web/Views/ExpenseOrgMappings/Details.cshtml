@@ -1,54 +1,154 @@
-﻿@model AD419.DataHelper.Web.Models.ExpenseOrgMapping
+﻿@model AD419.DataHelper.Web.ViewModels.ExpenseOrgMappingsEditViewModel
 
 @{
 }
-
+@if (Model.UnknownDepartmentAccountDetails.Any())
+{
+    <div>
+        <h4>Accounts Details for @Model.ExpenseOrgMapping.ExpenseOrgR @(string.IsNullOrEmpty(Model.ExpenseOrgMapping.ExpenseOrg) ? "" : "- " + Model.ExpenseOrgMapping.ExpenseOrg)</h4>
+        <table id="unknownDepartmentsTable" class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetails[0].Chart)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetails[0].OrgR)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetails[0].SuggestedOrgR)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetails[0].Org)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetails[0].Account)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetails[0].AccountName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetails[0].ARCName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetails[0].School)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetails[0].Department)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetails[0].MgrName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetails[0].PrincipalInvestigatorName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetails[0].EmployeeId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnknownDepartmentAccountDetails[0].Purpose)
+                    </th>
+                    @*<th></th>*@
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.UnknownDepartmentAccountDetails)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Chart)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrgR)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SuggestedOrgR)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Org)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Account)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AccountName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ARCName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.School)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Department)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MgrName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PrincipalInvestigatorName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Purpose)
+                        </td>
+                        @*<td>
+                                @Html.ActionLink("Create Remap OrgR", "Create", new { Chart = item.Chart, OrgR = item.OrgR, Org = item.Org, SuggestedOrgR = item.SuggestedOrgR }, new { @class = "btn btn-default display-inline" })
+                            </td>*@
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
 <div>
-    <h4>Expense OrgR Mapping</h4>
+    <h4>@Model.ExpenseOrgMapping.ExpenseOrgR @(string.IsNullOrEmpty(Model.ExpenseOrgMapping.ExpenseOrg) ? "" : "- " + Model.ExpenseOrgMapping.ExpenseOrg) Expense OrgR (Org) Mapping</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Chart)
-        </dt>
-    
-        <dd>
-            @Html.DisplayFor(model => model.Chart)
-        </dd>
-    
-        <dt>
-            @Html.DisplayNameFor(model => model.ExpenseOrgR)
-        </dt>
-    
-        <dd>
-            @Html.DisplayFor(model => model.ExpenseOrgR)
-        </dd>
-        
-        <dt>
-            @Html.DisplayNameFor(model => model.ExpenseOrg)
+            @Html.DisplayNameFor(model => model.ExpenseOrgMapping.Chart)
         </dt>
 
         <dd>
-            @if (Model.ExpenseOrg == null)
+            @Html.DisplayFor(model => model.ExpenseOrgMapping.Chart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpenseOrgMapping.ExpenseOrgR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpenseOrgMapping.ExpenseOrgR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpenseOrgMapping.ExpenseOrg)
+        </dt>
+
+        <dd>
+            @if (Model.ExpenseOrgMapping.ExpenseOrg == null)
             {
                 <i>All</i>
             }
             else
             {
-                @Html.DisplayFor(model => model.ExpenseOrg)
+                @Html.DisplayFor(model => model.ExpenseOrgMapping.ExpenseOrg)
             }
         </dd>
-    
+
         <dt>
-            @Html.DisplayNameFor(model => model.AD419OrgR)
+            @Html.DisplayNameFor(model => model.ExpenseOrgMapping.AD419OrgR)
         </dt>
-    
+
         <dd>
-            @Html.DisplayFor(model => model.AD419OrgR)
+            @Html.DisplayFor(model => model.ExpenseOrgMapping.AD419OrgR)
         </dd>
-    
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ExpenseOrgMapping.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

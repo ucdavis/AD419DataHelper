@@ -340,6 +340,18 @@ namespace AD419.DataHelper.Web.Models
             return Database.SqlQuery<LaborTransactionsForTitlesWithMissingStaffTypes>(sql);
         }
 
+        public virtual DbRawSqlQuery<UnknownDepartmentAccountDetail> GetExpenseDeptToAd419DeptRemappedAccountDetails(string Chart, string OrgR, string Org=null)
+        {
+            var pChart = new SqlParameter("@Chart", SqlDbType.VarChar) {Value = Chart};
+            var pOrgR = new SqlParameter("@OrgR", SqlDbType.VarChar) {Value = OrgR};
+            var pOrg = string.IsNullOrWhiteSpace(Org) ? new SqlParameter("@Org", SqlDbType.VarChar) { Value = DBNull.Value } :
+                    new SqlParameter("@Org", SqlDbType.VarChar) { Value = Org };
+
+            return Database.SqlQuery<UnknownDepartmentAccountDetail>(
+                "SELECT * FROM [dbo].[udf_GetExpenseDeptToAd419DeptRemappedAccountDetails] (@Chart, @OrgR, @Org)",
+                pChart, pOrgR, pOrg);
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             CreateAllProject(modelBuilder);

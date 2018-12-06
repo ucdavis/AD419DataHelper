@@ -32,6 +32,11 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return HttpNotFound();
             }
+
+            var unknownDepartmentAccountDetails = DbContext.GetExpenseDeptToAd419DeptRemappedAccountDetails(expenseOrgMapping.Chart, expenseOrgMapping.ExpenseOrgR, expenseOrgMapping.ExpenseOrg).ToList();
+            var expenseOrgMappingViewModel = new ExpenseOrgMappingsEditViewModel(expenseOrgMapping, null, unknownDepartmentAccountDetails);
+            return View(expenseOrgMappingViewModel);
+
             return View(expenseOrgMapping);
         }
 
@@ -39,12 +44,12 @@ namespace AD419.DataHelper.Web.Controllers
         public ActionResult Create(string Chart, string OrgR, string Org, string SuggestedOrgR)
         {
             var expenseOrgMapping = new ExpenseOrgMapping() { Chart = Chart, ExpenseOrgR = OrgR, ExpenseOrg = Org, AD419OrgR = SuggestedOrgR };
-            var unknownDepartmentAccountDetail = DbContext.GetAccountDetailsForNullOrUnknownDepartments().Where(u => u.Chart.Equals(Chart)
-                && u.OrgR.Equals(OrgR) && u.Org.Equals(Org)).FirstOrDefault();
+            var unknownDepartmentAccountDetails = DbContext.GetAccountDetailsForNullOrUnknownDepartments().Where(u => u.Chart.Equals(Chart)
+                && u.OrgR.Equals(OrgR) && u.Org.Equals(Org)).ToList();
             var expenseOrgMappingViewModel = new ExpenseOrgMappingsEditViewModel(
                     expenseOrgMapping, 
                     DbContext.ReportingOrganizations.ToList(), 
-                    unknownDepartmentAccountDetail);
+                    unknownDepartmentAccountDetails);
             return View(expenseOrgMappingViewModel);
         }
 
@@ -78,8 +83,7 @@ namespace AD419.DataHelper.Web.Controllers
                 return HttpNotFound();
             }
 
-            var unknownDepartmentAccountDetails = DbContext.GetAccountDetailsForNullOrUnknownDepartments().FirstOrDefault(u => u.Chart.Equals(expenseOrgMapping.Chart)
-                && u.OrgR.Equals(expenseOrgMapping.ExpenseOrgR) && u.Org.Equals(expenseOrgMapping.ExpenseOrg));
+            var unknownDepartmentAccountDetails = DbContext.GetExpenseDeptToAd419DeptRemappedAccountDetails(expenseOrgMapping.Chart, expenseOrgMapping.ExpenseOrgR, expenseOrgMapping.ExpenseOrg).ToList();
             var expenseOrgMappingViewModel = new ExpenseOrgMappingsEditViewModel(expenseOrgMapping, DbContext.ReportingOrganizations.Where(s => s.IsActive).ToList(), unknownDepartmentAccountDetails);
             return View(expenseOrgMappingViewModel);
         }

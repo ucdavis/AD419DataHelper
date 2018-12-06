@@ -7,33 +7,37 @@ namespace AD419.DataHelper.Web.ViewModels
 {
     public class ExpenseOrgMappingsEditViewModel
     {
-        public ExpenseOrgMappingsEditViewModel(ExpenseOrgMapping expenseOrgMapping, List<ReportingOrganization> reportingOrgs, UnknownDepartmentAccountDetail unknownDepartmentAccountDetail)
+        public ExpenseOrgMappingsEditViewModel(ExpenseOrgMapping expenseOrgMapping,
+            List<ReportingOrganization> reportingOrgs,
+            List<UnknownDepartmentAccountDetail> unknownDepartmentAccountDetails)
         {
             ExpenseOrgMapping = expenseOrgMapping;
 
             // Initialize reporting orgs select list:
             var reportingOrgsSelectList = new List<SelectListItem>();
-
-            foreach (var reportingOrg in reportingOrgs.OrderBy(r => r.Code))
-            {
-                reportingOrgsSelectList.Add(new SelectListItem()
+            if (reportingOrgs != null) {
+                foreach (var reportingOrg in reportingOrgs.OrderBy(r => r.Code))
                 {
-                    Text = string.Format("{1} - {0}", reportingOrg.ShortName, reportingOrg.Code),
-                    Value = reportingOrg.Code,
-                    Selected =
-                    (!string.IsNullOrEmpty(ExpenseOrgMapping.AD419OrgR) &&
-                     ExpenseOrgMapping.AD419OrgR.Equals(reportingOrg.Code))
-                });
-            }
-            ReportingOrgsSelectList = reportingOrgsSelectList;
+                    reportingOrgsSelectList.Add(new SelectListItem()
+                    {
+                        Text = string.Format("{1} - {0}", reportingOrg.ShortName, reportingOrg.Code),
+                        Value = reportingOrg.Code,
+                        Selected =
+                            (!string.IsNullOrEmpty(ExpenseOrgMapping.AD419OrgR) &&
+                             ExpenseOrgMapping.AD419OrgR.Equals(reportingOrg.Code))
+                    });
+                }
+        }
 
-            UnknownDepartmentAccountDetail = unknownDepartmentAccountDetail;
+        ReportingOrgsSelectList = reportingOrgsSelectList;
+
+            UnknownDepartmentAccountDetails = unknownDepartmentAccountDetails;
         }
 
         public ExpenseOrgMapping ExpenseOrgMapping { get; set; }
 
         public List<SelectListItem> ReportingOrgsSelectList { get; set; }
 
-        public UnknownDepartmentAccountDetail UnknownDepartmentAccountDetail { get; set; }
+        public List<UnknownDepartmentAccountDetail> UnknownDepartmentAccountDetails { get; set; }
     }
 }
