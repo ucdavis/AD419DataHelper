@@ -412,6 +412,7 @@
     </Content>
     <Content Include="Content\Sample_Forms\TitleCodesSelfCertify.xlsx" />
     <Content Include="Content\Sample_Forms\NifaProjectAndAccessionNumberImport.xlsx" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
