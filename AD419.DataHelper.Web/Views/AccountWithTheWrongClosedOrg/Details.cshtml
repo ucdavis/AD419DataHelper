@@ -1,0 +1,123 @@
+﻿@model AD419.DataHelper.Web.Models.AccountWithTheWrongClosedOrg
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Account with the Wrong Closed Org Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Chart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Chart)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Account)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Account)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentOrg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentOrg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LatestNonClosedOrg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LatestNonClosedOrg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentOrgR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentOrgR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LatestNonClosedOrgR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LatestNonClosedOrgR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LatestNonClosedYearPeriod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LatestNonClosedYearPeriod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccountName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountPurpose)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccountPurpose)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentOrgName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentOrgName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LatestNonClosedOrgName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LatestNonClosedOrgName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LatestNonClosedHomeDepartment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LatestNonClosedHomeDepartment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Expenses)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Expenses)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { chart = Model.Chart, account = Model.Account }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

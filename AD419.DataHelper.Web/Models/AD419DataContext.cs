@@ -83,6 +83,8 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<NewAccountSfn> NewAccountSfns { get; set; }
 
+        public virtual DbSet<AD419Account> Ad419Accounts{ get; set; }
+
         public virtual DbSet<AccountsWithMissingSfn> AccountsWithMissingSfns { get; set; }
 
         public virtual DbSet<SfnListItem> SfnListItems { get; set; }
@@ -130,6 +132,17 @@ namespace AD419.DataHelper.Web.Models
                 "       ExpensesTotal" +
                 " FROM [dbo].[udf_GetAccountsWithDifferentTotals] (@FiscalYear)",
                     new SqlParameter("@FiscalYear", SqlDbType.Int) { Value = fiscalYear }
+                );
+        }
+
+        public virtual DbRawSqlQuery<AccountWithTheWrongClosedOrg> GetAccountWithTheWrongClosedOrg(string chart, string account)
+        {
+            return Database.SqlQuery<AccountWithTheWrongClosedOrg>(
+                "SELECT *" +
+                " FROM [dbo].[AccountsWithTheWrongClosedOrgsInfoV]" +
+                " WHERE Chart = @Chart AND Account = @Account",
+                    new SqlParameter("@Chart", SqlDbType.VarChar) { Value = chart },
+                    new SqlParameter("@Account", SqlDbType.VarChar) { Value = account }
                 );
         }
 
@@ -585,5 +598,7 @@ namespace AD419.DataHelper.Web.Models
         public System.Data.Entity.DbSet<AD419.DataHelper.Web.Models.AccountWithDifferentTotalDetails> AccountWithDifferentTotalDetails { get; set; }
 
         public System.Data.Entity.DbSet<AD419.DataHelper.Web.Models.ProjectPiWithMissingEmployeeId> ProjectPiWithMissingEmployeeId { get; set; }
+
+        public System.Data.Entity.DbSet<AD419.DataHelper.Web.Models.AccountWithTheWrongClosedOrg> AccountWithTheWrongClosedOrg { get; set; }
     }
 }
