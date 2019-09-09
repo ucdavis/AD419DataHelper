@@ -1,4 +1,4 @@
-﻿@model AD419.DataHelper.Web.Models.AccountWithTheWrongClosedOrg
+﻿@model AD419.DataHelper.Web.ViewModels.AccountsWithWithTheWrongOrgRViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -7,125 +7,150 @@
 <h2>@ViewBag.Title</h2>
 
 
-@using (Html.BeginForm())
+
+        <h4>Account with Potentially the Wrong Closed Org</h4>
+        <hr />
+        
+        
+<dl class="dl-horizontal">
+
+    <dt>
+        @Html.DisplayNameFor(model => model.AccountWithTheWrongClosedOrg.Chart)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.AccountWithTheWrongClosedOrg.Chart)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.AccountWithTheWrongClosedOrg.Account)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.AccountWithTheWrongClosedOrg.Account)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.AccountWithTheWrongClosedOrg.CurrentOrg)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.AccountWithTheWrongClosedOrg.CurrentOrg)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.AccountWithTheWrongClosedOrg.LatestNonClosedOrg)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.AccountWithTheWrongClosedOrg.LatestNonClosedOrg)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.AccountWithTheWrongClosedOrg.CurrentOrgR)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.AccountWithTheWrongClosedOrg.CurrentOrgR)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.AccountWithTheWrongClosedOrg.LatestNonClosedOrgR)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.AccountWithTheWrongClosedOrg.LatestNonClosedOrgR)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.AccountWithTheWrongClosedOrg.LatestNonClosedYearPeriod)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.AccountWithTheWrongClosedOrg.LatestNonClosedYearPeriod)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.AccountWithTheWrongClosedOrg.AccountName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.AccountWithTheWrongClosedOrg.AccountName)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.AccountWithTheWrongClosedOrg.AccountPurpose)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.AccountWithTheWrongClosedOrg.AccountPurpose)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.AccountWithTheWrongClosedOrg.CurrentOrgName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.AccountWithTheWrongClosedOrg.CurrentOrgName)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.AccountWithTheWrongClosedOrg.LatestNonClosedOrgName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.AccountWithTheWrongClosedOrg.LatestNonClosedOrgName)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.AccountWithTheWrongClosedOrg.LatestNonClosedHomeDepartment)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.AccountWithTheWrongClosedOrg.LatestNonClosedHomeDepartment)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.AccountWithTheWrongClosedOrg.Expenses)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.AccountWithTheWrongClosedOrg.Expenses)
+    </dd>
+
+</dl>
+<hr />
+@using (Html.BeginForm("Edit", "AD419Account", new {chart=Model.Ad419Account.Chart, account=Model.Ad419Account.Account}, FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Account with the Wrong Closed Org</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Chart)
 
-        @Html.HiddenFor(model => model.Account)
+    <h4>AD-419 Account OrgR Edit Form</h4>
+    <i>Use this form to change the OrgR of the account listed above</i>
+    <div id="accountWithTheWrongClosedOrgForm" class="form-horizontal">
+       
+        <hr/>
+
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        @Html.HiddenFor(model => model.Ad419Account.Chart)
+
+        @Html.HiddenFor(model => model.Ad419Account.Account)
         
+        
+        <h4>Select the correct OrgR for Account @Html.DisplayFor(model => model.Ad419Account.Chart, new { htmlAttributes = new { @class = "form-control" } }) - @Html.DisplayFor(model => model.Ad419Account.Account, new { htmlAttributes = new { @class = "form-control" } })</h4>
+        <i>*OrgR currently used for AD-419 expenses.</i>
+        &nbsp;
         <div class="form-group">
-            @Html.LabelFor(model => model.Chart, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Ad419Account.OrgR, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DisplayFor(model => model.Chart, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.Chart, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Account, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.Account, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.Account, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CurrentOrg, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CurrentOrg, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CurrentOrg, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.LatestNonClosedOrg, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.LatestNonClosedOrg, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.LatestNonClosedOrg, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CurrentOrgR, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CurrentOrgR, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CurrentOrgR, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.LatestNonClosedOrgR, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.LatestNonClosedOrgR, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.LatestNonClosedOrgR, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.LatestNonClosedYearPeriod, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.LatestNonClosedYearPeriod, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.LatestNonClosedYearPeriod, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.AccountName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.AccountName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.AccountName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.AccountPurpose, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.AccountPurpose, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.AccountPurpose, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CurrentOrgName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.CurrentOrgName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.CurrentOrgName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.LatestNonClosedOrgName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.LatestNonClosedOrgName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.LatestNonClosedOrgName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.LatestNonClosedHomeDepartment, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.LatestNonClosedHomeDepartment, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.LatestNonClosedHomeDepartment, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Expenses, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.Expenses, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.Expenses, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.Ad419Account.OrgR, Model.OrgRSelectionList, htmlAttributes: new { @class = "form-control" })
+                @*@Html.DropDownListFor(x => x.Ad419Account.OrgR, new SelectList(Model.OrgRSelectionList, "Value","Text" ))*@
+                @Html.ValidationMessageFor(model => model.Ad419Account.OrgR, "", new {@class = "text-danger"})
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default"/>
             </div>
         </div>
     </div>

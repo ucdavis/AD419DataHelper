@@ -1,0 +1,87 @@
+﻿@model AD419.DataHelper.Web.Models.AD419Account
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>AD419Account</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Chart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Chart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Account)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Account)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Org)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Org)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrgR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrgR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Expenses)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Expenses)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SFN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SFN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsExpired)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsExpired)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HaveOrgsBeenAdjusted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HaveOrgsBeenAdjusted)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

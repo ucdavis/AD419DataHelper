@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AD419.DataHelper.Web.Models;
+using AD419.DataHelper.Web.ViewModels;
 
 namespace AD419.DataHelper.Web.Controllers
 {
@@ -63,12 +64,14 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            AD419Account aD419Account = DbContext.Ad419Accounts.Find(chart, account);
             AccountWithTheWrongClosedOrg accountWithTheWrongClosedOrg = DbContext.GetAccountWithTheWrongClosedOrg(chart, account).FirstOrDefault();
             if (accountWithTheWrongClosedOrg == null)
             {
                 return HttpNotFound();
             }
-            return View(accountWithTheWrongClosedOrg);
+            var viewModel = new AccountsWithWithTheWrongOrgRViewModel(accountWithTheWrongClosedOrg, aD419Account);
+            return View(viewModel);
         }
 
         // POST: AccountWithTheWrongClosedOrg/Edit/5

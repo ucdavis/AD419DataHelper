@@ -1,66 +1,70 @@
 ﻿@model IEnumerable<AD419.DataHelper.Web.Models.AccountWithTheWrongClosedOrg>
 
 @{
-    ViewBag.Title = "Accounts with the Wrong Closed Orgs";
+    ViewBag.Title = "Accounts with Potentially the Wrong Closed Orgs";
 }
+        @section AdditionalStyles
+        {
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.2.1/css/buttons.bootstrap.min.css" />
+        }
 
-@section AdditionalStyles
+        <h2>@ViewBag.Title</h2>
+<div>
+@if (Model.Any())
 {
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.2.1/css/buttons.bootstrap.min.css" />
-}
+    <p>
+        <h4> The following Accounts have a different closed OrgR than their most recently non-closed OrgR:</h4>
+        <i>Please review the information provided to determine the most appropriate OrgR, and edit the record accordingly. Thank you!</i>
+    </p>
+    <hr />
+    <p id="actionButtons" class="btn-group"></p>
 
-<h2>@ViewBag.Title</h2>
-
-<hr />
-<p id="actionButtons" class="btn-group">
-    <a href="@Url.Action("Create")" target="_blank" class="btn btn-default">Create New</a>
-</p>
-<table id="accountsWithWrongClosedOrgsTable" class="table">
-    <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Chart)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Account)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CurrentOrg)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LatestNonClosedOrg)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CurrentOrgR)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LatestNonClosedOrgR)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LatestNonClosedYearPeriod)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AccountName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AccountPurpose)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CurrentOrgName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LatestNonClosedOrgName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LatestNonClosedHomeDepartment)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Expenses)
-        </th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
+    <table id="accountsWithWrongClosedOrgsTable" class="table">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Chart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentOrg)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LatestNonClosedOrg)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentOrgR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LatestNonClosedOrgR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LatestNonClosedYearPeriod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountPurpose)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentOrgName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LatestNonClosedOrgName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LatestNonClosedHomeDepartment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Expenses)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
         @foreach (var item in Model)
         {
             <tr>
@@ -104,35 +108,42 @@
                     @Html.DisplayFor(modelItem => item.Expenses)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new {chart = item.Chart, account = item.Account}) |
-                    @Html.ActionLink("Details", "Details", new {chart = item.Chart, account = item.Account})
+                    @Html.ActionLink("Edit", "Edit", new { chart = item.Chart, account = item.Account }) |
+                    @Html.ActionLink("Details", "Details", new { chart = item.Chart, account = item.Account })
                 </td>
             </tr>
         }
-    </tbody>
-</table>
-@section AdditionalScripts
-{
-    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/dataTables.buttons.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.html5.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.flash.min.js"></script>
-
-    <script>
-        $(function() {
-            var table = $('#accountsWithWrongClosedOrgsTable').DataTable({
-                buttons: [
-                   'copy', 'excel'
-                ],
-                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                columnDefs: [
-                    { targets: [-1, -2, -3], sortable: false }
-                ],
-                order: [[1, "asc"]]
-            });
-            table.buttons().container()
-                .appendTo($('#actionButtons'));
-        })
-    </script>
+        </tbody>
+    </table>
 }
+else
+{
+    <p><br /><h4><i>Note: There are <strong>zero</strong> Accounts with potentially the Wrong Closed Orgs that need to be updated at this time. <br /> Please continue on to the next step.</i></h4></p>
+}
+</div>
+
+    @section AdditionalScripts
+{
+        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/dataTables.buttons.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.html5.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.flash.min.js"></script>
+
+        <script>
+            $(function () {
+                var table = $('#accountsWithWrongClosedOrgsTable').DataTable({
+                    buttons: [
+                       'copy', 'excel'
+                    ],
+                    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                    columnDefs: [
+                        { targets: [-1, -2], sortable: false }
+                    ],
+                    order: [[1, "asc"]]
+                });
+                table.buttons().container()
+                    .appendTo($('#actionButtons'));
+            })
+        </script>
+    }
