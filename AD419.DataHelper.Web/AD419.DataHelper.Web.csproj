@@ -236,6 +236,8 @@
     <Compile Include="Attributes\ValidateAntiForgeryTokenHeaderOrFormAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountWithDifferentTotalsController.cs" />
+    <Compile Include="Controllers\AccountWithTheWrongClosedOrgController.cs" />
+    <Compile Include="Controllers\AD419AccountController.cs" />
     <Compile Include="Controllers\AdjustedTotalsController.cs" />
     <Compile Include="Controllers\AllProjectsNewController.cs" />
     <Compile Include="Controllers\ArcCodeAccountExclusionsController.cs" />
@@ -257,6 +259,8 @@
     <Compile Include="Controllers\Ad419InstructionsController.cs" />
     <Compile Include="Helpers\ProcessCategoryExtensions.cs" />
     <Compile Include="Models\AccountsWithMissingSfn.cs" />
+    <Compile Include="Models\AD419Account.cs" />
+    <Compile Include="Models\AccountWithTheWrongClosedOrg.cs" />
     <Compile Include="Models\AccountWithDifferentTotalDetails.cs" />
     <Compile Include="Models\AccountWithDifferentTotal.cs" />
     <Compile Include="Models\NewAccountSfn.cs" />
@@ -265,6 +269,7 @@
     <Compile Include="Models\ProjectPiWithMissingEmployeeId.cs" />
     <Compile Include="Models\Projects.cs" />
     <Compile Include="Models\CurrentAd419Project.cs" />
+    <Compile Include="Models\OrgRListItem.cs" />
     <Compile Include="Models\SfnListItem.cs" />
     <Compile Include="Services\NifaProjectAccessionNumberImportService.cs" />
     <Compile Include="Services\SelfCertifyingTitleCodesService.cs" />
@@ -348,6 +353,7 @@
     <Compile Include="Services\FieldStationExpenseService.cs" />
     <Compile Include="Services\ProjectImportService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AccountsWithWithTheWrongOrgRViewModel.cs" />
     <Compile Include="ViewModels\AccountsWithMissingSfnEditViewModel.cs" />
     <Compile Include="ViewModels\ExpenseOrgMappingsViewModel.cs" />
     <Compile Include="ViewModels\ExpiringProjectMatch.cs" />
@@ -620,6 +626,16 @@
     <Content Include="Views\AccountsWithMissingSfn\Index.cshtml" />
     <Content Include="Views\AccountsWithMissingSfn\Edit.cshtml" />
     <Content Include="Views\AccountsWithMissingSfn\Details.cshtml" />
+    <Content Include="Views\AccountWithTheWrongClosedOrg\Create.cshtml" />
+    <Content Include="Views\AccountWithTheWrongClosedOrg\Delete.cshtml" />
+    <Content Include="Views\AccountWithTheWrongClosedOrg\Details.cshtml" />
+    <Content Include="Views\AccountWithTheWrongClosedOrg\Edit.cshtml" />
+    <Content Include="Views\AccountWithTheWrongClosedOrg\Index.cshtml" />
+    <Content Include="Views\AD419Account\Create.cshtml" />
+    <Content Include="Views\AD419Account\Delete.cshtml" />
+    <Content Include="Views\AD419Account\Details.cshtml" />
+    <Content Include="Views\AD419Account\Edit.cshtml" />
+    <Content Include="Views\AD419Account\Index.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
