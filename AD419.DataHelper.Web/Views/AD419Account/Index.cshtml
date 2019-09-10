@@ -1,0 +1,106 @@
+﻿@model IEnumerable<AD419.DataHelper.Web.Models.AD419Account>
+
+@{
+    ViewBag.Title = "AD-419 Accounts";
+}
+
+@section AdditionalStyles
+{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.2.1/css/buttons.bootstrap.min.css" />
+}
+
+<h2>@ViewBag.Title</h2>
+
+<hr />
+<p id="actionButtons" class="btn-group"></p>
+<table id="ad419AccountsTable"class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Chart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Org)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrgR)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Expenses)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SFN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsExpired)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HaveOrgsBeenAdjusted)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Chart)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Account)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Org)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrgR)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Expenses)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SFN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsExpired)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HaveOrgsBeenAdjusted)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { chart = item.Chart, account = item.Account }) |
+                    @Html.ActionLink("Details", "Details", new { chart = item.Chart, account = item.Account })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section AdditionalScripts
+{
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.flash.min.js"></script>
+
+    <script>
+        $(function() {
+            var table = $('#ad419AccountsTable').DataTable({
+                buttons: [
+                   'copy', 'excel'
+                ],
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                columnDefs: [
+                    { targets: [-1, -2], sortable: false }
+                ],
+                order: [[1, "asc"]]
+            });
+            table.buttons().container()
+                .appendTo($('#actionButtons'));
+        })
+    </script>
+}
