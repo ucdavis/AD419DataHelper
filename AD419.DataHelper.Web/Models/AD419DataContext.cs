@@ -92,7 +92,7 @@ namespace AD419.DataHelper.Web.Models
         public virtual DbRawSqlQuery<AccountWithDifferentTotalDetails> GetAccountWithDifferentTotalDetails(int fiscalYear, string chart, string account)
         {
             return Database.SqlQuery<AccountWithDifferentTotalDetails>(
- 		  @"SELECT 
+           @"SELECT 
 			 t1.[Chart]
 			,t1.[Account]
 			,t2.OpFundNum OpFund
@@ -121,7 +121,6 @@ namespace AD419.DataHelper.Web.Models
                 new SqlParameter("@Account", SqlDbType.VarChar) { Value = account }
             );
         }
-
 
         public virtual DbRawSqlQuery<AccountWithDifferentTotal> GetAccountsWithDifferentTotals(int fiscalYear)
         {

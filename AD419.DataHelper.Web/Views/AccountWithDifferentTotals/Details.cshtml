@@ -140,7 +140,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Ad419ExpensesTotal)
+                @(Model.Ad419ExpensesTotal != null ? string.Format("{0:C}", Model.Ad419ExpensesTotal) : "Account did not get transferred to AD-419 expenses table")
             </dd>
 
             <dt>

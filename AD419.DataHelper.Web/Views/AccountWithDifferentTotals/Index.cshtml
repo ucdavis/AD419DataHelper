@@ -33,7 +33,7 @@
                         @Html.DisplayFor(modelItem => item.FfyExpensesByArcTotal)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ExpensesTotal)
+                        @(item.ExpensesTotal != null ? string.Format("{0:C}", item.ExpensesTotal) : "Account did not get transferred to AD-419 expenses table")
                     </td>
 
                     <td>
