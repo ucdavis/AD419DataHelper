@@ -14,12 +14,15 @@ namespace AD419.DataHelper.Web.Models
         public string Account { get; set; }
 
         [Display(Name = "FFY Expenses By ARC Total")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal FfyExpensesByArcTotal { get; set; }
 
         [Display(Name = "Expenses Total")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal? ExpensesTotal { get; set; }
 
         [NotMapped]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public string Difference => ExpensesTotal != null ? (FfyExpensesByArcTotal - Convert.ToDecimal(ExpensesTotal)).ToString(CultureInfo.InvariantCulture) : "N/A";
     }
 }
