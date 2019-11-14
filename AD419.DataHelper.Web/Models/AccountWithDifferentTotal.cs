@@ -23,6 +23,6 @@ namespace AD419.DataHelper.Web.Models
 
         [NotMapped]
         [DisplayFormat(DataFormatString = "{0:C}")]
-        public string Difference => ExpensesTotal != null ? (FfyExpensesByArcTotal - Convert.ToDecimal(ExpensesTotal)).ToString(CultureInfo.InvariantCulture) : "N/A";
+        public string Difference => ExpensesTotal.HasValue ? (FfyExpensesByArcTotal - Convert.ToDecimal(ExpensesTotal)).ToString(CultureInfo.InvariantCulture) : "N/A";
     }
 }

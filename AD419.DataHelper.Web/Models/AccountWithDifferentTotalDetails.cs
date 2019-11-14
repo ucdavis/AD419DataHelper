@@ -49,7 +49,7 @@ namespace AD419.DataHelper.Web.Models
         public decimal? Ad419ExpensesTotal { get; set; }
 
         [NotMapped]
-        public string Difference => Ad419ExpensesTotal != null ? (FfyExpensesByArcTotal - Convert.ToDecimal(Ad419ExpensesTotal)).ToString(CultureInfo.InvariantCulture) : "N/A";
+        public string Difference => Ad419ExpensesTotal.HasValue ? (FfyExpensesByArcTotal - Convert.ToDecimal(Ad419ExpensesTotal)).ToString(CultureInfo.InvariantCulture) : "N/A";
 
         [Display(Name = "SFN")]
         public string Sfn { get; set; }
