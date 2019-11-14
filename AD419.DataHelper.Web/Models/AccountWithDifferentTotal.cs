@@ -14,32 +14,15 @@ namespace AD419.DataHelper.Web.Models
         public string Account { get; set; }
 
         [Display(Name = "FFY Expenses By ARC Total")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal FfyExpensesByArcTotal { get; set; }
 
-        private string _expensesTotal;
         [Display(Name = "Expenses Total")]
-        public string ExpensesTotal
-        {
-            get
-            {
-                return string.IsNullOrEmpty(_expensesTotal) ? "Account did not get transferred to AD-419 expenses table" : _expensesTotal;
-            }
-            set
-            {
-                _expensesTotal = value;
-            }
-        }
+        [DisplayFormat(DataFormatString = "{0:C}")]
+        public decimal? ExpensesTotal { get; set; }
 
         [NotMapped]
-        public string Difference
-        {
-            get
-            {
-                if (_expensesTotal != null)
-                    return (FfyExpensesByArcTotal - Convert.ToDecimal(_expensesTotal)).ToString(CultureInfo.InvariantCulture);
-
-                return "N/A";
-            }
-        }
+        [DisplayFormat(DataFormatString = "{0:C}")]
+        public string Difference => ExpensesTotal.HasValue ? (FfyExpensesByArcTotal - Convert.ToDecimal(ExpensesTotal)).ToString(CultureInfo.InvariantCulture) : "N/A";
     }
 }
