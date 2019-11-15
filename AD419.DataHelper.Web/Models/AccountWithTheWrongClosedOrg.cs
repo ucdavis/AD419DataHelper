@@ -5,7 +5,7 @@ using System.Globalization;
 
 namespace AD419.DataHelper.Web.Models
 {
-     [Table("AccountsWithTheWrongClosedOrgsInfoV")]
+     [Table("AccountsWithTheWrongClosedOrgOrUnknownReportingOrgV")]
     public partial class AccountWithTheWrongClosedOrg
     {
         [Column(Order = 0), Key]
