@@ -85,7 +85,7 @@ namespace AD419.DataHelper.Web.Controllers
                 return HttpNotFound();
             }
 
-            if (myAd419Account.OrgR.Equals(accountWithTheWrongClosedOrg.CurrentOrgR))
+            if (aD419Account.OrgR.Equals(accountWithTheWrongClosedOrg.CurrentOrgR))
             {
                 // Then just set the flag to indicate that the account has been reviewed
                 myAd419Account.HaveOrgsBeenAdjusted = false;
