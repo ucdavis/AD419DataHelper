@@ -417,6 +417,9 @@
     </Content>
     <Content Include="Content\Sample_Forms\TitleCodesSelfCertify.xlsx" />
     <Content Include="Content\Sample_Forms\NifaProjectAndAccessionNumberImport.xlsx" />
+    <Content Include="Instructions\AD419Instructions.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
@@ -641,7 +644,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Instructions\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
