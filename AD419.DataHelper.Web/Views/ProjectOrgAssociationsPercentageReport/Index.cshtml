@@ -1,0 +1,15 @@
+﻿@using ReportViewerForMvc
+@{
+    ViewBag.Title = "Project/Organization Associations Percentage Report";
+}
+
+<h2>@ViewBag.Title</h2>
+<h4>This is a list of Expense and FTE totals by Organization per Project for the @ViewBag.ReportingPeriod reporting period.</h4>
+<i>It is run after the department associations have been completed, and displays the amount of expenses and FTE that a
+    department has associated to a particular project for a particular organization compared to 
+    the organization's total expenses and FTE across ALL projects for that organization.</i>
+<hr />
+
+<div>
+    @Html.ReportViewer(@Model.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { style = "border: none" })
+</div>
