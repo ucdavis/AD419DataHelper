@@ -243,6 +243,7 @@
     <Compile Include="Controllers\ArcCodesController.cs" />
     <Compile Include="Controllers\C204AcctXProjController.cs" />
     <Compile Include="Controllers\CurrentAd419ProjectsController.cs" />
+    <Compile Include="Controllers\ProjectOrgAssociationsPercentageReportController.cs" />
     <Compile Include="Controllers\NifaProjectAccessionNumberImportsController.cs" />
     <Compile Include="Controllers\AccountsWithMissingSfnController.cs" />
     <Compile Include="Controllers\ProjectPiWithMissingEmployeeIdsController.cs" />
@@ -638,6 +639,7 @@
     <Content Include="Views\AD419Account\Details.cshtml" />
     <Content Include="Views\AD419Account\Edit.cshtml" />
     <Content Include="Views\AD419Account\Index.cshtml" />
+    <Content Include="Views\ProjectOrgAssociationsPercentageReport\Index.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
