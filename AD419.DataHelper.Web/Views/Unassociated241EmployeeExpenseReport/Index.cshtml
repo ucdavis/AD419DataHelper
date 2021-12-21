@@ -1,0 +1,15 @@
+﻿@using ReportViewerForMvc
+@{
+    ViewBag.Title = "Unassociated 241 Employee Expenses";
+}
+
+<h2>@ViewBag.Title</h2>
+<h4>This is an all-inclusive list of every unassociated 241 employee expense that was not auto-associated.</h4>
+<h5><i>These 241 employees did not have any projects in the corresponding expense department that could be auto-associated.  
+    Note: They may have had project(s) in departments other than the expense's OrgR, 
+    which would have hidden the expense from view in the User Interface (UI).</i></h5>
+<hr />
+
+<div>
+    @Html.ReportViewer(@Model.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { style = "border: none" })
+</div>
