@@ -243,6 +243,7 @@
     <Compile Include="Controllers\ArcCodesController.cs" />
     <Compile Include="Controllers\C204AcctXProjController.cs" />
     <Compile Include="Controllers\CurrentAd419ProjectsController.cs" />
+    <Compile Include="Controllers\Unassociated241EmployeeExpenseReportController.cs" />
     <Compile Include="Controllers\ProjectOrgAssociationsPercentageReportController.cs" />
     <Compile Include="Controllers\NifaProjectAccessionNumberImportsController.cs" />
     <Compile Include="Controllers\AccountsWithMissingSfnController.cs" />
@@ -418,9 +419,7 @@
     </Content>
     <Content Include="Content\Sample_Forms\TitleCodesSelfCertify.xlsx" />
     <Content Include="Content\Sample_Forms\NifaProjectAndAccessionNumberImport.xlsx" />
-    <Content Include="Instructions\AD419Instructions.pdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Instructions\AD419Instructions.pdf" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
@@ -640,6 +639,7 @@
     <Content Include="Views\AD419Account\Edit.cshtml" />
     <Content Include="Views\AD419Account\Index.cshtml" />
     <Content Include="Views\ProjectOrgAssociationsPercentageReport\Index.cshtml" />
+    <Content Include="Views\Unassociated241EmployeeExpenseReport\Index.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

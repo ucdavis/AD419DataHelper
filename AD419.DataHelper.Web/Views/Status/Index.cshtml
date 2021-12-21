@@ -14,29 +14,31 @@
 <h2>AD-419 Reporting Process Status and Operation</h2>
 
 <div>
-    <h3><p>This page displays a list of all steps necessary to complete the AD-419 Reporting Process, as well as an indication of which steps have yet to be completed.</p>
-        <p>It serves as both a checklist and a control panel with which to guide you through the process.</p></h3>
-    <br/>
+    <h3>
+        <p>This page displays a list of all steps necessary to complete the AD-419 Reporting Process, as well as an indication of which steps have yet to be completed.</p>
+        <p>It serves as both a checklist and a control panel with which to guide you through the process.</p>
+    </h3>
+    <br />
     <h4> Although there are a large number of steps listed on this page, they are basically comprised of the following seven (7): </h4>
-    
+
     <ol>
         <li>Data collection from both internal (campus data warehouses) and external (Excel spreadsheets) data sources,</li>
         <li>Reviewing the collected data to ensure accuracy and making any modifications as necessary,</li>
         <li>Loading the above expense data into the AD-419 web application,</li>
         <li>Associating the expense data via the AD-419 web application, performed by the various College departments*,</li>
         <li>Reviewing the above associations,</li>
-        <li>Creating the Final Reports utilizing the above associated data, and</li> 
+        <li>Creating the Final Reports utilizing the above associated data, and</li>
         <li>Submitting a modified version of the above reports to ANR.</li>
     </ol>
     <i>*All of the above actions are performed by members of the Dean's Office accounting staff unless otherwise noted.</i>
 
 </div>
 
-<hr/>
+<hr />
 @{
     // First let's find the lowest non-completed category, aka the current category
     var nonCompleted = Model.Where(c => !c.IsCompleted).ToArray();
-    
+
     var currentSequenceOrder = nonCompleted.Any() ? nonCompleted.Min(c => c.SequenceOrder) : 0;
 }
 
@@ -58,10 +60,30 @@
 {
     @Html.AntiForgeryToken()
     <div>
-        <dl><dt>Selecting this button will <i><strong>DELETE</strong></i> all of the Expense and Association data from the AD-419 application's data set, and then reload the expenses table, plus the re-associate 204, 20x, CE, Field Station and 241 expenses.  
-            It will reset the status of all the steps after the point at which the expenses were loaded to allow you to pickup the process from that point forward without having to restart back at the beginning.</dt>
-        <dd><input type="submit" data-confirm="Are you sure you want to delete all AD-419 Associations?" class="btn btn-warning" value="Delete Associations" /></dd></dl>
+        <dl>
+            <dt>
+                Selecting this button will <i><strong>DELETE</strong></i> all of the Expense and Association data from the AD-419 application's data set, and then reload the expenses table, plus the re-associate 204, 20x, CE, Field Station and 241 expenses.
+                It will reset the status of all the steps after the point at which the expenses were loaded to allow you to pickup the process from that point forward without having to restart back at the beginning.
+            </dt>
+            <dd><input type="submit" data-confirm="Are you sure you want to delete all AD-419 Associations?" class="btn btn-warning" value="Delete Associations" /></dd>
+        </dl>
     </div>
+}
+
+@if (currentSequenceOrder >30) { 
+    using (Html.BeginForm("HideProjectsAndResetStatusBackToPostProcessingReview", "Status", FormMethod.Post, new { id = "ResetForm", enctype = "multipart/form-data", @class = "" }))
+    {
+        @Html.AntiForgeryToken()
+        <div>
+            <dl>
+                <dt>
+                    Selecting this button will <i><strong>RESET</strong></i> all steps after and including Post-Association Review, so that associations may be adjusted or
+                    final reports re-run.  <br /><i>Note that this will also re-hide any 204 projects with less than $100 in expenses, and remove them from the project list until the final reports have been re-run.</i>
+                </dt>
+                <dd><input type="submit" data-confirm="Are you sure you want go back to Post-Association Review?" class="btn btn-warning" value="Go Back to Post-Association Review" /></dd>
+            </dl>
+        </div>
+    }
 }
 
 @foreach (var category in Model.OrderBy(c => c.SequenceOrder))
@@ -86,7 +108,7 @@
             {
                 var disabled = category.SequenceOrder != currentSequenceOrder ? "disabled='disabled" : string.Empty;
 
-                <button data-id="@category.Id" data-name="@category.Name" class="sproc btn btn-primary" @disabled><i class="fa fa-spin" > </i> <span> Click here to</span> @category.Name</button>
+                <button data-id="@category.Id" data-name="@category.Name" class="sproc btn btn-primary" @disabled><i class="fa fa-spin"> </i> <span> Click here to</span> @category.Name</button>
 
             }
             @{
@@ -94,82 +116,82 @@
                 var currentStatusSequenceOrder = orderedStatuses.Any(s => !s.IsCompleted) ? orderedStatuses.Where(s => !s.IsCompleted).Min(c => c.SequenceOrder) : 0;
             }
             <ul class="checklist">
-                @foreach (var status in category.Statuses.OrderBy(c=>c.SequenceOrder))
+                @foreach (var status in category.Statuses.OrderBy(c => c.SequenceOrder))
                 {
                     <li class="@(status.IsCompleted ? "complete" : "incomplete")">
-                            @if (isActiveCategory && status.NoProcessingRequired == true)
+                        @if (isActiveCategory && status.NoProcessingRequired == true)
+                        {
+                            // Active category
+                            using (Html.BeginForm("StatusCompleted", "Status", new { id = status.Id }, FormMethod.Post))
                             {
-                                // Active category
-                                    using (Html.BeginForm("StatusCompleted", "Status", new { id = status.Id }, FormMethod.Post))
+                                @Html.AntiForgeryToken()
+                                <h2>
+                                    @if (status.IsCompleted == false)
                                     {
-                                    @Html.AntiForgeryToken()
-                                    <h2>
-                                        @if (status.IsCompleted == false)
+                                        if (status.SequenceOrder == currentStatusSequenceOrder)
                                         {
-                                            if (status.SequenceOrder == currentStatusSequenceOrder)
-                                            {
-                                                <button type="submit" class="fa fa-circle-thin btn-xs align-btn-xs" style="color:black"></button>
+                                            <button type="submit" class="fa fa-circle-thin btn-xs align-btn-xs" style="color:black"></button>
 
-                                            }
-                                            else
-                                            {
-                                                <button type="submit" class="fa fa-circle-thin btn-xs align-btn-xs" style="color: white" disabled="disabled"></button>
-                                                @*<i class="fa fa-circle-thin bullet"></i>*@
-                                            }
-
-                                            if (string.IsNullOrWhiteSpace(status.Hyperlink))
-                                            {
-                                                @status.Name
-                                            }
-                                            else
-                                            {
-                                                <a class="disabled display-inline" href="@Url.Action("", status.Hyperlink)">@status.Name <i class="fa fa-external-link"></i></a>
-                                            }
                                         }
                                         else
                                         {
-                                            <button type="submit" class="fa fa-check-circle btn-xs align-btn-xs"></button>
-                                            if (string.IsNullOrWhiteSpace(status.Hyperlink))
-                                            {
-                                                @status.Name
-                                            }
-                                            else
-                                            {
-                                                <a class="disabled" href="@Url.Action("", status.Hyperlink)">@status.Name <i class="fa fa-external-link"></i></a>
-                                            }
+                                            <button type="submit" class="fa fa-circle-thin btn-xs align-btn-xs" style="color: white" disabled="disabled"></button>
+                                            @*<i class="fa fa-circle-thin bullet"></i>*@
                                         }
-                                    </h2>
-                                    }
-                                
-                            }
-                            else if (status.IsCompleted)
-                            { // Completed, inactive category
-                                <i class="fa fa-check-circle bullet"></i>
-                                <h2>
-                                    @if (string.IsNullOrWhiteSpace(status.Hyperlink))
-                                    {
-                                        @status.Name
+
+                                        if (string.IsNullOrWhiteSpace(status.Hyperlink))
+                                        {
+                                            @status.Name
+                                        }
+                                        else
+                                        {
+                                            <a class="disabled display-inline" href="@Url.Action("", status.Hyperlink)">@status.Name <i class="fa fa-external-link"></i></a>
+                                        }
                                     }
                                     else
                                     {
-                                        <a class="disabled" href="@Url.Action("", status.Hyperlink)">@status.Name <i class="fa fa-external-link"></i></a>
+                                        <button type="submit" class="fa fa-check-circle btn-xs align-btn-xs"></button>
+                                        if (string.IsNullOrWhiteSpace(status.Hyperlink))
+                                        {
+                                            @status.Name
+                                        }
+                                        else
+                                        {
+                                            <a class="disabled" href="@Url.Action("", status.Hyperlink)">@status.Name <i class="fa fa-external-link"></i></a>
+                                        }
                                     }
                                 </h2>
                             }
-                            else // Not completed, inactive category.
-                            {
-                                <i class="fa fa-circle-thin bullet"></i>
-                                <h2>
-                                    @if (string.IsNullOrWhiteSpace(status.Hyperlink))
-                                          {
-                                              @status.Name
-                                          }
-                                          else
-                                          {
-                                              <a class="disabled" href="@Url.Action("", status.Hyperlink)">@status.Name <i class="fa fa-external-link"></i></a>
-                                          }
-                                </h2>
-                            }
+
+                        }
+                        else if (status.IsCompleted)
+                        { // Completed, inactive category
+                            <i class="fa fa-check-circle bullet"></i>
+                            <h2>
+                                @if (string.IsNullOrWhiteSpace(status.Hyperlink))
+                                {
+                                    @status.Name
+                                }
+                                else
+                                {
+                                    <a class="disabled" href="@Url.Action("", status.Hyperlink)">@status.Name <i class="fa fa-external-link"></i></a>
+                                }
+                            </h2>
+                        }
+                        else // Not completed, inactive category.
+                        {
+                            <i class="fa fa-circle-thin bullet"></i>
+                            <h2>
+                                @if (string.IsNullOrWhiteSpace(status.Hyperlink))
+                                {
+                                    @status.Name
+                                }
+                                else
+                                {
+                                    <a class="disabled" href="@Url.Action("", status.Hyperlink)">@status.Name <i class="fa fa-external-link"></i></a>
+                                }
+                            </h2>
+                        }
 
                         <p>@status.Notes</p>
                     </li>
@@ -178,10 +200,10 @@
             @if (string.IsNullOrWhiteSpace(category.StoredProcedureName))
             {
                 var disabled = category.SequenceOrder != currentSequenceOrder ? "disabled='disabled" : string.Empty;
-                using (Html.BeginForm("Completed", "Status", new {id = category.Id}, FormMethod.Post))
+                using (Html.BeginForm("Completed", "Status", new { id = category.Id }, FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
-                    <input type="submit" class="btn btn-primary" @disabled value="I've done these steps"/>
+                    <input type="submit" class="btn btn-primary" @disabled value="I've done these steps" />
 
                 }
             }
@@ -191,7 +213,7 @@
 @section AdditionalScripts
 {
     <script type="text/javascript">
-        $('[data-confirm]').on('click', function(e) {
+        $('[data-confirm]').on('click', function (e) {
             if (!confirm(jQuery(this).attr("data-confirm"))) {
                 e.preventDefault();
             }
@@ -234,7 +256,7 @@
         });
     </script>
     <script type="text/javascript">
-        $(function() {
+        $(function () {
             $('html, body').animate({
                 scrollTop: $('.activePannel').offset().top - $("#nav").height()
             }, 'slow');

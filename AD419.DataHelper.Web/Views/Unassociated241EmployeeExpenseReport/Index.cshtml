@@ -1,0 +1,20 @@
+﻿@using ReportViewerForMvc
+@{
+    ViewBag.Title = "Unassociated 241 Employee Expenses";
+}
+
+<h2>@ViewBag.Title</h2>
+<h4>This is an all-inclusive list of every 241 employee expense that was not auto-associated.</h4>
+<h5>Use this information to help assist with making associations in the AD-419 web application.  <br />Note that the bold text signifies that the account PI's name matches the expense's employee name as indicated by "Name Match" field = True.<br /><br />
+<p>
+    <i>
+        These 241 employees did not have any projects in the corresponding expense department that could be auto-associated.
+        They may have had project(s) in departments other than the expense's OrgR,
+        which would have hidden the expense from view in the User Interface (UI).  These expenses are typically indicated by data present in the project fields on the left-hand side of the report.
+    </i>
+</p></h5>
+<hr />
+
+<div>
+    @Html.ReportViewer(@Model.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { style = "border: none" })
+</div>
