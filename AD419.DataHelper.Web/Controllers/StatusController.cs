@@ -109,6 +109,26 @@ namespace AD419.DataHelper.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Resets status back to post processing review,
+        /// Re-hides any 204 projects which have less than $100 of expenses, and
+        /// Truncates and reloads the project table so those projects are no longer visible.
+        /// </summary>
+        [HttpPost]
+        public ActionResult HideProjectsAndResetStatusBackToPostProcessingReview()
+        {
+            try
+            {
+                ExecuteSproc("[usp_HideProjectsAndResetStatusBackToPostProcessingReview]");
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult() { Data = new { Success = false, Message = "There was a problem.", ErrorMessage = ex.Message }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         public ActionResult RunSproc(int id)
         {
