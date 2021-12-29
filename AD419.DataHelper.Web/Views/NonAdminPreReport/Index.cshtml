@@ -1,0 +1,25 @@
+﻿@using ReportViewerForMvc
+@{
+    ViewBag.Title = "AD-419 Non-Admin Pre-Report";
+}
+
+<h2>@ViewBag.Title</h2>
+<h4>
+    This report mimics what would ultimately be displayed on the AD-419 Non-Admin report
+    providing no additional changes are made to the underlying data.
+</h4>
+
+<h5>
+    Using this report allows the accounting team the opportunity to review the data prior to actually executing
+    the final report generation process.  It allows adjustments to be made to the associations and
+    then review the effect they would have on the final report. <br /><br />
+    <i>
+        Note that 204 projects with less than $100 may not appear on this report if it is
+        run prior to the final report generation process.
+    </i>
+</h5>
+<hr />
+
+<div>
+    @Html.ReportViewer(@Model.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { style = "border: none" })
+</div>
