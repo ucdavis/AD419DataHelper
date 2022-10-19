@@ -5,8 +5,9 @@ namespace AD419.DataHelper.Web.Models
 {
     /// <summary>
     /// This class represents a record imported from the REEport financial system, from a list that contains 
-    /// all of the projects we will be reorting on.  It is used to validate against the project list that the
-    /// Data Helper derived from the All ANR projects list.
+    /// all of the projects we will be reporting on.  It is used to validate against the project list that the
+    /// Data Helper derived from the All ANR projects list.  
+    /// 20221019: Modified to include UCP Emp. ID provided by Shannon
     /// </summary>
     [Table("NifaProjectAccessionNumberImport")]
     public partial class NifaProjectAccessionNumberImport
@@ -22,6 +23,11 @@ namespace AD419.DataHelper.Web.Models
         [StringLength(20)]
         [Display(Name = "Accession Number")]
         public string AccessionNumber { get; set; }
+
+        [Required]
+        [StringLength(11)]
+        [Display(Name = "UCP Employee ID")]
+        public string UcpEmployeeId { get; set; }
 
         [StringLength(255)]
         [Display(Name = "Notes")]

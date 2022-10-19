@@ -20,6 +20,9 @@
                 @Html.DisplayNameFor(x => Model[0].AccessionNumber)
             </th>
             <th>
+                @Html.DisplayNameFor(x => Model[0].UcpEmployeeId)
+            </th>
+            <th>
                 @Html.DisplayNameFor(x => Model[0].Notes)
             </th>
         </tr>
@@ -29,30 +32,33 @@
         {
             var item = Model[i];
             var error = errors[i];
-            <tr>
-                <td>
-                    @if (!error.IsValid)
-                    {
-                        var message = string.Join("\n",
-                            error.Values
-                                .SelectMany(v => v.Errors)
-                                .Select(e => e.ErrorMessage));
-                        
-                        <span class="text-danger" title="@message">
-                            <i class="fa fa-exclamation-triangle"></i>
-                        </span>
-                    }
-                </td>
-                <td>
-                    @Html.DisplayFor(x => item.ProjectNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(x => item.AccessionNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(x => item.Notes)
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @if (!error.IsValid)
+                {
+                    var message = string.Join("\n",
+                        error.Values
+                            .SelectMany(v => v.Errors)
+                            .Select(e => e.ErrorMessage));
+
+                    <span class="text-danger" title="@message">
+                        <i class="fa fa-exclamation-triangle"></i>
+                    </span>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(x => item.ProjectNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(x => item.AccessionNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(x => item.UcpEmployeeId)
+            </td>
+            <td>
+                @Html.DisplayFor(x => item.Notes)
+            </td>
+        </tr>
         }
     </tbody>
 </table>
@@ -63,6 +69,7 @@
     {
         @Html.HiddenFor(m => m[i].ProjectNumber)
         @Html.HiddenFor(m => m[i].AccessionNumber)
+        @Html.HiddenFor(m => m[i].UcpEmployeeId)
         @Html.HiddenFor(m => m[i].Notes)
     }
 </form>
