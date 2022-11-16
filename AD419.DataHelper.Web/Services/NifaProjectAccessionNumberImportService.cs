@@ -27,8 +27,9 @@ namespace AD419.DataHelper.Web.Services
             var project = new NifaProjectAccessionNumberImport()
             {
                 ProjectNumber = row[0].ToString(),
-                AccessionNumber    = row[1].ToString(),
-                Notes = row[2].ToString()
+                AccessionNumber = row[1].ToString(),
+                UcpEmployeeId = row[2].ToString(),
+                Notes = row[3].ToString()
             };
 
             // fix accession number

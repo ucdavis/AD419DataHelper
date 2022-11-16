@@ -51,7 +51,7 @@ namespace AD419.DataHelper.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ProjectNumber,AccessionNumber,Notes")] NifaProjectAccessionNumberImport nifaProjectAccessionNumberImport)
+        public ActionResult Create([Bind(Include = "Id,ProjectNumber,AccessionNumber,UcpEmployeeId,Notes")] NifaProjectAccessionNumberImport nifaProjectAccessionNumberImport)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace AD419.DataHelper.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ProjectNumber,AccessionNumber,Notes")] NifaProjectAccessionNumberImport nifaProjectAccessionNumberImport)
+        public ActionResult Edit([Bind(Include = "Id,ProjectNumber,AccessionNumber,UcpEmployeeId,Notes")] NifaProjectAccessionNumberImport nifaProjectAccessionNumberImport)
         {
             if (ModelState.IsValid)
             {
