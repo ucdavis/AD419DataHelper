@@ -1,0 +1,14 @@
+﻿
+@using ReportViewerForMvc
+@{
+    ViewBag.Title = "AD-419 Associated Totals by SFN Report";
+}
+
+<h2>@ViewBag.Title</h2>
+<h4>This is an all-inclusive list of Totals by SFN similar to what would be displayed in the summary section of the AD-419 Associations web application.</h4>
+<h5>Use this information to compare the 201,202, and 204 expense totals with those listed on the AD-419 Non-Admin Pre-Report.  </h5>
+<hr />
+
+<div>
+    @Html.ReportViewer(@Model.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { style = "border: none" })
+</div>
