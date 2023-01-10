@@ -243,6 +243,7 @@
     <Compile Include="Controllers\ArcCodesController.cs" />
     <Compile Include="Controllers\C204AcctXProjController.cs" />
     <Compile Include="Controllers\CurrentAd419ProjectsController.cs" />
+    <Compile Include="Controllers\AssociatedTotalsBySfnReportController.cs" />
     <Compile Include="Controllers\NonAdminPreReportController.cs" />
     <Compile Include="Controllers\Unassociated241EmployeeExpenseReportController.cs" />
     <Compile Include="Controllers\ProjectOrgAssociationsPercentageReportController.cs" />
@@ -443,6 +444,7 @@
     <Content Include="Scripts\typeahead.jquery.min.js" />
     <Content Include="Scripts\upload-wizard.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\AssociatedTotalsBySfnReport\Index.cshtml" />
     <None Include="Web.config">
       <SubType>Designer</SubType>
     </None>
@@ -642,7 +644,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
