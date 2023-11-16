@@ -255,3 +255,4 @@ packages/
 AppSettings.config
 AD419.DataHelper.Web/AD419.DataHelper.Web.csproj.DotSettings
 AD419.DataHelper.Web/Web.Release.config
+AD419.DataHelper.Web/connectionStrings.config
