@@ -113,7 +113,7 @@
     </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Windows\assembly\GAC_MSIL\Microsoft.ReportViewer.Common\11.0.0.0__89845dcd8080cc91\Microsoft.ReportViewer.Common.dll</HintPath>
+      <HintPath>bin\Microsoft.ReportViewer.Common.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -422,6 +422,9 @@
     <Content Include="Content\Sample_Forms\TitleCodesSelfCertify.xlsx" />
     <Content Include="Content\Sample_Forms\NifaProjectAndAccessionNumberImport.xlsx" />
     <Content Include="Instructions\AD419Instructions.pdf" />
+    <Content Include="connectionStrings.config" />
+    <Content Include="appSettings.config" />
+    <None Include="Properties\PublishProfiles\AD419DataHelper - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
@@ -445,11 +448,13 @@
     <Content Include="Scripts\upload-wizard.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\AssociatedTotalsBySfnReport\Index.cshtml" />
-    <None Include="Web.config">
+    <Content Include="Web.config">
       <SubType>Designer</SubType>
-    </None>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -641,6 +646,14 @@
     <Content Include="Views\ProjectOrgAssociationsPercentageReport\Index.cshtml" />
     <Content Include="Views\Unassociated241EmployeeExpenseReport\Index.cshtml" />
     <Content Include="Views\NonAdminPreReport\Index.cshtml" />
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Web.Test.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
