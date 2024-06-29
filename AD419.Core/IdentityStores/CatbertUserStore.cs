@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AD419.Core.Models;
 using Microsoft.AspNet.Identity;
 
+
 namespace AD419.Core.IdentityStores
 {
     public class CatbertUserStore : IUserStore<User, int>

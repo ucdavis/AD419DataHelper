@@ -245,6 +245,7 @@
     <Compile Include="Controllers\CurrentAd419ProjectsController.cs" />
     <Compile Include="Controllers\AssociatedTotalsBySfnReportController.cs" />
     <Compile Include="Controllers\NonAdminPreReportController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\Unassociated241EmployeeExpenseReportController.cs" />
     <Compile Include="Controllers\ProjectOrgAssociationsPercentageReportController.cs" />
     <Compile Include="Controllers\NifaProjectAccessionNumberImportsController.cs" />
@@ -452,6 +453,8 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Report\Report.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

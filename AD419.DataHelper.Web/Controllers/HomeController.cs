@@ -10,6 +10,11 @@ namespace AD419.DataHelper.Web.Controllers
         }
         public ActionResult Index()
         {
+            if (User.IsInRole("ReportViewer"))
+            {
+                // return View("Lockout");
+                return RedirectToAction("AeComparisonReport", "Report");
+            }
             return View();
         }
 
