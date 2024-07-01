@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using Microsoft.AspNet.Identity;
 
 namespace AD419.Core.Models
@@ -54,5 +55,13 @@ namespace AD419.Core.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Permission> Permissions { get; set; }
+
+        public bool IsUserInRole (string oleName) 
+        {
+                var permissions = this.Permissions.AsQueryable();
+                var permission = permissions.Where(x => x.ApplicationID == 4).Where(x => x.Role.RoleName.Equals(oleName));
+                return permission.Count() == 1 ? true : false;
+        }
+
     }
 }

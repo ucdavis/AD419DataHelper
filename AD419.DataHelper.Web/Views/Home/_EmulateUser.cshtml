@@ -1,0 +1,12 @@
+﻿@{ if (User.IsInRole("EmulationUser"))
+   {
+       <div id="div-emulate-user">
+           @using (Html.BeginForm("Emulate", "Account", FormMethod.Post))
+           {
+               @Html.TextBox("id")
+
+               <input id="btnEmulateUserSubmit" type="submit" value="Emulate" />
+           }
+       </div>
+   }
+}

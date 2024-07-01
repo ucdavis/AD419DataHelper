@@ -244,6 +244,8 @@
     <Compile Include="Controllers\C204AcctXProjController.cs" />
     <Compile Include="Controllers\CurrentAd419ProjectsController.cs" />
     <Compile Include="Controllers\AssociatedTotalsBySfnReportController.cs" />
+    <Compile Include="Controllers\Fliters\RoleFilters.cs" />
+    <Compile Include="Controllers\Fliters\RoleNames.cs" />
     <Compile Include="Controllers\NonAdminPreReportController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\Unassociated241EmployeeExpenseReportController.cs" />
@@ -261,6 +263,8 @@
     <Compile Include="Controllers\ExpiredProjectsController.cs" />
     <Compile Include="Controllers\FinalReportsController.cs" />
     <Compile Include="Controllers\Ad419InstructionsController.cs" />
+    <Compile Include="Controllers\UserAdministrationController.cs" />
+    <Compile Include="Helpers\CasMvc.cs" />
     <Compile Include="Helpers\ProcessCategoryExtensions.cs" />
     <Compile Include="Models\AccountsWithMissingSfn.cs" />
     <Compile Include="Models\AD419Account.cs" />
@@ -455,6 +459,12 @@
     </Content>
     <Content Include="Views\Report\Index.cshtml" />
     <Content Include="Views\Report\Report.cshtml" />
+    <Content Include="Views\UserAdministration\Index.cshtml" />
+    <Content Include="Views\Home\_EmulateUser.cshtml" />
+    <Content Include="Views\Shared\_EmulateUser.cshtml" />
+    <Content Include="Views\Account.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Account.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

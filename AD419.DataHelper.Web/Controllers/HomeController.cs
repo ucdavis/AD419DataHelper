@@ -1,4 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
+using System.Web.Security;
+using AD419.Core.Models;
 
 namespace AD419.DataHelper.Web.Controllers
 {
@@ -10,6 +14,7 @@ namespace AD419.DataHelper.Web.Controllers
         }
         public ActionResult Index()
         {
+            
             if (User.IsInRole("ReportViewer"))
             {
                 // return View("Lockout");

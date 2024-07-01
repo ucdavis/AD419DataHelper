@@ -15,7 +15,10 @@
                 <span class="brand-text">AD-419 Data Helper Application</span>
             </a>
         </div>
+       
         <div id="nav" class="navbar-collapse collapse">
+            @if (!User.IsInRole("ReportViewer"))
+            {
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("Status", "Index", "Status")</li>
                 <li class="dropdown">
@@ -79,13 +82,29 @@
                         <li>@Html.ActionLink("AD-419 Non-Admin Pre-Report", "Index", "NonAdminPreReport")</li>
 
                         <li>@Html.ActionLink("AD-419 Final Reports", "Index", "FinalReports")</li>
+                    </ul>
+                </li>
 
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">AE Reports <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
                         <li>@Html.ActionLink("KFS Conversion and Project Comparison Report", "Index", "Report")</li>
                     </ul>
                 </li>
+
                 <li><a href="@ConfigurationManager.AppSettings["AD419AppUrl"]" target="_blank">AD-419 Application</a></li>
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <li>
+                        @Html.ActionLink("User Administration", "Index", "UserAdministration")
+                    </li>
+                }
+
             </ul>
+            }
             @Html.Partial("_LoginPartial")
         </div>
+       
     </div>
 </div>
