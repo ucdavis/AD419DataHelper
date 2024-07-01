@@ -112,20 +112,21 @@ namespace AD419.DataHelper.Web.Controllers
         public ActionResult LogOff()
         {
             Log.Information("User logging out");
-            AuthenticationManager.SignOut();
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+          
             FormsAuthentication.SignOut();
             Session.Abandon();
             var myLogoutPage = "LoggedOut";
             var postBackUrl = "https://cas.ucdavis.edu/cas/logout?service=" +
                               Request.Url.ToString().Substring(0, Request.Url.ToString().LastIndexOf("/") + 1) + myLogoutPage;
-           // return Redirect(postBackUrl);
-            return Redirect("https://cas.ucdavis.edu/cas/logout");
+           return Redirect(postBackUrl);
+            //return Redirect("https://cas.ucdavis.edu/cas/logout");
         }
 
-        //public ActionResult LoggedOut()
-        //{
-        //    return View();
-        //}
+        public ActionResult LoggedOut()
+        {
+            return View();
+        }
 
         #region Helpers
         private IAuthenticationManager AuthenticationManager

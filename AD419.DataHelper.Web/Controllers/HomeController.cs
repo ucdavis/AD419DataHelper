@@ -14,13 +14,19 @@ namespace AD419.DataHelper.Web.Controllers
         }
         public ActionResult Index()
         {
-            
-            if (User.IsInRole("ReportViewer"))
+            if (User.Identity.IsAuthenticated)
             {
-                // return View("Lockout");
-                return RedirectToAction("AeComparisonReport", "Report");
+                if (User.IsInRole("ReportViewer"))
+                {
+                    // return View("Lockout");
+                    return RedirectToAction("AeComparisonReport", "Report");
+                }
+
+                return View();
             }
-            return View();
+
+            return View("Error");
+
         }
 
         [HttpPost]

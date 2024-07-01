@@ -13,10 +13,14 @@ namespace AD419.DataHelper.Web.Controllers
 
         public ActionResult AeComparisonReport()
         {
-            var reportName = @"KFS Conversion and Project Comparisons";
-            var model = new ReportViewerModel(reportName);
+            if (User.Identity.IsAuthenticated) {
+                var reportName = @"KFS Conversion and Project Comparisons";
+                var model = new ReportViewerModel(reportName);
 
-            return View("Report", model);
+                return View("Report", model);
+            }
+
+            return RedirectToAction("Index", "Home");
         }
 
     }

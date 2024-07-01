@@ -33,9 +33,13 @@ namespace AD419.DataHelper.Web.Controllers
         // GET: Status
         public ActionResult Index()
         {
-            var categories = DbContext.ProcessCategories.Include("Statuses").ToList();
+            if (User.IsInRole("Admin"))
+            {
+                var categories = DbContext.ProcessCategories.Include("Statuses").ToList();
 
-            return View(categories);
+                return View(categories);
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
