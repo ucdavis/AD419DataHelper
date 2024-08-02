@@ -23,5 +23,18 @@ namespace AD419.DataHelper.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult GlPpmReconciliationReport()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var reportName = @"GL PPM Reconciliation Report";
+                var model = new ReportViewerModel(reportName);
+
+                return View("Report", model);
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }
