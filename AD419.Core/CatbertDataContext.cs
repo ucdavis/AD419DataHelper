@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using AD419.Core.Models;
 
 namespace AD419.Core

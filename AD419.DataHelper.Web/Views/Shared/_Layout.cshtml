@@ -54,9 +54,12 @@ if (window.attachEvent) window.attachEvent("onload", sfHover);
             }
         </header>
 
-        @RenderBody()
+        @if (User.Identity.IsAuthenticated)
+        {
+            @RenderBody();
+        }
 
-        <hr>
+            <hr>
         <footer>
             <p>&copy; College of Agricultural and Environmental Sciences, University of California at Davis</p>
         </footer>
