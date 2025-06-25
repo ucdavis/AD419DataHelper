@@ -2,10 +2,12 @@
 # Legacy .NET Framework 4.5.1 application
 # Data Loader and review website for the AD-419 Report
 
-trigger:
-- master
-pr:
-- master
+# trigger:
+# - master
+# pr:
+# - master
+
+trigger: none
 
 pool:
   vmImage: 'windows-latest'
