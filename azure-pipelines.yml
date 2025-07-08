@@ -1,11 +1,11 @@
 # ASP.NET Framework Pipeline for AD419DataHelper
-# Legacy .NET Framework 4.5.1 application
+# .NET Framework 4.7 application  
 # Data Loader and review website for the AD-419 Report
 
 trigger: none
 
 pool:
-  vmImage: 'windows-2019'  # Use older image with .NET Framework support
+  vmImage: 'windows-latest'
 
 variables:
   solution: '**/*.sln'
@@ -17,20 +17,6 @@ steps:
 # - task: NodeTool@0
 #   inputs:
 #     versionSpec: '18.x'
-
-# Install .NET Framework 4.5.1 Developer Pack
-- task: PowerShell@2
-  displayName: 'Install .NET Framework 4.5.1 Developer Pack'
-  inputs:
-    targetType: 'inline'
-    script: |
-      Write-Host "Downloading .NET Framework 4.5.1 Developer Pack..."
-      $url = "https://download.microsoft.com/download/A/7/8/A78F1D25-8D5C-4411-B544-C7D527296D5E/NDP451-KB2858728-x86-x64-DevPack.exe"
-      $output = "$(Agent.TempDirectory)\NDP451-KB2858728-x86-x64-DevPack.exe"
-      Invoke-WebRequest -Uri $url -OutFile $output
-      Write-Host "Installing .NET Framework 4.5.1 Developer Pack..."
-      Start-Process -FilePath $output -ArgumentList "/quiet" -Wait
-      Write-Host "Installation complete."
 
 - task: NuGetToolInstaller@1
   displayName: 'Install NuGet tool'
@@ -44,7 +30,7 @@ steps:
   displayName: 'Build solution'
   inputs:
     solution: '$(solution)'
-    msbuildArgs: '/p:Configuration=$(buildConfiguration) /p:Platform="$(buildPlatform)" /p:TargetFrameworkVersion=v4.5.1'
+    msbuildArgs: '/p:Configuration=$(buildConfiguration) /p:Platform="$(buildPlatform)"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
@@ -52,7 +38,7 @@ steps:
   displayName: 'Create Web Deploy Package'
   inputs:
     solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site" /p:TargetFrameworkVersion=v4.5.1'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
