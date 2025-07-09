@@ -13,8 +13,8 @@ namespace AD419.DataHelper.Web.Controllers
             var model = new DosCodesViewModel
             {
                 DosCodes = DbContext.DosCodes.ToList(),
-                LaborTransactions = DbContext.GetLaborTransactions((int)LaborTransactionsOptions.DosCodes).ToList(), 
-                CodeTypeName = "D.O.S. Codes" 
+                LaborTransactions = DbContext.GetLaborTransactions((int)LaborTransactionsOptions.DosCodes, 2024).ToList(), 
+                CodeTypeName = "ERN Codes" 
             };
 
             return View(model);

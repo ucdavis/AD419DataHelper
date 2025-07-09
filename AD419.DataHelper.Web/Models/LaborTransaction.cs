@@ -6,27 +6,48 @@ namespace AD419.DataHelper.Web.Models
 {
     public enum LaborTransactionsOptions
     {
-        All,
-        ConsolidationCodes,
-        DocTypeCodes,
-        DosCodes
-    };
+        All = 0,
+        FinancialDepartments = 1, 
+        AEFunds = 2,
+        DosCodes = 3,
+        AEAccounts = 4,
+        Activities = 5,
+        ConsolidationCodes = 6, // SHOULD THIS BE REMOVED?
+        DocTypeCodes = 7 // SHOULD THIS BE REMOVED?
+    }
     public class LaborTransaction
     {
-        public string Chart { get; set; }
-        public string Account { get; set; }
+        [DisplayName("AE Entity")]
+        public string AE_Entity { get; set; }
 
-        [DisplayName("Sub Account")]
-        public string SubAccount { get; set; }
-        public string Org { get; set; }
+        [DisplayName("AE Fund")]
+        public string AE_Fund { get; set; }
 
-        [DisplayName("Consolidation Code")]
-        public string ObjConsol { get; set; }
+        [DisplayName("AE Financial Dept")]
+        public string AE_FinancialDept { get; set; }
+
+        [DisplayName("AE Parent Dept")]
+        public string AE_ParentDept { get; set; }
+
+        [DisplayName("AE Account")]
+        public string AE_Account { get; set; }
+
+        [DisplayName("AE Purpose")]
+        public string AE_Purpose { get; set; }
+
+        [DisplayName("AE Program")]
+        public string AE_Program { get; set; }
+
+        [DisplayName("AE Project")]
+        public string AE_Project { get; set; }
+
+        [DisplayName("AE Activity")]
+        public string AE_Activity { get; set; }
 
         [DisplayName("Trans Doc. Type")]
         public string FinanceDocTypeCd { get; set; }
 
-        [DisplayName("D.O.S. Code")]
+        [DisplayName("ERN Code")]
         public string DosCd { get; set; }
 
         [DisplayName("Employee ID")]
@@ -53,20 +74,20 @@ namespace AD419.DataHelper.Web.Models
         [DisplayName("Fringe Benefit Salary Code")]
         public string FringeBenefitSalaryCd { get; set; }
 
-        [DisplayName("Annual Report Code")]
-        public string AnnualReportCode { get; set; }
+        [DisplayName("Excluded By Financial Dept")]
+        public bool? ExcludedByFinancialDept { get; set; }
 
-        [DisplayName("Excluded By ARC")]
-        public bool ExcludedByARC { get; set; }
+        [DisplayName("Excluded By AE Account")]
+        public bool? ExcludedByAeAccount { get; set; }
 
-        [DisplayName("Excluded By Org")]
-        public bool ExcludedByOrg { get; set; }
+        [DisplayName("Excluded By AE Fund")]
+        public bool? ExcludedByAeFund { get; set; }
 
-        [DisplayName("Excluded By Account")]
-        public bool ExcludedByAccount { get; set; }
+        [DisplayName("Excluded By Activity")]
+        public bool? ExcludedByActivity { get; set; }
 
-        [DisplayName("Excluded By Consol. Code")]
-        public bool ExcludedByObjConsol { get; set; }
+        [DisplayName("FTE Excluded By ERN Code")]
+        public bool? FteExcludedByERN_Code { get; set; }
 
         [Key]
         public int Id { get; set; }

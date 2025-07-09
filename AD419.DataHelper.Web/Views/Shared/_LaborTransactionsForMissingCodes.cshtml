@@ -10,19 +10,19 @@
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.LaborTransactions[0].Chart)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].AE_Entity)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.LaborTransactions[0].Account)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].AE_FinancialDept)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.LaborTransactions[0].SubAccount)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].AE_Account)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.LaborTransactions[0].Org)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].AE_Fund)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.LaborTransactions[0].ObjConsol)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].AE_Activity)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.LaborTransactions[0].FinanceDocTypeCd)
@@ -55,87 +55,88 @@
                         @Html.DisplayNameFor(model => model.LaborTransactions[0].FringeBenefitSalaryCd)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.LaborTransactions[0].AnnualReportCode)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].ExcludedByFinancialDept)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.LaborTransactions[0].ExcludedByARC)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].ExcludedByAeAccount)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.LaborTransactions[0].ExcludedByOrg)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].ExcludedByAeFund)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.LaborTransactions[0].ExcludedByAccount)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].ExcludedByActivity)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.LaborTransactions[0].ExcludedByObjConsol)
+                        @Html.DisplayNameFor(model => model.LaborTransactions[0].FteExcludedByERN_Code)
                     </th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model.LaborTransactions)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Chart)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Account)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SubAccount)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Org)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => item.ObjConsol)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => item.FinanceDocTypeCd)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => item.DosCd)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => item.EmployeeID)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => item.EmployeeName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => item.TitleCd)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => item.RateTypeCd)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => item.Payrate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => item.Amount)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => item.PayPeriodEndDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => item.FringeBenefitSalaryCd)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => item.AnnualReportCode)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => item.ExcludedByARC)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => item.ExcludedByOrg)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => item.ExcludedByAccount)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => item.ExcludedByObjConsol)
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AE_Entity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AE_FinancialDept)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AE_Account)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AE_Fund)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AE_Activity)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => item.FinanceDocTypeCd)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.DosCd)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.EmployeeID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.EmployeeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.TitleCd)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.RateTypeCd)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Payrate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.PayPeriodEndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.FringeBenefitSalaryCd)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.ExcludedByFinancialDept)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.ExcludedByAeAccount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.ExcludedByAeFund)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.ExcludedByActivity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.FteExcludedByERN_Code)
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

@@ -1,0 +1,34 @@
+﻿@model AD419.DataHelper.Web.Models.FinancialDepartmentsViewModel
+
+@{
+    ViewBag.Title = "Financial Departments";
+}
+
+<h2>Financial Departments</h2>
+
+@Html.Partial("_LaborTransactionsForMissingCodes", @Model)
+
+<h3>Existing Financial Departments</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Financial Department Code</th>
+            <th>Description</th>
+            <th>Include in AES?</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dept in Model.FinancialDepartments)
+        {
+            <tr>
+                <td>@dept.FinancialDepartmentCode</td>
+                <td>@dept.Description</td>
+                <td>@(dept.IsAES ? "Yes" : "No")</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = dept.FinancialDepartmentCode }, new { @class = "btn btn-sm btn-primary" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

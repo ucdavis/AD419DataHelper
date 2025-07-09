@@ -16,7 +16,7 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 TransDocTypes = DbContext.TransDocTypes.ToList(),
                 MissingDocTypes = GetMissingDocTypes(),
-                LaborTransactions = DbContext.GetLaborTransactions((int)LaborTransactionsOptions.DocTypeCodes).ToList(),
+                LaborTransactions = DbContext.GetLaborTransactions((int)LaborTransactionsOptions.DocTypeCodes, 2024).ToList(),
                 CodeTypeName = "Trans. Doc. Types (Doc. Type Codes)"
             };
 
