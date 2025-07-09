@@ -34,23 +34,6 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: CopyFiles@2
-  displayName: 'Copy additional web assets'
-  inputs:
-    SourceFolder: '$(System.DefaultWorkingDirectory)'
-    Contents: |
-      **\Views\**
-      **\Content\**
-      **\Scripts\**
-      **\fonts\**
-      **\Images\**
-      **\SqlServerTypes\**
-      **\*.css
-      **\*.js
-    TargetFolder: '$(Build.ArtifactStagingDirectory)\WebFiles'
-    CleanTargetFolder: true
-
-
 - task: PowerShell@2
   displayName: 'Create config files from secrets'
   inputs:
@@ -72,6 +55,25 @@ steps:
   env:
     CONNECTION_STRINGS: $(ConnectionStrings)
     APP_SETTINGS: $(AppSettings)
+
+- task: CopyFiles@2
+  displayName: 'Copy additional web assets'
+  inputs:
+    SourceFolder: '$(System.DefaultWorkingDirectory)'
+    Contents: |
+      **\Views\**
+      **\Content\**
+      **\Scripts\**
+      **\fonts\**
+      **\Images\**
+      **\SqlServerTypes\**
+      **\connectionStrings.config
+      **\appSettings.config
+      **\*.css
+      **\*.js
+    TargetFolder: '$(Build.ArtifactStagingDirectory)\WebFiles'
+    CleanTargetFolder: true
+
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish build artifacts'
