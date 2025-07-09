@@ -1,0 +1,96 @@
+# ASP.NET Framework Pipeline for AD419DataHelper
+# .NET Framework 4.7 application  
+# Data Loader and review website for the AD-419 Report
+
+trigger: none
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+# Do we need node? I don't think so but there's js so I'm not sure.
+# - task: NodeTool@0
+#   inputs:
+#     versionSpec: '18.x'
+
+- task: NuGetToolInstaller@1
+  displayName: 'Install NuGet tool'
+
+- task: NuGetCommand@2
+  displayName: 'Restore NuGet packages'
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: PowerShell@2
+  displayName: 'Create config files from secrets'
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Create connectionStrings.config from xml variable
+      $connectionStrings = @'
+      $($env:CONNECTION_STRINGS)
+      '@
+      $connectionStrings | Out-File -FilePath "$(Build.SourcesDirectory)/AD419.DataHelper.Web/connectionStrings.config" -Encoding UTF8
+      Write-Host "connectionStrings.config created successfully"
+      
+      # Create appSettings.config from xml variable
+      $appSettings = @'
+      $($env:APP_SETTINGS_CONFIG)
+      '@
+      $appSettings | Out-File -FilePath "$(Build.SourcesDirectory)/AD419.DataHelper.Web/appSettings.config" -Encoding UTF8
+      Write-Host "appSettings.config created successfully"
+  env:
+    CONNECTION_STRINGS: $(ConnectionStrings)
+    APP_SETTINGS: $(AppSettings)
+
+- task: VSBuild@1
+  displayName: 'Create Web Deploy Package'
+  inputs:
+    solution: '$(solution)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: CopyFiles@2
+  displayName: 'Copy additional web assets'
+  inputs:
+    SourceFolder: '$(System.DefaultWorkingDirectory)'
+    Contents: |
+      **\Views\**
+      **\Content\**
+      **\Scripts\**
+      **\fonts\**
+      **\Images\**
+      **\SqlServerTypes\**
+      **\connectionStrings.config
+      **\appSettings.config
+      **\*.css
+      **\*.js
+    TargetFolder: '$(Build.ArtifactStagingDirectory)\WebFiles'
+    CleanTargetFolder: true
+
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish build artifacts'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'AD419DataHelper'
+    publishLocation: 'Container'
+
+# Deployment stage disabled for now - focusing on build artifacts only
+# To enable deployment later, uncomment and configure the deployment group:
+# - task: IISWebAppDeploymentOnMachineGroup@0
+#   displayName: 'Deploy to IIS Server'
+#   inputs:
+#     WebSiteName: 'AD419DataHelper'
+#     Package: '$(Build.ArtifactStagingDirectory)\WebApp.zip'
+#     RemoveAdditionalFilesFlag: true
+#     TakeAppOfflineFlag: true
+#     XmlTransformation: true
+#   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+#   # Note: Requires deployment group setup for web.caes.ucdavis.edu
