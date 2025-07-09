@@ -25,7 +25,20 @@ steps:
   displayName: 'Restore NuGet packages'
   inputs:
     restoreSolution: '$(solution)'
-
+    
+- task: PowerShell@2
+  displayName: 'Install Report Viewer runtime'
+  inputs:
+    targetType: 'inline'
+    script: |
+      Write-Host "Installing Microsoft Report Viewer 2015 runtime..."
+      $url = "https://download.microsoft.com/download/A/1/2/A129F694-233C-4C7C-860F-F73139CF2E01/ENU/x64/ReportViewer.msi"
+      $output = "$(Agent.TempDirectory)\ReportViewer.msi"
+      Write-Host "Downloading Report Viewer..."
+      Invoke-WebRequest -Uri $url -OutFile $output -ErrorAction Stop
+      Write-Host "Installing Report Viewer..."
+      Start-Process -FilePath "msiexec.exe" -ArgumentList "/i `"$output`" /quiet /norestart /L*v `"$(Agent.TempDirectory)\ReportViewer_install.log`"" -Wait
+      Write-Host "Report Viewer installation complete."
 - task: VSBuild@1
   displayName: 'Build solution'
   inputs:
