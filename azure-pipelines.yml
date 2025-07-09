@@ -52,6 +52,7 @@ steps:
       **\Scripts\**
       **\fonts\**
       **\Images\**
+      **\SqlServerTypes\**
       **\*.css
       **\*.js
       **\connectionStrings.config
