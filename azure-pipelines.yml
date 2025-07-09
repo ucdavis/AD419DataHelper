@@ -47,10 +47,20 @@ steps:
       **\SqlServerTypes\**
       **\*.css
       **\*.js
-      **\connectionStrings.config
       **\AppSettings.config
     TargetFolder: '$(Build.ArtifactStagingDirectory)\WebFiles'
     CleanTargetFolder: true
+
+- task: PowerShell@2
+  displayName: 'Create connectionStrings.config from secret'
+  inputs:
+    targetType: 'inline'
+    script: |
+      $content = @'
+      $(ConnectionStrings)
+      '@
+      $content | Out-File -FilePath "$(Build.SourcesDirectory)/AD419.DataHelper.Web/connectionStrings.config" -Encoding UTF8
+      Write-Host "connectionStrings.config created successfully"
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish build artifacts'
