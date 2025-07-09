@@ -62,6 +62,28 @@ steps:
       $content | Out-File -FilePath "$(Build.SourcesDirectory)/AD419.DataHelper.Web/connectionStrings.config" -Encoding UTF8
       Write-Host "connectionStrings.config created successfully"
 
+- task: PowerShell@2
+  displayName: 'Create config files from secrets'
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Create connectionStrings.config from xml variable
+      $connectionStrings = @'
+      $($env:CONNECTION_STRINGS)
+      '@
+      $connectionStrings | Out-File -FilePath "$(Build.SourcesDirectory)/AD419.DataHelper.Web/connectionStrings.config" -Encoding UTF8
+      Write-Host "connectionStrings.config created successfully"
+      
+      # Create appSettings.config from xml variable
+      $appSettings = @'
+      $($env:APP_SETTINGS_CONFIG)
+      '@
+      $appSettings | Out-File -FilePath "$(Build.SourcesDirectory)/AD419.DataHelper.Web/appSettings.config" -Encoding UTF8
+      Write-Host "appSettings.config created successfully"
+  env:
+    CONNECTION_STRINGS: $(ConnectionStrings)
+    APP_SETTINGS: $(AppSettings)
+
 - task: PublishBuildArtifacts@1
   displayName: 'Publish build artifacts'
   inputs:
