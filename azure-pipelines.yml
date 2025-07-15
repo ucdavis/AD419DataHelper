@@ -2,7 +2,8 @@
 # .NET Framework 4.7 application  
 # Data Loader and review website for the AD-419 Report
 
-trigger: none
+trigger:
+- master
 
 pool:
   vmImage: 'windows-latest'
