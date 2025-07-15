@@ -13,10 +13,6 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-# Do we need node? I don't think so but there's js so I'm not sure.
-# - task: NodeTool@0
-#   inputs:
-#     versionSpec: '18.x'
 
 - task: NuGetToolInstaller@1
   displayName: 'Install NuGet tool'
@@ -31,22 +27,18 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      # Create connectionStrings.config from xml variable
-      $connectionStrings = @'
-      $($env:CONNECTION_STRINGS)
-      '@
+      # Create connectionStrings.config from environment variable
+      $connectionStrings = $env:CONNECTION_STRINGS
       $connectionStrings | Out-File -FilePath "$(Build.SourcesDirectory)/AD419.DataHelper.Web/connectionStrings.config" -Encoding UTF8
       Write-Host "connectionStrings.config created successfully"
       
-      # Create appSettings.config from xml variable
-      $appSettings = @'
-      $($env:APP_SETTINGS_CONFIG)
-      '@
+      # Create appSettings.config from environment variable
+      $appSettings = $env:APP_SETTINGS_CONFIG
       $appSettings | Out-File -FilePath "$(Build.SourcesDirectory)/AD419.DataHelper.Web/appSettings.config" -Encoding UTF8
       Write-Host "appSettings.config created successfully"
   env:
     CONNECTION_STRINGS: $(ConnectionStrings)
-    APP_SETTINGS: $(AppSettings)
+    APP_SETTINGS_CONFIG: $(AppSettings)
 
 - task: VSBuild@1
   displayName: 'Create Web Deploy Package'
@@ -82,15 +74,3 @@ steps:
     ArtifactName: 'AD419DataHelper'
     publishLocation: 'Container'
 
-# Deployment stage disabled for now - focusing on build artifacts only
-# To enable deployment later, uncomment and configure the deployment group:
-# - task: IISWebAppDeploymentOnMachineGroup@0
-#   displayName: 'Deploy to IIS Server'
-#   inputs:
-#     WebSiteName: 'AD419DataHelper'
-#     Package: '$(Build.ArtifactStagingDirectory)\WebApp.zip'
-#     RemoveAdditionalFilesFlag: true
-#     TakeAppOfflineFlag: true
-#     XmlTransformation: true
-#   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-#   # Note: Requires deployment group setup for web.caes.ucdavis.edu
