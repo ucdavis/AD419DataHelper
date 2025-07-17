@@ -1,0 +1,127 @@
+﻿@model AD419.DataHelper.Web.Models.FinancialDepartment
+
+@{
+    ViewBag.Title = "Edit Financial Department";
+}
+
+<h2>Edit Financial Department</h2>
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h4>Department Hierarchy</h4>
+    </div>
+    <div class="panel-body">
+        <p>
+            <strong>Full Path:</strong> @Model.Financial_Department_Parent_A_Description → @Model.Financial_Department_Parent_B_Description → @Model.Financial_Department_Parent_C_Description → @Model.Financial_Department_Parent_D_Description → @Model.Financial_Department_Parent_E_Description → @Model.Financial_Department_Parent_F_Description → <strong>@Model.Financial_Department_Level_G_Description</strong>
+        </p>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Financial_Department_Level_G_Child)
+
+    <div class="form-horizontal">
+        <h4>Editable Classification Fields</h4>
+        <hr />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Is_AES, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.DropDownListFor(model => model.Is_AES,
+                    new List<SelectListItem>
+                    {
+                        new SelectListItem { Text = "Not Set", Value = "", Selected = !Model.Is_AES.HasValue },
+                        new SelectListItem { Text = "Yes", Value = "true", Selected = Model.Is_AES == true },
+                        new SelectListItem { Text = "No", Value = "false", Selected = Model.Is_AES == false }
+                    },
+                    new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Is_AES, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsAnimalHealth, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.DropDownListFor(model => model.IsAnimalHealth,
+                    new List<SelectListItem>
+                    {
+                        new SelectListItem { Text = "Not Set", Value = "", Selected = !Model.IsAnimalHealth.HasValue },
+                        new SelectListItem { Text = "Yes", Value = "true", Selected = Model.IsAnimalHealth == true },
+                        new SelectListItem { Text = "No", Value = "false", Selected = Model.IsAnimalHealth == false }
+                    },
+                    new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IsAnimalHealth, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OrgR, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.OrgR, new { htmlAttributes = new { @class = "form-control", @maxlength = "4" } })
+                @Html.ValidationMessageFor(model => model.OrgR, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BCBS00CFilterByFund, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.DropDownListFor(model => model.BCBS00CFilterByFund,
+                    new List<SelectListItem>
+                    {
+                        new SelectListItem { Text = "Not Set", Value = "", Selected = !Model.BCBS00CFilterByFund.HasValue },
+                        new SelectListItem { Text = "Yes", Value = "true", Selected = Model.BCBS00CFilterByFund == true },
+                        new SelectListItem { Text = "No", Value = "false", Selected = Model.BCBS00CFilterByFund == false }
+                    },
+                    new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.BCBS00CFilterByFund, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BCBS00CFilterByPurpose, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.DropDownListFor(model => model.BCBS00CFilterByPurpose,
+                    new List<SelectListItem>
+                    {
+                        new SelectListItem { Text = "Not Set", Value = "", Selected = !Model.BCBS00CFilterByPurpose.HasValue },
+                        new SelectListItem { Text = "Yes", Value = "true", Selected = Model.BCBS00CFilterByPurpose == true },
+                        new SelectListItem { Text = "No", Value = "false", Selected = Model.BCBS00CFilterByPurpose == false }
+                    },
+                    new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.BCBS00CFilterByPurpose, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BCBS00CFilterByAESFacultyProjects, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.DropDownListFor(model => model.BCBS00CFilterByAESFacultyProjects,
+                    new List<SelectListItem>
+                    {
+                        new SelectListItem { Text = "Not Set", Value = "", Selected = !Model.BCBS00CFilterByAESFacultyProjects.HasValue },
+                        new SelectListItem { Text = "Yes", Value = "true", Selected = Model.BCBS00CFilterByAESFacultyProjects == true },
+                        new SelectListItem { Text = "No", Value = "false", Selected = Model.BCBS00CFilterByAESFacultyProjects == false }
+                    },
+                    new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.BCBS00CFilterByAESFacultyProjects, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-9">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    </div>
+}

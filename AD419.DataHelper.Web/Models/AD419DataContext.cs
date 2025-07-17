@@ -47,6 +47,8 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<ExpenseOrgMapping> ExpenseOrgMappings { get; set; }
 
+        public virtual DbSet<FinancialDepartment> FinancialDepartments { get; set; }
+
         public virtual DbSet<FieldStationExpenseListImport> FieldStationExpenseListImports { get; set; }
 
         public virtual DbSet<FfySfnEntry> FfySfnEntries { get; set; }
