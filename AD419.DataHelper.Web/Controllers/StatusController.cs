@@ -20,11 +20,11 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 _sqlCommandTimeout = Convert.ToInt32(ConfigurationManager.AppSettings.Get("SqlCommandTimeout"));
             }
-            catch (System.FormatException ex)
+            catch (System.FormatException)
             {
                 _sqlCommandTimeout = DefaultSqlCommandTimeout;
             }
-            catch (System.OverflowException ex)
+            catch (System.OverflowException)
             {
                 _sqlCommandTimeout = DefaultSqlCommandTimeout;
             }

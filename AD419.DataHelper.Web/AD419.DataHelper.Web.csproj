@@ -490,6 +490,8 @@
     <Content Include="Views\Account\LoggedOut.cshtml" />
     <Content Include="Views\FinancialDepartments\Index.cshtml" />
     <Content Include="Views\FinancialDepartments\Edit.cshtml" />
+    <Content Include="Views\Funds\Index.cshtml" />
+    <Content Include="Views\Funds\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

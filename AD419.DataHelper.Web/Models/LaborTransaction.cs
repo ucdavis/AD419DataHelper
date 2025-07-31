@@ -69,7 +69,7 @@ namespace AD419.DataHelper.Web.Models
 
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         [DisplayName("Pay Period End Date")]
-        public DateTime PayPeriodEndDate { get; set; }
+        public DateTime? PayPeriodEndDate { get; set; }
 
         [DisplayName("Fringe Benefit Salary Code")]
         public string FringeBenefitSalaryCd { get; set; }
