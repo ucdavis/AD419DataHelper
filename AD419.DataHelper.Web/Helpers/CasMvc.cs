@@ -10,11 +10,7 @@ namespace AD419.DataHelper.Web.Helpers
 {
     public static class CasMvc
     {
-#if DEBUG
         private const string CasBaseUrl = "https://ssodev.ucdavis.edu/cas/";
-#else
-        private const string CasBaseUrl = "https://cas.ucdavis.edu/cas/";
-#endif
         private const string StrTicket = "ticket";
         private const string StrReturnUrl = "ReturnURL";
 
