@@ -47,11 +47,15 @@ namespace AD419.DataHelper.Web.Models
 
         public virtual DbSet<ExpenseOrgMapping> ExpenseOrgMappings { get; set; }
 
+        public virtual DbSet<FinancialDepartment> FinancialDepartments { get; set; }
+
         public virtual DbSet<FieldStationExpenseListImport> FieldStationExpenseListImports { get; set; }
 
         public virtual DbSet<FfySfnEntry> FfySfnEntries { get; set; }
 
         public virtual DbSet<FfySfnEntryWithAccount> FfySfnEntriesWithAccounts { get; set; }
+
+        public virtual DbSet<Fund> Fund { get; set; }
 
         public virtual DbSet<Interdepartmental> Interdepartmentals { get; set; }
 
@@ -230,11 +234,12 @@ namespace AD419.DataHelper.Web.Models
         /// </summary>
         /// <param name="option">0: All, 1: ConsolidationCodes, 2: TransDocTypes, 3: DosCodes</param>
         /// <returns>A list of Labor Transactions for the option provided.</returns>
-        public virtual DbRawSqlQuery<LaborTransaction> GetLaborTransactions(int option)
+        public virtual DbRawSqlQuery<LaborTransaction> GetLaborTransactions(int option, int fiscalYear)
         {
             return Database.SqlQuery<LaborTransaction>(
-                "SELECT * FROM [dbo].[udf_GetTransactionsForUnknownCodes] (@Option)",
-                    new SqlParameter("@Option", SqlDbType.Int) { Value = option });
+                "SELECT * FROM [dbo].[udf_GetTransactionsForUnknownCodes] (@Option, @FiscalYear)",
+                    new SqlParameter("@Option", SqlDbType.Int) { Value = option },
+                    new SqlParameter("@FiscalYear", SqlDbType.Int) { Value = fiscalYear });
         }
 
         public virtual string GetSfnCaseStatement()

@@ -1,0 +1,252 @@
+﻿@model AD419.DataHelper.Web.Models.FinancialDepartmentsViewModel
+
+@{
+    ViewBag.Title = "Financial Departments";
+    var unclassifiedDepts = Model.FinancialDepartments.Where(d => !d.Is_AES.HasValue).ToList();
+    var classifiedDepts = Model.FinancialDepartments.Where(d => d.Is_AES.HasValue).ToList();
+}
+
+<h2>Financial Departments</h2>
+
+<h3>New Departments</h3>
+@if (!unclassifiedDepts.Any())
+{
+    <div class="alert alert-success">
+        <strong>No departments need to be classified</strong>
+    </div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Level A</th>
+                <th>Level B</th>
+                <th>Level C</th>
+                <th>Level D</th>
+                <th>Level E</th>
+                <th>Level F</th>
+                <th>Level G (Current)</th>
+                <th>Include in AES?</th>
+                <th>Animal Health?</th>
+                <th>Org R</th>
+                <th>BCBS Filter By Fund</th>
+                <th>BCBS Filter By Purpose</th>
+                <th>BCBS Filter By AES Faculty</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var dept in unclassifiedDepts)
+            {
+                <tr class="warning">
+                    <td>@dept.Financial_Department_Parent_A: @dept.Financial_Department_Parent_A_Description</td>
+                    <td>@dept.Financial_Department_Parent_B: @dept.Financial_Department_Parent_B_Description</td>
+                    <td>@dept.Financial_Department_Parent_C: @dept.Financial_Department_Parent_C_Description</td>
+                    <td>@dept.Financial_Department_Parent_D: @dept.Financial_Department_Parent_D_Description</td>
+                    <td>@dept.Financial_Department_Parent_E: @dept.Financial_Department_Parent_E_Description</td>
+                    <td>@dept.Financial_Department_Parent_F: @dept.Financial_Department_Parent_F_Description</td>
+                    <td><strong>@dept.Financial_Department_Level_G_Child: @dept.Financial_Department_Level_G_Description</strong></td>
+                    <td><span class="text-muted">Not Set</span></td>
+                    <td>@(dept.IsAnimalHealth.HasValue ? (dept.IsAnimalHealth.Value ? "Yes" : "No") : "Not Set")</td>
+                    <td>@(string.IsNullOrEmpty(dept.OrgR) ? "Not Set" : dept.OrgR)</td>
+                    <td>@(dept.BCBS00CFilterByFund.HasValue ? (dept.BCBS00CFilterByFund.Value ? "Yes" : "No") : "Not Set")</td>
+                    <td>@(dept.BCBS00CFilterByPurpose.HasValue ? (dept.BCBS00CFilterByPurpose.Value ? "Yes" : "No") : "Not Set")</td>
+                    <td>@(dept.BCBS00CFilterByAESFacultyProjects.HasValue ? (dept.BCBS00CFilterByAESFacultyProjects.Value ? "Yes" : "No") : "Not Set")</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = dept.Financial_Department_Level_G_Child }, new { @class = "btn btn-sm btn-warning" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<h3>Already Classified</h3>
+
+<!-- Search Controls -->
+<div class="row" style="margin-bottom: 15px;">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Search Classified Departments</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-1">
+                        <label>Level A:</label>
+                        <input type="text" id="searchLevelA" class="form-control input-sm" placeholder="A..." />
+                    </div>
+                    <div class="col-md-1">
+                        <label>Level B:</label>
+                        <input type="text" id="searchLevelB" class="form-control input-sm" placeholder="B..." />
+                    </div>
+                    <div class="col-md-1">
+                        <label>Level C:</label>
+                        <input type="text" id="searchLevelC" class="form-control input-sm" placeholder="C..." />
+                    </div>
+                    <div class="col-md-1">
+                        <label>Level D:</label>
+                        <input type="text" id="searchLevelD" class="form-control input-sm" placeholder="D..." />
+                    </div>
+                    <div class="col-md-1">
+                        <label>Level E:</label>
+                        <input type="text" id="searchLevelE" class="form-control input-sm" placeholder="E..." />
+                    </div>
+                    <div class="col-md-1">
+                        <label>Level F:</label>
+                        <input type="text" id="searchLevelF" class="form-control input-sm" placeholder="F..." />
+                    </div>
+                    <div class="col-md-1">
+                        <label>Level G:</label>
+                        <input type="text" id="searchLevelG" class="form-control input-sm" placeholder="G..." />
+                    </div>
+                    <div class="col-md-4">
+                        <label>All Fields:</label>
+                        <input type="text" id="searchAll" class="form-control" placeholder="Search all fields..." />
+                    </div>
+                    <div class="col-md-1">
+                        <label>&nbsp;</label>
+                        <button type="button" class="btn btn-default btn-sm" onclick="clearAllFilters()">Clear</button>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 5px;">
+                    <div class="col-md-12">
+                        <span id="resultCount" class="text-muted"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-striped" id="classifiedTable">
+    <thead>
+        <tr>
+            <th>Level A</th>
+            <th>Level B</th>
+            <th>Level C</th>
+            <th>Level D</th>
+            <th>Level E</th>
+            <th>Level F</th>
+            <th>Level G (Current)</th>
+            <th>Include in AES?</th>
+            <th>Animal Health?</th>
+            <th>Org R</th>
+            <th>Filter By Fund</th>
+            <th>Filter By Purpose</th>
+            <th>Filter By AES Faculty</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dept in classifiedDepts)
+        {
+            <tr class="dept-row">
+                <td data-search="levelA">@dept.Financial_Department_Parent_A: @dept.Financial_Department_Parent_A_Description</td>
+                <td data-search="levelB">@dept.Financial_Department_Parent_B: @dept.Financial_Department_Parent_B_Description</td>
+                <td data-search="levelC">@dept.Financial_Department_Parent_C: @dept.Financial_Department_Parent_C_Description</td>
+                <td data-search="levelD">@dept.Financial_Department_Parent_D: @dept.Financial_Department_Parent_D_Description</td>
+                <td data-search="levelE">@dept.Financial_Department_Parent_E: @dept.Financial_Department_Parent_E_Description</td>
+                <td data-search="levelF">@dept.Financial_Department_Parent_F: @dept.Financial_Department_Parent_F_Description</td>
+                <td data-search="levelG"><strong>@dept.Financial_Department_Level_G_Child: @dept.Financial_Department_Level_G_Description</strong></td>
+                <td data-search="AES">@(dept.Is_AES.Value ? "Yes" : "No")</td>
+                <td data-search="animalHealth">@(dept.IsAnimalHealth.HasValue ? (dept.IsAnimalHealth.Value ? "Yes" : "No") : "Not Set")</td>
+                <td data-search="orgR">@(string.IsNullOrEmpty(dept.OrgR) ? "Not Set" : dept.OrgR)</td>
+                <td data-search="fund">@(dept.BCBS00CFilterByFund.HasValue ? (dept.BCBS00CFilterByFund.Value ? "Yes" : "No") : "Not Set")</td>
+                <td data-search="purpose">@(dept.BCBS00CFilterByPurpose.HasValue ? (dept.BCBS00CFilterByPurpose.Value ? "Yes" : "No") : "Not Set")</td>
+                <td data-search="AESFaculty">@(dept.BCBS00CFilterByAESFacultyProjects.HasValue ? (dept.BCBS00CFilterByAESFacultyProjects.Value ? "Yes" : "No") : "Not Set")</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = dept.Financial_Department_Level_G_Child }, new { @class = "btn btn-sm btn-primary" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get all search inputs
+        const searchInputs = {
+            levelA: document.getElementById('searchLevelA'),
+            levelB: document.getElementById('searchLevelB'),
+            levelC: document.getElementById('searchLevelC'),
+            levelD: document.getElementById('searchLevelD'),
+            levelE: document.getElementById('searchLevelE'),
+            levelF: document.getElementById('searchLevelF'),
+            levelG: document.getElementById('searchLevelG'),
+            all: document.getElementById('searchAll')
+        };
+
+        const table = document.getElementById('classifiedTable');
+        const rows = table.querySelectorAll('.dept-row');
+        const resultCount = document.getElementById('resultCount');
+
+        // Update result count
+        function updateResultCount() {
+            const visibleRows = Array.from(rows).filter(row => row.style.display !== 'none');
+            resultCount.textContent = `Showing ${visibleRows.length} of ${rows.length} departments`;
+        }
+
+        // Filter function
+        function filterTable() {
+            const filters = {};
+            Object.keys(searchInputs).forEach(key => {
+                filters[key] = searchInputs[key].value.toLowerCase();
+            });
+
+            rows.forEach(row => {
+                let showRow = true;
+
+                // If "all" search is used, search across all cells
+                if (filters.all) {
+                    const allText = row.textContent.toLowerCase();
+                    showRow = allText.includes(filters.all);
+                } else {
+                    // Only apply filters that have values
+                    const activeFilters = Object.keys(filters).filter(key => key !== 'all' && filters[key]);
+
+                    if (activeFilters.length === 0) {
+                        // No filters active, show all rows
+                        showRow = true;
+                    } else {
+                        // Check each active filter (AND logic)
+                        activeFilters.forEach(filterKey => {
+                            const cells = row.querySelectorAll(`[data-search="${filterKey}"]`);
+                            const matchFound = Array.from(cells).some(cell =>
+                                cell.textContent.toLowerCase().includes(filters[filterKey])
+                            );
+
+                            if (!matchFound) {
+                                showRow = false;
+                            }
+                        });
+                    }
+                }
+
+                row.style.display = showRow ? '' : 'none';
+            });
+
+            updateResultCount();
+        }
+
+        // Add event listeners to all search inputs
+        Object.values(searchInputs).forEach(input => {
+            input.addEventListener('input', filterTable);
+        });
+
+        // Clear all filters function
+        window.clearAllFilters = function () {
+            Object.values(searchInputs).forEach(input => {
+                input.value = '';
+            });
+            rows.forEach(row => {
+                row.style.display = '';
+            });
+            updateResultCount();
+        };
+
+        // Initial count
+        updateResultCount();
+    });
+</script>

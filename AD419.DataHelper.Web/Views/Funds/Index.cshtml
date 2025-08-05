@@ -1,0 +1,227 @@
+﻿@model AD419.DataHelper.Web.Models.FundsViewModel
+
+@{
+    ViewBag.Title = "Funds";
+    var unclassifiedFunds = Model.Funds.Where(f => string.IsNullOrEmpty(f.SFN)).ToList();
+    var classifiedFunds = Model.Funds.Where(f => !string.IsNullOrEmpty(f.SFN)).ToList();
+}
+
+<h2>Funds</h2>
+
+<h3>New Funds</h3>
+@if (!unclassifiedFunds.Any())
+{
+    <div class="alert alert-success">
+        <strong>No funds need to be classified</strong>
+    </div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Fund</th>
+                <th>Fund Name</th>
+                <th>Parent 1</th>
+                <th>Parent 2</th>
+                <th>Parent 3</th>
+                <th>Parent 4</th>
+                <th>Fund Level</th>
+                <th>SFN Designation</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var fund in unclassifiedFunds)
+            {
+                <tr class="warning">
+                    <td><strong>@fund.FundCode</strong></td>
+                    <td>@fund.FundName</td>
+                    <td>@fund.Parent1: @fund.Parent1Name</td>
+                    <td>@fund.Parent2: @fund.Parent2Name</td>
+                    <td>@fund.Parent3: @fund.Parent3Name</td>
+                    <td>@fund.Parent4: @fund.Parent4Name</td>
+                    <td>@fund.FundLevel</td>
+                    <td><span class="text-muted">Not Set</span></td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = fund.FundCode }, new { @class = "btn btn-sm btn-warning" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<h3>Already Classified</h3>
+
+<!-- Search Controls -->
+<div class="row" style="margin-bottom: 15px;">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Search Classified Funds</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-1">
+                        <label>Fund:</label>
+                        <input type="text" id="searchFund" class="form-control input-sm" placeholder="Fund..." />
+                    </div>
+                    <div class="col-md-2">
+                        <label>Fund Name:</label>
+                        <input type="text" id="searchFundName" class="form-control input-sm" placeholder="Name..." />
+                    </div>
+                    <div class="col-md-1">
+                        <label>Parent 1:</label>
+                        <input type="text" id="searchParent1" class="form-control input-sm" placeholder="P1..." />
+                    </div>
+                    <div class="col-md-1">
+                        <label>Parent 2:</label>
+                        <input type="text" id="searchParent2" class="form-control input-sm" placeholder="P2..." />
+                    </div>
+                    <div class="col-md-1">
+                        <label>Parent 3:</label>
+                        <input type="text" id="searchParent3" class="form-control input-sm" placeholder="P3..." />
+                    </div>
+                    <div class="col-md-1">
+                        <label>Parent 4:</label>
+                        <input type="text" id="searchParent4" class="form-control input-sm" placeholder="P4..." />
+                    </div>
+                    <div class="col-md-3">
+                        <label>All Fields:</label>
+                        <input type="text" id="searchAll" class="form-control" placeholder="Search all fields..." />
+                    </div>
+                    <div class="col-md-1">
+                        <label>&nbsp;</label>
+                        <button type="button" class="btn btn-default btn-sm" onclick="clearAllFilters()">Clear</button>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 5px;">
+                    <div class="col-md-12">
+                        <span id="resultCount" class="text-muted"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-striped" id="classifiedTable">
+    <thead>
+        <tr>
+            <th>Fund</th>
+            <th>Fund Name</th>
+            <th>Parent 1</th>
+            <th>Parent 2</th>
+            <th>Parent 3</th>
+            <th>Parent 4</th>
+            <th>Fund Level</th>
+            <th>SFN Designation</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var fund in classifiedFunds)
+        {
+            <tr class="fund-row">
+                <td data-search="fund"><strong>@fund.FundCode</strong></td>
+                <td data-search="fundName">@fund.FundName</td>
+                <td data-search="parent1">@fund.Parent1: @fund.Parent1Name</td>
+                <td data-search="parent2">@fund.Parent2: @fund.Parent2Name</td>
+                <td data-search="parent3">@fund.Parent3: @fund.Parent3Name</td>
+                <td data-search="parent4">@fund.Parent4: @fund.Parent4Name</td>
+                <td data-search="fundLevel">@fund.FundLevel</td>
+                <td>@fund.SFN</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = fund.FundCode }, new { @class = "btn btn-sm btn-primary" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get all search inputs
+        const searchInputs = {
+            fund: document.getElementById('searchFund'),
+            fundName: document.getElementById('searchFundName'),
+            parent1: document.getElementById('searchParent1'),
+            parent2: document.getElementById('searchParent2'),
+            parent3: document.getElementById('searchParent3'),
+            parent4: document.getElementById('searchParent4'),
+            all: document.getElementById('searchAll')
+        };
+
+        const table = document.getElementById('classifiedTable');
+        const rows = table.querySelectorAll('.fund-row');
+        const resultCount = document.getElementById('resultCount');
+
+        // Update result count
+        function updateResultCount() {
+            const visibleRows = Array.from(rows).filter(row => row.style.display !== 'none');
+            resultCount.textContent = `Showing ${visibleRows.length} of ${rows.length} funds`;
+        }
+
+        // Filter function
+        function filterTable() {
+            const filters = {};
+            Object.keys(searchInputs).forEach(key => {
+                filters[key] = searchInputs[key].value.toLowerCase();
+            });
+
+            rows.forEach(row => {
+                let showRow = true;
+
+                // If "all" search is used, search across all cells
+                if (filters.all) {
+                    const allText = row.textContent.toLowerCase();
+                    showRow = allText.includes(filters.all);
+                } else {
+                    // Only apply filters that have values
+                    const activeFilters = Object.keys(filters).filter(key => key !== 'all' && filters[key]);
+
+                    if (activeFilters.length === 0) {
+                        // No filters active, show all rows
+                        showRow = true;
+                    } else {
+                        // Check each active filter (AND logic)
+                        activeFilters.forEach(filterKey => {
+                            const cells = row.querySelectorAll(`[data-search="${filterKey}"]`);
+                            const matchFound = Array.from(cells).some(cell =>
+                                cell.textContent.toLowerCase().includes(filters[filterKey])
+                            );
+
+                            if (!matchFound) {
+                                showRow = false;
+                            }
+                        });
+                    }
+                }
+
+                row.style.display = showRow ? '' : 'none';
+            });
+
+            updateResultCount();
+        }
+
+        // Add event listeners to all search inputs
+        Object.values(searchInputs).forEach(input => {
+            input.addEventListener('input', filterTable);
+        });
+
+        // Clear all filters function
+        window.clearAllFilters = function () {
+            Object.values(searchInputs).forEach(input => {
+                input.value = '';
+            });
+            rows.forEach(row => {
+                row.style.display = '';
+            });
+            updateResultCount();
+        };
+
+        // Initial count
+        updateResultCount();
+    });
+</script>

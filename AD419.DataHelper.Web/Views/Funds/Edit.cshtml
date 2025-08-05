@@ -1,0 +1,74 @@
+﻿@model AD419.DataHelper.Web.Models.Fund
+
+@{
+    ViewBag.Title = "Edit Fund";
+}
+
+<h2>Edit Fund</h2>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Fund Information</h3>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.FundCode)
+
+                    <dl class="dl-horizontal">
+                        <dt>Fund:</dt>
+                        <dd><strong>@Model.FundCode</strong></dd>
+
+                        <dt>Fund Name:</dt>
+                        <dd>@Model.FundName</dd>
+
+                        <dt>Parent 1:</dt>
+                        <dd>@Model.Parent1: @Model.Parent1Name</dd>
+
+                        <dt>Parent 2:</dt>
+                        <dd>@Model.Parent2: @Model.Parent2Name</dd>
+
+                        <dt>Parent 3:</dt>
+                        <dd>@Model.Parent3: @Model.Parent3Name</dd>
+
+                        <dt>Parent 4:</dt>
+                        <dd>@Model.Parent4: @Model.Parent4Name</dd>
+
+                        <dt>Fund Level:</dt>
+                        <dd>@Model.FundLevel</dd>
+                    </dl>
+
+                    <hr />
+
+                    <div class="form-group">
+                        <label for="SFN">SFN Designation:</label>
+                        @Html.DropDownListFor(
+                            model => model.SFN,
+                            new List<SelectListItem>
+                            {
+                                new SelectListItem { Text = "Not Set", Value = "" },
+                                new SelectListItem { Text = "201", Value = "201" },
+                                new SelectListItem { Text = "202", Value = "202" },
+                                new SelectListItem { Text = "205", Value = "205" },
+                                new SelectListItem { Text = "220", Value = "220" },
+                                new SelectListItem { Text = "221", Value = "221" },
+                                new SelectListItem { Text = "223", Value = "223" },
+                                new SelectListItem { Text = "multiple", Value = "multiple" }
+                            },
+                            new { @class = "form-control" }
+                        )
+                        @Html.ValidationMessageFor(model => model.SFN, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Save Classification</button>
+                        @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
