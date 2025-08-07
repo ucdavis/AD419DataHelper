@@ -1,0 +1,263 @@
+﻿@model AD419.DataHelper.Web.Models.NaturalAccountsViewModel
+
+@{
+    ViewBag.Title = "Natural Accounts";
+    var unclassifiedAccounts = Model.NaturalAccounts.Where(a => !a.IncludeInAD419.HasValue).ToList();
+    var classifiedAccounts = Model.NaturalAccounts.Where(a => a.IncludeInAD419.HasValue).ToList();
+}
+
+<h2>Natural Accounts</h2>
+
+<h3>Unclassified Accounts</h3>
+@if (!unclassifiedAccounts.Any())
+{
+    <div class="alert alert-success">
+        <strong>All accounts have been classified</strong>
+    </div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Account</th>
+                <th>Description</th>
+                <th>Parent 1</th>
+                <th>Parent 2</th>
+                <th>Parent 3</th>
+                <th>Parent 4</th>
+                <th>Parent 5</th>
+                <th>Include in AD-419?</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var account in unclassifiedAccounts)
+            {
+                <tr class="warning">
+                    <td><strong>@account.Account_Child_Posting_Level</strong></td>
+                    <td>@account.Account_Child_Posting_Description</td>
+                    <td>@account.Account_Parent_1: @account.Account_Parent_1_Description</td>
+                    <td>@account.Account_Parent_2: @account.Account_Parent_2_Description</td>
+                    <td>@account.Account_Parent_3: @account.Account_Parent_3_Description</td>
+                    <td>@account.Account_Parent_4: @account.Account_Parent_4_Description</td>
+                    <td>@account.Account_Parent_5: @account.Account_Parent_5_Description</td>
+                    <td><span class="text-muted">Not Set</span></td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = account.Account_Child_Posting_Level }, new { @class = "btn btn-sm btn-warning" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<h3>Classified Accounts</h3>
+
+<!-- Search Controls -->
+<div class="row" style="margin-bottom: 15px;">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Search Classified Accounts</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-1">
+                        <label>Account:</label>
+                        <input type="text" id="searchAccount" class="form-control input-sm" placeholder="Account..." />
+                    </div>
+                    <div class="col-md-2">
+                        <label>Description:</label>
+                        <input type="text" id="searchDescription" class="form-control input-sm" placeholder="Description..." />
+                    </div>
+                    <div class="col-md-1">
+                        <label>Parent 1:</label>
+                        <input type="text" id="searchParent1" class="form-control input-sm" placeholder="P1..." />
+                    </div>
+                    <div class="col-md-1">
+                        <label>Parent 2:</label>
+                        <input type="text" id="searchParent2" class="form-control input-sm" placeholder="P2..." />
+                    </div>
+                    <div class="col-md-1">
+                        <label>Parent 3:</label>
+                        <input type="text" id="searchParent3" class="form-control input-sm" placeholder="P3..." />
+                    </div>
+                    <div class="col-md-1">
+                        <label>Status:</label>
+                        <select id="searchStatus" class="form-control input-sm">
+                            <option value="">All</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label>All Fields:</label>
+                        <input type="text" id="searchAll" class="form-control input-sm" placeholder="Search all..." />
+                    </div>
+                    <div class="col-md-1">
+                        <label>&nbsp;</label>
+                        <button type="button" class="btn btn-default btn-sm" onclick="clearAllFilters()">Clear</button>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 5px;">
+                    <div class="col-md-12">
+                        <span id="resultCount" class="text-muted"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-striped" id="classifiedTable">
+    <thead>
+        <tr>
+            <th>Account</th>
+            <th>Description</th>
+            <th>Parent 1</th>
+            <th>Parent 2</th>
+            <th>Parent 3</th>
+            <th>Parent 4</th>
+            <th>Parent 5</th>
+            <th>Include in AD-419?</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var account in classifiedAccounts)
+        {
+            string rowClass = "account-row";
+            string statusText = "";
+            string statusClass = "";
+            string statusData = "";
+            
+            if (account.IncludeInAD419.Value)
+            {
+                rowClass += " success";
+                statusText = "Yes";
+                statusClass = "text-success";
+                statusData = "yes";
+            }
+            else
+            {
+                rowClass += " danger";
+                statusText = "No";
+                statusClass = "text-danger";
+                statusData = "no";
+            }
+
+            <tr class="@rowClass" data-status="@statusData">
+                <td data-search="account"><strong>@account.Account_Child_Posting_Level</strong></td>
+                <td data-search="description">@account.Account_Child_Posting_Description</td>
+                <td data-search="parent1">@account.Account_Parent_1: @account.Account_Parent_1_Description</td>
+                <td data-search="parent2">@account.Account_Parent_2: @account.Account_Parent_2_Description</td>
+                <td data-search="parent3">@account.Account_Parent_3: @account.Account_Parent_3_Description</td>
+                <td data-search="parent4">@account.Account_Parent_4: @account.Account_Parent_4_Description</td>
+                <td data-search="parent5">@account.Account_Parent_5: @account.Account_Parent_5_Description</td>
+                <td><span class="@statusClass"><strong>@statusText</strong></span></td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = account.Account_Child_Posting_Level }, new { @class = "btn btn-sm btn-primary" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get all search inputs
+        const searchInputs = {
+            account: document.getElementById('searchAccount'),
+            description: document.getElementById('searchDescription'),
+            parent1: document.getElementById('searchParent1'),
+            parent2: document.getElementById('searchParent2'),
+            parent3: document.getElementById('searchParent3'),
+            status: document.getElementById('searchStatus'),
+            all: document.getElementById('searchAll')
+        };
+
+        const table = document.getElementById('classifiedTable');
+        const rows = table.querySelectorAll('.account-row');
+        const resultCount = document.getElementById('resultCount');
+
+        // Update result count
+        function updateResultCount() {
+            const visibleRows = Array.from(rows).filter(row => row.style.display !== 'none');
+            resultCount.textContent = `Showing ${visibleRows.length} of ${rows.length} accounts`;
+        }
+
+        // Filter function
+        function filterTable() {
+            const filters = {};
+            Object.keys(searchInputs).forEach(key => {
+                filters[key] = searchInputs[key].value.toLowerCase();
+            });
+
+            rows.forEach(row => {
+                let showRow = true;
+
+                // If "all" search is used, search across all cells
+                if (filters.all) {
+                    const allText = row.textContent.toLowerCase();
+                    showRow = allText.includes(filters.all);
+                } else {
+                    // Only apply filters that have values
+                    const activeFilters = Object.keys(filters).filter(key => key !== 'all' && filters[key]);
+
+                    if (activeFilters.length === 0) {
+                        // No filters active, show all rows
+                        showRow = true;
+                    } else {
+                        // Check each active filter (AND logic)
+                        activeFilters.forEach(filterKey => {
+                            if (filterKey === 'status') {
+                                // Special handling for status filter
+                                const rowStatus = row.getAttribute('data-status');
+                                if (rowStatus !== filters.status) {
+                                    showRow = false;
+                                }
+                            } else {
+                                // Regular text search filters
+                                const cells = row.querySelectorAll(`[data-search="${filterKey}"]`);
+                                const matchFound = Array.from(cells).some(cell =>
+                                    cell.textContent.toLowerCase().includes(filters[filterKey])
+                                );
+
+                                if (!matchFound) {
+                                    showRow = false;
+                                }
+                            }
+                        });
+                    }
+                }
+
+                row.style.display = showRow ? '' : 'none';
+            });
+
+            updateResultCount();
+        }
+
+        // Add event listeners to all search inputs
+        Object.values(searchInputs).forEach(input => {
+            input.addEventListener('input', filterTable);
+            if (input.tagName === 'SELECT') {
+                input.addEventListener('change', filterTable);
+            }
+        });
+
+        // Clear all filters function
+        window.clearAllFilters = function () {
+            Object.values(searchInputs).forEach(input => {
+                input.value = '';
+            });
+            rows.forEach(row => {
+                row.style.display = '';
+            });
+            updateResultCount();
+        };
+
+        // Initial count
+        updateResultCount();
+    });
+</script>

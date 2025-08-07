@@ -1,0 +1,70 @@
+﻿@model AD419.DataHelper.Web.Models.NaturalAccount
+
+@{
+    ViewBag.Title = "Edit Natural Account";
+}
+
+<h2>Edit Natural Account</h2>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Account Information</h3>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.Account_Child_Posting_Level)
+
+                    <dl class="dl-horizontal">
+                        <dt>Account:</dt>
+                        <dd><strong>@Model.Account_Child_Posting_Level</strong></dd>
+
+                        <dt>Description:</dt>
+                        <dd>@Model.Account_Child_Posting_Description</dd>
+
+                        <dt>Parent 1:</dt>
+                        <dd>@Model.Account_Parent_1: @Model.Account_Parent_1_Description</dd>
+
+                        <dt>Parent 2:</dt>
+                        <dd>@Model.Account_Parent_2: @Model.Account_Parent_2_Description</dd>
+
+                        <dt>Parent 3:</dt>
+                        <dd>@Model.Account_Parent_3: @Model.Account_Parent_3_Description</dd>
+
+                        <dt>Parent 4:</dt>
+                        <dd>@Model.Account_Parent_4: @Model.Account_Parent_4_Description</dd>
+
+                        <dt>Parent 5:</dt>
+                        <dd>@Model.Account_Parent_5: @Model.Account_Parent_5_Description</dd>
+                    </dl>
+
+                    <hr />
+
+                    <div class="form-group">
+                        <label for="IncludeInAD419">Include in AD-419?</label>
+                        @Html.DropDownListFor(
+                            model => model.IncludeInAD419,
+                            new List<SelectListItem>
+                            {
+                                new SelectListItem { Text = "Not Set", Value = "" },
+                                new SelectListItem { Text = "Yes", Value = "True" },
+                                new SelectListItem { Text = "No", Value = "False" }
+                            },
+                            new { @class = "form-control" }
+                        )
+                        @Html.ValidationMessageFor(model => model.IncludeInAD419, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Save Classification</button>
+                        @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -252,6 +252,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountWithDifferentTotalsController.cs" />
     <Compile Include="Controllers\AccountWithTheWrongClosedOrgController.cs" />
+    <Compile Include="Controllers\ActivityController.cs" />
     <Compile Include="Controllers\AD419AccountController.cs" />
     <Compile Include="Controllers\AdjustedTotalsController.cs" />
     <Compile Include="Controllers\AllProjectsNewController.cs" />
@@ -264,6 +265,7 @@
     <Compile Include="Controllers\Fliters\RoleFilters.cs" />
     <Compile Include="Controllers\Fliters\RoleNames.cs" />
     <Compile Include="Controllers\FundsController.cs" />
+    <Compile Include="Controllers\NaturalAccountsController.cs" />
     <Compile Include="Controllers\NonAdminPreReportController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\Unassociated241EmployeeExpenseReportController.cs" />
@@ -288,6 +290,8 @@
     <Compile Include="Models\AccountWithTheWrongClosedOrg.cs" />
     <Compile Include="Models\AccountWithDifferentTotalDetails.cs" />
     <Compile Include="Models\AccountWithDifferentTotal.cs" />
+    <Compile Include="Models\Activity.cs" />
+    <Compile Include="Models\NaturalAccount.cs" />
     <Compile Include="Models\FinancialDepartment.cs" />
     <Compile Include="Models\FinancialDepartmentViewModel.cs" />
     <Compile Include="Models\Funds.cs" />
@@ -391,6 +395,10 @@
     <Compile Include="ViewModels\ExpenseOrgMappingsEditViewModel.cs" />
     <Compile Include="ViewModels\TitleCodeEditViewModel.cs" />
     <Compile Include="ViewModels\TitleCodeViewModel.cs" />
+    <Content Include="Views\NaturalAccounts\Edit.cshtml" />
+    <Content Include="Views\Activities\Index.cshtml" />
+    <Content Include="Views\Activities\Edit.cshtml" />
+    <None Include="Views\NaturalAccounts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
