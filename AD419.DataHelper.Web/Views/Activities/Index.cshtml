@@ -1,0 +1,228 @@
+﻿@model AD419.DataHelper.Web.Models.ActivitiesViewModel
+
+@{
+    ViewBag.Title = "Activities";
+    var unclassifiedActivities = Model.Activities.Where(a => !a.IsExcluded.HasValue).ToList();
+    var classifiedActivities = Model.Activities.Where(a => a.IsExcluded.HasValue).ToList();
+}
+
+<h2>Activities</h2>
+
+<h3>Unclassified Activities</h3>
+@if (!unclassifiedActivities.Any())
+{
+    <div class="alert alert-success">
+        <strong>All activities have been classified</strong>
+    </div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Activity</th>
+                <th>Description</th>
+                <th>Excluded?</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var activity in unclassifiedActivities)
+            {
+                <tr class="warning">
+                    <td><strong>@activity.Activity</strong></td>
+                    <td>@activity.Activity_Description</td>
+                    <td><span class="text-muted">Not Set</span></td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = activity.Id }, new { @class = "btn btn-sm btn-warning" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<h3>Classified Activities</h3>
+
+<!-- Search Controls -->
+<div class="row" style="margin-bottom: 15px;">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Search Classified Activities</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Activity:</label>
+                        <input type="text" id="searchActivity" class="form-control input-sm" placeholder="Activity..." />
+                    </div>
+                    <div class="col-md-3">
+                        <label>Description:</label>
+                        <input type="text" id="searchDescription" class="form-control input-sm" placeholder="Description..." />
+                    </div>
+                    <div class="col-md-2">
+                        <label>Status:</label>
+                        <select id="searchStatus" class="form-control input-sm">
+                            <option value="">All</option>
+                            <option value="no">Not Excluded</option>
+                            <option value="yes">Excluded</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label>All Fields:</label>
+                        <input type="text" id="searchAll" class="form-control input-sm" placeholder="Search all..." />
+                    </div>
+                    <div class="col-md-1">
+                        <label>&nbsp;</label>
+                        <button type="button" class="btn btn-default btn-sm" onclick="clearAllFilters()">Clear</button>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 5px;">
+                    <div class="col-md-12">
+                        <span id="resultCount" class="text-muted"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-striped" id="classifiedTable">
+    <thead>
+        <tr>
+            <th>Activity</th>
+            <th>Description</th>
+            <th>Excluded?</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var activity in classifiedActivities)
+        {
+            string rowClass = "activity-row";
+            string statusText = "";
+            string statusClass = "";
+            string statusData = "";
+
+            if (activity.IsExcluded.Value)
+            {
+                rowClass += " danger";
+                statusText = "Yes";
+                statusClass = "text-danger";
+                statusData = "yes";
+            }
+            else
+            {
+                rowClass += " success";
+                statusText = "No";
+                statusClass = "text-success";
+                statusData = "no";
+            }
+
+            <tr class="@rowClass" data-status="@statusData">
+                <td data-search="activity"><strong>@activity.Activity</strong></td>
+                <td data-search="description">@activity.Activity_Description</td>
+                <td><span class="@statusClass"><strong>@statusText</strong></span></td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = activity.Id }, new { @class = "btn btn-sm btn-primary" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get all search inputs
+        const searchInputs = {
+            activity: document.getElementById('searchActivity'),
+            description: document.getElementById('searchDescription'),
+            status: document.getElementById('searchStatus'),
+            all: document.getElementById('searchAll')
+        };
+
+        const table = document.getElementById('classifiedTable');
+        const rows = table.querySelectorAll('.activity-row');
+        const resultCount = document.getElementById('resultCount');
+
+        // Update result count
+        function updateResultCount() {
+            const visibleRows = Array.from(rows).filter(row => row.style.display !== 'none');
+            resultCount.textContent = `Showing ${visibleRows.length} of ${rows.length} activities`;
+        }
+
+        // Filter function
+        function filterTable() {
+            const filters = {};
+            Object.keys(searchInputs).forEach(key => {
+                filters[key] = searchInputs[key].value.toLowerCase();
+            });
+
+            rows.forEach(row => {
+                let showRow = true;
+
+                // If "all" search is used, search across all cells
+                if (filters.all) {
+                    const allText = row.textContent.toLowerCase();
+                    showRow = allText.includes(filters.all);
+                } else {
+                    // Only apply filters that have values
+                    const activeFilters = Object.keys(filters).filter(key => key !== 'all' && filters[key]);
+
+                    if (activeFilters.length === 0) {
+                        // No filters active, show all rows
+                        showRow = true;
+                    } else {
+                        // Check each active filter (AND logic)
+                        activeFilters.forEach(filterKey => {
+                            if (filterKey === 'status') {
+                                // Special handling for status filter
+                                const rowStatus = row.getAttribute('data-status');
+                                if (rowStatus !== filters.status) {
+                                    showRow = false;
+                                }
+                            } else {
+                                // Regular text search filters
+                                const cells = row.querySelectorAll(`[data-search="${filterKey}"]`);
+                                const matchFound = Array.from(cells).some(cell =>
+                                    cell.textContent.toLowerCase().includes(filters[filterKey])
+                                );
+
+                                if (!matchFound) {
+                                    showRow = false;
+                                }
+                            }
+                        });
+                    }
+                }
+
+                row.style.display = showRow ? '' : 'none';
+            });
+
+            updateResultCount();
+        }
+
+        // Add event listeners to all search inputs
+        Object.values(searchInputs).forEach(input => {
+            input.addEventListener('input', filterTable);
+            if (input.tagName === 'SELECT') {
+                input.addEventListener('change', filterTable);
+            }
+        });
+
+        // Clear all filters function
+        window.clearAllFilters = function () {
+            Object.values(searchInputs).forEach(input => {
+                input.value = '';
+            });
+            rows.forEach(row => {
+                row.style.display = '';
+            });
+            updateResultCount();
+        };
+
+        // Initial count
+        updateResultCount();
+    });
+</script>

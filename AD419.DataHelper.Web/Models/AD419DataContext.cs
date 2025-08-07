@@ -14,7 +14,7 @@ namespace AD419.DataHelper.Web.Models
             : base("name=AD419DataContext")
         {
         }
-
+        public virtual DbSet<ActivityModel> Activities { get; set; }
         public virtual DbSet<ArcCode> ARC_Codes { get; set; }
 
         public virtual DbSet<ArcCodeSelections> ArcCodes { get; set; }
@@ -58,6 +58,8 @@ namespace AD419.DataHelper.Web.Models
         public virtual DbSet<Fund> Fund { get; set; }
 
         public virtual DbSet<Interdepartmental> Interdepartmentals { get; set; }
+
+        public virtual DbSet<NaturalAccount> NaturalAccount { get; set; }
 
         public virtual DbSet<TransDocType> TransDocTypes { get; set; }
 
