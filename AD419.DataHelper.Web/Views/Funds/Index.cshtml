@@ -8,11 +8,11 @@
 
 <h2>Funds</h2>
 
-<h3>New Funds</h3>
+<h3>Unclassified Funds (@unclassifiedFunds.Count)</h3>
 @if (!unclassifiedFunds.Any())
 {
     <div class="alert alert-success">
-        <strong>No funds need to be classified</strong>
+        <strong>All funds have been classified</strong>
     </div>
 }
 else
@@ -52,7 +52,7 @@ else
     </table>
 }
 
-<h3>Already Classified</h3>
+<h3>Classified Funds (@classifiedFunds.Count)</h3>
 
 <!-- Search Controls -->
 <div class="row" style="margin-bottom: 15px;">
@@ -87,13 +87,15 @@ else
                         <label>Parent 4:</label>
                         <input type="text" id="searchParent4" class="form-control input-sm" placeholder="P4..." />
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label>All Fields:</label>
-                        <input type="text" id="searchAll" class="form-control" placeholder="Search all fields..." />
+                        <input type="text" id="searchAll" class="form-control input-sm" placeholder="Search all fields..." />
                     </div>
                     <div class="col-md-1">
                         <label>&nbsp;</label>
-                        <button type="button" class="btn btn-default btn-sm" onclick="clearAllFilters()">Clear</button>
+                        <div>
+                            <button type="button" class="btn btn-default btn-sm" onclick="clearAllFilters()">Clear</button>
+                        </div>
                     </div>
                 </div>
                 <div class="row" style="margin-top: 5px;">
