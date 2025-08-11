@@ -8,7 +8,7 @@
 
 <h2>Natural Accounts</h2>
 
-<h3>Unclassified Accounts</h3>
+<h3>Unclassified Accounts (@unclassifiedAccounts.Count)</h3>
 @if (!unclassifiedAccounts.Any())
 {
     <div class="alert alert-success">
@@ -52,7 +52,7 @@ else
     </table>
 }
 
-<h3>Classified Accounts</h3>
+<h3>Classified Accounts (@classifiedAccounts.Count)</h3>
 
 <!-- Search Controls -->
 <div class="row" style="margin-bottom: 15px;">
@@ -97,7 +97,9 @@ else
                     </div>
                     <div class="col-md-1">
                         <label>&nbsp;</label>
-                        <button type="button" class="btn btn-default btn-sm" onclick="clearAllFilters()">Clear</button>
+                        <div>
+                            <button type="button" class="btn btn-default btn-sm" onclick="clearAllFilters()">Clear</button>
+                        </div>
                     </div>
                 </div>
                 <div class="row" style="margin-top: 5px;">
@@ -127,27 +129,9 @@ else
     <tbody>
         @foreach (var account in classifiedAccounts)
         {
-            string rowClass = "account-row";
-            string statusText = "";
-            string statusClass = "";
-            string statusData = "";
-            
-            if (account.IncludeInAD419.Value)
-            {
-                rowClass += " success";
-                statusText = "Yes";
-                statusClass = "text-success";
-                statusData = "yes";
-            }
-            else
-            {
-                rowClass += " danger";
-                statusText = "No";
-                statusClass = "text-danger";
-                statusData = "no";
-            }
+            string statusText = account.IncludeInAD419.Value ? "Yes" : "No";
 
-            <tr class="@rowClass" data-status="@statusData">
+            <tr class="account-row" data-status="@(account.IncludeInAD419.Value ? "yes" : "no")">
                 <td data-search="account"><strong>@account.Account_Child_Posting_Level</strong></td>
                 <td data-search="description">@account.Account_Child_Posting_Description</td>
                 <td data-search="parent1">@account.Account_Parent_1: @account.Account_Parent_1_Description</td>
@@ -155,7 +139,7 @@ else
                 <td data-search="parent3">@account.Account_Parent_3: @account.Account_Parent_3_Description</td>
                 <td data-search="parent4">@account.Account_Parent_4: @account.Account_Parent_4_Description</td>
                 <td data-search="parent5">@account.Account_Parent_5: @account.Account_Parent_5_Description</td>
-                <td><span class="@statusClass"><strong>@statusText</strong></span></td>
+                <td><strong>@statusText</strong></td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = account.Account_Child_Posting_Level }, new { @class = "btn btn-sm btn-primary" })
                 </td>

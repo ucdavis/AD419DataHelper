@@ -8,11 +8,11 @@
 
 <h2>Financial Departments</h2>
 
-<h3>New Departments</h3>
+<h3>Unclassified Departments (@unclassifiedDepts.Count)</h3>
 @if (!unclassifiedDepts.Any())
 {
     <div class="alert alert-success">
-        <strong>No departments need to be classified</strong>
+        <strong>All departments have been classified</strong>
     </div>
 }
 else
@@ -62,7 +62,7 @@ else
     </table>
 }
 
-<h3>Already Classified</h3>
+<h3>Classified Departments (@classifiedDepts.Count)</h3>
 
 <!-- Search Controls -->
 <div class="row" style="margin-bottom: 15px;">
@@ -101,13 +101,15 @@ else
                         <label>Level G:</label>
                         <input type="text" id="searchLevelG" class="form-control input-sm" placeholder="G..." />
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label>All Fields:</label>
-                        <input type="text" id="searchAll" class="form-control" placeholder="Search all fields..." />
+                        <input type="text" id="searchAll" class="form-control input-sm" placeholder="Search all fields..." />
                     </div>
                     <div class="col-md-1">
                         <label>&nbsp;</label>
-                        <button type="button" class="btn btn-default btn-sm" onclick="clearAllFilters()">Clear</button>
+                        <div>
+                            <button type="button" class="btn btn-default btn-sm" onclick="clearAllFilters()">Clear</button>
+                        </div>
                     </div>
                 </div>
                 <div class="row" style="margin-top: 5px;">
@@ -150,7 +152,7 @@ else
                 <td data-search="levelE">@dept.Financial_Department_Parent_E: @dept.Financial_Department_Parent_E_Description</td>
                 <td data-search="levelF">@dept.Financial_Department_Parent_F: @dept.Financial_Department_Parent_F_Description</td>
                 <td data-search="levelG"><strong>@dept.Financial_Department_Level_G_Child: @dept.Financial_Department_Level_G_Description</strong></td>
-                <td data-search="AES">@(dept.Is_AES.Value ? "Yes" : "No")</td>
+                <td data-search="AES"><strong>@(dept.Is_AES.Value ? "Yes" : "No")</strong></td>
                 <td data-search="animalHealth">@(dept.IsAnimalHealth.HasValue ? (dept.IsAnimalHealth.Value ? "Yes" : "No") : "Not Set")</td>
                 <td data-search="orgR">@(string.IsNullOrEmpty(dept.OrgR) ? "Not Set" : dept.OrgR)</td>
                 <td data-search="fund">@(dept.BCBS00CFilterByFund.HasValue ? (dept.BCBS00CFilterByFund.Value ? "Yes" : "No") : "Not Set")</td>

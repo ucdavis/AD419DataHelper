@@ -8,7 +8,7 @@
 
 <h2>Activities</h2>
 
-<h3>Unclassified Activities</h3>
+<h3>Unclassified Activities (@unclassifiedActivities.Count)</h3>
 @if (!unclassifiedActivities.Any())
 {
     <div class="alert alert-success">
@@ -42,7 +42,7 @@ else
     </table>
 }
 
-<h3>Classified Activities</h3>
+<h3>Classified Activities (@classifiedActivities.Count)</h3>
 
 <!-- Search Controls -->
 <div class="row" style="margin-bottom: 15px;">
@@ -75,7 +75,9 @@ else
                     </div>
                     <div class="col-md-1">
                         <label>&nbsp;</label>
-                        <button type="button" class="btn btn-default btn-sm" onclick="clearAllFilters()">Clear</button>
+                        <div>
+                            <button type="button" class="btn btn-default btn-sm" onclick="clearAllFilters()">Clear</button>
+                        </div>
                     </div>
                 </div>
                 <div class="row" style="margin-top: 5px;">
@@ -100,30 +102,12 @@ else
     <tbody>
         @foreach (var activity in classifiedActivities)
         {
-            string rowClass = "activity-row";
-            string statusText = "";
-            string statusClass = "";
-            string statusData = "";
+            string statusText = activity.IsExcluded.Value ? "Yes" : "No";
 
-            if (activity.IsExcluded.Value)
-            {
-                rowClass += " danger";
-                statusText = "Yes";
-                statusClass = "text-danger";
-                statusData = "yes";
-            }
-            else
-            {
-                rowClass += " success";
-                statusText = "No";
-                statusClass = "text-success";
-                statusData = "no";
-            }
-
-            <tr class="@rowClass" data-status="@statusData">
+            <tr class="activity-row" data-status="@(activity.IsExcluded.Value ? "yes" : "no")">
                 <td data-search="activity"><strong>@activity.Activity</strong></td>
                 <td data-search="description">@activity.Activity_Description</td>
-                <td><span class="@statusClass"><strong>@statusText</strong></span></td>
+                <td><strong>@statusText</strong></td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = activity.Id }, new { @class = "btn btn-sm btn-primary" })
                 </td>
