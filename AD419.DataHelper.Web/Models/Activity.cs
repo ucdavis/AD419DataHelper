@@ -10,7 +10,6 @@ namespace AD419.DataHelper.Web.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
         public string Activity { get; set; }
 
         public string Activity_Description { get; set; }

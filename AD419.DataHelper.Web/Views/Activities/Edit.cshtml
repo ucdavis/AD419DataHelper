@@ -17,6 +17,7 @@
                 {
                     @Html.AntiForgeryToken()
                     @Html.HiddenFor(model => model.Id)
+                    @Html.HiddenFor(model => model.Activity)
 
                     <dl class="dl-horizontal">
                         <dt>Activity:</dt>
@@ -48,27 +49,6 @@
                         @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
                     </div>
                 }
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">Classification Guidelines</h3>
-            </div>
-            <div class="panel-body">
-                <p><strong>Exclude from AD-419 if:</strong></p>
-                <ul>
-                    <li>Activity is not related to research</li>
-                    <li>Activity represents administrative overhead</li>
-                    <li>Activity is deprecated or unused</li>
-                </ul>
-                <p><strong>Include in AD-419 if:</strong></p>
-                <ul>
-                    <li>Activity supports research activities</li>
-                    <li>Activity is used for grant reporting</li>
-                    <li>Activity tracks project-related work</li>
-                </ul>
             </div>
         </div>
     </div>
