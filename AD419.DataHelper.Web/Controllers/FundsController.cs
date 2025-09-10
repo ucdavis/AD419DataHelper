@@ -43,11 +43,11 @@ namespace AD419.DataHelper.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Fund,SFN")] Fund model)
+        public ActionResult Edit(string id, [Bind(Include = "Fund,SFN")] Fund model)
         {
             if (!ModelState.IsValid) return View(model);
 
-            var existing = DbContext.Fund.Find(model.FundCode);
+            var existing = DbContext.Fund.Find(id);
             if (existing == null) return HttpNotFound();
 
             existing.SFN = model.SFN;

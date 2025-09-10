@@ -36,11 +36,11 @@ namespace AD419.DataHelper.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,IsExcluded")] ActivityModel model)
+        public ActionResult Edit(int id, [Bind(Include = "Id,Activity,IsExcluded")] ActivityModel model)
         {
             if (!ModelState.IsValid) return View(model);
 
-            var existing = DbContext.Activities.Find(model.Id);
+            var existing = DbContext.Activities.Find(id);
             if (existing == null) return HttpNotFound();
 
             existing.IsExcluded = model.IsExcluded;
