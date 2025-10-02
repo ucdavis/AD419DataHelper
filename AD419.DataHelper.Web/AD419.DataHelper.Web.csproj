@@ -395,10 +395,10 @@
     <Compile Include="ViewModels\ExpenseOrgMappingsEditViewModel.cs" />
     <Compile Include="ViewModels\TitleCodeEditViewModel.cs" />
     <Compile Include="ViewModels\TitleCodeViewModel.cs" />
+    <Content Include="Views\NaturalAccounts\Index.cshtml" />
     <Content Include="Views\NaturalAccounts\Edit.cshtml" />
     <Content Include="Views\Activities\Index.cshtml" />
     <Content Include="Views\Activities\Edit.cshtml" />
-    <None Include="Views\NaturalAccounts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
