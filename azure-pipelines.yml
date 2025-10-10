@@ -42,8 +42,6 @@ steps:
       **\fonts\**
       **\Images\**
       **\SqlServerTypes\**
-      **\connectionStrings.config
-      **\appSettings.config
       **\*.css
       **\*.js
     TargetFolder: '$(Build.ArtifactStagingDirectory)\WebFiles'
