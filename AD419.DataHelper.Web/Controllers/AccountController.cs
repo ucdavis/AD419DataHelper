@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Security.Claims;
-using System.Security.Cryptography.Xml;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using AD419.Core.Models;
 using AD419.DataHelper.Web.Helpers;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -116,10 +115,14 @@ namespace AD419.DataHelper.Web.Controllers
           
             FormsAuthentication.SignOut();
             Session.Abandon();
-            var myLogoutPage = "LoggedOut";
-            var postBackUrl = "https://ssodev.ucdavis.edu/cas/logout?service=" +
-            Request.Url.ToString().Substring(0, Request.Url.ToString().LastIndexOf("/") + 1) + myLogoutPage;
-           return Redirect(postBackUrl);
+            var casBaseUrl = ConfigurationManager.AppSettings["Environment"] == "Production"
+                ? "https://cas.ucdavis.edu/cas/"
+                : "https://ssodev.ucdavis.edu/cas/";
+
+            var postBackUrl = casBaseUrl + "logout?service=" +
+                Request.Url.ToString().Substring(0, Request.Url.ToString().LastIndexOf("/") + 1) + "LoggedOut";
+
+            return Redirect(postBackUrl);
             //return Redirect("https://cas.ucdavis.edu/cas/logout");
         }
 

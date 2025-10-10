@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Web;
@@ -8,7 +9,9 @@ namespace AD419.DataHelper.Web.Helpers
 {
     public static class CasHelper
     {
-        private const string CasBaseUrl = "https://ssodev.ucdavis.edu/cas/";
+        private static readonly string CasBaseUrl = ConfigurationManager.AppSettings["Environment"] == "Production"
+            ? "https://cas.ucdavis.edu/cas/"
+            : "https://ssodev.ucdavis.edu/cas/";
         public static string Login()
         {
             // look for existing sign in data
