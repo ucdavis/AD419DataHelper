@@ -30,15 +30,38 @@ steps:
     script: |
       # Create placeholder connectionStrings.config
       @"
-      <connectionStrings>
-        <!-- Placeholder - overwritten during release -->
+      <?xml version="1.0" encoding="utf-8" ?> 
+      <connectionStrings>   
+        <add name="AD419DataContext" connectionString="data source=db.caes.ucdavis.edu;initial catalog=AD419_rmtest;User ID=ProdAppAD419;Password=xxxx;MultipleActiveResultSets=True;App=EntityFramework" providerName="System.Data.SqlClient" />
+        <add name="FISDataContext" connectionString="data source=caes-elzar;initial catalog=FISDataMart;User ID=ProdAppAD419;Password=xxxx;MultipleActiveResultSets=True;App=EntityFramework" providerName="System.Data.SqlClient" />
+        <add name="CatbertDataContext" connectionString="data source=db.caes.ucdavis.edu;initial catalog=Catbert3;User ID=ProdAppAD419;Password=xxxx;MultipleActiveResultSets=True;App=EntityFramework" providerName="System.Data.SqlClient" />
+        <add name="PpsDataContext" connectionString="data source=caes-elzar;initial catalog=PPSDataMart;User ID=ProdAppAD419;Password=;MultipleActiveResultSets=True;App=EntityFramework" providerName="System.Data.SqlClient" />
       </connectionStrings>
       "@ | Out-File -FilePath "$(Build.SourcesDirectory)/AD419.DataHelper.Web/connectionStrings.config" -Encoding UTF8
       
       # Create placeholder appSettings.config
       @"
+      <?xml version="1.0" encoding="utf-8"?>
       <appSettings>
-        <!-- Placeholder - overwritten during release -->
+        <add key="webpages:Version" value="3.0.0.0" />
+        <add key="webpages:Enabled" value="false" />
+        <add key="ClientValidationEnabled" value="true" />
+        <add key="UnobtrusiveJavaScriptEnabled" value="true" />
+        <add key="Stackify.AppName" value="AD419.DataHelper" />
+        <add key="Stackify.Environment" value="localhost" />
+        <add key="Stackify.ApiKey" value="[external]" />
+        <add key="ReportServerUrl" value="http://reports.caes.ucdavis.edu/ReportServer/" />
+        <add key="AD419AppUrl" value="https://ad419-next.caes.ucdavis.edu/" />
+        <add key="ReportServerDirectory" value="/AD419Reports/" />
+        <add key="InstructionsDirectory" value="~/Instructions" />
+        <add key="AD419InstructionsFileName" value="AD419Instructions.pdf" />
+        <add key="SqlCommandTimeout" value="30" />
+        <add key="UcdProjectOrganizationName" value="CAES - UNIVERSITY OF CALIFORNIA AT DAVIS" />
+        <add key="NewProjectDefaultStatus" value="Active" />
+        <add key="AdminPageURL" value="https://secure.caes.ucdavis.edu/Catbert4/UserManagement/Manage/AD419" />
+        <add key="ReportViewerUser" value="caes-prodapp" />
+        <add key="ReportViewerPassword" value="xxxx" />
+        <add key="ReportViewerDomain" value="ou" />
       </appSettings>
       "@ | Out-File -FilePath "$(Build.SourcesDirectory)/AD419.DataHelper.Web/appSettings.config" -Encoding UTF8
       
