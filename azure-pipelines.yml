@@ -62,6 +62,7 @@ steps:
         <add key="ReportViewerUser" value="caes-prodapp" />
         <add key="ReportViewerPassword" value="xxxx" />
         <add key="ReportViewerDomain" value="ou" />
+        <add key="Environment" value="Staging" />
       </appSettings>
       "@ | Out-File -FilePath "$(Build.SourcesDirectory)/AD419.DataHelper.Web/appSettings.config" -Encoding UTF8
       
