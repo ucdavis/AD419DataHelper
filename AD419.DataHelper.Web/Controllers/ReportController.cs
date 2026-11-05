@@ -29,6 +29,7 @@ namespace AD419.DataHelper.Web.Controllers
             {
                 var reportName = @"GL PPM Reconciliation Report";
                 var model = new ReportViewerModel(reportName);
+                ViewBag.MaintenanceMessage = "The GL/PPM Reconciliation Report is undergoing scheduled maintenance and may be unavailable for a few hours. Please check back later.";
 
                 return View("Report", model);
             }
